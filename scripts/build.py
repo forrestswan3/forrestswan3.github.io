@@ -170,7 +170,7 @@ def nav(links_html):
 
 
 def social_links(cls=''):
-    items = [('linkedin', 'LinkedIn', SOCIAL.get('linkedin')), ('tree', 'Linktree', SOCIAL.get('linktree')), ('github', 'GitHub', SOCIAL.get('github'))]
+    items = [('doc', 'Resume (PDF)', SOCIAL.get('resume')), ('linkedin', 'LinkedIn', SOCIAL.get('linkedin')), ('tree', 'Linktree', SOCIAL.get('linktree')), ('github', 'GitHub', SOCIAL.get('github'))]
     return ''.join(f'<a class="{cls}" href="{e(u)}" rel="me">{icon(i,16)} {t}</a>' for i, t, u in items if u)
 
 
@@ -284,7 +284,7 @@ def site():
 <span class="eyebrow">{e(ROLE)}</span>
 <h1>Operational clarity <em>at scale.</em></h1>
 <p class="lede">I design and ship the internal software that runs a Florida insurance agency: compliance auditors on the file server, AI-assisted underwriting triage, offline desktop apps and training systems that onboard new staff.</p>
-<div class="cta"><a class="btn btn-primary" href="#work">View selected work {icon('arrow',17)}</a><a class="btn btn-ghost" href="https://github.com/{owner}">{icon('github',17)} GitHub profile</a></div>
+<div class="cta"><a class="btn btn-primary" href="#work">View selected work {icon('arrow',17)}</a><a class="btn btn-ghost" href="{e(SOCIAL.get('resume', ''))}">{icon('doc',17)} Resume (PDF)</a></div>
 <div class="who"><b>{e(author)}</b><span>·</span><span>Kasey Osman Insurance</span><span>·</span><span>Central Florida</span></div>
 <div class="who-links">{social_links()}</div>
 </div><div class="stats" role="list" aria-label="At a glance">{stats_html}</div></div></section>
@@ -452,7 +452,7 @@ def profile_readme():
 
 I design and ship the internal software that runs a Florida insurance agency: compliance auditors on the file server, AI-assisted underwriting triage, offline desktop apps and training systems that onboard new staff.
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-forrestswan3.github.io-2C9C95?style=flat-square)]({SITE}) [![LinkedIn](https://img.shields.io/badge/LinkedIn-forrestswan3-0A66C2?style=flat-square&logo=linkedin&logoColor=white)]({SOCIAL.get('linkedin', '')}) [![Linktree](https://img.shields.io/badge/Linktree-forrestswan3-43E55E?style=flat-square&logo=linktree&logoColor=white)]({SOCIAL.get('linktree', '')})
+[![Portfolio](https://img.shields.io/badge/Portfolio-forrestswan3.github.io-2C9C95?style=flat-square)]({SITE}) [![LinkedIn](https://img.shields.io/badge/LinkedIn-forrestswan3-0A66C2?style=flat-square&logo=linkedin&logoColor=white)]({SOCIAL.get('linkedin', '')}) [![Linktree](https://img.shields.io/badge/Linktree-forrestswan3-43E55E?style=flat-square&logo=linktree&logoColor=white)]({SOCIAL.get('linktree', '')}) [![Resume](https://img.shields.io/badge/Resume-PDF-0B1F33?style=flat-square&logo=adobeacrobatreader&logoColor=white)]({SOCIAL.get('resume', '')})
 
 **Focus:** Python desktop apps · Google Apps Script · workflow automation (Zapier, n8n, Slack) · data-policy compliance · training systems
 
@@ -478,6 +478,8 @@ site_dir = ROOT / 'site'
 (site_dir / '.nojekyll').write_text('', encoding='utf-8')
 for f in ('ss-mark.png', 'ss-mark-dark.png', 'og-card.png'):
     shutil.copy(ROOT / 'assets' / f, site_dir / 'assets' / f)
+if (ROOT / 'assets' / 'resume.pdf').exists():
+    shutil.copy(ROOT / 'assets' / 'resume.pdf', site_dir / 'resume.pdf')
 for f in (ROOT / 'assets' / 'previews').glob('*.png'):
     shutil.copy(f, site_dir / 'assets' / 'previews' / f.name)
 

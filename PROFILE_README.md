@@ -8,7 +8,7 @@
 
 I design and ship the internal software that runs a Florida insurance agency: compliance auditors on the file server, AI-assisted underwriting triage, offline desktop apps and training systems that onboard new staff.
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-forrestswan3.github.io-2C9C95?style=flat-square)](https://forrestswan3.github.io/) [![LinkedIn](https://img.shields.io/badge/LinkedIn-forrestswan3-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/forrestswan3) [![Linktree](https://img.shields.io/badge/Linktree-forrestswan3-43E55E?style=flat-square&logo=linktree&logoColor=white)](https://linktr.ee/forrestswan3)
+[![Portfolio](https://img.shields.io/badge/Portfolio-forrestswan3.github.io-2C9C95?style=flat-square)](https://forrestswan3.github.io/) [![LinkedIn](https://img.shields.io/badge/LinkedIn-forrestswan3-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/forrestswan3) [![Linktree](https://img.shields.io/badge/Linktree-forrestswan3-43E55E?style=flat-square&logo=linktree&logoColor=white)](https://linktr.ee/forrestswan3) [![Resume](https://img.shields.io/badge/Resume-PDF-0B1F33?style=flat-square&logo=adobeacrobatreader&logoColor=white)](https://forrestswan3.github.io/resume.pdf)
 
 **Focus:** Python desktop apps · Google Apps Script · workflow automation (Zapier, n8n, Slack) · data-policy compliance · training systems
 
