@@ -2,11 +2,13 @@
 
 # Forrest Swan III
 
-**Agency Operations & Systems Manager** · *SystemSerenity: Operational clarity at scale.*
+**Agency Operations & Systems Manager at Kasey Osman Insurance | Systems Architecture, Automation & Data Governance | Insurance Operations**
+
+*SystemSerenity: Operational clarity at scale.*
 
 I design and ship the internal software that runs a Florida insurance agency: compliance auditors on the file server, AI-assisted underwriting triage, offline desktop apps and training systems that onboard new staff.
 
-**[View the portfolio site →](https://forrestswan3.github.io/)**
+[![Portfolio](https://img.shields.io/badge/Portfolio-forrestswan3.github.io-2C9C95?style=flat-square)](https://forrestswan3.github.io/) [![LinkedIn](https://img.shields.io/badge/LinkedIn-forrestswan3-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/forrestswan3) [![Linktree](https://img.shields.io/badge/Linktree-forrestswan3-43E55E?style=flat-square&logo=linktree&logoColor=white)](https://linktr.ee/forrestswan3)
 
 **Focus:** Python desktop apps · Google Apps Script · workflow automation (Zapier, n8n, Slack) · data-policy compliance · training systems
 

@@ -371,5 +371,11 @@
       "summary": "An evidence-based monthly quiz program (retrieval practice, spaced \"Encore\" re-testing, private scores, no leaderboards) with an Apps Script generator for the Google Forms (see koi-apps-script-toolkit)."
     }
   ],
-  "site": "https://forrestswan3.github.io/"
+  "site": "https://forrestswan3.github.io/",
+  "social": {
+    "linkedin": "https://www.linkedin.com/in/forrestswan3",
+    "linktree": "https://linktr.ee/forrestswan3",
+    "github": "https://github.com/forrestswan3"
+  },
+  "headline": "Agency Operations & Systems Manager at Kasey Osman Insurance | Systems Architecture, Automation & Data Governance | Insurance Operations"
 }

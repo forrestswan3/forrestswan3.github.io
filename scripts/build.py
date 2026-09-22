@@ -26,6 +26,8 @@ BRAND = dict(name='SystemSerenity', tagline='Operational clarity at scale.',
              navy='#0B1F33', steel='#3A6EA5', teal='#2C9C95', sage='#8FB996',
              platinum='#E5E7EB', offwhite='#F7F4ED')
 ROLE = 'Agency Operations & Systems Manager'
+SOCIAL = data.get('social', {})
+HEADLINE = data.get('headline', ROLE)
 MARK = f'{SITE}assets/ss-mark.png'
 MARK_DARK = f'{SITE}assets/ss-mark-dark.png'
 
@@ -81,6 +83,8 @@ def icon(name, size=20):
         'learn': '<path d="M3 8l9-4 9 4-9 4z"/><path d="M7 10v5c0 1.5 2.2 3 5 3s5-1.5 5-3v-5"/>',
         'play': '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/>',
         'doc': '<path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+        'linkedin': '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V16M8 7.5v.01M12 16v-3.2c0-1.4.9-2.3 2-2.3s2 .9 2 2.3V16M12 10.5V16"/>',
+        'tree': '<path d="M12 21v-8M12 13l-5-5M12 13l5-5M12 9V3M9 5l3-2 3 2M4 9h5M15 9h5"/>',
         'github': '<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
     }
     return (f'<svg class="ic" width="{size}" height="{size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
@@ -139,7 +143,7 @@ section{{padding:88px 0}}section+section{{border-top:1px solid var(--line)}}
 /* footer */
 footer{{border-top:1px solid var(--line);padding:40px 0 56px;color:var(--muted);font-size:14px}}
 footer .wrap{{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}}
-footer .brand{{font-size:15px}}footer .brand img{{width:24px}}
+footer .social{{display:flex;gap:18px;flex-wrap:wrap}}footer .social a{{display:inline-flex;align-items:center;gap:6px;color:var(--ink-2);font-weight:500}}footer .brand{{font-size:15px}}footer .brand img{{width:24px}}
 :focus-visible{{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}}
 @media (prefers-reduced-motion:reduce){{*{{transition:none!important;scroll-behavior:auto!important}}}}
 """
@@ -165,8 +169,14 @@ def nav(links_html):
 <nav class="links" aria-label="Primary">{links_html}<a class="gh" href="https://github.com/{owner}">{icon('github',16)}GitHub</a></nav></div></header>"""
 
 
+def social_links(cls=''):
+    items = [('linkedin', 'LinkedIn', SOCIAL.get('linkedin')), ('tree', 'Linktree', SOCIAL.get('linktree')), ('github', 'GitHub', SOCIAL.get('github'))]
+    return ''.join(f'<a class="{cls}" href="{e(u)}" rel="me">{icon(i,16)} {t}</a>' for i, t, u in items if u)
+
+
 def footer():
     return f"""<footer><div class="wrap"><a class="brand" href="{SITE}">{mark()}<span class="wm">System<span>Serenity</span></span></a>
+<div class="social">{social_links()}</div>
 <div>© {data['updated'][:4]} {e(author)} · {e(BRAND['tagline'])}</div>
 <div>Updated {fmt_date(data['updated'])}</div></div></footer>"""
 
@@ -181,6 +191,7 @@ HOME_CSS = """
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
 .who{display:flex;align-items:center;gap:10px;margin-top:28px;font-size:14.5px;color:var(--muted)}
 .who b{color:var(--ink);font-weight:600}
+.who-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;font-size:14.5px;font-weight:600}.who-links a{display:inline-flex;align-items:center;gap:6px}
 .stats{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr 1fr}
 .stat{padding:26px 26px 24px}.stat:nth-child(odd){border-right:1px solid var(--line)}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
 .stat .n{font:700 44px/1 var(--display);letter-spacing:-.03em;color:var(--ink)}.stat .l{margin-top:8px;font-size:13.5px;color:var(--muted)}
@@ -213,6 +224,7 @@ HOME_CSS = """
 .contact{background:var(--navy);color:#E9EEF3;border-radius:22px;padding:48px;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap}
 .contact h2{color:#fff}.contact p{margin:10px 0 0;color:#B9C6D3;max-width:52ch}
 .contact .btn-primary{background:#fff;color:var(--navy)}
+.btn-ghost-dark{color:#fff;border-color:rgba(255,255,255,.35)}.btn-ghost-dark:hover{border-color:#fff}
 @media (max-width:980px){.hero-grid,.approach{grid-template-columns:1fr;gap:40px}.caps{grid-template-columns:repeat(2,minmax(0,1fr))}.grid,.demos,.cases{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){section{padding:64px 0}.hero{padding:64px 0}.caps,.grid,.demos,.cases{grid-template-columns:1fr}.contact{padding:32px}.stat .n{font-size:36px}}
 """
@@ -273,7 +285,8 @@ def site():
 <h1>Operational clarity <em>at scale.</em></h1>
 <p class="lede">I design and ship the internal software that runs a Florida insurance agency: compliance auditors on the file server, AI-assisted underwriting triage, offline desktop apps and training systems that onboard new staff.</p>
 <div class="cta"><a class="btn btn-primary" href="#work">View selected work {icon('arrow',17)}</a><a class="btn btn-ghost" href="https://github.com/{owner}">{icon('github',17)} GitHub profile</a></div>
-<div class="who"><b>{e(author)}</b><span>·</span><span>Central Florida</span></div>
+<div class="who"><b>{e(author)}</b><span>·</span><span>Kasey Osman Insurance</span><span>·</span><span>Central Florida</span></div>
+<div class="who-links">{social_links()}</div>
 </div><div class="stats" role="list" aria-label="At a glance">{stats_html}</div></div></section>
 
 <section id="capabilities"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Capabilities</span><h2 style="margin-top:10px">What I build</h2>
@@ -296,8 +309,8 @@ def site():
 <p class="lede" style="margin-top:16px">Small agencies can't afford fragile software. Each system here is built to be understood, audited and handed off, and to keep working when its author is out of the office.</p></div>
 <ul class="principles">{pr_html}</ul></div></section>
 
-<section style="padding-top:0;border-top:0"><div class="wrap"><div class="contact"><div><h2>See the code</h2><p>Every public project links to its full source, architecture diagram and run instructions.</p></div>
-<a class="btn btn-primary" href="https://github.com/{owner}?tab=repositories">Browse repositories {icon('arrow',17)}</a></div></div></section>
+<section style="padding-top:0;border-top:0"><div class="wrap"><div class="contact"><div><h2>Let's connect</h2><p>Every public project links to its full source, architecture diagram and run instructions. For anything else, reach me on LinkedIn.</p></div>
+<div class="cta" style="margin-top:0"><a class="btn btn-primary" href="{e(SOCIAL.get('linkedin', ''))}">{icon('linkedin',17)} Connect on LinkedIn</a><a class="btn btn-ghost-dark" href="https://github.com/{owner}?tab=repositories">Browse repositories {icon('arrow',17)}</a></div></div></div></section>
 </main>
 {footer()}
 </body></html>
@@ -433,11 +446,13 @@ def profile_readme():
 
 # {author}
 
-**{ROLE}** · *SystemSerenity: {BRAND['tagline']}*
+**{HEADLINE}**
+
+*SystemSerenity: {BRAND['tagline']}*
 
 I design and ship the internal software that runs a Florida insurance agency: compliance auditors on the file server, AI-assisted underwriting triage, offline desktop apps and training systems that onboard new staff.
 
-**[View the portfolio site →]({SITE})**
+[![Portfolio](https://img.shields.io/badge/Portfolio-forrestswan3.github.io-2C9C95?style=flat-square)]({SITE}) [![LinkedIn](https://img.shields.io/badge/LinkedIn-forrestswan3-0A66C2?style=flat-square&logo=linkedin&logoColor=white)]({SOCIAL.get('linkedin', '')}) [![Linktree](https://img.shields.io/badge/Linktree-forrestswan3-43E55E?style=flat-square&logo=linktree&logoColor=white)]({SOCIAL.get('linktree', '')})
 
 **Focus:** Python desktop apps · Google Apps Script · workflow automation (Zapier, n8n, Slack) · data-policy compliance · training systems
 
