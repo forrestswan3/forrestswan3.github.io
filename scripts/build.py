@@ -175,7 +175,7 @@ HOME_CSS = """
 .hero{padding:96px 0 88px;position:relative;overflow:hidden}
 .hero::after{content:"";position:absolute;inset:auto -10% -40% 45%;height:520px;background:radial-gradient(closest-side,color-mix(in srgb,var(--teal) 16%,transparent),transparent);pointer-events:none}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:56px;align-items:center;position:relative;z-index:1}
-.hero h1{font-size:clamp(40px,6.2vw,68px);line-height:1.02;font-weight:700;letter-spacing:-.035em;margin:18px 0 22px}
+.hero h1{font-size:clamp(40px,6.2vw,68px);line-height:1.02;font-weight:700;letter-spacing:-.026em;margin:18px 0 22px}
 .hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--steel),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
 .who{display:flex;align-items:center;gap:10px;margin-top:28px;font-size:14.5px;color:var(--muted)}
@@ -308,7 +308,7 @@ PAGE_CSS = """
 .crumbs{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);padding-top:40px}
 .crumbs a{display:inline-flex;align-items:center;gap:6px;color:var(--ink-2);font-weight:500}
 .phero{padding:28px 0 56px}
-.phero h1{font-size:clamp(36px,5.4vw,56px);line-height:1.05;font-weight:700;letter-spacing:-.035em;margin:18px 0 18px;max-width:20ch}
+.phero h1{font-size:clamp(36px,5.4vw,56px);line-height:1.05;font-weight:700;letter-spacing:-.024em;margin:18px 0 18px;max-width:20ch}
 .meta{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin-top:26px;font-size:14px;color:var(--muted)}
 .meta b{color:var(--ink);font-weight:600}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
