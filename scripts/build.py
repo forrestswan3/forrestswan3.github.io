@@ -150,8 +150,9 @@ def head(title, desc, url, extra_css=''):
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}"><meta name="author" content="{e(author)}">
 <link rel="canonical" href="{e(url)}"><link rel="icon" type="image/png" href="{MARK}">
-<meta property="og:type" content="website"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{e(url)}"><meta property="og:image" content="{MARK}">
-<meta name="twitter:card" content="summary"><meta name="theme-color" content="{b['offwhite']}" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#081726" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{e(url)}"><meta property="og:site_name" content="SystemSerenity">
+<meta property="og:image" content="{SITE}assets/og-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="627"><meta property="og:image:alt" content="SystemSerenity: Forrest Swan III project portfolio">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{SITE}assets/og-card.png"><meta name="theme-color" content="{b['offwhite']}" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#081726" media="(prefers-color-scheme: dark)">
 {FONTS}<style>{CSS}{extra_css}</style></head>"""
 
 
@@ -460,7 +461,7 @@ site_dir = ROOT / 'site'
 (site_dir / 'assets' / 'previews').mkdir(parents=True, exist_ok=True)
 (site_dir / 'index.html').write_text(site(), encoding='utf-8')
 (site_dir / '.nojekyll').write_text('', encoding='utf-8')
-for f in ('ss-mark.png', 'ss-mark-dark.png'):
+for f in ('ss-mark.png', 'ss-mark-dark.png', 'og-card.png'):
     shutil.copy(ROOT / 'assets' / f, site_dir / 'assets' / f)
 for f in (ROOT / 'assets' / 'previews').glob('*.png'):
     shutil.copy(f, site_dir / 'assets' / 'previews' / f.name)
