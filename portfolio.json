@@ -1,0 +1,197 @@
+{
+  "owner": "forrestswan3",
+  "author": "Forrest Swan III",
+  "updated": "2026-09-22",
+  "projects": [
+    {
+      "name": "koi-license-exam-prep",
+      "title": "License Exam Prep",
+      "status": "Shipped",
+      "shipped": "2026-07-02",
+      "lang": "Python",
+      "tagline": "Offline Windows desktop app for Florida insurance license practice exams across six license tracks.",
+      "topics": [
+        "python",
+        "pywebview",
+        "sqlite",
+        "reportlab",
+        "pyinstaller",
+        "desktop-app",
+        "edtech",
+        "insurance"
+      ],
+      "repo": "https://github.com/forrestswan3/koi-license-exam-prep",
+      "visibility": "public"
+    },
+    {
+      "name": "koi-training-program",
+      "title": "Agency Training Program",
+      "status": "Shipped",
+      "shipped": "2026-07-14",
+      "lang": "Python",
+      "tagline": "Internal training platform: video modules, randomized question banks, remediation gates and automatic score emails.",
+      "topics": [
+        "python",
+        "pywebview",
+        "sqlite",
+        "pdfjs",
+        "outlook-com",
+        "lms",
+        "training",
+        "desktop-app"
+      ],
+      "repo": "https://github.com/forrestswan3/koi-training-program",
+      "visibility": "public"
+    },
+    {
+      "name": "koi-filegate",
+      "title": "FileGate \u2014 Naming Compliance Auditor + Intake",
+      "status": "In production",
+      "shipped": "2026-09-22",
+      "lang": "Python",
+      "tagline": "Scans the agency file share, scores every file against the data policy, attributes ownership, and renames reversibly; plus a staff upload intake.",
+      "topics": [
+        "python",
+        "customtkinter",
+        "sqlite",
+        "ntfs",
+        "compliance",
+        "google-apps-script",
+        "automation",
+        "windows"
+      ],
+      "repo": "https://github.com/forrestswan3/koi-filegate",
+      "visibility": "public"
+    },
+    {
+      "name": "koi-uw-triage",
+      "title": "UW Triage Engine + Board",
+      "status": "In production",
+      "shipped": "2026-09-22",
+      "lang": "Google Apps Script",
+      "tagline": "Turns carrier underwriting notices into tracked work items with an AI triage engine, a web board, and two-way Slack.",
+      "topics": [
+        "google-apps-script",
+        "claude-api",
+        "slack-api",
+        "workflow",
+        "insurance",
+        "underwriting",
+        "kanban"
+      ],
+      "repo": "https://github.com/forrestswan3/koi-uw-triage",
+      "visibility": "public"
+    },
+    {
+      "name": "koi-audit-system",
+      "title": "Audit & Compliance Scoring System",
+      "status": "In progress",
+      "shipped": null,
+      "lang": "Python",
+      "tagline": "Self-hosted QC audit system: random policy sampling, rubric scoring, UW issue tracking and dashboards on a NAS.",
+      "topics": [
+        "python",
+        "n8n",
+        "postgresql",
+        "metabase",
+        "docker-compose",
+        "jotform",
+        "qnap",
+        "compliance"
+      ],
+      "repo": "https://github.com/forrestswan3/koi-audit-system",
+      "visibility": "public"
+    },
+    {
+      "name": "koi-apps-script-toolkit",
+      "title": "Apps Script Toolkit",
+      "status": "Shipped",
+      "shipped": "2026-09-22",
+      "lang": "Google Apps Script",
+      "tagline": "Google Apps Script tools: KPI tracker automation, monthly quiz form generator, spend tracker import, and a team quick-launch hub.",
+      "topics": [
+        "google-apps-script",
+        "google-sheets",
+        "google-forms",
+        "automation",
+        "kpi",
+        "web-app"
+      ],
+      "repo": "https://github.com/forrestswan3/koi-apps-script-toolkit",
+      "visibility": "public"
+    },
+    {
+      "name": "koi-training-video-pipeline",
+      "title": "Narrated Training Video Pipeline",
+      "status": "Shipped",
+      "shipped": "2026-07-15",
+      "lang": "Python",
+      "tagline": "Turns slide decks and narration scripts into narrated MP4 training videos plus HTML players with time-synced clickable links.",
+      "topics": [
+        "python",
+        "edge-tts",
+        "ffmpeg",
+        "libreoffice",
+        "text-to-speech",
+        "video",
+        "training"
+      ],
+      "repo": "https://github.com/forrestswan3/koi-training-video-pipeline",
+      "visibility": "public"
+    },
+    {
+      "name": "koi-design-system",
+      "title": "Design System",
+      "status": "Shipped",
+      "shipped": "2026-06-26",
+      "lang": "JavaScript",
+      "tagline": "Brand tokens (CSS variables, JS theme, Tailwind config) and ten React components for consistent agency web work.",
+      "topics": [
+        "design-system",
+        "design-tokens",
+        "react",
+        "tailwindcss",
+        "css-variables"
+      ],
+      "repo": "https://github.com/forrestswan3/koi-design-system",
+      "visibility": "public"
+    },
+    {
+      "name": "koi-sdr-talk-path",
+      "title": "SDR Talk Path Companion",
+      "status": "Shipped",
+      "shipped": "2026-08-21",
+      "lang": "JavaScript",
+      "tagline": "Interactive call-script companion for sales development reps, embedded in WordPress/Elementor.",
+      "topics": [
+        "javascript",
+        "wordpress",
+        "elementor",
+        "sales-enablement",
+        "call-scripts"
+      ],
+      "repo": "https://github.com/forrestswan3/koi-sdr-talk-path",
+      "visibility": "public"
+    }
+  ],
+  "case_studies": [
+    {
+      "title": "Zap Watchdog",
+      "status": "Shipped (documentation)",
+      "date": "2026-07-07",
+      "summary": "A three-layer monitoring program for Zapier automations (detection & routing \u2192 logging & accountability \u2192 routine maintenance) so silent Zap failures on revenue-critical voicemail routing get caught. Delivered as an SOP and a Zap Health Log workbook."
+    },
+    {
+      "title": "reMarkable 2 rollout training",
+      "status": "Shipped (documentation + video)",
+      "date": "2026-07-10",
+      "summary": "A 32-slide training deck verified against reMarkable software 3.27, an EOS Core Process document, and narrated videos with clickable in-video links (see koi-training-video-pipeline)."
+    },
+    {
+      "title": "Staff monthly quiz program",
+      "status": "Designed; rollout status unconfirmed",
+      "date": "2026-07-02",
+      "summary": "An evidence-based monthly quiz program (retrieval practice, spaced \"Encore\" re-testing, private scores, no leaderboards) with an Apps Script generator for the Google Forms (see koi-apps-script-toolkit)."
+    }
+  ]
+}

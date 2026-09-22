@@ -1,0 +1,3 @@
+#!/bin/sh
+# Portfolio safety gate: block any commit that gitleaks flags.
+gitleaks git --pre-commit --staged --redact --no-banner -v
