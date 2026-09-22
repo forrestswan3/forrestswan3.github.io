@@ -1,4 +1,4 @@
-<img src="assets/ss-mark.png" width="56" alt="SystemSerenity"> **SystemSerenity** — *Operational clarity at scale.*
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/ss-mark-dark.png"><img src="assets/ss-mark.png" width="56" alt="SystemSerenity"></picture> **SystemSerenity** — *Operational clarity at scale.*
 
 # Hi, I'm Forrest 👋
 

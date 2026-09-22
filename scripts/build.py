@@ -30,7 +30,7 @@ def profile_readme():
         name = f"[{p['title']}]({url})" if url else f"{p['title']} *(private)*"
         rows.append(f"| {name} | {p['status']} | {p['shipped'] or '—'} | {p['tagline']} |")
     cs = '\n'.join(f"- **{c['title']}** ({c['status']}, {c['date']}): {c['summary']}" for c in data.get('case_studies', []))
-    return f"""<img src="assets/ss-mark.png" width="56" alt="SystemSerenity"> **SystemSerenity** — *{BRAND['tagline']}*
+    return f"""<picture><source media="(prefers-color-scheme: dark)" srcset="assets/ss-mark-dark.png"><img src="assets/ss-mark.png" width="56" alt="SystemSerenity"></picture> **SystemSerenity** — *{BRAND['tagline']}*
 
 # Hi, I'm {author.split()[0]} 👋
 
