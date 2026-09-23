@@ -1,0 +1,9 @@
+---
+import paths from './mark-paths.json';
+interface Props { title?: string; class?: string }
+const { title, class: cls } = Astro.props;
+---
+<svg class={cls} viewBox="0 0 110 118" xmlns="http://www.w3.org/2000/svg" role={title ? 'img' : undefined} aria-hidden={title ? undefined : 'true'} aria-label={title}>
+  <path fill="var(--teal)" d={paths.teal} />
+  <path fill="var(--mark-n)" d={paths.navy} />
+</svg>
