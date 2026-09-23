@@ -1,5 +1,6 @@
-# Portfolio .gitignore
-__pycache__/
-.env
+node_modules/
+dist/
+.astro/
+.lighthouseci/
+preview.log
 .DS_Store
-Thumbs.db
