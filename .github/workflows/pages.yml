@@ -1,31 +1,60 @@
-name: Build and deploy portfolio site
-# Rebuilds site/index.html and PROFILE_README.md from portfolio.json on every push to main,
-# then publishes site/ to GitHub Pages. (Pages needs this repo to be public on the Free plan.)
+name: Build, test and deploy site
+# Every push builds the Astro site, generates the resume PDF from the same data,
+# and runs Lighthouse, axe accessibility and link checks. Only pushes to main deploy.
 on:
   push:
-    branches: [main]
+    branches: [main, astro-rebuild]
+  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
-  pages: write
-  id-token: write
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: '3.12'
-      - run: python scripts/build.py
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build site
+        run: npm run build
+      - name: Install Chromium for PDF and accessibility checks
+        run: npx playwright install --with-deps chromium
+      - name: Start preview server
+        run: |
+          npm run preview > preview.log 2>&1 &
+          npx --yes wait-on@8 http://localhost:4321/ -t 60000
+      - name: Generate resume PDF
+        run: npm run resume:pdf
+      - name: Accessibility (axe, WCAG 2.2 AA, light + dark)
+        run: npm run test:a11y
+      - name: Lighthouse (min 95 in every category)
+        run: npx --yes @lhci/cli@0.14.x autorun
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress --root-dir ${{ github.workspace }}/dist
+            --exclude 'linkedin\.com' --exclude 'linktr\.ee' --exclude '^mailto:' --exclude '^tel:'
+            --exclude '^https://forrestswan3\.github\.io/([^k]|$)'
+            --accept 200,206,429
+            'dist/**/*.html'
+          fail: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/configure-pages@v5
+        if: github.ref == 'refs/heads/main'
       - uses: actions/upload-pages-artifact@v4
+        if: github.ref == 'refs/heads/main'
         with:
-          path: site
+          path: dist
   deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     permissions:
