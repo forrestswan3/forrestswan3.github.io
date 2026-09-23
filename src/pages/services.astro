@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import profile from '../data/profile.json';
+import services from '../data/services.json';
+const mailto = (subject: string) => `mailto:${profile.email}?subject=${encodeURIComponent(subject)}`;
+const ld = services.offers.map((o) => ({
+  '@context': 'https://schema.org', '@type': 'Service', name: o.title, description: o.summary,
+  provider: { '@id': 'https://forrestswan3.github.io/#person' }, brand: { '@type': 'Brand', name: 'SystemSerenity' },
+}));
+---
+<Base title="Services" description="SystemSerenity services: fixed-price small-business websites and workflow & AI automation setup." jsonld={ld}>
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">SystemSerenity services</p>
+      <h1 style="font-size:var(--step-3)">Clear scope. Fixed price.</h1>
+      <p class="lede">{services.intro}</p>
+
+      <div class="grid grid--2" style="margin-top:2.5rem">
+        {services.offers.map((o) => (
+          <article class="card" id={o.id}>
+            <h2 style="font-size:var(--step-2)">{o.title}</h2>
+            <p class="price">{o.price}{' '}<small>{o.priceNote}</small></p>
+            <p>{o.summary}</p>
+            <ul>{o.includes.map((i) => <li>{i}</li>)}</ul>
+            <div class="addon"><strong>{o.addon.title}{o.addon.price && ` · ${o.addon.price}`}</strong>{o.addon.text}</div>
+            <div class="btn-row"><a class="btn btn--primary" href={mailto(`SystemSerenity: ${o.title}`)}><Icon name="mail" /> Ask about this</a></div>
+          </article>
+        ))}
+      </div>
+
+      <div class="split" style="margin-top:4rem">
+        <h2 style="font-size:var(--step-2)">Ground rules</h2>
+        <ul class="prose">
+          <li>Fixed prices, stated up front.</li>
+          <li>Automation projects start with a written scope and acceptance criteria, are built in your own accounts, and you keep control of credentials. No client personal data is stored on my side.</li>
+          <li>Websites include two revision rounds before launch. No promises about search rankings.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>

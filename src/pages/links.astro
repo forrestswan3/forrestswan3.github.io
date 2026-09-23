@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Mark from '../components/Mark.astro';
+import Icon from '../components/Icon.astro';
+import profile from '../data/profile.json';
+const links = [
+  { icon: 'globe', label: 'Project portfolio', sub: 'Systems, automation & training tools', href: '/work/' },
+  { icon: 'file', label: 'Resume', sub: 'PDF, updated 2026', href: '/resume.pdf' },
+  { icon: 'linkedin', label: 'LinkedIn', sub: 'in/forrestswan3', href: profile.social.linkedin },
+  { icon: 'github', label: 'GitHub', sub: '@forrestswan3', href: profile.social.github },
+  { icon: 'flow', label: 'SystemSerenity services', sub: 'Websites & automation setup', href: '/services/' },
+  { icon: 'mail', label: 'Email', sub: profile.email, href: `mailto:${profile.email}` },
+  { icon: 'card', label: 'Save my contact', sub: 'vCard for your phone', href: '/forrest-swan.vcf' },
+  { icon: 'tree', label: 'Linktree', sub: 'linktr.ee/forrestswan3', href: profile.social.linktree },
+];
+---
+<Base title="Links" description={`All of ${profile.name}'s links in one place: portfolio, resume, LinkedIn, GitHub and contact.`}>
+  <section class="section">
+    <div class="wrap" style="text-align:center">
+      <Mark class="links-mark" />
+      <h1 style="font-size:var(--step-2);margin-top:1rem">{profile.name}</h1>
+      <p class="muted" style="max-width:52ch;margin-inline:auto">{profile.headline}</p>
+      <ul class="link-list" style="margin-top:2rem;text-align:left">
+        {links.map((l) => (
+          <li><a href={l.href}><Icon name={l.icon} /><span>{l.label}<span class="sub">{l.sub}</span></span></a></li>
+        ))}
+      </ul>
+      <figure style="margin:2.5rem auto 0;max-width:180px">
+        <img src="/qr.svg" alt="QR code linking to forrestswan3.github.io" width="180" height="180" style="background:#fff;padding:10px;border-radius:12px" />
+        <figcaption class="small muted" style="margin-top:.5rem">Scan to open this site</figcaption>
+      </figure>
+    </div>
+  </section>
+  <style is:global>.links-mark { width: 72px; margin-inline: auto; }</style>
+</Base>

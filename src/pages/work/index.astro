@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import portfolio from '../../data/portfolio.json';
+
+const pub = portfolio.projects.filter((p) => p.visibility === 'public');
+const groups = [
+  { id: 'production', title: 'In production', items: pub.filter((p) => p.status === 'In production') },
+  { id: 'apps', title: 'Desktop apps & training systems', items: pub.filter((p) => ['koi-license-exam-prep', 'koi-training-program', 'koi-training-video-pipeline'].includes(p.name)) },
+  { id: 'automation', title: 'Automation, web & design tooling', items: pub.filter((p) => ['koi-apps-script-toolkit', 'koi-sdr-talk-path', 'koi-design-system'].includes(p.name)) },
+  { id: 'progress', title: 'In progress', items: pub.filter((p) => p.status === 'In progress') },
+];
+const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const itemList = {
+  '@context': 'https://schema.org', '@type': 'ItemList', name: 'Projects by Forrest Swan III',
+  itemListElement: pub.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `https://forrestswan3.github.io/work/${p.name}/`, name: p.title })),
+};
+---
+<Base title="Work" description="Internal software, workflow automation, compliance tooling and training systems for insurance agency operations, with case studies and public source code." jsonld={[itemList]}>
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Work</p>
+      <h1 style="font-size:var(--step-3)">Projects & case studies</h1>
+      <p class="lede">{pub.length} systems built for day-to-day agency operations. Each links to its public source and a written case study.</p>
+      <p class="notice">These repositories are sanitized portfolio copies: staff names, IDs and network details are replaced, and they contain no client data.</p>
+
+      {groups.map((g) => g.items.length > 0 && (
+        <section aria-labelledby={`g-${g.id}`} style="margin-top:3rem">
+          <h2 id={`g-${g.id}`} style="font-size:var(--step-2)">{g.title}</h2>
+          <div class="grid grid--3">{g.items.map((p) => <ProjectCard p={p} />)}</div>
+        </section>
+      ))}
+
+      <section id="case-studies" aria-labelledby="cs-h" style="margin-top:4rem">
+        <p class="eyebrow">Documentation case studies</p>
+        <h2 id="cs-h" style="font-size:var(--step-2)">Programs delivered as documentation, not code</h2>
+        <div class="grid grid--3">
+          {portfolio.case_studies.map((c) => (
+            <article class="card">
+              <div class="meta"><span class="pill">{c.status}</span><span class="pill">{fmt(c.date)}</span></div>
+              <h3>{c.title}</h3>
+              <p>{c.summary}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    </div>
+  </section>
+</Base>

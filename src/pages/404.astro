@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Mark from '../components/Mark.astro';
+---
+<Base title="Page not found">
+  <section class="section">
+    <div class="wrap" style="text-align:center;max-width:620px">
+      <Mark class="nf-mark" />
+      <p class="eyebrow" style="margin-top:1.5rem">404</p>
+      <h1 style="font-size:var(--step-3)">This page isn't where it should be</h1>
+      <p class="lede" style="margin-inline:auto">Even well-run systems have a broken link now and then. Try one of these, or press <kbd>Ctrl</kbd> <kbd>K</kbd> to search.</p>
+      <div class="btn-row" style="justify-content:center">
+        <a class="btn btn--primary" href="/">Home</a>
+        <a class="btn btn--ghost" href="/work/">Work</a>
+        <a class="btn btn--ghost" href="/contact/">Contact</a>
+      </div>
+    </div>
+  </section>
+  <style is:global>.nf-mark { width: 96px; margin-inline: auto; }</style>
+</Base>

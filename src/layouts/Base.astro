@@ -1,0 +1,220 @@
+---
+import '../styles/global.css';
+// Self-hosted fonts, latin subset only. Preloaded and loaded with font-display: optional so text
+// renders once in its final font (no late swap, no layout shift). Files come from Fontsource.
+import interUrl from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import poppins600Url from '@fontsource/poppins/files/poppins-latin-600-normal.woff2?url';
+import poppins700Url from '@fontsource/poppins/files/poppins-latin-700-normal.woff2?url';
+import Mark from '../components/Mark.astro';
+import Icon from '../components/Icon.astro';
+import profile from '../data/profile.json';
+import portfolio from '../data/portfolio.json';
+
+interface Props { title?: string; description?: string; jsonld?: object[] }
+const { title, description = `${profile.name}: ${profile.title} at ${profile.employer}. Systems architecture, automation and data governance. ${profile.brand.name}: ${profile.brand.tagline}`, jsonld = [] } = Astro.props;
+const fullTitle = title ? `${title} · ${profile.name}` : `${profile.name} · ${profile.brand.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/work/', label: 'Work' },
+  { href: '/about/', label: 'About' },
+  { href: '/services/', label: 'Services' },
+  { href: '/resume/', label: 'Resume' },
+  { href: '/contact/', label: 'Contact' },
+];
+const current = (href: string) => path === href ? 'page' : (href !== '/' && path.startsWith(href) ? 'true' : undefined);
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${profile.site}/#person`,
+  name: profile.name,
+  url: `${profile.site}/`,
+  image: `${profile.site}/og.jpg`,
+  jobTitle: profile.title,
+  worksFor: { '@type': 'Organization', name: profile.employer },
+  email: `mailto:${profile.email}`,
+  telephone: profile.phone,
+  address: { '@type': 'PostalAddress', addressLocality: 'Melbourne', addressRegion: 'FL', addressCountry: 'US' },
+  alumniOf: profile.education.map((e) => ({ '@type': 'CollegeOrUniversity', name: e.school })),
+  knowsAbout: ['Systems architecture', 'Workflow automation', 'Data governance', 'Salesforce', 'Google Apps Script', 'Python'],
+  sameAs: [profile.social.linkedin, profile.social.github, profile.social.linktree],
+};
+
+const paletteItems = [
+  { label: 'Home', href: '/', group: 'Page' },
+  ...nav.map((n) => ({ label: n.label, href: n.href, group: 'Page' })),
+  { label: 'Case studies', href: '/work/#case-studies', group: 'Page' },
+  { label: 'Links', href: '/links/', group: 'Page' },
+  { label: 'Download resume (PDF)', href: '/resume.pdf', group: 'File' },
+  { label: 'Save contact card (vCard)', href: '/forrest-swan.vcf', group: 'File' },
+  ...portfolio.projects.filter((p) => p.visibility === 'public').map((p) => ({ label: p.title, href: `/work/${p.name}/`, group: 'Project' })),
+  { label: 'Email Forrest', href: `mailto:${profile.email}`, group: 'Contact' },
+  { label: 'LinkedIn', href: profile.social.linkedin, group: 'Contact' },
+  { label: 'GitHub', href: profile.social.github, group: 'Contact' },
+];
+const latin = 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD';
+const fontCss = `@font-face{font-family:'Inter Variable';font-style:normal;font-display:optional;font-weight:100 900;src:url(${interUrl}) format('woff2');unicode-range:${latin}}`
+  + `@font-face{font-family:'Poppins';font-style:normal;font-display:optional;font-weight:600;src:url(${poppins600Url}) format('woff2');unicode-range:${latin}}`
+  + `@font-face{font-family:'Poppins';font-style:normal;font-display:optional;font-weight:700;src:url(${poppins700Url}) format('woff2');unicode-range:${latin}}`;
+const built = new Date(portfolio.updated + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta name="author" content={profile.name} />
+  <meta name="theme-color" content="#F7F4ED" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0B1F33" media="(prefers-color-scheme: dark)" />
+  <link rel="preload" href={interUrl} as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href={poppins700Url} as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href={poppins600Url} as="font" type="font/woff2" crossorigin />
+  <style is:inline set:html={fontCss}></style>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="sitemap" href="/sitemap.xml" />
+  <meta property="og:type" content="profile" />
+  <meta property="og:site_name" content={profile.brand.name} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={`${profile.site}/og.jpg`} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="SystemSerenity: Operational clarity at scale. Forrest Swan III." />
+  <meta property="profile:first_name" content="Forrest" />
+  <meta property="profile:last_name" content="Swan" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={`${profile.site}/og.jpg`} />
+  <script is:inline>
+    (function () {
+      try { var t = localStorage.getItem('ss-theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+    })();
+  </script>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify([person, ...jsonld])} />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label={`${profile.brand.name} home`}>
+        <Mark />
+        <span>System<span class="ser">Serenity</span></span>
+      </a>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        {nav.map((n) => <a href={n.href} aria-current={current(n.href)}>{n.label}</a>)}
+      </nav>
+      <button class="icon-btn" type="button" data-open-palette aria-label="Search the site (Ctrl+K)">
+        <Icon name="search" /><kbd class="kbd-hint">Ctrl K</kbd>
+      </button>
+      <button class="icon-btn" type="button" id="theme-toggle" aria-label="Toggle dark mode">
+        <Icon name="moon" class="i-moon" /><Icon name="sun" class="i-sun" />
+      </button>
+      <button class="icon-btn menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" id="menu-toggle" aria-label="Menu">
+        <Icon name="menu" />
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <strong>{profile.brand.name}</strong> · {profile.brand.tagline}<br />
+        © {new Date().getFullYear()} {profile.name} · Updated {built}
+      </div>
+      <nav aria-label="Footer">
+        <a href="/links/">Links</a>
+        <a href={profile.social.linkedin}>LinkedIn</a>
+        <a href={profile.social.github}>GitHub</a>
+        <a href="/resume.pdf">Resume PDF</a>
+        <a href="/forrest-swan.vcf">vCard</a>
+      </nav>
+    </div>
+  </footer>
+
+  <dialog class="palette" id="palette" aria-label="Search the site">
+    <form method="dialog">
+      <label class="sr-only" for="palette-input">Search pages and projects</label>
+      <input id="palette-input" type="search" placeholder="Search pages and projects…" autocomplete="off" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-controls="palette-list" />
+      <ul id="palette-list" role="listbox"></ul>
+    </form>
+  </dialog>
+  <script is:inline type="application/json" id="palette-data" set:html={JSON.stringify(paletteItems)} />
+
+  <script>
+    // Theme toggle
+    const root = document.documentElement;
+    const toggle = document.getElementById('theme-toggle')!;
+    const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    const paint = () => { toggle.setAttribute('aria-pressed', String(isDark())); toggle.classList.toggle('is-dark', isDark()); };
+    toggle.addEventListener('click', () => {
+      const next = isDark() ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try { localStorage.setItem('ss-theme', next); } catch (e) {}
+      paint();
+    });
+    paint();
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menu-toggle')!;
+    const nav = document.getElementById('site-nav')!;
+    menuBtn.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+
+    // Command palette (Ctrl/Cmd + K)
+    const dlg = document.getElementById('palette') as HTMLDialogElement;
+    const input = document.getElementById('palette-input') as HTMLInputElement;
+    const list = document.getElementById('palette-list')!;
+    const items: { label: string; href: string; group: string }[] = JSON.parse(document.getElementById('palette-data')!.textContent || '[]');
+    let sel = 0; let shown = items;
+    const render = () => {
+      const q = input.value.trim().toLowerCase();
+      shown = items.filter((i) => !q || i.label.toLowerCase().includes(q) || i.group.toLowerCase().includes(q));
+      sel = Math.min(sel, Math.max(shown.length - 1, 0));
+      list.innerHTML = '';
+      if (!shown.length) { const li = document.createElement('li'); li.setAttribute('role', 'none'); li.className = 'empty'; li.textContent = 'No matches'; list.append(li); input.removeAttribute('aria-activedescendant'); return; }
+      shown.forEach((i, n) => {
+        const li = document.createElement('li');
+        li.setAttribute('role', 'none');
+        const a = document.createElement('a');
+        a.href = i.href; a.id = `pal-${n}`; a.setAttribute('role', 'option');
+        a.setAttribute('aria-selected', String(n === sel));
+        a.textContent = i.label;
+        const s = document.createElement('span'); s.textContent = i.group; a.append(s);
+        li.append(a); list.append(li);
+      });
+      input.setAttribute('aria-activedescendant', `pal-${sel}`);
+    };
+    const open = () => { input.value = ''; sel = 0; render(); dlg.showModal(); input.focus(); };
+    document.querySelectorAll('[data-open-palette]').forEach((b) => b.addEventListener('click', open));
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); dlg.open ? dlg.close() : open(); }
+    });
+    input.addEventListener('input', () => { sel = 0; render(); });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); sel = Math.min(sel + 1, shown.length - 1); render(); document.getElementById(`pal-${sel}`)?.scrollIntoView({ block: 'nearest' }); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); sel = Math.max(sel - 1, 0); render(); document.getElementById(`pal-${sel}`)?.scrollIntoView({ block: 'nearest' }); }
+      else if (e.key === 'Enter') { e.preventDefault(); const t = shown[sel]; if (t) window.location.href = t.href; }
+    });
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  </script>
+  <style is:global>
+    #theme-toggle .i-sun { display: none; }
+    #theme-toggle.is-dark .i-sun { display: block; }
+    #theme-toggle.is-dark .i-moon { display: none; }
+  </style>
+</body>
+</html>

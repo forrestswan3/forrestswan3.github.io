@@ -1,0 +1,43 @@
+{
+  "intro": "SystemSerenity also takes on a small number of fixed-price projects for small businesses: the same systems thinking, scoped so you know the cost up front.",
+  "offers": [
+    {
+      "id": "websites",
+      "title": "Small-business websites",
+      "price": "$599",
+      "priceNote": "one-time build",
+      "summary": "A 5-page website delivered in 7 days, with no CMS to maintain.",
+      "includes": [
+        "5 pages covering your services, about, reviews, service area and contact",
+        "Click-to-call, contact form, service area and Google Business Profile link",
+        "Search-friendly structured data for local businesses",
+        "Hosting on Cloudflare Pages at no monthly hosting cost; your own .com at cost",
+        "Two revision rounds before launch"
+      ],
+      "addon": {
+        "title": "Optional maintenance",
+        "price": "$99/month",
+        "text": "Content edits (up to 2 hours a month), uptime monitoring, backups and a monthly report. Cancel with 30 days' notice."
+      }
+    },
+    {
+      "id": "automation",
+      "title": "Workflow & AI automation setup",
+      "price": "From $300",
+      "priceNote": "fixed fee",
+      "summary": "Fixed-fee automation built in your own accounts, handed over with a runbook and 30 days of email support.",
+      "includes": [
+        "Inbox triage and draft replies: $600",
+        "Renewal and follow-up reminder system (Sheets, Calendar, email drafts): $600",
+        "Lead intake to sheet or CRM with an instant acknowledgment: $600",
+        "SOP library build (10 processes): $1,500",
+        "Mini (single workflow): $300 · Multi-workflow: $1,500"
+      ],
+      "addon": {
+        "title": "How it works",
+        "price": "",
+        "text": "A 20-minute discovery call, a written scope with acceptance criteria, 50% deposit and 50% on acceptance. Built in your own accounts; you keep control of any credentials."
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import profile from '../data/profile.json';
+---
+<Base title="Contact" description={`Contact ${profile.name} by email, phone or LinkedIn.`}>
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h1 style="font-size:var(--step-3)">Let's talk</h1>
+        <p class="lede">For roles, collaborations or a SystemSerenity project, email is the fastest way to reach me.</p>
+      </div>
+      <ul class="link-list" style="margin:0;max-width:none">
+        <li><a href={`mailto:${profile.email}`}><Icon name="mail" /><span>Email<span class="sub">{profile.email}</span></span></a></li>
+        <li><a href={`tel:${profile.phone}`}><Icon name="phone" /><span>Phone<span class="sub">{profile.phoneDisplay}</span></span></a></li>
+        <li><a href={profile.social.linkedin}><Icon name="linkedin" /><span>LinkedIn<span class="sub">Message me on LinkedIn</span></span></a></li>
+        <li><a href="/forrest-swan.vcf" download><Icon name="card" /><span>Save contact card<span class="sub">vCard (.vcf) for phone or Outlook</span></span></a></li>
+        <li><a href="/resume.pdf"><Icon name="file" /><span>Resume<span class="sub">PDF</span></span></a></li>
+      </ul>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,102 @@
+{
+  "name": "Forrest Swan III",
+  "handle": "forrestswan3",
+  "title": "Agency Operations & Systems Manager",
+  "employer": "Kasey Osman Insurance",
+  "headline": "Agency Operations & Systems Manager at Kasey Osman Insurance | Systems Architecture, Automation & Data Governance | Insurance Operations",
+  "location": "Melbourne, Florida",
+  "email": "forrestswan3@gmail.com",
+  "phone": "+12766989332",
+  "phoneDisplay": "(276) 698-9332",
+  "site": "https://forrestswan3.github.io",
+  "brand": {
+    "name": "SystemSerenity",
+    "tagline": "Operational clarity at scale.",
+    "pillars": [
+      { "title": "Trusted", "text": "Dependable systems you can count on." },
+      { "title": "Connected", "text": "Workflows and data that work together." },
+      { "title": "Optimized", "text": "Built to scale with your business." }
+    ],
+    "values": [
+      { "title": "Clarity", "text": "Clear processes. Clear direction." },
+      { "title": "Confidence", "text": "Make better decisions with the right information." },
+      { "title": "Serenity", "text": "Less chaos. Less stress. More time to lead." }
+    ]
+  },
+  "summary": "Promoted from Licensed Sales Producer to Technical Solutions Manager to Agency Operations & Systems Manager at an Allstate agency, owning systems architecture, automation, data governance, and cybersecurity.",
+  "social": {
+    "linkedin": "https://www.linkedin.com/in/forrestswan3/",
+    "github": "https://github.com/forrestswan3",
+    "linktree": "https://linktr.ee/forrestswan3"
+  },
+  "skills": [
+    "Information Systems Planning", "Software-as-a-Service (SaaS)", "Customer Relationship Managers",
+    "Systems Administration", "Salesforce Implementations", "Data Policies",
+    "SQL/SOQL", "Microsoft Excel", "VBA Macros",
+    "Automation Strategies", "Workflow Development", "Project Management",
+    "Communication", "WordPress", "Critical-Thinking",
+    "Initiative", "Adaptability", "Creativity"
+  ],
+  "experience": [
+    {
+      "employer": "Kasey Osman Insurance",
+      "title": "Agency Operations & Systems Manager",
+      "location": "Melbourne, Florida",
+      "start": "June 2024",
+      "end": "Current",
+      "startISO": "2024-06",
+      "summary": "Promoted from Licensed Sales Producer to Technical Solutions Manager to Agency Operations & Systems Manager at an Allstate agency, owning systems architecture, automation, data governance, and cybersecurity.",
+      "bullets": [
+        "Built and documented 9 internal systems, 2 in daily production, including a file-naming compliance auditor.",
+        "Launched AI-assisted underwriting-notice triage with a web board and two-way Slack updates for agents.",
+        "Developed offline Windows apps for staff training and license exam prep, backed by 56 passing automated tests."
+      ]
+    },
+    {
+      "employer": "Avidyne Corporation",
+      "title": "Customer Experience Systems Administrator",
+      "location": "Melbourne, Florida",
+      "start": "June 2022",
+      "end": "February 2023",
+      "startISO": "2022-06",
+      "summary": "A Systems Admin at Avidyne enhanced efficiency for aviation tech company's staff and clients, ensuring data accuracy and contributing to cutting-edge solutions in an $8.5M company with 200+ employees.",
+      "bullets": [
+        "Created a data policy covering entry, design, naming conventions, branding, and tagging, resulting in a 20% drop in errors and revised data quality.",
+        "Expanded functionality of CRM (Keap/Infusionsoft) and help desk (HappyFox) software, leading to a 30% improvement in user efficiency and a reduction in response time for customer support by over 10 minutes.",
+        "Provided Tier II and III support, internally and externally, for software and technical issues achieving a 15% decrease in resolution time for complex technical challenges."
+      ]
+    },
+    {
+      "employer": "Paramount Foundation",
+      "title": "Systems Administrator, Salesforce",
+      "location": "Bristol, Tennessee",
+      "start": "March 2016",
+      "end": "March 2020",
+      "startISO": "2016-03",
+      "summary": "Systems Admin at The Paramount Foundation developed data policies, enhanced donor management, streamlined Salesforce, and boosted overall systems efficiency for a $3.3M non-profit with 10+ employees.",
+      "bullets": [
+        "Served as the Project Manager for two implementations of Salesforce (NPSP and Enterprise), resulting in a 30% improvement in donor management efficiency and a reduction in donation processing time by 5 days.",
+        "Utilized Salesforce tools and apps (PatronManager and CongaComposer) for streamlined donation data entry and acknowledgment, eliminating over 30 manual tasks and boosting donor communication efficiency by 30%.",
+        "Implemented onboarding for employees and volunteers on technologies (Salesforce, PatronManager, Slack, Google Suite, Clover POS), cutting onboarding time by 2 days and increasing proficiency by 25%."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "University of Florida",
+      "college": "College of Health & Human Performance",
+      "degree": "Bachelor of Science, Sport and Fitness Administration/Management",
+      "date": "December 2023",
+      "location": "Gainesville, Florida",
+      "honors": "Cum Laude, GPA: 3.55"
+    },
+    {
+      "school": "Piedmont Virginia Community College",
+      "college": "",
+      "degree": "Associate of Science, Business Administration",
+      "date": "May 2019",
+      "location": "Charlottesville, Virginia",
+      "honors": "Summa Cum Laude, GPA: 3.98"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import profile from '../data/profile.json';
+---
+<Base title="Resume" description={`Resume of ${profile.name}, ${profile.title} at ${profile.employer}.`}>
+  <section class="section">
+    <div class="wrap" style="max-width:860px">
+      <div class="btn-row no-print" style="margin:0 0 2rem">
+        <a class="btn btn--primary" href="/resume.pdf" download><Icon name="download" /> Download PDF</a>
+        <a class="btn btn--ghost" href="/forrest-swan.vcf" download><Icon name="card" /> Save contact</a>
+      </div>
+
+      <header class="resume-head">
+        <h1>{profile.name}</h1>
+        <p class="muted" style="margin:0">
+          Florida, United States · <a href={`tel:${profile.phone}`}>{profile.phoneDisplay}</a> · <a href={`mailto:${profile.email}`}>{profile.email}</a> · <a href={profile.social.linktree}>linktr.ee/forrestswan3</a>
+        </p>
+      </header>
+
+      <h2 class="rh">Key strengths, skills & knowledge</h2>
+      <ul class="skills">{profile.skills.map((s) => <li>{s}</li>)}</ul>
+
+      <h2 class="rh">Education</h2>
+      {profile.education.map((e) => (
+        <div class="role">
+          <div class="role-head"><h3>{e.school}{e.college && `, ${e.college}`}</h3><span class="when">{e.date}</span></div>
+          <div class="role-head"><span>{e.degree}</span><span class="when">{e.location}</span></div>
+          <ul><li>{e.honors}</li></ul>
+        </div>
+      ))}
+
+      <h2 class="rh">Work experience</h2>
+      {profile.experience.map((x) => (
+        <div class="role">
+          <div class="role-head"><h3 class="org">{x.employer}</h3><span class="when">{x.start} – {x.end}</span></div>
+          <div class="role-head"><strong>{x.title}</strong><span class="when">{x.location}</span></div>
+          <p class="summary">{x.summary}</p>
+          <ul>{x.bullets.map((b) => <li>{b}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import portfolio from '../../data/portfolio.json';
+
+export function getStaticPaths() {
+  return portfolio.projects
+    .filter((p) => p.visibility === 'public')
+    .map((p) => ({ params: { slug: p.name }, props: { p } }));
+}
+const { p } = Astro.props as { p: any };
+const d = p.detail ?? {};
+const fmt = (s: string | null) => s ? new Date(s + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : null;
+// Render `code` spans from the source text safely.
+const md = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/`([^`]+)`/g, '<code>$1</code>');
+const all = portfolio.projects.filter((x) => x.visibility === 'public');
+const idx = all.findIndex((x) => x.name === p.name);
+const next = all[(idx + 1) % all.length];
+const ld = {
+  '@context': 'https://schema.org', '@type': 'SoftwareSourceCode', name: p.title, description: p.tagline,
+  codeRepository: p.repo, programmingLanguage: p.lang, keywords: p.topics.join(', '),
+  author: { '@id': 'https://forrestswan3.github.io/#person' }, ...(p.shipped ? { dateModified: p.shipped } : {}),
+};
+---
+<Base title={p.title} description={p.tagline} jsonld={[ld]}>
+  <article class="section">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/work/">Work</a> / Case study</p>
+      <h1 style="font-size:var(--step-3)">{p.title}</h1>
+      <div class="meta">
+        <span class={p.status === 'In production' ? 'pill pill--live' : 'pill'}>{p.status}</span>
+        {p.shipped && <span class="pill">{p.status === 'Shipped' ? 'Shipped' : 'Updated'} {fmt(p.shipped)}</span>}
+        <span class="pill">{p.lang}</span>
+      </div>
+      <p class="lede">{p.tagline}</p>
+      <div class="btn-row">
+        {p.demo && <a class="btn btn--primary" href={p.demo.url}>{p.demo.label} <Icon name="arrow" /></a>}
+        <a class={p.demo ? 'btn btn--ghost' : 'btn btn--primary'} href={p.repo}><Icon name="github" /> Source on GitHub</a>
+        {p.page && <a class="btn btn--ghost" href={p.page}>Project page</a>}
+      </div>
+      {p.demo?.note && <p class="small muted" style="margin-top:.75rem">{p.demo.note}</p>}
+
+      {p.preview && (
+        <figure style="margin:2.5rem 0 0">
+          <img src={`/previews/${p.name}.webp`} alt={`Screenshot of ${p.title}`} width="960" height="600" style="border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)" />
+        </figure>
+      )}
+
+      <div class="split" style="margin-top:3rem">
+        <aside>
+          {d.stack && (<><h2 style="font-size:var(--step-1)">Stack</h2><ul class="tags" style="flex-direction:column;align-items:flex-start">{d.stack.map((s: string) => <li>{s}</li>)}</ul></>)}
+          <h2 style="font-size:var(--step-1);margin-top:1.5rem">Topics</h2>
+          <ul class="tags">{p.topics.map((t: string) => <li>{t}</li>)}</ul>
+        </aside>
+        <div class="prose">
+          {d.problem && (<><h2 style="margin-top:0">Problem</h2><p set:html={md(d.problem)} /></>)}
+          {d.solution && (<><h2>Solution</h2><p set:html={md(d.solution)} /></>)}
+          {d.highlights && (<><h2>Results & highlights</h2><ul>{d.highlights.map((h: string) => <li set:html={md(h)} />)}</ul></>)}
+          {d.notes && (<><h2>Notes</h2><ul>{d.notes.map((h: string) => <li set:html={md(h)} />)}</ul></>)}
+        </div>
+      </div>
+
+      <p style="margin-top:3rem"><a href={`/work/${next.name}/`}>Next: {next.title} →</a></p>
+    </div>
+  </article>
+</Base>
