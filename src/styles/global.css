@@ -157,6 +157,9 @@ kbd { font-family: inherit; font-size: .75rem; border: 1px solid var(--line); bo
 .pillar p { color: var(--ink-2); margin: 0; font-size: .97rem; }
 @media (max-width: 760px) { .pillars { grid-template-columns: 1fr; } }
 
+/* Headshot (About) */
+.headshot { width: min(240px, 60vw); height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 4px solid var(--surface); box-shadow: var(--shadow), 0 0 0 1px var(--line); margin-bottom: 1.5rem; }
+
 /* Split / prose */
 .split { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; }
 @media (max-width: 860px) { .split { grid-template-columns: 1fr; gap: 1rem; } }
