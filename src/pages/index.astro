@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import Mark from '../components/Mark.astro';
+import Icon from '../components/Icon.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import profile from '../data/profile.json';
+import portfolio from '../data/portfolio.json';
+import services from '../data/services.json';
+
+const pub = portfolio.projects.filter((p) => p.visibility === 'public');
+const inProd = pub.filter((p) => p.status === 'In production').length;
+const featured = ['koi-filegate', 'koi-uw-triage', 'koi-license-exam-prep']
+  .map((n) => pub.find((p) => p.name === n)).filter(Boolean);
+const pillarIcons = ['shield', 'flow', 'chart'];
+const valueIcons = ['target', 'person', 'lotus'];
+---
+<Base>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">{profile.name} · {profile.brand.name}</p>
+        <h1>Operational clarity <span class="accent">at scale.</span></h1>
+        <p class="who">{profile.title} at {profile.employer}</p>
+        <p class="lede">I own systems architecture, automation, data governance and cybersecurity at an Allstate agency in {profile.location}, and I build the internal tools the team runs on: a file-compliance auditor, AI-assisted triage, training apps and the workflows that connect them.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/work/">View work <Icon name="arrow" class="i" /></a>
+          <a class="btn btn--ghost" href="/resume/">Resume</a>
+          <a class="btn btn--ghost" href="/contact/">Contact</a>
+        </div>
+      </div>
+      <Mark class="hero-mark" />
+    </div>
+    <div class="wrap">
+      <div class="proof" role="list" aria-label="At a glance">
+        <div role="listitem"><strong>{pub.length}</strong><span>internal systems built and documented</span></div>
+        <div role="listitem"><strong>{inProd}</strong><span>in daily production</span></div>
+        <div role="listitem"><strong>84</strong><span>passing automated tests across 3 apps (FileGate, training, exam prep)</span></div>
+        <div role="listitem"><strong>2016</strong><span>started in Salesforce systems administration</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="pillars-h">
+    <div class="wrap">
+      <h2 id="pillars-h" class="sr-only">What the work stands for</h2>
+      <div class="pillars">
+        {profile.brand.pillars.map((p, i) => (
+          <div class="pillar"><Icon name={pillarIcons[i]} /><div><h3>{p.title}</h3><p>{p.text}</p></div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="work-h">
+    <div class="wrap">
+      <p class="eyebrow">Selected work</p>
+      <h2 id="work-h">Systems that ship, not slideware</h2>
+      <p class="lede">Each project links to its public source code and a written case study.</p>
+      <div class="grid grid--3" style="margin-top:2rem">
+        {featured.map((p) => <ProjectCard p={p} showImage={false} />)}
+      </div>
+      <div class="btn-row"><a class="btn btn--ghost" href="/work/">All {pub.length} projects and case studies <Icon name="arrow" /></a></div>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="how-h">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">How I work</p>
+        <h2 id="how-h">Clarity first, then automation</h2>
+      </div>
+      <div class="pillars" style="grid-template-columns:1fr">
+        {profile.brand.values.map((v, i) => (
+          <div class="pillar"><Icon name={valueIcons[i]} /><div><h3>{v.title}</h3><p>{v.text}</p></div></div>
+        ))}
+        <p class="muted">In practice: policies get written down as data before code enforces them, anything that can't be derived goes to a review queue instead of being guessed, and the larger tools ship with automated tests.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="svc-h">
+    <div class="wrap">
+      <p class="eyebrow">Services</p>
+      <h2 id="svc-h">Need this kind of clarity in your business?</h2>
+      <p class="lede">{services.intro}</p>
+      <div class="grid grid--2" style="margin-top:2rem">
+        {services.offers.map((o) => (
+          <article class="card">
+            <h3><a href={`/services/#${o.id}`}>{o.title}</a></h3>
+            <p class="price">{o.price}{' '}<small>{o.priceNote}</small></p>
+            <p>{o.summary}</p>
+            <div class="foot"><a href={`/services/#${o.id}`}>What's included<span class="sr-only">: {o.title}</span></a></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

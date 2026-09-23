@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import profile from '../data/profile.json';
+const [koi, avidyne, paramount] = profile.experience;
+---
+<Base title="About" description={`About ${profile.name}: ${profile.title} at ${profile.employer}, with systems administration roles at Avidyne Corporation and the Paramount Foundation.`}>
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">About</p>
+        <h1 style="font-size:var(--step-3)">{profile.name}</h1>
+        <p class="muted">{profile.title}<br />{profile.employer} · {profile.location}</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/resume/">Resume</a>
+          <a class="btn btn--ghost" href={profile.social.linkedin}><Icon name="linkedin" /> LinkedIn</a>
+        </div>
+      </div>
+      <div class="prose">
+        <p class="lede">I make operations legible: I write down how the work is supposed to flow, then build the systems that keep it flowing that way.</p>
+
+        <h2>Now: {koi.employer}</h2>
+        <p>Since {koi.start} I've worked at {koi.employer}, an Allstate agency in {koi.location}. I was promoted from Licensed Sales Producer to Technical Solutions Manager to {koi.title}, and I own systems architecture, automation, data governance and cybersecurity.</p>
+        <p>The environment has real constraints. The agency's Microsoft 365 environment is carrier-managed and blocks add-ins and macros, so automation runs through Google Apps Script, Zapier, n8n and standalone Windows apps instead. Within that, I've built and documented nine internal systems. Two run in daily production: a file-naming compliance auditor for the agency file share and an AI-assisted underwriting-notice triage board with two-way Slack updates.</p>
+
+        <h2>Before</h2>
+        <p><strong>{avidyne.employer}</strong> ({avidyne.start} – {avidyne.end}). As {avidyne.title} at the aviation technology company, I wrote a data policy covering entry, design, naming conventions, branding and tagging, extended the CRM (Keap/Infusionsoft) and help desk (HappyFox), and provided Tier II and III support.</p>
+        <p><strong>{paramount.employer}</strong> ({paramount.start} – {paramount.end}). As {paramount.title} for a non-profit in {paramount.location}, I project-managed two Salesforce implementations (NPSP and Enterprise), streamlined donation entry and acknowledgment with PatronManager and Conga Composer, and onboarded staff and volunteers onto the organization's technology.</p>
+
+        <h2>Education</h2>
+        <ul>
+          {profile.education.map((e) => <li><strong>{e.school}</strong>: {e.degree}, {e.date} ({e.honors.split(',')[0]})</li>)}
+        </ul>
+
+        <h2>How I work</h2>
+        <ul>
+          <li><strong>Policy as data.</strong> Rules live in versioned files (rulesets, blueprints, rubrics) so they can change without a code change.</li>
+          <li><strong>No guessing.</strong> When a value can't be derived, it goes to a review queue instead of being made up.</li>
+          <li><strong>Reversible changes.</strong> When a tool renames files, every change is journaled with an undo path.</li>
+          <li><strong>Tested.</strong> The larger tools ship with automated test suites, and case studies note test results where they were recorded.</li>
+        </ul>
+        <p class="notice">Every claim about my experience here traces to my resume, the public source code on GitHub, or the case studies.</p>
+      </div>
+    </div>
+  </section>
+</Base>
