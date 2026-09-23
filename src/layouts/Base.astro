@@ -1,8 +1,10 @@
 ---
-import '@fontsource/poppins/600.css';
-import '@fontsource/poppins/700.css';
-import '@fontsource-variable/inter';
 import '../styles/global.css';
+// Self-hosted fonts, latin subset only. Preloaded and loaded with font-display: optional so text
+// renders once in its final font (no late swap, no layout shift). Files come from Fontsource.
+import interUrl from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import poppins600Url from '@fontsource/poppins/files/poppins-latin-600-normal.woff2?url';
+import poppins700Url from '@fontsource/poppins/files/poppins-latin-700-normal.woff2?url';
 import Mark from '../components/Mark.astro';
 import Icon from '../components/Icon.astro';
 import profile from '../data/profile.json';
@@ -51,6 +53,10 @@ const paletteItems = [
   { label: 'LinkedIn', href: profile.social.linkedin, group: 'Contact' },
   { label: 'GitHub', href: profile.social.github, group: 'Contact' },
 ];
+const latin = 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD';
+const fontCss = `@font-face{font-family:'Inter Variable';font-style:normal;font-display:optional;font-weight:100 900;src:url(${interUrl}) format('woff2');unicode-range:${latin}}`
+  + `@font-face{font-family:'Poppins';font-style:normal;font-display:optional;font-weight:600;src:url(${poppins600Url}) format('woff2');unicode-range:${latin}}`
+  + `@font-face{font-family:'Poppins';font-style:normal;font-display:optional;font-weight:700;src:url(${poppins700Url}) format('woff2');unicode-range:${latin}}`;
 const built = new Date(portfolio.updated + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 ---
 <!doctype html>
@@ -64,6 +70,10 @@ const built = new Date(portfolio.updated + 'T12:00:00').toLocaleDateString('en-U
   <meta name="author" content={profile.name} />
   <meta name="theme-color" content="#F7F4ED" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0B1F33" media="(prefers-color-scheme: dark)" />
+  <link rel="preload" href={interUrl} as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href={poppins700Url} as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href={poppins600Url} as="font" type="font/woff2" crossorigin />
+  <style is:inline set:html={fontCss}></style>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
