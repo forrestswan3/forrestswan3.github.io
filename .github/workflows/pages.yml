@@ -23,6 +23,17 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Build site
         run: npm run build
+      - name: Sensitive-data scan of build output
+        # Term list lives in an encrypted repository secret, never in this public repo.
+        # grep -l prints file names only, so matches are not echoed into public logs.
+        env:
+          PII_PATTERNS: ${{ secrets.PII_PATTERNS }}
+        run: |
+          GENERIC='\b(10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}|192\.168\.[0-9]{1,3}\.[0-9]{1,3}|172\.(1[6-9]|2[0-9]|3[01])\.[0-9]{1,3}\.[0-9]{1,3})\b|S-1-5-21-[0-9]{6,}'
+          if grep -rIEl "$GENERIC" dist; then echo "::error::Private IP address or Windows SID found in build output"; exit 1; fi
+          if [ -z "$PII_PATTERNS" ]; then echo "::warning::PII_PATTERNS secret not set; dictionary scan skipped"; exit 0; fi
+          if grep -rIPil "$PII_PATTERNS" dist; then echo "::error::Private dictionary term found in build output"; exit 1; fi
+          echo "Sensitive-data scan clean"
       - name: Install Chromium for PDF and accessibility checks
         run: npx playwright install --with-deps chromium
       - name: Start preview server
