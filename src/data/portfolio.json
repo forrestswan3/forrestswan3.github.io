@@ -1,7 +1,7 @@
 {
   "owner": "forrestswan3",
   "author": "Forrest Swan III",
-  "updated": "2026-09-25",
+  "updated": "2026-09-26",
   "projects": [
     {
       "name": "license-exam-prep",
@@ -9,28 +9,29 @@
       "status": "Shipped",
       "shipped": "2026-07-02",
       "lang": "Python",
-      "tagline": "Offline Windows desktop app for Florida insurance license practice exams across six license tracks.",
+      "tagline": "Designed and shipped an offline Python desktop application that prepares insurance agents for Florida state licensing exams across six license tracks.",
       "topics": [
         "python",
-        "pywebview",
+        "desktop-application",
         "sqlite",
-        "reportlab",
-        "pyinstaller",
-        "desktop-app",
+        "llm-integration",
         "edtech",
+        "test-automation",
+        "pyinstaller",
+        "product-development",
         "insurance"
       ],
       "repo": null,
       "visibility": "public",
       "page": null,
       "detail": {
-        "problem": "Agents studying for Florida license exams had no practice tool that ran on the locked-down Allstate-managed workstations (no add-ins, no macros, no cloud installs).",
-        "solution": "A standalone one-file `.exe` (PyWebView + SQLite + ReportLab) with full-length timed exams that follow the official Pearson VUE Florida content outlines (effective 2026-01-01), a projected-score gauge, per-domain mastery, and branded PDF reports.",
+        "problem": "Licensing is a revenue gate: new agents can't sell until they pass the state exam. The agency had no practice tool that could run on locked-down, carrier-managed workstations with no add-ins, macros or cloud installs.",
+        "solution": "Owned the product end to end, from requirements to deployment. The result is a single-file Windows executable (Python, PyWebView, SQLite, ReportLab). It runs full-length timed exams mapped to the official Pearson VUE Florida content outlines, and adds a projected-score gauge, per-domain mastery analytics and branded PDF performance reports.",
         "highlights": [
-          "1,467 outline-mapped practice questions (500 hand-written master items) across 2-20, 20-44, 4-40, 2-15, 2-14 and 2-40 tracks",
-          "Blueprints are data (`data/blueprints/blueprints.json`, weights validated at startup) — no code change to update an outline",
-          "Optional AI narrative report via the Anthropic API (key DPAPI-encrypted) with a deterministic offline fallback",
-          "17 automated tests pass (zero-dependency runner, verified 2026-09-22)"
+          "Built a 1,467-question, outline-mapped item bank (500 hand-written master items) across six license tracks: 2-20, 20-44, 4-40, 2-15, 2-14 and 2-40",
+          "Architected blueprints as data: exam weights are validated at startup, so outline changes need no code change or redeploy",
+          "Integrated an LLM (Anthropic API) for AI-generated study narratives, with the API key DPAPI-encrypted at rest and a deterministic offline fallback",
+          "Quality gate: 17 automated tests passing (verified 2026-09-22)"
         ],
         "stack": [
           "Python 3.10+",
@@ -56,29 +57,30 @@
       "status": "Shipped",
       "shipped": "2026-07-14",
       "lang": "Python",
-      "tagline": "Internal training platform: video modules, randomized question banks, remediation gates and automatic score emails.",
+      "tagline": "Built an internal learning management system (LMS) that standardizes staff onboarding with video modules, randomized assessments, remediation gates and automated manager reporting.",
       "topics": [
-        "python",
-        "pywebview",
-        "sqlite",
-        "pdfjs",
-        "outlook-com",
         "lms",
-        "training",
-        "desktop-app"
+        "python",
+        "e-learning",
+        "onboarding",
+        "test-automation",
+        "playwright",
+        "sqlite",
+        "workflow-automation",
+        "desktop-application"
       ],
       "repo": null,
       "visibility": "public",
       "page": null,
       "detail": {
-        "problem": "Staff training lived in scattered decks and videos with no quiz tracking and no way for managers to see results.",
-        "solution": "A desktop app where content is data: each module (video, slides, chapters, question bank, Core Process document) lives in `content/` next to the exe and is added through a built-in import wizard — no code change or rebuild.",
+        "problem": "Training was scattered across decks and videos, with no assessment tracking and no manager visibility into results. That made onboarding inconsistent and hard to hold people accountable to.",
+        "solution": "Designed and delivered a content-driven training platform. Each module (video, slides, chapters, question bank and Core Process document) is data, added through a built-in import wizard with no code change or rebuild, so non-technical staff can publish training.",
         "highlights": [
-          "Quiz engine v2: per-attempt draws round-robin across sections with shuffled questions and options",
-          "Fail ⇒ remediation gate: sections tied to missed questions must be rewatched (server-enforced) before a retake",
-          "Scores emailed to the right manager via Outlook COM automation (works where the M365 tenant blocks SMTP AUTH); failed sends queue in SQLite and retry",
-          "Documents open in an in-app PDF.js viewer; topbar search across narration, slides, documents and links",
-          "39 automated tests pass (verified 2026-09-22)"
+          "Engineered a randomized assessment engine: round-robin draws across sections, with shuffled questions and answer options on every attempt",
+          "Enforced mastery: a failed attempt triggers a server-enforced remediation gate, so staff must rewatch the sections they missed before retaking",
+          "Automated score reporting to the right manager through Outlook COM, working around a tenant that blocks SMTP AUTH; failed sends queue in SQLite and retry",
+          "Added in-app PDF.js document viewing and cross-content search across narration, slides, documents and links",
+          "Quality gate: 39 automated tests passing (verified 2026-09-22), plus a Playwright end-to-end suite for the web variant"
         ],
         "stack": [
           "Python",
@@ -106,29 +108,30 @@
       "status": "In production",
       "shipped": "2026-09-23",
       "lang": "Python",
-      "tagline": "Scans the agency file share against the data policy, and files staff uploads automatically with AI field extraction. Completed and in production.",
+      "tagline": "Built and deployed an AI-powered data-governance platform that audits about 67,000 client files against policy and files new documents automatically using LLM field extraction.",
       "topics": [
+        "data-governance",
         "python",
-        "sqlite",
-        "claude-api",
-        "google-apps-script",
+        "llm-integration",
         "compliance",
-        "automation",
-        "windows",
-        "pytest"
+        "workflow-automation",
+        "document-processing",
+        "sqlite",
+        "root-cause-analysis",
+        "test-automation"
       ],
       "repo": null,
       "visibility": "public",
       "detail": {
-        "problem": "Client files on the shared NAS drifted from the agency naming and folder policy, and nobody could see who owned the violations.",
-        "solution": "A Windows desktop/headless auditor that encodes the data policy as a JSON ruleset, resolves the NTFS owner of every item, locks a baseline compliance score per employee, and applies reversible in-place renames. FileGate Intake adds a Google Apps Script upload page that stages files in Drive for an on-prem agent to rename and file.",
+        "problem": "Client records on the shared file server had drifted from the agency's naming and folder policy, which hurt retrieval and created compliance and E&O risk. No one could see where violations were or who owned them.",
+        "solution": "Designed, built and put into production a two-part system. The Naming Compliance Auditor encodes the data policy as a machine-readable ruleset, attributes file ownership, locks a baseline compliance score per employee and supports reversible renames. FileGate Intake is an automated document-ingestion pipeline: staff upload a file and an on-site agent uses LLM extraction (Claude API) to identify the client, document type and address, renames it to policy and files it.",
         "highlights": [
-          "Policy is data (`rulesets/data_policy_v1.6.json`); underivable names go to a Pending-Review proposal instead of being guessed",
-          "Measured why weekly scans stalled (about 178 items/s on the office LAN vs about 7 over the VPN), added a LAN gate, incremental commits and explicit failure states, then moved the scan to an always-on office PC",
-          "Live scan: 67,240 items in 24 minutes with 0 errors (2026-09-22)",
-          "Intake: staff drop a file; an on-site agent extracts client, document type and address with the Claude API, renames to policy and files it, and parks anything it can't match for human review",
-          "62 automated tests pass; a 388,000-row database migration verified before go-live",
-          "Staff training shipped 2026-09-24: 33-slide deck, two narrated videos, a 24-question quiz and two SOPs"
+          "Treated policy as code (versioned JSON ruleset); anything that can't be derived goes to a human review queue instead of being guessed",
+          "Ran a root cause analysis on stalled weekly scans: throughput fell from about 178 items/s on the office LAN to about 7 over the VPN. Fixed it with a network gate, incremental commits and explicit failure states, then migrated the job to an always-on host",
+          "Production scan: 67,240 items processed in 24 minutes with 0 errors (2026-09-22)",
+          "Human-in-the-loop design: unmatched documents are parked for review, never mis-filed",
+          "Quality gate: 62 automated tests passing; a 388,000-row database migration verified before go-live",
+          "Drove adoption with change-management deliverables: a 33-slide training deck, two narrated videos, a 24-question assessment and two SOPs (2026-09-24)"
         ],
         "notes": [
           "Completed: in production since 2026-09-23. Compliance-rate improvement will be published once rename cycles begin."
@@ -145,26 +148,27 @@
       "status": "In production",
       "shipped": "2026-09-22",
       "lang": "Google Apps Script",
-      "tagline": "Turns carrier underwriting notices into tracked work items with an AI triage engine, a web board, and two-way Slack.",
+      "tagline": "Automated the underwriting-notice workflow end to end: LLM-powered triage, a web-based work board and two-way Slack integration for accountability and SLA tracking.",
       "topics": [
+        "workflow-automation",
+        "llm-integration",
         "google-apps-script",
-        "claude-api",
         "slack-api",
-        "workflow",
-        "insurance",
-        "underwriting",
+        "process-improvement",
+        "sla-tracking",
+        "insurance-operations",
         "kanban"
       ],
       "repo": null,
       "visibility": "public",
       "detail": {
-        "problem": "Underwriting notices arrived by email and got lost; there was no single list of what was due, who owned it, or what was past due.",
-        "solution": "An Apps Script engine reads the notices mailbox, extracts structured fields with the Claude API, and writes items to a Sheet; a web-app board lets agents work items, with Slack DMs, a daily digest, and command parsing from Slack threads.",
+        "problem": "Carrier underwriting notices arrived by email and fell through the cracks. There was no single source of truth for what was due, who owned it, or what was past due, which put policies and client retention at risk.",
+        "solution": "Built an intake-to-resolution pipeline. An Apps Script engine monitors the notices mailbox, uses the Claude API to extract structured fields, and writes work items to a central tracker. A web-app board lets agents claim and close items, with Slack DMs, a daily digest and commands issued straight from Slack threads.",
         "highlights": [
-          "Board shipped through v2.10.5 (web-app version 62, 2026-09-22); engine v1.4 with legacy-source backfill",
-          "Two-way Slack by polling (Apps Script cannot read Slack signing headers), all writes through one write path",
-          "Single \"Past Due\" flag in days; daily digest at or after 5 PM ET",
-          "Board regression suites recorded 0 failures at v2.10 (per the deploy record)"
+          "Shipped iteratively through board v2.10.5 and engine v1.4, including backfill of legacy notices",
+          "Built two-way Slack integration within platform constraints (polling, since Apps Script can't read Slack signing headers), with every write going through one controlled path",
+          "Standardized SLA visibility: one Past Due flag measured in days, plus an end-of-day digest",
+          "Regression suites recorded 0 failures at v2.10"
         ]
       },
       "page": null,
@@ -178,26 +182,26 @@
       "status": "In progress",
       "shipped": null,
       "lang": "Python",
-      "tagline": "Self-hosted QC audit system: random policy sampling, rubric scoring, UW issue tracking and dashboards on a NAS.",
+      "tagline": "Architecting a self-hosted quality-assurance and compliance audit platform: statistical sampling, rubric-based scoring, issue tracking and BI dashboards.",
       "topics": [
+        "quality-assurance",
+        "compliance",
         "python",
-        "n8n",
         "postgresql",
-        "metabase",
-        "docker-compose",
-        "jotform",
-        "qnap",
-        "compliance"
+        "docker",
+        "business-intelligence",
+        "n8n",
+        "data-modeling"
       ],
       "repo": null,
       "visibility": "public",
       "detail": {
-        "problem": "Policy file quality was checked ad hoc with no sampling method, no rubric, and no record of findings.",
-        "solution": "A free-tier, self-hosted stack on the office NAS (Docker via Container Station): seeded stratified sampling, a versioned YAML rubric, JotForm human-in-the-loop checklists feeding n8n, findings in Postgres, and Metabase dashboards.",
+        "problem": "Policy-file quality was checked ad hoc, with no sampling method, no scoring rubric and no audit trail, so QA results couldn't be defended or trended.",
+        "solution": "Designing a zero-license-cost, self-hosted stack on the office NAS (Docker): seeded stratified sampling, a versioned YAML scoring rubric, human-in-the-loop checklists (Jotform) feeding n8n workflows, findings stored in PostgreSQL, and Metabase dashboards for leadership reporting.",
         "highlights": [
           "Pure, unit-tested scoring and sampling functions",
-          "Migrations 000–003 including a unified `uw_issue` table for scheduled audits and reactive intake",
-          "Designed around a hard constraint: the carrier portal allows no automation, so ~30–40% of checks stay human-in-the-loop"
+          "Designed the database schema and migrations (000–003), including a unified issue model for scheduled audits and reactive intake",
+          "Built for a hard constraint: the carrier portal allows no automation, so about 30–40% of checks stay human-in-the-loop by design"
         ]
       },
       "page": null,
@@ -211,25 +215,25 @@
       "status": "Shipped",
       "shipped": "2026-09-22",
       "lang": "Google Apps Script",
-      "tagline": "Google Apps Script tools: KPI tracker automation, monthly quiz form generator, spend tracker import, and a team quick-launch hub.",
+      "tagline": "A suite of Google Apps Script automations that replaced manual reporting and scattered tools: KPI and SLA tracking, assessment generation, spend-data import and a team portal.",
       "topics": [
         "google-apps-script",
-        "google-sheets",
-        "google-forms",
-        "automation",
-        "kpi",
+        "workflow-automation",
+        "kpi-reporting",
+        "google-workspace",
+        "process-improvement",
         "web-app"
       ],
       "repo": null,
       "visibility": "public",
       "detail": {
-        "problem": "Operations reporting and staff tools were manual spreadsheets and bookmarks, and the M365 environment blocked macros and add-ins.",
-        "solution": "Small, focused Apps Script projects that run in the consumer Google environment the agency is allowed to automate.",
+        "problem": "Operations reporting and staff tools lived in manual spreadsheets and bookmarks, and the carrier-managed Microsoft 365 environment blocks macros and add-ins.",
+        "solution": "Delivered focused automations in the Google environment the agency is permitted to automate, cutting manual work in reporting, training and finance tracking.",
         "highlights": [
-          "`kpi-tracker/` — computes business-hours SLA columns (Mon–Fri 8a–6p) as values, weekly roster row generation, 10-minute refresh trigger",
-          "`monthly-quiz/` — builds five auto-graded Google Forms with shuffled choices and per-item feedback",
-          "`spend-tracker/` — CSV import dialog, formula repair and menu for a multi-source spend workbook",
-          "`quick-launch-hub/` — full-width web-app hub embedded in the team site (v1.2, 2026-09-22)"
+          "KPI tracker: computes business-hours SLA metrics (Mon–Fri, 8 AM–6 PM), generates weekly roster rows and refreshes every 10 minutes",
+          "Assessment generator: builds five auto-graded Google Forms with shuffled choices and per-item feedback",
+          "Spend tracker: CSV import, formula repair and a custom menu for a multi-source spend workbook",
+          "Quick-Launch Hub: a web-app portal embedded in the team intranet (v1.2, 2026-09-22)"
         ]
       },
       "page": null,
@@ -243,26 +247,26 @@
       "status": "Shipped",
       "shipped": "2026-07-15",
       "lang": "Python",
-      "tagline": "Turns slide decks and narration scripts into narrated MP4 training videos plus HTML players with time-synced clickable links.",
+      "tagline": "Automated training-video production: turns slide decks and scripts into narrated MP4s with AI text-to-speech and interactive HTML players with clickable links.",
       "topics": [
+        "content-automation",
         "python",
-        "edge-tts",
-        "ffmpeg",
-        "libreoffice",
         "text-to-speech",
-        "video",
-        "training"
+        "ffmpeg",
+        "instructional-design",
+        "e-learning",
+        "video-production"
       ],
       "repo": null,
       "visibility": "public",
       "page": null,
       "detail": {
-        "problem": "Slide-deck trainings were not self-serve, and MP4 files cannot carry clickable links.",
-        "solution": "A script pipeline: slides rendered to PNG, narration synthesized per slide with edge-tts, segments assembled with ffmpeg, and an HTML player that overlays time-synced link hotspots on the video.",
+        "problem": "Slide-deck training wasn't self-serve, recording narration by hand didn't scale, and MP4 files can't carry clickable links to the tools being taught.",
+        "solution": "Engineered a scripted production pipeline: slides are rendered to images, narration is synthesized per slide with neural text-to-speech, segments are assembled with FFmpeg, and an HTML player overlays time-synced link hotspots on the video.",
         "highlights": [
-          "Six videos shipped 2026-07-14 to 2026-07-15 (PDFelement, reMarkable 2, RoboForm trainings and their Core Process videos)",
-          "Player hotspots positioned from python-pptx shape bounding boxes",
-          "Pronunciation transforms for acronyms and product names; segments validated with ffprobe before concat"
+          "Produced and shipped six training videos in two days (2026-07-14 to 2026-07-15) across three software rollouts",
+          "Placed hotspots automatically from slide-shape bounding boxes (python-pptx)",
+          "Built in quality controls: pronunciation rules for acronyms and product names, and every segment validated with ffprobe before assembly"
         ],
         "stack": [
           "Python",
@@ -289,23 +293,25 @@
       "status": "Shipped",
       "shipped": "2026-06-26",
       "lang": "JavaScript",
-      "tagline": "Brand tokens (CSS variables, JS theme, Tailwind config) and ten React components for consistent agency web work.",
+      "tagline": "Created a design system (design tokens plus a React component library) to enforce brand consistency and WCAG AA accessibility across web properties.",
       "topics": [
         "design-system",
-        "design-tokens",
         "react",
+        "design-tokens",
+        "accessibility",
         "tailwindcss",
-        "css-variables"
+        "front-end",
+        "ui-ux"
       ],
       "repo": null,
       "visibility": "public",
       "page": null,
       "detail": {
-        "problem": "Web pages and generated artifacts drifted from the agency brand.",
-        "solution": "One source of truth: `src/tokens.css`, mirrored in `src/theme.js` and `tailwind.config.js`, consumed by a small React component library and documented in `design-system.md`.",
+        "problem": "Web pages and generated materials drifted from the brand, with no shared source of truth for color, type or components.",
+        "solution": "Established one source of truth: CSS design tokens mirrored into a JavaScript theme and Tailwind config, consumed by a reusable React component library and documented in a usage guide.",
         "highlights": [
-          "Palette, type scale, spacing, radius and elevation tokens with WCAG AA usage rules",
-          "10 components (Badge, Button, Card, Footer, Hero, Input, NavBar, QuoteCTA, ServiceTile, Testimonial), barrel-exported from src/components/index.js"
+          "Defined palette, type scale, spacing, radius and elevation tokens with WCAG AA contrast rules",
+          "Delivered 10 reusable components (Badge, Button, Card, Footer, Hero, Input, NavBar, QuoteCTA, ServiceTile, Testimonial), barrel-exported for easy adoption"
         ],
         "stack": [
           "CSS custom properties",
@@ -332,22 +338,23 @@
       "status": "Shipped",
       "shipped": "2026-08-21",
       "lang": "JavaScript",
-      "tagline": "Interactive call-script companion for sales development reps, embedded in WordPress/Elementor.",
+      "tagline": "Built a sales-enablement tool: an interactive call-guidance widget that gives sales development reps (SDRs) consistent, situation-specific cross-sell talk paths.",
       "topics": [
+        "sales-enablement",
         "javascript",
         "wordpress",
-        "elementor",
-        "sales-enablement",
-        "call-scripts"
+        "revenue-operations",
+        "front-end",
+        "cms"
       ],
       "repo": null,
       "visibility": "public",
       "page": null,
       "detail": {
-        "problem": "New SDRs needed consistent, situation-specific call paths for cross-sell conversations.",
-        "solution": "A self-contained JS/HTML widget with talk paths per client situation (e.g. auto-only, home-only, renter), keyword search and routing hints, delivered as an Elementor widget and a WPCode snippet.",
+        "problem": "New SDRs needed consistent, situation-specific call guidance for cross-sell conversations.",
+        "solution": "Designed a self-contained JavaScript/HTML widget with talk paths for each client situation (for example auto-only, home-only or renter), plus keyword search and routing guidance. It's deployed on the company CMS.",
         "highlights": [
-          "Three delivery formats: Elementor embed (v1.1), Elementor widget (v1.2), WPCode JS snippet (v1.2)"
+          "Shipped in three delivery formats for CMS flexibility: Elementor embed (v1.1), Elementor widget (v1.2) and a WPCode JavaScript snippet (v1.2)"
         ],
         "stack": [
           "Vanilla JavaScript",
@@ -374,26 +381,27 @@
       "status": "Operational",
       "shipped": "2025-12-29",
       "lang": "Infrastructure",
-      "tagline": "Designed, deployed and manage the agency firewall and staff VPN so remote staff reach office systems as if at their desks.",
+      "tagline": "Designed, deployed and administer the agency's perimeter firewall and zero-cost WireGuard VPN, enabling secure remote access for a hybrid workforce of 20+ users.",
       "topics": [
-        "pfsense",
-        "netgate",
-        "wireguard",
-        "firewall",
+        "network-security",
+        "firewall-administration",
         "vpn",
-        "windows",
-        "network-security"
+        "pfsense",
+        "wireguard",
+        "remote-access",
+        "incident-response",
+        "identity-access-management"
       ],
       "detail": {
-        "problem": "Remote and hybrid staff needed the office file server and printers, but the agency had no firewall-managed VPN and staff laptops have no admin rights.",
-        "solution": "A Netgate 2100 running pfSense as the office firewall, with WireGuard as the single staff VPN, rolled out so non-admin users can switch the tunnel on and off themselves.",
+        "problem": "Remote and hybrid staff needed secure access to on-premises resources (file server and printers), but the agency had no managed firewall or VPN, and staff laptops don't grant local admin rights.",
+        "solution": "Procured and deployed a Netgate 2100 running pfSense as the network perimeter, with WireGuard as the single standardized VPN. The rollout was engineered so non-admin users can connect and disconnect on their own, without weakening endpoint controls.",
         "highlights": [
-          "Netgate 2100 purchased October 2025",
-          "Deployed and brought the VPN live in December 2025; 20+ remote and in-office users onboarded",
-          "Non-admin rollout: WireGuard installed as a Windows service with a limited network-operator role (January 2026)",
-          "VPN access revocation built into employee offboarding",
-          "Diagnosed and resolved a server-side issue blocking remote access to office systems (August 2026)",
-          "Measured file-share throughput over the VPN versus the office LAN; the data moved bulk scans onto the LAN"
+          "Procured the Netgate 2100 (October 2025) and brought the VPN into production in December 2025",
+          "Onboarded 20+ remote and in-office users",
+          "Achieved non-admin enablement: WireGuard deployed as a Windows service with a least-privilege network-operator role (January 2026)",
+          "Built VPN access revocation into the employee offboarding checklist (access governance)",
+          "Led incident response: diagnosed and resolved a server-side issue blocking remote access to on-prem systems (August 2026)",
+          "Benchmarked file-share throughput over the VPN against the LAN, and used the data to move bulk workloads on-network"
         ],
         "stack": [
           "Netgate 2100",
@@ -419,26 +427,27 @@
       "status": "Operational",
       "shipped": "2025-12-12",
       "lang": "Infrastructure",
-      "tagline": "Researched, proposed, installed and manage the NAS that became the single source of truth for client files.",
+      "tagline": "Led the business case, procurement and deployment of a centralized network-attached storage (NAS) system that became the agency's system of record for client data.",
       "topics": [
-        "qnap",
-        "nas",
-        "zfs",
-        "smb",
+        "data-governance",
+        "storage-administration",
+        "business-continuity",
         "access-control",
-        "data-governance"
+        "raid",
+        "zfs",
+        "budget-management",
+        "vendor-evaluation"
       ],
       "detail": {
-        "problem": "Client files were scattered across personal drives and laptops, creating data-liability and E&O exposure and making files hard to find.",
-        "solution": "A QNAP TVS-h674 on QuTS hero (ZFS) with two 4 TB WD Red drives in RAID 1, per-employee accounts, a designed folder-permission model and a least-privilege service account for automation; reachable remotely over the WireGuard VPN, with quarterly backups.",
+        "problem": "Client files were scattered across personal drives and laptops, creating data-loss, privacy and E&O exposure and slowing retrieval.",
+        "solution": "Ran a vendor evaluation, secured owner approval and deployed a QNAP TVS-h674 on QuTS hero (ZFS) with two 4 TB WD Red drives in RAID 1. It has per-employee accounts, a designed folder-permission model, a least-privilege service account for automation, VPN-based remote access and quarterly backups.",
         "highlights": [
-          "Compared three NAS platforms at different price points and pitched the owners (July 2025)",
-          "Wrote the FY2026 Technology Budget Proposal including the NAS line (October 2025)",
-          "Purchased October 2025; built and brought live in-office (November–December 2025)",
-          "Two 4 TB WD Red drives mirrored (RAID 1); quarterly backups",
-          "Least-privilege, file-sharing-only service account for automation",
-          "Hosts the staff Training Program web edition over LAN and VPN",
-          "About 67,000 client-file items under a weekly naming-compliance scan (see FileGate)"
+          "Evaluated three NAS platforms across price and capability tiers and presented a recommendation to ownership (July 2025)",
+          "Authored the FY2026 Technology Budget Proposal, including the storage line item (October 2025)",
+          "Procured in October 2025; built and brought to production in-office (November–December 2025)",
+          "Improved data resilience: mirrored storage (RAID 1) plus a quarterly backup cadence",
+          "Applied least-privilege access: a file-sharing-only service account for automation",
+          "Consolidated about 67,000 client-file items under a weekly automated compliance scan (see FileGate); the NAS also hosts the staff training web platform"
         ],
         "stack": [
           "QNAP TVS-h674",
@@ -465,20 +474,21 @@
       "status": "In progress",
       "shipped": "2026-08-28",
       "lang": "Infrastructure",
-      "tagline": "An always-on office print server so staff can print to office printers from anywhere over the VPN.",
+      "tagline": "Deploying a centralized print service that lets hybrid staff print securely to office printers from anywhere over the VPN.",
       "topics": [
-        "print-server",
-        "windows",
-        "wireguard",
-        "remote-work"
+        "remote-access",
+        "print-management",
+        "hybrid-work",
+        "end-user-support",
+        "documentation"
       ],
       "detail": {
-        "problem": "Staff could only print while physically in the office.",
-        "solution": "An office print server sharing the office printers, reachable over the VPN, with a one-page staff setup guide.",
+        "problem": "Staff could print only while physically in the office, which slowed remote and hybrid workflows.",
+        "solution": "Stood up an office print server that shares the agency printers over the VPN, and wrote a one-page self-service setup guide to cut support tickets.",
         "highlights": [
-          "Live since August 28, 2026 for the office’s shared printers; remaining printers being reconnected",
-          "Staff setup guide v1.1: connect VPN, open the print server, add a printer",
-          "Jobs sent while the VPN is off queue and release on reconnect"
+          "Live since August 28, 2026 for the office's shared printers; remaining printers being reconnected",
+          "Published a self-service setup guide (v1.1): connect the VPN, open the print server, add a printer",
+          "Resilient by design: jobs sent while offline queue and release when the VPN reconnects"
         ],
         "stack": [
           "Office print server",
@@ -502,25 +512,27 @@
       "status": "Ongoing",
       "shipped": "2025-11-03",
       "lang": "Operations",
-      "tagline": "Built the agency IT function from scratch: budget, purchasing, vendor management, support intake and device lifecycle.",
+      "tagline": "Built the agency's IT function from the ground up: technology budget, procurement, vendor management, IT service desk, device lifecycle and systems governance.",
       "topics": [
-        "it-operations",
+        "it-management",
         "vendor-management",
-        "budgeting",
-        "support",
-        "onboarding",
-        "eos"
+        "budget-ownership",
+        "itsm",
+        "asset-lifecycle-management",
+        "onboarding-offboarding",
+        "eos",
+        "leadership"
       ],
       "detail": {
-        "problem": "The agency had no IT function; purchasing, vendors, support and equipment were handled ad hoc.",
-        "solution": "A dedicated IT function with a technology budget, a vendor and systems ledger, a tiered support model and a managed device lifecycle.",
+        "problem": "The agency had no IT function. Purchasing, vendors, support and equipment were handled ad hoc, with no budget, no service levels and no systems inventory.",
+        "solution": "Established a dedicated IT operations function: an annual technology budget, a centralized systems and vendor ledger, a tiered support model with a defined response SLA, and a managed device lifecycle.",
         "highlights": [
-          "Promoted to Technical Solutions Manager (August 2025), full-time from November 2025, then Agency Operations & Systems Manager (April 2026)",
-          "Authored the FY2026 Technology Department Budget",
-          "Launched equipment-request intake with weekly ordering (November 2025)",
-          "Support model: Windows 11 support chatbot first line, then an IT request form with a 1-business-day response",
-          "Systems ledger of 81 tools; System Administrator on 41",
-          "Onboarding/offboarding, device imaging and a wipe/recycle/donation pipeline"
+          "Career progression: Licensed Sales Producer, then a home-insurance sales seat, then promoted to Technical Solutions Manager (August 2025; full-time November 2025) and Agency Operations & Systems Manager (April 2026)",
+          "Authored and own the FY2026 Technology Department Budget",
+          "Launched a standardized equipment-request intake with a weekly procurement cycle (November 2025)",
+          "Designed a tiered IT service desk: an AI support chatbot as first line, escalating to an IT request form with a 1-business-day response SLA",
+          "Built a centralized systems ledger tracking 81 tools; System Administrator for 41",
+          "Own onboarding and offboarding, device imaging and a secure wipe, recycle and donation pipeline"
         ],
         "stack": [
           "Jotform",
@@ -544,22 +556,24 @@
       "status": "Ongoing",
       "shipped": "2025-10-06",
       "lang": "Operations",
-      "tagline": "Numbered asset codes, labeled storage and a central equipment register covering 150+ items.",
+      "tagline": "Implemented IT asset management (ITAM): a tagged inventory of 150+ items with labeled storage and a remote-equipment register.",
       "topics": [
-        "inventory",
         "asset-management",
-        "facilities"
+        "itam",
+        "inventory-control",
+        "facilities-management",
+        "process-improvement"
       ],
       "detail": {
-        "problem": "Equipment was untracked and scattered across desks and homes.",
-        "solution": "An asset inventory with numbered codes, label-maker labels and a register kept on the agency file server, plus labeled storage and a remote-equipment register.",
+        "problem": "Equipment was untracked and scattered across desks and homes, creating loss risk, duplicate purchases and slow replacements.",
+        "solution": "Created an asset-management system: numbered asset tags, label-maker labeling, a central register on the agency file server, labeled storage, and a register of agency-owned equipment held by remote staff.",
         "highlights": [
-          "About 150+ tracked items, including cords and cables",
-          "Numbered asset codes and PT label-maker labels",
-          "Register kept on the agency file server",
-          "Agency-owned equipment register collected from remote staff (serial, brand, model)",
-          "Return-to-pool drive cleared unused equipment from desks (December 2025)",
-          "Labeled storage for monitors, headsets and spares; cube shelving installed (August 2026)"
+          "Tracks 150+ assets, including cords and cables",
+          "Standardized tagging with numbered asset codes and PT label-maker labels",
+          "Centralized the asset register on the agency file server",
+          "Captured serial, brand and model for agency equipment held by remote staff",
+          "Ran a return-to-pool reclamation drive to recover unused equipment (December 2025)",
+          "Reorganized storage with labeled bins and new cube shelving (August 2026)"
         ],
         "stack": [
           "PT label maker",
@@ -581,23 +595,22 @@
       "status": "Operational",
       "shipped": "2026-04-17",
       "lang": "Operations",
-      "tagline": "In-office shipping with a Zebra thermal label printer, Shippo multi-carrier labels and on-demand USPS stamps.",
+      "tagline": "Stood up and modernized an in-office shipping and postage operation, then migrated it to a Zebra thermal printer and Shippo multi-carrier platform when the legacy hardware failed.",
       "topics": [
-        "shipping",
-        "postage",
-        "zebra",
-        "stamps-com",
-        "shippo",
-        "pitney-bowes"
+        "operations-management",
+        "logistics",
+        "vendor-migration",
+        "cost-control",
+        "process-improvement"
       ],
       "detail": {
-        "problem": "Packages and postage required trips out and manual label handling.",
-        "solution": "An in-office station for weighing and labeling. It started on a Pitney Bowes setup; when the Pitney Bowes cube printer failed out of warranty, I moved it to a Zebra ZD421 thermal printer with Shippo. USPS stamps are bought through Stamps.com as needed and printed in batches.",
+        "problem": "Packages and postage required trips out and manual label handling. Later, the legacy Pitney Bowes printer failed out of warranty.",
+        "solution": "Built an in-office shipping station, then led a vendor migration from Pitney Bowes to a Zebra ZD421 thermal printer with Shippo for multi-carrier labels. USPS stamps are purchased on demand through Stamps.com and printed in batches to control recurring cost.",
         "highlights": [
-          "Pitney Bowes shipping labels and scale set up (November 2025)",
-          "Replaced the failed, out-of-warranty Pitney Bowes printer with a Zebra ZD421 thermal printer and Shippo (April 2026)",
-          "Stamps.com used on demand: stamps printed in batches and the subscription cancelled between uses",
-          "Postage charges reconciled against the card statement with no discrepancies"
+          "Implemented Pitney Bowes shipping labels and scale (November 2025)",
+          "Migrated to a Zebra ZD421 plus Shippo after the out-of-warranty hardware failed (April 2026)",
+          "Controlled recurring cost: Stamps.com used on demand, with stamps printed in batches and the subscription cancelled between uses",
+          "Reconciled postage charges against card statements with no discrepancies"
         ],
         "stack": [
           "Zebra ZD421",
@@ -621,22 +634,23 @@
       "status": "In progress",
       "shipped": "2026-09-25",
       "lang": "Operations",
-      "tagline": "Battery backup at every office desk and for every remote employee’s modem and router, so a power blip doesn’t stop work.",
+      "tagline": "Led a business-continuity rollout of battery backup across every office desk and every remote employee's internet connection.",
       "topics": [
-        "ups",
         "business-continuity",
-        "fire-code",
-        "hardware"
+        "disaster-recovery",
+        "hardware-deployment",
+        "compliance",
+        "remote-workforce"
       ],
       "detail": {
-        "problem": "Power blips took down the office network and workstations, and remote staff lost connectivity during outages.",
-        "solution": "A CyberPower CP1500PFCLCD UPS at each office desk, a UPS on the office modem/router, and a Daran 89.6 Wh LiFePO4 portable power station for each remote employee’s modem and router.",
+        "problem": "Power interruptions took down office workstations and network equipment, and remote staff lost connectivity during outages.",
+        "solution": "Standardized battery backup: a CyberPower CP1500PFCLCD UPS at each office desk, a UPS on the office modem/router, and a Daran 89.6 Wh LiFePO4 portable power station for each remote employee's modem and router.",
         "highlights": [
-          "One CyberPower CP1500PFCLCD UPS per office desk for work continuity during outages",
-          "Office modem/router on its own UPS",
-          "One Daran 89.6 Wh LiFePO4 portable power station (100 W) per remote employee for modem/router backup, ordered with spares at a volume discount (September 2026)",
-          "Sourced exact replacement batteries for older office UPS units",
-          "Fire-code compliance research (NFPA 1 / Florida Fire Prevention Code, UL guidance) with five compliant installation options"
+          "Deployed one CyberPower CP1500PFCLCD UPS per office desk for workstation continuity",
+          "Protected the office network edge with a dedicated modem/router UPS",
+          "Equipped every remote employee with a Daran 89.6 Wh LiFePO4 power station (100 W), sourced with spares at a volume discount (September 2026)",
+          "Extended the life of legacy units by sourcing exact replacement batteries",
+          "Ran a fire-code compliance review (NFPA 1, Florida Fire Prevention Code, UL guidance) and defined five compliant installation options"
         ],
         "stack": [
           "CyberPower CP1500PFCLCD",
@@ -658,19 +672,20 @@
       "status": "Operational",
       "shipped": null,
       "lang": "Operations",
-      "tagline": "Moved recurring office supplies from ad-hoc orders to managed subscriptions with a shared request queue.",
+      "tagline": "Centralized procurement by moving recurring office supplies from ad-hoc orders to managed subscription purchasing with a shared request queue.",
       "topics": [
         "procurement",
-        "amazon-business",
-        "subscriptions"
+        "spend-management",
+        "process-improvement",
+        "amazon-business"
       ],
       "detail": {
-        "problem": "Supplies were ordered ad hoc, one request at a time.",
-        "solution": "Recurring supplies on Amazon Business Subscribe & Save, with staff queuing requests in a shared cart instead of one-off orders.",
+        "problem": "Supplies were ordered ad hoc, one request at a time, with no central control or visibility.",
+        "solution": "Implemented subscription-based purchasing on Amazon Business Subscribe & Save, with a shared request cart so staff queue needs instead of placing one-off orders.",
         "highlights": [
-          "Recurring items such as drinks, snacks and printer paper on auto-order",
-          "Shared request cart replaces one-off orders",
-          "Account and ordering administered centrally"
+          "Automated replenishment of recurring items such as drinks, snacks and printer paper",
+          "Replaced one-off orders with a shared request queue",
+          "Centralized account administration and purchasing control"
         ],
         "stack": [
           "Amazon Business",
@@ -694,19 +709,19 @@
       "title": "Zap Watchdog",
       "status": "Shipped (documentation)",
       "date": "2026-07-07",
-      "summary": "A three-layer monitoring program for Zapier automations (detection & routing → logging & accountability → routine maintenance) so silent Zap failures on revenue-critical voicemail routing get caught. Delivered as an SOP and a Zap Health Log workbook."
+      "summary": "Designed a three-layer monitoring and escalation program for business-critical Zapier automations (detection and routing, logging and accountability, preventive maintenance) so silent failures in revenue-critical voicemail routing are caught. Delivered as an SOP and a health-log workbook."
     },
     {
       "title": "reMarkable 2 rollout training",
       "status": "Shipped (documentation + video)",
       "date": "2026-07-10",
-      "summary": "A 32-slide training deck verified against reMarkable software 3.27, an EOS Core Process document, and narrated videos with clickable in-video links (see koi-training-video-pipeline)."
+      "summary": "Led a hardware rollout with a 32-slide training deck (verified against reMarkable software 3.27), an EOS Core Process document, and narrated videos with clickable in-video links (see Narrated Training Video Pipeline)."
     },
     {
       "title": "Staff monthly quiz program",
       "status": "Designed; rollout status unconfirmed",
       "date": "2026-07-02",
-      "summary": "An evidence-based monthly quiz program (retrieval practice, spaced \"Encore\" re-testing, private scores, no leaderboards) with an Apps Script generator for the Google Forms (see koi-apps-script-toolkit)."
+      "summary": "Designed an evidence-based monthly knowledge-check program (retrieval practice, spaced re-testing, private scores, no leaderboards) with an automated Google Forms generator (see Apps Script Toolkit)."
     }
   ],
   "site": "https://forrestswan3.github.io/",
