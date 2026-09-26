@@ -17,7 +17,7 @@ const all = portfolio.projects.filter((x) => x.visibility === 'public');
 const idx = all.findIndex((x) => x.name === p.name);
 const next = all[(idx + 1) % all.length];
 const ld = {
-  '@context': 'https://schema.org', '@type': 'SoftwareSourceCode', name: p.title, description: p.tagline,
+  '@context': 'https://schema.org', '@type': (['Operations', 'Infrastructure'].includes(p.lang) ? 'CreativeWork' : 'SoftwareSourceCode'), name: p.title, description: p.tagline,
   programmingLanguage: p.lang, keywords: p.topics.join(', '),
   author: { '@id': 'https://forrestswan3.github.io/#person' }, ...(p.shipped ? { dateModified: p.shipped } : {}),
 };
@@ -29,7 +29,7 @@ const ld = {
       <h1 style="font-size:var(--step-3)">{p.title}</h1>
       <div class="meta">
         <span class={p.status === 'In production' ? 'pill pill--live' : 'pill'}>{p.status}</span>
-        {p.shipped && <span class="pill">{p.status === 'Shipped' ? 'Shipped' : 'Updated'} {fmt(p.shipped)}</span>}
+        {p.shipped && <span class="pill">{p.status === 'Shipped' ? 'Shipped' : (['Operations', 'Infrastructure'].includes(p.lang) ? 'Since' : 'Updated')} {fmt(p.shipped)}</span>}
         <span class="pill">{p.lang}</span>
       </div>
       <p class="lede">{p.tagline}</p>

@@ -12,6 +12,6 @@ I design and ship the internal software that runs a Florida insurance agency: a 
 
 **Focus:** Python desktop apps · Google Apps Script · workflow automation (Zapier, n8n, Slack) · data-policy compliance · training systems
 
-➡️ **Case studies for all 9 projects: [forrestswan3.github.io/work](https://forrestswan3.github.io/work/)**
+➡️ **Case studies for all projects: [forrestswan3.github.io/work](https://forrestswan3.github.io/work/)**
 
-<sub>Repositories are sanitized portfolio copies: staff names, IDs and network details are replaced, and they contain no client data.</sub>
+<sub>Project source code is private; walkthroughs are available on request. Case studies omit staff names, network details and client data.</sub>

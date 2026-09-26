@@ -1,7 +1,7 @@
 {
   "owner": "forrestswan3",
   "author": "Forrest Swan III",
-  "updated": "2026-09-22",
+  "updated": "2026-09-25",
   "projects": [
     {
       "name": "license-exam-prep",
@@ -124,7 +124,7 @@
         "solution": "A Windows desktop/headless auditor that encodes the data policy as a JSON ruleset, resolves the NTFS owner of every item, locks a baseline compliance score per employee, and applies reversible in-place renames. FileGate Intake adds a Google Apps Script upload page that stages files in Drive for an on-prem agent to rename and file.",
         "highlights": [
           "Policy is data (`rulesets/data_policy_v1.6.json`); underivable names go to a Pending-Review proposal instead of being guessed",
-          "Measured a VPN bottleneck (~178 → ~7 items/s over the tunnel), added a LAN gate, incremental commits and explicit failure states, then moved the weekly scan to an always-on office PC",
+          "Measured why weekly scans stalled (about 178 items/s on the office LAN vs about 7 over the VPN), added a LAN gate, incremental commits and explicit failure states, then moved the scan to an always-on office PC",
           "Live scan: 67,240 items in 24 minutes with 0 errors (2026-09-22)",
           "Intake: staff drop a file; an on-site agent extracts client, document type and address with the Claude API, renames to policy and files it, and parks anything it can't match for human review",
           "62 automated tests pass; a 388,000-row database migration verified before go-live",
@@ -391,9 +391,8 @@
           "Deployed and brought the VPN live in December 2025; 20+ remote and in-office users onboarded",
           "Non-admin rollout: WireGuard installed as a Windows service with a limited network-operator role (January 2026)",
           "VPN access revocation built into employee offboarding",
-          "Firewall management locked down to an admin workstation",
-          "Diagnosed a server-side routing/NAT gap blocking remote access to office systems and restored access (August 2026)",
-          "Measured VPN latency against file-share operations; the data moved bulk scans onto the office LAN"
+          "Diagnosed and resolved a server-side issue blocking remote access to office systems (August 2026)",
+          "Measured file-share throughput over the VPN versus the office LAN; the data moved bulk scans onto the LAN"
         ],
         "stack": [
           "Netgate 2100",
@@ -430,7 +429,7 @@
       ],
       "detail": {
         "problem": "Client files were scattered across personal drives and laptops, creating data-liability and E&O exposure and making files hard to find.",
-        "solution": "A QNAP TVS-h674 on QuTS hero (ZFS) with per-employee accounts, a folder-permission model and least-privilege service accounts for automation; reachable remotely over the WireGuard VPN.",
+        "solution": "A QNAP TVS-h674 on QuTS hero (ZFS) with per-employee accounts, a designed folder-permission model and a least-privilege service account for automation; reachable remotely over the WireGuard VPN.",
         "highlights": [
           "Compared three NAS platforms at different price points and pitched the owners (July 2025)",
           "Wrote the FY2026 Technology Budget Proposal including the NAS line (October 2025)",
@@ -443,7 +442,6 @@
           "QNAP TVS-h674",
           "QuTS hero (ZFS)",
           "SMB",
-          "Windows ACLs",
           "WireGuard"
         ],
         "notes": [
@@ -473,14 +471,14 @@
       ],
       "detail": {
         "problem": "Staff could only print while physically in the office.",
-        "solution": "A dedicated always-on office print server sharing the office printers, reachable over the VPN, with a one-page staff setup guide.",
+        "solution": "An office print server sharing the office printers, reachable over the VPN, with a one-page staff setup guide.",
         "highlights": [
-          "Live for the shared office printers since August 28, 2026",
+          "Live since August 28, 2026 for the office’s shared printers; remaining printers being reconnected",
           "Staff setup guide v1.1: connect VPN, open the print server, add a printer",
           "Jobs sent while the VPN is off queue and release on reconnect"
         ],
         "stack": [
-          "Windows print server",
+          "Office print server",
           "WireGuard VPN"
         ],
         "notes": [
@@ -578,7 +576,7 @@
       "status": "Operational",
       "shipped": "2026-04-17",
       "lang": "Operations",
-      "tagline": "In-office shipping and USPS postage with a thermal label printer, scale and multi-carrier labels.",
+      "tagline": "In-office shipping with a thermal label printer, scale and multi-carrier labels.",
       "topics": [
         "shipping",
         "postage",
@@ -589,18 +587,18 @@
       ],
       "detail": {
         "problem": "Packages and postage required trips out and manual label handling.",
-        "solution": "An in-office station for weighing, labeling and postage: Pitney Bowes labels and scale, USPS postage via Stamps.com, a Zebra ZD421 thermal printer and Shippo for multi-carrier labels.",
+        "solution": "An in-office station for weighing and labeling: Pitney Bowes labels and scale, a Zebra ZD421 thermal printer and Shippo for multi-carrier labels. USPS postage ran through Stamps.com until it was retired in August 2026.",
         "highlights": [
           "Pitney Bowes shipping labels and scale set up (November 2025)",
           "Zebra ZD421 thermal shipping printer added (April 2026)",
-          "Postal scale and USPS postage via Stamps.com; Shippo for multi-carrier labels",
-          "Postage charges reconciled against the card statement with no discrepancies"
+          "Shippo for multi-carrier labels",
+          "USPS postage via Stamps.com (2026); charges reconciled against the card statement with no discrepancies, then the subscription was retired once stamp stock was printed (August 2026)"
         ],
         "stack": [
           "Zebra ZD421",
           "Pitney Bowes",
-          "Stamps.com",
-          "Shippo"
+          "Shippo",
+          "Stamps.com (retired)"
         ],
         "notes": []
       },
@@ -629,7 +627,7 @@
         "problem": "Power blips took down the office network and workstations, and remote staff lost connectivity during outages.",
         "solution": "UPS coverage for office network gear and desks, and portable units for every remote employee’s modem and router.",
         "highlights": [
-          "Sourced exact replacement batteries for the office UPS fleet",
+          "Sourced exact replacement batteries for the office UPS units",
           "Fire-code compliance research (NFPA 1 / Florida Fire Prevention Code, UL guidance) with five compliant installation options",
           "Ordered portable UPS units for all remote staff plus spares at a volume discount (September 2026)"
         ],
@@ -637,7 +635,9 @@
           "APC Back-UPS",
           "Portable UPS units"
         ],
-        "notes": []
+        "notes": [
+          "Office coverage (network gear and desks) as described by the owner; unit models and counts are not listed here."
+        ]
       },
       "repo": null,
       "source": "private",
@@ -651,7 +651,7 @@
       "name": "supply-subscriptions",
       "title": "Office Supply Management — Subscription Ordering",
       "status": "Operational",
-      "shipped": "2026-05-28",
+      "shipped": null,
       "lang": "Operations",
       "tagline": "Moved recurring office supplies from ad-hoc orders to managed subscriptions with a shared request queue.",
       "topics": [
@@ -663,7 +663,7 @@
         "problem": "Supplies were ordered ad hoc, one request at a time.",
         "solution": "Recurring supplies on Amazon Business Subscribe & Save, with staff queuing requests in a shared cart instead of one-off orders.",
         "highlights": [
-          "Recurring drinks, snacks, coffee and paper on auto-order",
+          "Recurring items such as drinks, snacks and printer paper on auto-order",
           "Shared request cart replaces one-off orders",
           "Account and ordering administered centrally"
         ],
@@ -671,7 +671,9 @@
           "Amazon Business",
           "Subscribe & Save"
         ],
-        "notes": []
+        "notes": [
+          "Active since at least May 2026."
+        ]
       },
       "repo": null,
       "source": "private",
