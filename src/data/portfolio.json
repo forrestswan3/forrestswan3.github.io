@@ -388,6 +388,7 @@
         "problem": "Remote and hybrid staff needed the office file server and printers, but the agency had no firewall-managed VPN and staff laptops have no admin rights.",
         "solution": "A Netgate 2100 running pfSense as the office firewall, with WireGuard as the single staff VPN, rolled out so non-admin users can switch the tunnel on and off themselves.",
         "highlights": [
+          "Netgate 2100 purchased October 2025",
           "Deployed and brought the VPN live in December 2025; 20+ remote and in-office users onboarded",
           "Non-admin rollout: WireGuard installed as a Windows service with a limited network-operator role (January 2026)",
           "VPN access revocation built into employee offboarding",
@@ -429,11 +430,12 @@
       ],
       "detail": {
         "problem": "Client files were scattered across personal drives and laptops, creating data-liability and E&O exposure and making files hard to find.",
-        "solution": "A QNAP TVS-h674 on QuTS hero (ZFS) with per-employee accounts, a designed folder-permission model and a least-privilege service account for automation; reachable remotely over the WireGuard VPN.",
+        "solution": "A QNAP TVS-h674 on QuTS hero (ZFS) with two 4 TB WD Red drives in RAID 1, per-employee accounts, a designed folder-permission model and a least-privilege service account for automation; reachable remotely over the WireGuard VPN, with quarterly backups.",
         "highlights": [
           "Compared three NAS platforms at different price points and pitched the owners (July 2025)",
           "Wrote the FY2026 Technology Budget Proposal including the NAS line (October 2025)",
-          "Ordered, built and brought the system live in-office (November–December 2025)",
+          "Purchased October 2025; built and brought live in-office (November–December 2025)",
+          "Two 4 TB WD Red drives mirrored (RAID 1); quarterly backups",
           "Least-privilege, file-sharing-only service account for automation",
           "Hosts the staff Training Program web edition over LAN and VPN",
           "About 67,000 client-file items under a weekly naming-compliance scan (see FileGate)"
@@ -441,6 +443,7 @@
         "stack": [
           "QNAP TVS-h674",
           "QuTS hero (ZFS)",
+          "RAID 1 (2 × 4 TB WD Red)",
           "SMB",
           "WireGuard"
         ],
@@ -482,7 +485,7 @@
           "WireGuard VPN"
         ],
         "notes": [
-          "In progress: remaining printers being brought onto the service."
+          "In progress. Next milestone: remote staff setup and testing, then a training SOP and Core Process module."
         ]
       },
       "repo": null,
@@ -541,7 +544,7 @@
       "status": "Ongoing",
       "shipped": "2025-10-06",
       "lang": "Operations",
-      "tagline": "Numbered asset codes, labeled storage and an equipment register for office and remote staff.",
+      "tagline": "Numbered asset codes, labeled storage and a central equipment register covering 150+ items.",
       "topics": [
         "inventory",
         "asset-management",
@@ -549,16 +552,18 @@
       ],
       "detail": {
         "problem": "Equipment was untracked and scattered across desks and homes.",
-        "solution": "An asset inventory with numbered codes, labels, logs and a spreadsheet, plus labeled storage and a remote-equipment register.",
+        "solution": "An asset inventory with numbered codes, label-maker labels and a register kept on the agency file server, plus labeled storage and a remote-equipment register.",
         "highlights": [
-          "Numbered asset codes in use from 2025",
+          "About 150+ tracked items, including cords and cables",
+          "Numbered asset codes and PT label-maker labels",
+          "Register kept on the agency file server",
           "Agency-owned equipment register collected from remote staff (serial, brand, model)",
           "Return-to-pool drive cleared unused equipment from desks (December 2025)",
           "Labeled storage for monitors, headsets and spares; cube shelving installed (August 2026)"
         ],
         "stack": [
-          "Labels",
-          "Spreadsheet register"
+          "PT label maker",
+          "Spreadsheet register on the NAS"
         ],
         "notes": []
       },
@@ -576,7 +581,7 @@
       "status": "Operational",
       "shipped": "2026-04-17",
       "lang": "Operations",
-      "tagline": "In-office shipping with a thermal label printer, scale and multi-carrier labels.",
+      "tagline": "In-office shipping with a Zebra thermal label printer, Shippo multi-carrier labels and on-demand USPS stamps.",
       "topics": [
         "shipping",
         "postage",
@@ -587,18 +592,18 @@
       ],
       "detail": {
         "problem": "Packages and postage required trips out and manual label handling.",
-        "solution": "An in-office station for weighing and labeling: Pitney Bowes labels and scale, a Zebra ZD421 thermal printer and Shippo for multi-carrier labels. USPS postage ran through Stamps.com until it was retired in August 2026.",
+        "solution": "An in-office station for weighing and labeling. It started on a Pitney Bowes setup; when the Pitney Bowes cube printer failed out of warranty, I moved it to a Zebra ZD421 thermal printer with Shippo. USPS stamps are bought through Stamps.com as needed and printed in batches.",
         "highlights": [
           "Pitney Bowes shipping labels and scale set up (November 2025)",
-          "Zebra ZD421 thermal shipping printer added (April 2026)",
-          "Shippo for multi-carrier labels",
-          "USPS postage via Stamps.com (2026); charges reconciled against the card statement with no discrepancies, then the subscription was retired once stamp stock was printed (August 2026)"
+          "Replaced the failed, out-of-warranty Pitney Bowes printer with a Zebra ZD421 thermal printer and Shippo (April 2026)",
+          "Stamps.com used on demand: stamps printed in batches and the subscription cancelled between uses",
+          "Postage charges reconciled against the card statement with no discrepancies"
         ],
         "stack": [
           "Zebra ZD421",
-          "Pitney Bowes",
           "Shippo",
-          "Stamps.com (retired)"
+          "Stamps.com",
+          "Pitney Bowes (previous)"
         ],
         "notes": []
       },
@@ -616,7 +621,7 @@
       "status": "In progress",
       "shipped": "2026-09-25",
       "lang": "Operations",
-      "tagline": "Battery backup for the office network, desks and every remote employee’s modem and router.",
+      "tagline": "Battery backup at every office desk and for every remote employee’s modem and router, so a power blip doesn’t stop work.",
       "topics": [
         "ups",
         "business-continuity",
@@ -625,19 +630,19 @@
       ],
       "detail": {
         "problem": "Power blips took down the office network and workstations, and remote staff lost connectivity during outages.",
-        "solution": "UPS coverage for office network gear and desks, and portable units for every remote employee’s modem and router.",
+        "solution": "A CyberPower CP1500PFCLCD UPS at each office desk, a UPS on the office modem/router, and a Daran 89.6 Wh LiFePO4 portable power station for each remote employee’s modem and router.",
         "highlights": [
-          "Sourced exact replacement batteries for the office UPS units",
-          "Fire-code compliance research (NFPA 1 / Florida Fire Prevention Code, UL guidance) with five compliant installation options",
-          "Ordered portable UPS units for all remote staff plus spares at a volume discount (September 2026)"
+          "One CyberPower CP1500PFCLCD UPS per office desk for work continuity during outages",
+          "Office modem/router on its own UPS",
+          "One Daran 89.6 Wh LiFePO4 portable power station (100 W) per remote employee for modem/router backup, ordered with spares at a volume discount (September 2026)",
+          "Sourced exact replacement batteries for older office UPS units",
+          "Fire-code compliance research (NFPA 1 / Florida Fire Prevention Code, UL guidance) with five compliant installation options"
         ],
         "stack": [
-          "APC Back-UPS",
-          "Portable UPS units"
+          "CyberPower CP1500PFCLCD",
+          "Daran 89.6 Wh LiFePO4 power station"
         ],
-        "notes": [
-          "Office coverage (network gear and desks) as described by the owner; unit models and counts are not listed here."
-        ]
+        "notes": []
       },
       "repo": null,
       "source": "private",
@@ -672,7 +677,7 @@
           "Subscribe & Save"
         ],
         "notes": [
-          "Active since at least May 2026."
+          "Active since about May 2026. Spend tracking through QuickBooks is planned for Q4 2026."
         ]
       },
       "repo": null,
