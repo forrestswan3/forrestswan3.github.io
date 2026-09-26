@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KOI Design System — Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./src/tokens.css" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--koi-background); font-family: var(--koi-font-sans); color: var(--koi-ink); }
+  .wrap { max-width: var(--koi-container); margin: 0 auto; padding: 0 var(--koi-space-5); }
+  .section { padding: var(--koi-space-7) 0; }
+  h2.sec { font-family: var(--koi-font-heading); color: var(--koi-primary); font-size: var(--koi-text-2xl); margin: 0 0 var(--koi-space-5); }
+  .row { display: flex; flex-wrap: wrap; gap: var(--koi-space-3); align-items: center; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--koi-space-4); }
+  .swatch { border-radius: var(--koi-radius-md); height: 84px; display:flex; align-items:flex-end; padding: 8px; color:#fff; font-size: var(--koi-text-xs); font-weight:600; box-shadow: var(--koi-shadow-sm); }
+  /* component styles mirror the React inline styles */
+  .btn { display:inline-flex; align-items:center; justify-content:center; font-weight:600; border-radius: var(--koi-radius-pill); padding:.65rem 1.25rem; border:1px solid transparent; cursor:pointer; text-decoration:none; }
+  .btn-primary { background: var(--koi-secondary); color:#fff; border-color: var(--koi-secondary); }
+  .btn-secondary { background: var(--koi-primary); color:#fff; border-color: var(--koi-primary); }
+  .btn-outline { background:transparent; color: var(--koi-secondary); border-color: var(--koi-secondary); }
+  .btn-ghost { background:transparent; color: var(--koi-primary); }
+  .badge { display:inline-flex; font-size: var(--koi-text-xs); font-weight:600; text-transform:uppercase; letter-spacing:.02em; padding:.25rem .6rem; border-radius: var(--koi-radius-pill); }
+  .card { background:#fff; border:1px solid var(--koi-border); border-radius: var(--koi-radius-lg); box-shadow: var(--koi-shadow-md); padding: var(--koi-space-5); }
+  .input { font-size: var(--koi-text-base); border:1px solid var(--koi-border); border-radius: var(--koi-radius-md); padding:.65rem .85rem; width:100%; }
+  .tile { background:#fff; border:1px solid var(--koi-border); border-radius: var(--koi-radius-lg); padding: var(--koi-space-5); box-shadow: var(--koi-shadow-sm); }
+  .tile .ic { width:52px;height:52px;border-radius:var(--koi-radius-md);background:var(--koi-primary-50);color:var(--koi-secondary);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:var(--koi-space-3);}
+</style>
+</head>
+<body>
+
+<!-- NavBar -->
+<header style="background:#fff;border-bottom:1px solid var(--koi-border);box-shadow:var(--koi-shadow-sm);">
+  <nav class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:var(--koi-space-3) var(--koi-space-5);">
+    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='60'><rect x='1' y='1' width='238' height='58' rx='8' fill='none' stroke='%23888' stroke-width='2'/><text x='120' y='37' font-family='sans-serif' font-size='18' fill='%23888' text-anchor='middle'>LOGO</text></svg>" alt="Kasey Osman Insurance" style="height:44px;" />
+    <div class="row" style="gap:var(--koi-space-5);">
+      <a href="#" style="color:var(--koi-primary);font-weight:500;text-decoration:none;">Home</a>
+      <a href="#" style="color:var(--koi-primary);font-weight:500;text-decoration:none;">Services</a>
+      <a href="#" style="color:var(--koi-primary);font-weight:500;text-decoration:none;">About</a>
+      <a href="#" style="color:var(--koi-primary);font-weight:500;text-decoration:none;">Contact KOI</a>
+      <a href="#" class="btn btn-primary">Request a Quote</a>
+    </div>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section style="background:linear-gradient(135deg,var(--koi-primary) 0%,var(--koi-secondary-600) 100%);color:#fff;text-align:center;">
+  <div class="wrap" style="padding:var(--koi-space-9) var(--koi-space-5);">
+    <span style="color:var(--koi-accent);font-size:var(--koi-text-sm);font-weight:600;letter-spacing:.12em;text-transform:uppercase;">Insurance you can count on</span>
+    <h1 style="font-family:var(--koi-font-heading);font-size:var(--koi-text-4xl);line-height:var(--koi-leading-tight);font-weight:700;margin:.5rem 0 1rem;">Insurance in Melbourne, FL</h1>
+    <p style="font-size:var(--koi-text-lg);color:var(--koi-on-dark-muted);max-width:620px;margin:0 auto 2rem;">Kasey Osman Insurance is a Florida-based agency and a leading provider of coverage in Melbourne and the surrounding areas.</p>
+    <a href="#" class="btn btn-primary" style="padding:.9rem 1.75rem;font-size:var(--koi-text-lg);">Request a Quote</a>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- Colors -->
+  <section class="section">
+    <h2 class="sec">Color</h2>
+    <div class="grid3" style="grid-template-columns:repeat(5,1fr);">
+      <div class="swatch" style="background:var(--koi-primary);">Primary #0F2A5F</div>
+      <div class="swatch" style="background:var(--koi-secondary);">Secondary #1E73BE</div>
+      <div class="swatch" style="background:var(--koi-accent);color:var(--koi-primary);">Accent #63A4FF</div>
+      <div class="swatch" style="background:var(--koi-background);color:var(--koi-primary);border:1px solid var(--koi-border);">Background #F6F9FF</div>
+      <div class="swatch" style="background:var(--koi-ui-gray);color:var(--koi-primary);">UI Gray #E2E8F0</div>
+    </div>
+  </section>
+
+  <!-- Buttons + Badges -->
+  <section class="section">
+    <h2 class="sec">Buttons &amp; Badges</h2>
+    <div class="row" style="margin-bottom:var(--koi-space-4);">
+      <a class="btn btn-primary">Primary</a>
+      <a class="btn btn-secondary">Secondary</a>
+      <a class="btn btn-outline">Outline</a>
+      <a class="btn btn-ghost">Ghost</a>
+    </div>
+    <div class="row">
+      <span class="badge" style="background:var(--koi-primary-50);color:var(--koi-primary);">Brand</span>
+      <span class="badge" style="background:rgba(99,164,255,.18);color:var(--koi-secondary-700);">Accent</span>
+      <span class="badge" style="background:rgba(46,125,91,.14);color:var(--koi-success);">Active</span>
+      <span class="badge" style="background:rgba(201,130,28,.16);color:var(--koi-warning);">Pending</span>
+      <span class="badge" style="background:rgba(192,57,43,.14);color:var(--koi-danger);">Lapsed</span>
+    </div>
+  </section>
+
+  <!-- Form + Card -->
+  <section class="section">
+    <h2 class="sec">Inputs &amp; Cards</h2>
+    <div class="grid3">
+      <div class="card">
+        <label style="font-size:var(--koi-text-sm);font-weight:500;color:var(--koi-primary);">Full name</label>
+        <input class="input" style="margin-top:.35rem;" placeholder="Jane Homeowner" />
+        <label style="font-size:var(--koi-text-sm);font-weight:500;color:var(--koi-primary);display:block;margin-top:var(--koi-space-3);">Email</label>
+        <input class="input" style="margin-top:.35rem;" placeholder="jane@email.com" />
+        <a class="btn btn-primary" style="margin-top:var(--koi-space-4);width:100%;">Get my quote</a>
+      </div>
+      <div class="card" style="border-top:4px solid var(--koi-secondary);">
+        <h3 style="font-family:var(--koi-font-heading);color:var(--koi-primary);font-size:var(--koi-text-xl);margin:0 0 .5rem;">Tailored coverage</h3>
+        <p style="color:var(--koi-ink-muted);line-height:var(--koi-leading-normal);margin:0;">A wide range of options customized to fit your specific situation and budget.</p>
+      </div>
+      <figure class="card" style="margin:0;">
+        <div style="color:var(--koi-warning);letter-spacing:.1em;">★★★★★</div>
+        <blockquote style="margin:.5rem 0;line-height:var(--koi-leading-normal);">“The most amazing experience getting home and auto insurance.”</blockquote>
+        <figcaption style="font-size:var(--koi-text-sm);color:var(--koi-ink-muted);"><strong style="color:var(--koi-primary);">Rod B.</strong> · Melbourne, FL</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Service tiles -->
+  <section class="section">
+    <h2 class="sec">Service Tiles</h2>
+    <div class="grid3">
+      <div class="tile"><div class="ic">🏠</div><h4 style="font-family:var(--koi-font-heading);color:var(--koi-primary);margin:0 0 .25rem;">Home</h4><p style="color:var(--koi-ink-muted);font-size:var(--koi-text-sm);margin:0;">Financial protection for homeowners against losses.</p></div>
+      <div class="tile"><div class="ic">🚗</div><h4 style="font-family:var(--koi-font-heading);color:var(--koi-primary);margin:0 0 .25rem;">Auto</h4><p style="color:var(--koi-ink-muted);font-size:var(--koi-text-sm);margin:0;">Protection for car owners in case of accidents.</p></div>
+      <div class="tile"><div class="ic">💼</div><h4 style="font-family:var(--koi-font-heading);color:var(--koi-primary);margin:0 0 .25rem;">Business</h4><p style="color:var(--koi-ink-muted);font-size:var(--koi-text-sm);margin:0;">Protection for companies against financial loss.</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- Quote CTA -->
+<section style="background:var(--koi-secondary);color:#fff;">
+  <div class="wrap" style="padding:var(--koi-space-7) var(--koi-space-5);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--koi-space-5);">
+    <div>
+      <h2 style="font-family:var(--koi-font-heading);font-size:var(--koi-text-2xl);margin:0 0 .75rem;">Take the first step towards protection.</h2>
+      <div class="row" style="gap:var(--koi-space-4);color:var(--koi-on-dark-muted);">
+        <span><span style="color:var(--koi-accent);">✓</span> Tailored coverage</span>
+        <span><span style="color:var(--koi-accent);">✓</span> Competitive pricing</span>
+        <span><span style="color:var(--koi-accent);">✓</span> Personalized service</span>
+      </div>
+    </div>
+    <a class="btn" style="background:#fff;color:var(--koi-primary);padding:.9rem 1.75rem;font-size:var(--koi-text-lg);">Request a Quote</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="background:var(--koi-primary);color:#fff;">
+  <div class="wrap" style="padding:var(--koi-space-7) var(--koi-space-5) var(--koi-space-5);display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:var(--koi-space-6);">
+    <div>
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='60'><rect x='1' y='1' width='238' height='58' rx='8' fill='none' stroke='%23888' stroke-width='2'/><text x='120' y='37' font-family='sans-serif' font-size='18' fill='%23888' text-anchor='middle'>LOGO</text></svg>" alt="KOI" style="height:40px;margin-bottom:var(--koi-space-3);" />
+      <p style="font-size:var(--koi-text-sm);color:var(--koi-on-dark-muted);max-width:340px;">A Florida-based insurance agency serving Melbourne and the surrounding areas.</p>
+    </div>
+    <div>
+      <h5 style="font-family:var(--koi-font-heading);text-transform:uppercase;letter-spacing:.08em;color:var(--koi-accent);font-size:var(--koi-text-sm);margin:0 0 .75rem;">Quick Links</h5>
+      <div style="display:flex;flex-direction:column;gap:.5rem;color:var(--koi-on-dark-muted);font-size:var(--koi-text-sm);"><span>Home</span><span>Services</span><span>About</span><span>Contact KOI</span></div>
+    </div>
+    <div>
+      <h5 style="font-family:var(--koi-font-heading);text-transform:uppercase;letter-spacing:.08em;color:var(--koi-accent);font-size:var(--koi-text-sm);margin:0 0 .75rem;">Services</h5>
+      <div style="display:flex;flex-direction:column;gap:.5rem;color:var(--koi-on-dark-muted);font-size:var(--koi-text-sm);"><span>Home</span><span>Auto</span><span>Life</span><span>Business</span></div>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,.12);padding:var(--koi-space-4) var(--koi-space-5);">
+    <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem;font-size:var(--koi-text-xs);color:var(--koi-on-dark-muted);">
+      <span>© 2026 Kasey Osman Insurance</span><span>(321) 555-0100 · Melbourne, FL</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

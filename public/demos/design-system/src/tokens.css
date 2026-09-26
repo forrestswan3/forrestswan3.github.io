@@ -1,0 +1,103 @@
+/* ============================================================
+   Kasey Osman Insurance (KOI) — Design Tokens
+   Source of truth for color, type, spacing, radius, elevation.
+   Palette verified against kaseyosmanins.com brand reference.
+   ============================================================ */
+
+:root {
+  /* --- Brand color (core) --- */
+  --koi-primary: #0F2A5F;        /* Deep navy — headers, primary text, logo */
+  --koi-secondary: #1E73BE;      /* Brand blue — primary actions, links */
+  --koi-accent: #63A4FF;         /* Sky accent — highlights, focus, hovers */
+  --koi-background: #F6F9FF;      /* Page background — cool off-white */
+  --koi-ui-gray: #E2E8F0;        /* Borders, dividers, muted surfaces */
+
+  /* --- Primary tint scale (derived from --koi-primary) --- */
+  --koi-primary-50:  #EAF0FA;
+  --koi-primary-100: #C9D8EF;
+  --koi-primary-200: #97B0DB;
+  --koi-primary-300: #6588C6;
+  --koi-primary-400: #36589C;
+  --koi-primary-500: #0F2A5F;    /* = --koi-primary */
+  --koi-primary-600: #0C2350;
+  --koi-primary-700: #091A3C;
+  --koi-primary-800: #061229;
+  --koi-primary-900: #030915;
+
+  /* --- Secondary tint scale (derived from --koi-secondary) --- */
+  --koi-secondary-50:  #E8F1FB;
+  --koi-secondary-100: #C2DCF4;
+  --koi-secondary-200: #8CBEEA;
+  --koi-secondary-300: #559FDF;
+  --koi-secondary-400: #1E73BE;  /* = --koi-secondary */
+  --koi-secondary-500: #1A66A8;
+  --koi-secondary-600: #155489;
+  --koi-secondary-700: #10406A;
+
+  /* --- Neutral / text --- */
+  --koi-ink: #0B1B33;            /* Body text on light */
+  --koi-ink-muted: #4A5A73;      /* Secondary text */
+  --koi-on-dark: #FFFFFF;        /* Text on navy/blue surfaces */
+  --koi-on-dark-muted: #C9D8EF;  /* Muted text on dark */
+  --koi-surface: #FFFFFF;        /* Cards, sheets */
+  --koi-border: #E2E8F0;         /* = --koi-ui-gray */
+
+  /* --- Semantic / status --- */
+  --koi-success: #2E7D5B;
+  --koi-warning: #C9821C;
+  --koi-danger:  #C0392B;
+  --koi-info:    var(--koi-secondary);
+
+  /* --- Typography --- */
+  --koi-font-sans: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --koi-font-heading: "Poppins", "Inter", system-ui, sans-serif; /* geometric, friendly-professional */
+
+  --koi-text-xs:   0.75rem;   /* 12 */
+  --koi-text-sm:   0.875rem;  /* 14 */
+  --koi-text-base: 1rem;      /* 16 */
+  --koi-text-lg:   1.125rem;  /* 18 */
+  --koi-text-xl:   1.375rem;  /* 22 */
+  --koi-text-2xl:  1.75rem;   /* 28 */
+  --koi-text-3xl:  2.25rem;   /* 36 */
+  --koi-text-4xl:  3rem;      /* 48 */
+
+  --koi-leading-tight: 1.15;
+  --koi-leading-snug:  1.35;
+  --koi-leading-normal:1.6;
+
+  --koi-weight-regular: 400;
+  --koi-weight-medium:  500;
+  --koi-weight-semibold:600;
+  --koi-weight-bold:    700;
+
+  /* --- Spacing (4px base) --- */
+  --koi-space-1: 0.25rem;
+  --koi-space-2: 0.5rem;
+  --koi-space-3: 0.75rem;
+  --koi-space-4: 1rem;
+  --koi-space-5: 1.5rem;
+  --koi-space-6: 2rem;
+  --koi-space-7: 3rem;
+  --koi-space-8: 4rem;
+  --koi-space-9: 6rem;
+
+  /* --- Radius --- */
+  --koi-radius-sm: 6px;
+  --koi-radius-md: 10px;
+  --koi-radius-lg: 16px;
+  --koi-radius-xl: 24px;
+  --koi-radius-pill: 999px;
+
+  /* --- Elevation --- */
+  --koi-shadow-sm: 0 1px 2px rgba(15, 42, 95, 0.08);
+  --koi-shadow-md: 0 6px 18px rgba(15, 42, 95, 0.10);
+  --koi-shadow-lg: 0 16px 40px rgba(15, 42, 95, 0.14);
+  --koi-ring: 0 0 0 3px rgba(99, 164, 255, 0.45); /* focus ring (accent) */
+
+  /* --- Motion --- */
+  --koi-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --koi-duration: 180ms;
+
+  /* --- Layout --- */
+  --koi-container: 1160px;
+}

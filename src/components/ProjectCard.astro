@@ -8,7 +8,7 @@ const hasPreview = showImage && p.preview;
 ---
 <article class="card">
   {hasPreview && (
-    <div class="card-img"><img src={`/previews/${p.name}.webp`} alt={`Screenshot of ${p.title}`} width="960" height="600" loading="lazy" decoding="async" /></div>
+    <div class="card-img"><img src={`/previews/${p.preview_img}.webp`} alt={`Screenshot of ${p.title}`} width="960" height="600" loading="lazy" decoding="async" /></div>
   )}
   <div class="meta">
     <span class={p.status === 'In production' ? 'pill pill--live' : 'pill'}>{p.status}</span>
@@ -20,6 +20,5 @@ const hasPreview = showImage && p.preview;
   <div class="foot">
     <a href={`/work/${p.name}/`}>Case study<span class="sr-only">: {p.title}</span></a>
     {p.demo && <a href={p.demo.url}>{p.demo.kind === 'live' ? 'Live demo' : 'Interface'}<span class="sr-only">: {p.title}</span></a>}
-    <a href={p.repo}>Source<span class="sr-only">: {p.title}</span></a>
   </div>
 </article>

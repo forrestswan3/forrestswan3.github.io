@@ -9,7 +9,7 @@ import services from '../data/services.json';
 
 const pub = portfolio.projects.filter((p) => p.visibility === 'public');
 const inProd = pub.filter((p) => p.status === 'In production').length;
-const featured = ['koi-filegate', 'koi-uw-triage', 'koi-license-exam-prep']
+const featured = ['filegate', 'uw-triage', 'license-exam-prep']
   .map((n) => pub.find((p) => p.name === n)).filter(Boolean);
 const pillarIcons = ['shield', 'flow', 'chart'];
 const valueIcons = ['target', 'person', 'lotus'];
