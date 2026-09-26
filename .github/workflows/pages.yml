@@ -41,7 +41,7 @@ jobs:
           args: >-
             --no-progress --root-dir ${{ github.workspace }}/dist
             --exclude 'linkedin\.com' --exclude 'linktr\.ee' --exclude '^mailto:' --exclude '^tel:'
-            --exclude '^https://forrestswan3\.github\.io/([^k]|$)'
+            --exclude '^https://forrestswan3\.github\.io/'
             --accept 200,206,429
             'dist/**/*.html'
           fail: true

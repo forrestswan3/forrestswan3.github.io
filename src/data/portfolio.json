@@ -4,7 +4,7 @@
   "updated": "2026-09-22",
   "projects": [
     {
-      "name": "koi-license-exam-prep",
+      "name": "license-exam-prep",
       "title": "License Exam Prep",
       "status": "Shipped",
       "shipped": "2026-07-02",
@@ -20,9 +20,9 @@
         "edtech",
         "insurance"
       ],
-      "repo": "https://github.com/forrestswan3/koi-license-exam-prep",
+      "repo": null,
       "visibility": "public",
-      "page": "https://forrestswan3.github.io/koi-license-exam-prep/",
+      "page": null,
       "detail": {
         "problem": "Agents studying for Florida license exams had no practice tool that ran on the locked-down Allstate-managed workstations (no add-ins, no macros, no cloud installs).",
         "solution": "A standalone one-file `.exe` (PyWebView + SQLite + ReportLab) with full-length timed exams that follow the official Pearson VUE Florida content outlines (effective 2026-01-01), a projected-score gauge, per-domain mastery, and branded PDF reports.",
@@ -46,10 +46,12 @@
           "Logo files in `web/assets/` are neutral placeholders."
         ]
       },
-      "demo": null
+      "demo": null,
+      "preview_img": null,
+      "source": "private"
     },
     {
-      "name": "koi-training-program",
+      "name": "training-program",
       "title": "Agency Training Program",
       "status": "Shipped",
       "shipped": "2026-07-14",
@@ -65,9 +67,9 @@
         "training",
         "desktop-app"
       ],
-      "repo": "https://github.com/forrestswan3/koi-training-program",
+      "repo": null,
       "visibility": "public",
-      "page": "https://forrestswan3.github.io/koi-training-program/",
+      "page": null,
       "detail": {
         "problem": "Staff training lived in scattered decks and videos with no quiz tracking and no way for managers to see results.",
         "solution": "A desktop app where content is data: each module (video, slides, chapters, question bank, Core Process document) lives in `content/` next to the exe and is added through a built-in import wizard — no code change or rebuild.",
@@ -94,42 +96,51 @@
           "`web-portal/` holds a later browser-based variant (single HTML page + PHP roster API) and its Playwright end-to-end test."
         ]
       },
-      "demo": null
+      "demo": null,
+      "preview_img": null,
+      "source": "private"
     },
     {
-      "name": "koi-filegate",
-      "title": "FileGate — Naming Compliance Auditor + Intake",
+      "name": "filegate",
+      "title": "FileGate — Naming Compliance Auditor + AI Intake",
       "status": "In production",
-      "shipped": "2026-09-22",
+      "shipped": "2026-09-23",
       "lang": "Python",
-      "tagline": "Scans the agency file share, scores every file against the data policy, attributes ownership, and renames reversibly; plus a staff upload intake.",
+      "tagline": "Scans the agency file share against the data policy, and files staff uploads automatically with AI field extraction. Completed and in production.",
       "topics": [
         "python",
-        "customtkinter",
         "sqlite",
-        "ntfs",
-        "compliance",
+        "claude-api",
         "google-apps-script",
+        "compliance",
         "automation",
-        "windows"
+        "windows",
+        "pytest"
       ],
-      "repo": "https://github.com/forrestswan3/koi-filegate",
+      "repo": null,
       "visibility": "public",
       "detail": {
         "problem": "Client files on the shared NAS drifted from the agency naming and folder policy, and nobody could see who owned the violations.",
         "solution": "A Windows desktop/headless auditor that encodes the data policy as a JSON ruleset, resolves the NTFS owner of every item, locks a baseline compliance score per employee, and applies reversible in-place renames. FileGate Intake adds a Google Apps Script upload page that stages files in Drive for an on-prem agent to rename and file.",
         "highlights": [
-          "Policy is data (`rulesets/data_policy_v1.6.json`); underivable names go to a ZZZ Pending-Review proposal instead of being guessed",
-          "Baseline-locked findings; every rename is journaled with one-click undo",
-          "Runs weekly from Windows Task Scheduler; moved to an always-on office PC on 2026-09-22",
-          "28 automated tests pass (verified 2026-09-22)"
+          "Policy is data (`rulesets/data_policy_v1.6.json`); underivable names go to a Pending-Review proposal instead of being guessed",
+          "Measured a VPN bottleneck (~178 → ~7 items/s over the tunnel), added a LAN gate, incremental commits and explicit failure states, then moved the weekly scan to an always-on office PC",
+          "Live scan: 67,240 items in 24 minutes with 0 errors (2026-09-22)",
+          "Intake: staff drop a file; an on-site agent extracts client, document type and address with the Claude API, renames to policy and files it, and parks anything it can't match for human review",
+          "62 automated tests pass; a 388,000-row database migration verified before go-live",
+          "Staff training shipped 2026-09-24: 33-slide deck, two narrated videos, a 24-question quiz and two SOPs"
+        ],
+        "notes": [
+          "Completed: in production since 2026-09-23. Compliance-rate improvement will be published once rename cycles begin."
         ]
       },
       "page": null,
-      "demo": null
+      "demo": null,
+      "preview_img": null,
+      "source": "private"
     },
     {
-      "name": "koi-uw-triage",
+      "name": "uw-triage",
       "title": "UW Triage Engine + Board",
       "status": "In production",
       "shipped": "2026-09-22",
@@ -144,7 +155,7 @@
         "underwriting",
         "kanban"
       ],
-      "repo": "https://github.com/forrestswan3/koi-uw-triage",
+      "repo": null,
       "visibility": "public",
       "detail": {
         "problem": "Underwriting notices arrived by email and got lost; there was no single list of what was due, who owned it, or what was past due.",
@@ -157,10 +168,12 @@
         ]
       },
       "page": null,
-      "demo": null
+      "demo": null,
+      "preview_img": null,
+      "source": "private"
     },
     {
-      "name": "koi-audit-system",
+      "name": "audit-system",
       "title": "Audit & Compliance Scoring System",
       "status": "In progress",
       "shipped": null,
@@ -176,7 +189,7 @@
         "qnap",
         "compliance"
       ],
-      "repo": "https://github.com/forrestswan3/koi-audit-system",
+      "repo": null,
       "visibility": "public",
       "detail": {
         "problem": "Policy file quality was checked ad hoc with no sampling method, no rubric, and no record of findings.",
@@ -188,10 +201,12 @@
         ]
       },
       "page": null,
-      "demo": null
+      "demo": null,
+      "preview_img": null,
+      "source": "private"
     },
     {
-      "name": "koi-apps-script-toolkit",
+      "name": "apps-script-toolkit",
       "title": "Apps Script Toolkit",
       "status": "Shipped",
       "shipped": "2026-09-22",
@@ -205,7 +220,7 @@
         "kpi",
         "web-app"
       ],
-      "repo": "https://github.com/forrestswan3/koi-apps-script-toolkit",
+      "repo": null,
       "visibility": "public",
       "detail": {
         "problem": "Operations reporting and staff tools were manual spreadsheets and bookmarks, and the M365 environment blocked macros and add-ins.",
@@ -218,10 +233,12 @@
         ]
       },
       "page": null,
-      "demo": null
+      "demo": null,
+      "preview_img": null,
+      "source": "private"
     },
     {
-      "name": "koi-training-video-pipeline",
+      "name": "training-video-pipeline",
       "title": "Narrated Training Video Pipeline",
       "status": "Shipped",
       "shipped": "2026-07-15",
@@ -236,9 +253,9 @@
         "video",
         "training"
       ],
-      "repo": "https://github.com/forrestswan3/koi-training-video-pipeline",
+      "repo": null,
       "visibility": "public",
-      "page": "https://forrestswan3.github.io/koi-training-video-pipeline/",
+      "page": null,
       "detail": {
         "problem": "Slide-deck trainings were not self-serve, and MP4 files cannot carry clickable links.",
         "solution": "A script pipeline: slides rendered to PNG, narration synthesized per slide with edge-tts, segments assembled with ffmpeg, and an HTML player that overlays time-synced link hotspots on the video.",
@@ -261,16 +278,13 @@
           "Voice used: en-US-AndrewMultilingualNeural at -4% rate."
         ]
       },
-      "demo": {
-        "url": "https://forrestswan3.github.io/koi-training-video-pipeline/players/player-remarkable-2-training.html",
-        "label": "Open player interface",
-        "kind": "ui",
-        "note": "Interface preview. Training video files are not hosted publicly."
-      },
-      "preview": "docs/preview.png"
+      "demo": null,
+      "preview": "docs/preview.png",
+      "preview_img": "koi-training-video-pipeline",
+      "source": "private"
     },
     {
-      "name": "koi-design-system",
+      "name": "design-system",
       "title": "Design System",
       "status": "Shipped",
       "shipped": "2026-06-26",
@@ -283,9 +297,9 @@
         "tailwindcss",
         "css-variables"
       ],
-      "repo": "https://github.com/forrestswan3/koi-design-system",
+      "repo": null,
       "visibility": "public",
-      "page": "https://forrestswan3.github.io/koi-design-system/",
+      "page": null,
       "detail": {
         "problem": "Web pages and generated artifacts drifted from the agency brand.",
         "solution": "One source of truth: `src/tokens.css`, mirrored in `src/theme.js` and `tailwind.config.js`, consumed by a small React component library and documented in `design-system.md`.",
@@ -304,14 +318,16 @@
         ]
       },
       "demo": {
-        "url": "https://forrestswan3.github.io/koi-design-system/preview.html",
+        "url": "/demos/design-system/preview.html",
         "label": "Open live preview",
         "kind": "live"
       },
-      "preview": "docs/preview.png"
+      "preview": "docs/preview.png",
+      "preview_img": "koi-design-system",
+      "source": "private"
     },
     {
-      "name": "koi-sdr-talk-path",
+      "name": "sdr-talk-path",
       "title": "SDR Talk Path Companion",
       "status": "Shipped",
       "shipped": "2026-08-21",
@@ -324,9 +340,9 @@
         "sales-enablement",
         "call-scripts"
       ],
-      "repo": "https://github.com/forrestswan3/koi-sdr-talk-path",
+      "repo": null,
       "visibility": "public",
-      "page": "https://forrestswan3.github.io/koi-sdr-talk-path/",
+      "page": null,
       "detail": {
         "problem": "New SDRs needed consistent, situation-specific call paths for cross-sell conversations.",
         "solution": "A self-contained JS/HTML widget with talk paths per client situation (e.g. auto-only, home-only, renter), keyword search and routing hints, delivered as an Elementor widget and a WPCode snippet.",
@@ -344,11 +360,326 @@
         ]
       },
       "demo": {
-        "url": "https://forrestswan3.github.io/koi-sdr-talk-path/src/elementor-widget-v1.2.html",
+        "url": "/demos/sdr-talk-path/",
         "label": "Open live widget",
         "kind": "live"
       },
-      "preview": "docs/preview.png"
+      "preview": "docs/preview.png",
+      "preview_img": "koi-sdr-talk-path",
+      "source": "private"
+    },
+    {
+      "name": "pfsense-wireguard-vpn",
+      "title": "Secure Remote Access — pfSense Firewall + WireGuard VPN",
+      "status": "Operational",
+      "shipped": "2025-12-29",
+      "lang": "Infrastructure",
+      "tagline": "Designed, deployed and manage the agency firewall and staff VPN so remote staff reach office systems as if at their desks.",
+      "topics": [
+        "pfsense",
+        "netgate",
+        "wireguard",
+        "firewall",
+        "vpn",
+        "windows",
+        "network-security"
+      ],
+      "detail": {
+        "problem": "Remote and hybrid staff needed the office file server and printers, but the agency had no firewall-managed VPN and staff laptops have no admin rights.",
+        "solution": "A Netgate 2100 running pfSense as the office firewall, with WireGuard as the single staff VPN, rolled out so non-admin users can switch the tunnel on and off themselves.",
+        "highlights": [
+          "Deployed and brought the VPN live in December 2025; 20+ remote and in-office users onboarded",
+          "Non-admin rollout: WireGuard installed as a Windows service with a limited network-operator role (January 2026)",
+          "VPN access revocation built into employee offboarding",
+          "Firewall management locked down to an admin workstation",
+          "Diagnosed a server-side routing/NAT gap blocking remote access to office systems and restored access (August 2026)",
+          "Measured VPN latency against file-share operations; the data moved bulk scans onto the office LAN"
+        ],
+        "stack": [
+          "Netgate 2100",
+          "pfSense",
+          "WireGuard",
+          "Windows service deployment"
+        ],
+        "notes": [
+          "Network specifics (addresses, interfaces, peers) are intentionally omitted."
+        ]
+      },
+      "repo": null,
+      "source": "private",
+      "visibility": "public",
+      "page": null,
+      "demo": null,
+      "preview": null,
+      "preview_img": null
+    },
+    {
+      "name": "qnap-nas",
+      "title": "Agency File Server — QNAP NAS as System of Record",
+      "status": "Operational",
+      "shipped": "2025-12-12",
+      "lang": "Infrastructure",
+      "tagline": "Researched, proposed, installed and manage the NAS that became the single source of truth for client files.",
+      "topics": [
+        "qnap",
+        "nas",
+        "zfs",
+        "smb",
+        "access-control",
+        "data-governance"
+      ],
+      "detail": {
+        "problem": "Client files were scattered across personal drives and laptops, creating data-liability and E&O exposure and making files hard to find.",
+        "solution": "A QNAP TVS-h674 on QuTS hero (ZFS) with per-employee accounts, a folder-permission model and least-privilege service accounts for automation; reachable remotely over the WireGuard VPN.",
+        "highlights": [
+          "Compared three NAS platforms at different price points and pitched the owners (July 2025)",
+          "Wrote the FY2026 Technology Budget Proposal including the NAS line (October 2025)",
+          "Ordered, built and brought the system live in-office (November–December 2025)",
+          "Least-privilege, file-sharing-only service account for automation",
+          "Hosts the staff Training Program web edition over LAN and VPN",
+          "About 67,000 client-file items under a weekly naming-compliance scan (see FileGate)"
+        ],
+        "stack": [
+          "QNAP TVS-h674",
+          "QuTS hero (ZFS)",
+          "SMB",
+          "Windows ACLs",
+          "WireGuard"
+        ],
+        "notes": [
+          "Share names, addresses and accounts are intentionally omitted."
+        ]
+      },
+      "repo": null,
+      "source": "private",
+      "visibility": "public",
+      "page": null,
+      "demo": null,
+      "preview": null,
+      "preview_img": null
+    },
+    {
+      "name": "remote-print-server",
+      "title": "Remote Printing Service",
+      "status": "In progress",
+      "shipped": "2026-08-28",
+      "lang": "Infrastructure",
+      "tagline": "An always-on office print server so staff can print to office printers from anywhere over the VPN.",
+      "topics": [
+        "print-server",
+        "windows",
+        "wireguard",
+        "remote-work"
+      ],
+      "detail": {
+        "problem": "Staff could only print while physically in the office.",
+        "solution": "A dedicated always-on office print server sharing the office printers, reachable over the VPN, with a one-page staff setup guide.",
+        "highlights": [
+          "Live for the shared office printers since August 28, 2026",
+          "Staff setup guide v1.1: connect VPN, open the print server, add a printer",
+          "Jobs sent while the VPN is off queue and release on reconnect"
+        ],
+        "stack": [
+          "Windows print server",
+          "WireGuard VPN"
+        ],
+        "notes": [
+          "In progress: remaining printers being brought onto the service."
+        ]
+      },
+      "repo": null,
+      "source": "private",
+      "visibility": "public",
+      "page": null,
+      "demo": null,
+      "preview": null,
+      "preview_img": null
+    },
+    {
+      "name": "it-department",
+      "title": "Establishing the Agency IT Department",
+      "status": "Ongoing",
+      "shipped": "2025-11-03",
+      "lang": "Operations",
+      "tagline": "Built the agency IT function from scratch: budget, purchasing, vendor management, support intake and device lifecycle.",
+      "topics": [
+        "it-operations",
+        "vendor-management",
+        "budgeting",
+        "support",
+        "onboarding",
+        "eos"
+      ],
+      "detail": {
+        "problem": "The agency had no IT function; purchasing, vendors, support and equipment were handled ad hoc.",
+        "solution": "A dedicated IT function with a technology budget, a vendor and systems ledger, a tiered support model and a managed device lifecycle.",
+        "highlights": [
+          "Promoted to Technical Solutions Manager (August 2025), full-time from November 2025, then Agency Operations & Systems Manager (April 2026)",
+          "Authored the FY2026 Technology Department Budget",
+          "Launched equipment-request intake with weekly ordering (November 2025)",
+          "Support model: Windows 11 support chatbot first line, then an IT request form with a 1-business-day response",
+          "Systems ledger of 81 tools; System Administrator on 41",
+          "Onboarding/offboarding, device imaging and a wipe/recycle/donation pipeline"
+        ],
+        "stack": [
+          "Jotform",
+          "Slack",
+          "EOS / Ninety.io",
+          "Systems ledger"
+        ],
+        "notes": []
+      },
+      "repo": null,
+      "source": "private",
+      "visibility": "public",
+      "page": null,
+      "demo": null,
+      "preview": null,
+      "preview_img": null
+    },
+    {
+      "name": "asset-inventory",
+      "title": "Asset Inventory & Storage System",
+      "status": "Ongoing",
+      "shipped": "2025-10-06",
+      "lang": "Operations",
+      "tagline": "Numbered asset codes, labeled storage and an equipment register for office and remote staff.",
+      "topics": [
+        "inventory",
+        "asset-management",
+        "facilities"
+      ],
+      "detail": {
+        "problem": "Equipment was untracked and scattered across desks and homes.",
+        "solution": "An asset inventory with numbered codes, labels, logs and a spreadsheet, plus labeled storage and a remote-equipment register.",
+        "highlights": [
+          "Numbered asset codes in use from 2025",
+          "Agency-owned equipment register collected from remote staff (serial, brand, model)",
+          "Return-to-pool drive cleared unused equipment from desks (December 2025)",
+          "Labeled storage for monitors, headsets and spares; cube shelving installed (August 2026)"
+        ],
+        "stack": [
+          "Labels",
+          "Spreadsheet register"
+        ],
+        "notes": []
+      },
+      "repo": null,
+      "source": "private",
+      "visibility": "public",
+      "page": null,
+      "demo": null,
+      "preview": null,
+      "preview_img": null
+    },
+    {
+      "name": "shipping-station",
+      "title": "Shipping & Postage Station",
+      "status": "Operational",
+      "shipped": "2026-04-17",
+      "lang": "Operations",
+      "tagline": "In-office shipping and USPS postage with a thermal label printer, scale and multi-carrier labels.",
+      "topics": [
+        "shipping",
+        "postage",
+        "zebra",
+        "stamps-com",
+        "shippo",
+        "pitney-bowes"
+      ],
+      "detail": {
+        "problem": "Packages and postage required trips out and manual label handling.",
+        "solution": "An in-office station for weighing, labeling and postage: Pitney Bowes labels and scale, USPS postage via Stamps.com, a Zebra ZD421 thermal printer and Shippo for multi-carrier labels.",
+        "highlights": [
+          "Pitney Bowes shipping labels and scale set up (November 2025)",
+          "Zebra ZD421 thermal shipping printer added (April 2026)",
+          "Postal scale and USPS postage via Stamps.com; Shippo for multi-carrier labels",
+          "Postage charges reconciled against the card statement with no discrepancies"
+        ],
+        "stack": [
+          "Zebra ZD421",
+          "Pitney Bowes",
+          "Stamps.com",
+          "Shippo"
+        ],
+        "notes": []
+      },
+      "repo": null,
+      "source": "private",
+      "visibility": "public",
+      "page": null,
+      "demo": null,
+      "preview": null,
+      "preview_img": null
+    },
+    {
+      "name": "ups-backup-rollout",
+      "title": "UPS Battery-Backup Rollout",
+      "status": "In progress",
+      "shipped": "2026-09-25",
+      "lang": "Operations",
+      "tagline": "Battery backup for the office network, desks and every remote employee’s modem and router.",
+      "topics": [
+        "ups",
+        "business-continuity",
+        "fire-code",
+        "hardware"
+      ],
+      "detail": {
+        "problem": "Power blips took down the office network and workstations, and remote staff lost connectivity during outages.",
+        "solution": "UPS coverage for office network gear and desks, and portable units for every remote employee’s modem and router.",
+        "highlights": [
+          "Sourced exact replacement batteries for the office UPS fleet",
+          "Fire-code compliance research (NFPA 1 / Florida Fire Prevention Code, UL guidance) with five compliant installation options",
+          "Ordered portable UPS units for all remote staff plus spares at a volume discount (September 2026)"
+        ],
+        "stack": [
+          "APC Back-UPS",
+          "Portable UPS units"
+        ],
+        "notes": []
+      },
+      "repo": null,
+      "source": "private",
+      "visibility": "public",
+      "page": null,
+      "demo": null,
+      "preview": null,
+      "preview_img": null
+    },
+    {
+      "name": "supply-subscriptions",
+      "title": "Office Supply Management — Subscription Ordering",
+      "status": "Operational",
+      "shipped": "2026-05-28",
+      "lang": "Operations",
+      "tagline": "Moved recurring office supplies from ad-hoc orders to managed subscriptions with a shared request queue.",
+      "topics": [
+        "procurement",
+        "amazon-business",
+        "subscriptions"
+      ],
+      "detail": {
+        "problem": "Supplies were ordered ad hoc, one request at a time.",
+        "solution": "Recurring supplies on Amazon Business Subscribe & Save, with staff queuing requests in a shared cart instead of one-off orders.",
+        "highlights": [
+          "Recurring drinks, snacks, coffee and paper on auto-order",
+          "Shared request cart replaces one-off orders",
+          "Account and ordering administered centrally"
+        ],
+        "stack": [
+          "Amazon Business",
+          "Subscribe & Save"
+        ],
+        "notes": []
+      },
+      "repo": null,
+      "source": "private",
+      "visibility": "public",
+      "page": null,
+      "demo": null,
+      "preview": null,
+      "preview_img": null
     }
   ],
   "case_studies": [

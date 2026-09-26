@@ -1,0 +1,614 @@
+<!-- ============================================================
+     KOI SDR Talk Path Companion — Elementor HTML-widget version
+     v1.2 — 2026-08-21  (MARKUP + STYLES ONLY — no script)
+     Paste THIS ENTIRE FILE into the Elementor HTML widget.
+     The page's JavaScript lives in a WPCode snippet (see the
+     companion file "KOI - SDR Talk Path Companion - WPCode JS
+     Snippet - v1.2 - 2026.js"). WordPress strips script tags
+     saved by non-administrator users, so the script cannot live
+     in this widget.
+     Changes vs v1.0:
+       • Removed the nested full-document wrapper (doctype, html,
+         head, body — invalid inside a WordPress page)
+       • Removed all base64 data: URIs — the live site's output
+         filter strips them (the logo arrived with an empty src).
+         Logo now loads from the site's own media library.
+       • Script wrapped in a DOM-ready, run-once initializer so it
+         survives being moved/deferred/duplicated by optimizers.
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --koi-blue:#004AAD; --koi-navy:#062C63; --koi-blue-tint:#E7EEFB;
+  --bg:#F4F7FC; --card:#FFFFFF; --ink:#0D1B2E; --muted:#5A6B84; --hair:#E4EAF3;
+  --c-homie:#004AAD; --c-hunter:#0E8A6E; --c-either:#6B4CC4; --c-comm:#A83B63; --c-warn:#B4471F; --c-fl:#D9820C;
+  --shadow:0 1px 2px rgba(6,44,99,.06), 0 6px 20px rgba(6,44,99,.05);
+  --shadow-lg:0 8px 40px rgba(6,44,99,.14);
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased; line-height:1.5;
+}
+h1,h2,h3,.disp{font-family:"Sora",sans-serif}
+/* ---- Top bar ---- */
+.topbar{position:sticky; top:0; z-index:30; background:var(--card); border-bottom:1px solid var(--hair)}
+.topbar-inner{max-width:1180px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.brand{display:flex; align-items:center; gap:12px; min-width:0}
+.brand img{height:32px; width:auto; display:block}
+.brand h1{margin:0; font-size:17px; font-weight:700; letter-spacing:-.01em; color:var(--koi-navy); line-height:1.15}
+.brand .sub{margin:0; font-size:12px; color:var(--muted); font-weight:500}
+.search{margin-left:auto; position:relative; flex:1 1 240px; max-width:360px}
+.search input{width:100%; padding:11px 14px 11px 40px; border:1px solid var(--hair); border-radius:12px;
+  font-size:14px; font-family:inherit; color:var(--ink); background:#fff; outline:none; transition:.15s}
+.search input:focus{border-color:var(--koi-blue); box-shadow:0 0 0 3px rgba(0,74,173,.14)}
+.search svg{position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--muted)}
+/* ---- Tabs ---- */
+.tabs{position:sticky; top:61px; z-index:20; background:var(--bg); border-bottom:1px solid var(--hair)}
+.tabs-inner{max-width:1180px; margin:0 auto; padding:12px 20px; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.chip{border:1px solid var(--hair); background:#fff; color:var(--ink); padding:8px 14px; border-radius:999px;
+  font-size:13px; font-weight:600; font-family:inherit; cursor:pointer; transition:.15s; display:inline-flex; align-items:center; gap:7px}
+.chip:hover{border-color:#c9d5e8}
+.chip[aria-pressed="true"]{background:var(--koi-navy); border-color:var(--koi-navy); color:#fff}
+.chip .n{font-size:11px; opacity:.65; font-weight:600}
+.count{margin-left:auto; font-size:12.5px; color:var(--muted); font-weight:500}
+main{max-width:1180px; margin:0 auto; padding:22px 20px 70px}
+.view{display:none} .view.on{display:block}
+.lede{background:var(--card); border:1px solid var(--hair); border-radius:var(--radius); padding:18px 20px;
+  box-shadow:var(--shadow); margin-bottom:18px}
+.lede h2{margin:0 0 6px; font-size:16px; color:var(--koi-navy)}
+.lede p{margin:0; font-size:13.5px; color:var(--muted); line-height:1.6}
+.lede p + p{margin-top:8px}
+/* ---- Spine strip ---- */
+.spine{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-top:14px}
+.beatbox{background:var(--koi-blue-tint); border:1px solid #CFE0F7; border-radius:12px; padding:10px 12px}
+.beatbox .num{font-family:"Sora",sans-serif; font-size:11px; font-weight:700; color:var(--koi-blue); letter-spacing:.05em}
+.beatbox .lbl{font-family:"Sora",sans-serif; font-size:13.5px; font-weight:600; color:var(--koi-navy); margin-top:2px}
+.beatbox .d{font-size:11.5px; color:var(--muted); margin-top:3px; line-height:1.4}
+/* ---- Grid / cards ---- */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; align-items:start}
+.card{background:var(--card); border:1px solid var(--hair); border-radius:var(--radius); padding:18px; cursor:pointer;
+  text-align:left; width:100%; font-family:inherit; color:inherit; box-shadow:var(--shadow);
+  transition:transform .16s, box-shadow .16s, border-color .16s; display:flex; flex-direction:column; gap:12px}
+.card:hover{transform:translateY(-2px); box-shadow:var(--shadow-lg); border-color:#d5e0f2}
+.card:focus-visible{outline:none; border-color:var(--koi-blue); box-shadow:0 0 0 3px rgba(0,74,173,.22)}
+.card-head{display:flex; align-items:center; gap:12px}
+.code{flex:none; min-width:46px; height:46px; padding:0 9px; border-radius:11px; display:flex; align-items:center; justify-content:center;
+  font-family:"Sora",sans-serif; font-weight:700; font-size:15px; letter-spacing:-.02em; color:#fff; background:var(--accent); white-space:nowrap}
+.card-title{min-width:0}
+.card-title .nm{font-family:"Sora",sans-serif; font-weight:600; font-size:15px; line-height:1.22; color:var(--ink)}
+.card-title .cat{font-size:11px; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:.04em; margin-top:3px}
+.quick{font-size:13.5px; color:var(--muted); margin:0}
+.reveal{display:flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:var(--accent); margin-top:auto}
+.reveal svg{transition:transform .2s}
+.card.open{grid-column:1 / -1; cursor:default; border-color:var(--accent); box-shadow:0 0 0 1px var(--accent), var(--shadow-lg); transform:none}
+.card.open .reveal svg{transform:rotate(180deg)}
+.detail{display:none}
+.card.open .detail{display:grid; gap:14px; margin-top:2px; animation:fade .25s ease both}
+@keyframes fade{from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none}}
+/* ---- Beats inside a path ---- */
+.beats{border-top:1px solid var(--hair); padding-top:16px; display:grid; gap:12px}
+.beat{display:grid; grid-template-columns:30px 1fr; gap:12px; align-items:start}
+.bdot{width:26px; height:26px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center;
+  justify-content:center; font-family:"Sora",sans-serif; font-size:12px; font-weight:700; margin-top:1px}
+.bdot.done{background:#0E8A6E}
+.bhead{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.bname{font-family:"Sora",sans-serif; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--muted)}
+.tick{border:1px solid var(--hair); background:#fff; border-radius:999px; font-size:10.5px; font-weight:600; color:var(--muted);
+  padding:2px 9px; cursor:pointer; font-family:inherit}
+.tick.on{background:#E6F5F0; border-color:#B7E2D5; color:#0A6E58}
+.say{position:relative; background:#F7FAFF; border:1px solid #DDE7F7; border-left:3px solid var(--accent); border-radius:10px;
+  padding:12px 46px 12px 14px; font-size:14.5px; line-height:1.6; color:var(--ink); margin-top:7px}
+.say em{font-style:italic; color:var(--muted)}
+.copy{position:absolute; top:8px; right:8px; border:1px solid var(--hair); background:#fff; border-radius:8px; padding:4px 8px;
+  font-size:10.5px; font-weight:600; color:var(--muted); cursor:pointer; font-family:inherit; transition:.15s}
+.copy:hover{border-color:var(--koi-blue); color:var(--koi-blue)}
+.copy.ok{background:#E6F5F0; border-color:#B7E2D5; color:#0A6E58}
+.note{font-size:13px; color:var(--muted); margin:7px 0 0; line-height:1.55}
+.branch{margin:8px 0 0; padding-left:0; list-style:none; display:grid; gap:6px}
+.branch li{font-size:13.5px; line-height:1.55; padding-left:14px; position:relative; color:var(--ink)}
+.branch li:before{content:""; position:absolute; left:0; top:9px; width:5px; height:5px; border-radius:50%; background:var(--accent)}
+.branch b{color:var(--koi-navy)}
+.field h4{margin:0 0 5px; font-family:"Sora",sans-serif; font-size:11px; font-weight:700; text-transform:uppercase;
+  letter-spacing:.06em; color:var(--muted)}
+.field p{margin:0; font-size:14px; color:var(--ink); line-height:1.55}
+.field.tip{background:var(--koi-blue-tint); border-radius:12px; padding:12px 14px}
+.field.tip h4{color:var(--koi-blue)}
+.field.watch{background:#FDF3EF; border-radius:12px; padding:12px 14px}
+.field.watch h4{color:var(--c-warn)}
+.badges{display:flex; gap:8px; flex-wrap:wrap}
+.pill{font-size:11.5px; font-weight:600; padding:4px 10px; border-radius:999px; background:#F0F4FA; color:var(--koi-navy); border:1px solid var(--hair)}
+.pill.route{background:var(--koi-blue-tint); color:var(--koi-blue); border-color:#CFE0F7}
+.pill.fl{background:#FDF1E1; color:#8A5008; border-color:#F4DCBB}
+/* ---- Objection rows ---- */
+.obj{background:var(--card); border:1px solid var(--hair); border-radius:14px; box-shadow:var(--shadow); overflow:hidden}
+.obj + .obj{margin-top:10px}
+.obj-q{width:100%; text-align:left; background:none; border:none; font-family:inherit; cursor:pointer; padding:15px 18px;
+  display:flex; align-items:center; gap:12px; color:var(--ink)}
+.obj-q .t{font-size:15px; font-weight:600; font-family:"Sora",sans-serif}
+.obj-q .arrow{margin-left:auto; color:var(--muted); transition:transform .2s; flex:none}
+.obj.open .obj-q .arrow{transform:rotate(180deg)}
+.obj-body{display:none; padding:0 18px 18px; border-top:1px solid var(--hair)}
+.obj.open .obj-body{display:grid; gap:12px; animation:fade .2s ease both}
+.mini{font-family:"Sora",sans-serif; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:14px 0 5px}
+.mini.red{color:var(--c-warn)}
+.never{background:#FDF3EF; border:1px solid #F6DED4; border-radius:10px; padding:10px 13px; font-size:13.5px; color:#7A3116; line-height:1.55}
+/* ---- Transfer builder ---- */
+.panel{background:var(--card); border:1px solid var(--hair); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); margin-bottom:16px}
+.panel h3{margin:0 0 4px; font-size:16px; color:var(--koi-navy)}
+.panel .ph{font-size:13px; color:var(--muted); margin:0 0 16px; line-height:1.55}
+.form{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px}
+.form label{display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--muted);
+  font-family:"Sora",sans-serif; margin-bottom:5px}
+.form input, .form select{width:100%; padding:10px 12px; border:1px solid var(--hair); border-radius:10px; font-size:14px;
+  font-family:inherit; color:var(--ink); background:#fff; outline:none}
+.form input:focus, .form select:focus{border-color:var(--koi-blue); box-shadow:0 0 0 3px rgba(0,74,173,.13)}
+.out{margin-top:16px; background:#F7FAFF; border:1px solid #DDE7F7; border-left:3px solid var(--koi-blue); border-radius:10px;
+  padding:14px 46px 14px 14px; font-size:15px; line-height:1.6; position:relative; min-height:56px}
+.routegrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px}
+.route{border:1px solid var(--hair); border-radius:12px; padding:14px; border-top:3px solid var(--accent)}
+.route .h{font-family:"Sora",sans-serif; font-weight:700; font-size:14px; color:var(--accent)}
+.route .b{font-size:13px; color:var(--muted); margin-top:5px; line-height:1.5}
+.checks{display:grid; gap:8px; margin-top:4px}
+.chk{display:flex; align-items:flex-start; gap:10px; padding:11px 13px; border:1px solid var(--hair); border-radius:11px;
+  cursor:pointer; font-size:14px; line-height:1.5; background:#fff; transition:.15s}
+.chk:hover{border-color:#c9d5e8}
+.chk.on{background:#E6F5F0; border-color:#B7E2D5}
+.chk .box{flex:none; width:19px; height:19px; border-radius:6px; border:1.5px solid #C3CFE2; margin-top:1px; display:flex;
+  align-items:center; justify-content:center; background:#fff}
+.chk.on .box{background:#0E8A6E; border-color:#0E8A6E}
+.chk.on .box svg{display:block}
+.chk .box svg{display:none}
+.resetbtn{margin-top:12px; background:none; border:1px solid var(--hair); color:var(--muted); padding:8px 14px;
+  border-radius:9px; font-weight:600; font-family:inherit; cursor:pointer; font-size:12.5px}
+.resetbtn:hover{border-color:var(--koi-blue); color:var(--koi-blue)}
+/* ---- Rules tables ---- */
+.tw{overflow-x:auto; border:1px solid var(--hair); border-radius:12px}
+table.t{width:100%; border-collapse:collapse; font-size:13.5px; min-width:440px; background:#fff}
+table.t th, table.t td{padding:11px 14px; text-align:left; border-bottom:1px solid var(--hair); vertical-align:top}
+table.t thead th{background:#F0F4FA; font-family:"Sora",sans-serif; font-size:10.5px; font-weight:700; text-transform:uppercase;
+  letter-spacing:.05em; color:var(--muted); white-space:nowrap}
+table.t tbody tr:last-child td{border-bottom:none}
+table.t .rl{font-weight:600; color:var(--ink); white-space:nowrap}
+.yes{color:#0E8A6E; font-weight:600} .no{color:var(--c-warn); font-weight:600} .mid{color:var(--koi-blue); font-weight:600}
+.quad{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px}
+.qbox{border:1px solid var(--hair); border-radius:12px; padding:16px; text-align:center; background:#fff}
+.qbox .v{font-family:"Sora",sans-serif; font-size:26px; font-weight:700; color:var(--koi-blue); line-height:1}
+.qbox .l{font-size:12px; color:var(--muted); margin-top:6px; font-weight:600}
+.roster{margin-top:11px; padding-top:10px; border-top:1px dashed #D9E3F0}
+.rl2{font-family:"Sora",sans-serif; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--muted); margin-bottom:5px}
+.roster .rl2:not(:first-child){margin-top:9px}
+.names{display:flex; flex-wrap:wrap; gap:5px}
+.nm2{font-size:12.5px; font-weight:600; color:var(--accent); background:#F4F8FE; border:1px solid #DDE7F7;
+  padding:3px 9px; border-radius:999px}
+.fillbox{background:#F6F9FD; border:1px solid #DCE6F5; border-radius:12px; padding:14px 16px}
+.fillbox h4{margin:0 0 4px; font-family:"Sora",sans-serif; font-size:11px; font-weight:700; text-transform:uppercase;
+  letter-spacing:.06em; color:var(--koi-navy)}
+.fillbox .fh{margin:0 0 12px; font-size:13px; color:var(--muted); font-style:italic; line-height:1.5}
+.fgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
+.fgroup{min-width:0}
+.fg{font-family:"Sora",sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+  color:var(--accent,var(--koi-blue)); margin-bottom:6px}
+.fq{display:flex; align-items:flex-start; gap:8px; padding:6px 8px; border-radius:8px; cursor:pointer;
+  font-size:13.5px; line-height:1.45; transition:.12s}
+.fq:hover{background:#fff}
+.fq .fbox{flex:none; width:15px; height:15px; border-radius:4px; border:1.5px solid #C3CFE2; background:#fff; margin-top:2px}
+.fq.on{color:var(--muted)}
+.fq.on span:last-child{text-decoration:line-through}
+.fq.on .fbox{background:#0E8A6E; border-color:#0E8A6E}
+table.t .rl.yes{color:#0E8A6E} table.t .rl.no{color:var(--c-warn)} table.t .rl.mid{color:var(--koi-blue)}
+.empty{grid-column:1/-1; text-align:center; padding:56px 20px; color:var(--muted)}
+.empty h3{margin:0 0 6px; color:var(--ink); font-size:18px}
+.empty button{margin-top:14px; background:var(--koi-blue); color:#fff; border:none; padding:10px 18px; border-radius:10px;
+  font-weight:600; font-family:inherit; cursor:pointer; font-size:13px}
+.foot{max-width:1180px; margin:0 auto; padding:0 20px 44px; color:var(--muted); font-size:12px; line-height:1.65}
+.foot strong{color:var(--koi-navy)}
+@media (max-width:600px){
+  .brand .sub{display:none}
+  .search{flex-basis:100%; max-width:none; margin-left:0}
+  .tabs{top:106px}
+  .tabs-inner{flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none; padding:10px 20px}
+  .tabs-inner::-webkit-scrollbar{display:none}
+  .chip{flex:none}
+  .count{display:none}
+  .card{padding:16px}
+  main{padding:16px 14px 60px}
+  .topbar-inner{padding:12px 14px; gap:10px}
+  .panel{padding:16px}
+  .say{padding:12px 14px 34px 12px}
+  .copy{top:auto; bottom:8px; right:8px}
+  .fq{padding:9px 8px}
+  .form{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+@media print{
+  .topbar,.tabs,.copy,.tick,.resetbtn{display:none!important}
+  .view{display:block!important} .card{break-inside:avoid; box-shadow:none} .card .detail{display:grid!important}
+  .obj-body{display:grid!important}
+}
+/* two-spine display */
+.spinewrap{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; margin-top:14px}
+.spinecol{min-width:0}
+.sh{font-family:"Sora",sans-serif; font-size:11px; font-weight:700; letter-spacing:.07em; padding:6px 12px;
+  border-radius:999px; display:inline-block; color:#fff}
+.sh-a{background:var(--koi-blue)} .sh-b{background:var(--c-either)}
+.sd{margin:7px 0 10px !important; font-size:12.5px; color:var(--muted)}
+.spinecol .spine{grid-template-columns:1fr; gap:7px}
+.beatbox.b{background:#F1EDFB; border-color:#DBD0F4}
+.beatbox.b .num{color:var(--c-either)}
+/* six questions */
+.sixq{display:grid; gap:8px; margin-top:14px}
+.sixrow{display:grid; grid-template-columns:34px 1fr; gap:12px; align-items:start;
+  background:#F7FAFF; border:1px solid #DDE7F7; border-radius:11px; padding:12px 14px}
+.sqn{font-family:"Sora",sans-serif; font-size:12px; font-weight:700; color:var(--koi-blue); padding-top:1px}
+.sqq{font-size:14.5px; font-weight:600; color:var(--ink); line-height:1.45}
+.sqw{font-size:12.5px; color:var(--muted); margin-top:4px; line-height:1.5}
+/* ============================================================
+   HOST PAGE HARDENING
+   When this file is pasted into a website builder's Edit HTML
+   panel, the host theme's CSS lands in the same document and
+   inflates buttons, inputs, headings and tables. These rules
+   win those fights. Harmless when the file is opened directly.
+   ============================================================ */
+.topbar, .tabs, main, .foot,
+.topbar *, .tabs *, main *, .foot *{
+  box-sizing:border-box !important;
+  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif !important;
+  letter-spacing:normal !important; text-transform:none !important;
+  float:none !important;
+}
+/* keep the centered fixed-width column — a host theme (or the blanket rule
+   above) must not let these run the full width of the window */
+.topbar-inner, .tabs-inner, main, .foot{
+  max-width:1180px !important; margin-left:auto !important; margin-right:auto !important;
+}
+.topbar h1, .lede h2, .panel h3, .card-title .nm, .beatbox .lbl, .fg, .rl2,
+.bname, .obj-q .t, .mini, .field h4, .fillbox h4, .route .h, .qbox .v, .disp{
+  font-family:"Sora",sans-serif !important;
+}
+.topbar h1, .lede h2, .panel h3, .empty h3{
+  margin:0 !important; padding:0 !important; border:0 !important;
+  background:none !important; text-align:left !important;
+}
+.lede h2, .panel h3{margin-bottom:6px !important}
+.chip, .copy, .tick, .resetbtn, .empty button{
+  -webkit-appearance:none !important; appearance:none !important;
+  width:auto !important; min-width:0 !important; min-height:0 !important;
+  height:auto !important; line-height:1.3 !important; box-shadow:none !important;
+  text-shadow:none !important; background-image:none !important; margin:0 !important;
+}
+.chip{padding:8px 14px !important; font-size:13px !important; border-radius:999px !important}
+.copy{padding:4px 8px !important; font-size:10.5px !important; border-radius:8px !important}
+.tick{padding:2px 9px !important; font-size:10.5px !important; border-radius:999px !important}
+.resetbtn{padding:8px 14px !important; font-size:12.5px !important; border-radius:9px !important}
+.search input, .form input, .form select{
+  -webkit-appearance:none !important; appearance:none !important;
+  width:100% !important; height:auto !important; min-height:0 !important;
+  font-size:14px !important; line-height:1.4 !important; box-shadow:none !important;
+  margin:0 !important; background-image:none !important;
+}
+.search input{padding:11px 14px 11px 40px !important; border-radius:12px !important}
+.form input, .form select{padding:10px 12px !important; border-radius:10px !important}
+main table.t{border-collapse:collapse !important; width:100% !important; margin:0 !important;
+  font-size:13.5px !important; background:#fff !important}
+main table.t th, main table.t td{padding:11px 14px !important; text-align:left !important;
+  vertical-align:top !important; background-image:none !important}
+main table.t thead th{background:#F0F4FA !important; font-size:10.5px !important;
+  text-transform:uppercase !important; letter-spacing:.05em !important}
+main ul, main ol{margin:0 !important; padding:0 !important; list-style:none !important}
+main li{margin:0 !important}
+main p{margin:0 !important}
+main a{text-decoration:none !important}
+.topbar img{max-width:none !important; height:32px !important; width:auto !important;
+  margin:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important}
+.card, .panel, .obj, .lede{background:var(--card) !important}
+.say, .out{background:#F7FAFF !important}
+</style>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='60'><rect x='1' y='1' width='238' height='58' rx='8' fill='none' stroke='%23888' stroke-width='2'/><text x='120' y='37' font-family='sans-serif' font-size='18' fill='%23888' text-anchor='middle'>LOGO</text></svg>" alt="Kasey Osman Insurance">
+      <div class="titles">
+        <h1>SDR Talk Path Companion</h1>
+        <p class="sub">Outbound &middot; Discovery &middot; Live Transfer</p>
+      </div>
+    </div>
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search a path, objection, or phrase&hellip;" autocomplete="off">
+    </div>
+  </div>
+</header>
+<nav class="tabs">
+  <div class="tabs-inner" id="tabs"></div>
+</nav>
+<main>
+  <!-- PATHS -->
+  <section class="view on" id="v-paths">
+    <div class="lede">
+      <h2>Two spines</h2>
+      <p>Which spine you run depends on one thing: <b>do we already have this household?</b> If we do, you open with the mini-review and the cross falls out of it naturally. If we don't, there's no file to review, so you state the reason for the call instead. Never do both &mdash; a mini-review on a stranger sounds false, and a "reason for my call" to your own client sounds like a telemarketer.</p>
+      <div class="spinewrap">
+        <div class="spinecol">
+          <div class="sh sh-a">SPINE A &nbsp;&middot;&nbsp; existing client</div>
+          <p class="sd">P1&ndash;P6, P8, P10. They're already ours.</p>
+          <div class="spine">
+            <div class="beatbox"><div class="num">BEAT 1</div><div class="lbl">Identify</div><div class="d">Name, agency, "nothing's wrong."</div></div>
+            <div class="beatbox"><div class="num">BEAT 2</div><div class="lbl">Mini-review</div><div class="d">Thank them for their years, confirm the file.</div></div>
+            <div class="beatbox"><div class="num">BEAT 3</div><div class="lbl">Assumptive cross</div><div class="d">"While I was looking over everything, I noticed&hellip;"</div></div>
+            <div class="beatbox"><div class="num">BEAT 4</div><div class="lbl">Gap statement</div><div class="d">Why it matters, here, for them.</div></div>
+            <div class="beatbox"><div class="num">BEAT 5</div><div class="lbl">Transfer ask</div><div class="d">Hand off by name. Assume the yes.</div></div>
+          </div>
+        </div>
+        <div class="spinecol">
+          <div class="sh sh-b">SPINE B &nbsp;&middot;&nbsp; not a client</div>
+          <p class="sd">P7 and P9. Cold, internet lead, requote, winback.</p>
+          <div class="spine">
+            <div class="beatbox b"><div class="num">BEAT 1</div><div class="lbl">Identify</div><div class="d">Name, agency, permission to continue.</div></div>
+            <div class="beatbox b"><div class="num">BEAT 2</div><div class="lbl">Reason for call</div><div class="d">Why you're calling <em>them</em>, specifically.</div></div>
+            <div class="beatbox b"><div class="num">BEAT 3</div><div class="lbl">One question</div><div class="d">One. Not three. Then listen.</div></div>
+            <div class="beatbox b"><div class="num">BEAT 4</div><div class="lbl">Gap statement</div><div class="d">Why it matters, here, for them.</div></div>
+            <div class="beatbox b"><div class="num">BEAT 5</div><div class="lbl">Transfer ask</div><div class="d">Hand off by name. Assume the yes.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lede">
+      <h2>Beat 3 &mdash; be assumptive</h2>
+      <p>The cross is a <b>statement</b>, not a request. You are not asking whether they'd like you to look. You noticed something, and you're moving.</p>
+      <div class="say" style="--accent:var(--koi-blue)">"You know, while I was looking over everything, I noticed we don't have your auto with us. Let's go ahead and take a look at that and see if we can help. What vehicles do you drive?"
+        <button class="copy" onclick="copyEl(this)">Copy</button></div>
+      <p class="note">Three things are doing work there. <b>"While I was looking over everything"</b> ties the cross to the review you just did, so it lands as service rather than a pitch. <b>"Let's go ahead"</b> assumes the yes. And it ends on a <b>question they can answer without deciding anything</b> &mdash; naming their cars costs them nothing, and once they've answered, the conversation is already underway. Compare that to "would you like a quote on your auto?", which invites a no and usually gets one.</p>
+    </div>
+    <div class="lede">
+      <h2>Beat 2 &mdash; the mini-review</h2>
+      <p>Spine A only. This is what earns you the right to the rest of the call. You're not opening with a pitch, you're opening with service: thank them for their years, confirm what we hold, update it live. Thirty to sixty seconds.</p>
+      <div class="tw" style="margin-top:12px">
+        <table class="t">
+          <thead><tr><th>Confirm</th><th>Why it earns its place</th></tr></thead>
+          <tbody>
+            <tr><td class="rl">Mailing / garaging address</td><td>A new address is a property conversation you would otherwise never have found.</td></tr>
+            <tr><td class="rl">Best phone number</td><td>A new area code usually means they moved. Ask where from.</td></tr>
+            <tr><td class="rl">Email address</td><td>Bad email is why renewal notices get missed and clients get surprised.</td></tr>
+            <tr><td class="rl">Employer or occupation</td><td>Job changes move the commute, the mileage, and sometimes the discount.</td></tr>
+            <tr><td class="rl">Who is in the household</td><td>A new name is a new driver. A new driver is an auto call and a liability call.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:12px"><b>Four rules.</b> Thank them by name and by number of years first &mdash; it's the cheapest goodwill you'll ever buy. Read it as a conversation, not a form. <b>Never</b> ask for date of birth, social security number, driver's licence number, or payment details on a review call &mdash; if it's needed, the licensed agent asks. And update it in IX on the call, not after.</p>
+    </div>
+    <div class="lede">
+      <h2>Six questions paint a picture</h2>
+      <p>When you have room to go deeper than the five fields above &mdash; a renewal review, a long-tenured household, anyone who's happy to talk &mdash; these are the questions that surface the cross before you've asked for anything.</p>
+      <div class="sixq" id="sixq"></div>
+      <p class="note"><b>Every one of these is a cross-sell trigger in disguise.</b> Marital status changes the household and the discount. A job change moves the commute and the mileage. A business means commercial. A child entering means a new driver in a few years and a life conversation now; a child exiting means a policy that no longer matches. And question six is the one that finds what nobody thought to mention.</p>
+    </div>
+    <div class="grid" id="pathgrid"></div>
+  </section>
+  <!-- OBJECTIONS -->
+  <section class="view" id="v-obj">
+    <div class="lede">
+      <h2>You are not the one who answers this</h2>
+      <p>You are not licensed to quote and you do not defend rates. Your only legal move on an objection is to turn it into a reason to talk to an agent. Every response below does exactly one thing: it buys the transfer.</p>
+    </div>
+    <div id="objlist"></div>
+  </section>
+  <!-- FILLER -->
+  <section class="view" id="v-filler">
+    <div class="lede">
+      <h2>Holding the line</h2>
+      <p>When the agent is a few minutes out, dead air loses the transfer. Instead of parking them on hold, keep talking and gather what the agent is going to ask for anyway. Done right this makes the handoff <em>shorter</em>, not longer &mdash; the agent picks up already knowing the household.</p>
+      <p><b>Frame it as saving them time, never as a stall:</b> "While [Agent] wraps up, let me grab a few things so you're not repeating yourself when I hand you over."</p>
+    </div>
+    <div class="panel">
+      <h3>What you may and may not ask</h3>
+      <p class="ph">You are unlicensed. Intake is fine; anything that looks like underwriting or account access is not.</p>
+      <div class="tw">
+        <table class="t">
+          <thead><tr><th>Tier</th><th>What</th><th>Rule</th></tr></thead>
+          <tbody>
+            <tr><td class="rl yes">Always fine</td><td>Vehicles, drivers by name and relationship, property details, roof age, current carrier, renewal date, claims and violations in general terms.</td><td>Ask freely. This is the bulk of every bank below.</td></tr>
+            <tr><td class="rl mid">Check first</td><td>Dates of birth, driver's licence numbers, VINs.</td><td>Agencies differ on whether an unlicensed seat collects these. Do not ask until the Sales Lead confirms KOI's position.</td></tr>
+            <tr><td class="rl no">Never</td><td>Social security number, payment card or bank details, health or medical information.</td><td>The licensed agent handles these on their own call. There is no exception.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Six rules for the hold</h3>
+      <div class="checks" id="fillrules"></div>
+    </div>
+    <div class="panel">
+      <h3>Always capture, whatever the path</h3>
+      <p class="ph">These three feed the IX reporting directly. Get them even if the transfer falls through.</p>
+      <div class="routegrid">
+        <div class="route" style="--accent:var(--c-homie)"><div class="h">Current carrier</div><div class="b">Who they are with now, on the line we are crossing into.</div></div>
+        <div class="route" style="--accent:var(--c-hunter)"><div class="h">Renewal date</div><div class="b">The single most useful field for working the household later.</div></div>
+        <div class="route" style="--accent:var(--c-warn)"><div class="h">Decline reason</div><div class="b">If they say no, capture why in their words, not yours.</div></div>
+      </div>
+    </div>
+    <div id="fillerlist"></div>
+  </section>
+  <!-- TRANSFER -->
+  <section class="view" id="v-transfer">
+    <div class="lede">
+      <h2>The handoff is the job</h2>
+      <p>The fifteen seconds between "hold on one second" and you dropping off the line is the difference between a credited transfer and a wasted dial. Never say the word <em>transfer</em> to a client &mdash; it sounds like a phone tree. Say <em>let me put you with</em>.</p>
+    </div>
+    <div class="panel">
+      <h3>Route by line of business</h3>
+      <p class="ph">Wrong seat means the call gets bounced and the client repeats themselves. That is a dead transfer.</p>
+      <div class="routegrid" id="routes"></div>
+      <p class="note"><b>Two people carry more than one seat.</b> One agent takes both property and auto, and another takes both property and commercial building &mdash; so if either is free, they can often catch a call the rest of the row can't. Work down the row before you give up and book an appointment.</p>
+    </div>
+    <div class="panel">
+      <h3>Slack handoff builder</h3>
+      <p class="ph">Build the line while the client is on hold, then copy it straight into the handoff channel so every available agent sees it at once. Whoever claims it is who you introduce &mdash; you say their name and how long the client has when you make the live transfer.</p>
+      <div class="form">
+        <div><label for="f-name">Client first name</label><input id="f-name" placeholder="Denise"></div>
+        <div><label for="f-rel">Has&hellip;</label><input id="f-rel" placeholder="auto with us since 2019"></div>
+        <div><label for="f-gap">Cross</label><input id="f-gap" placeholder="renters"></div>
+      </div>
+      <div class="out" id="introOut"><em style="color:#5A6B84">Your handoff line will build here as you type.</em>
+        <button class="copy" onclick="copyEl(this)">Copy</button></div>
+      <p class="note">Nothing in the channel that you wouldn't want the client reading over your shoulder. No rate, no coverage claim, no account numbers.</p>
+    </div>
+    <div class="panel">
+      <h3>Pre-transfer checklist</h3>
+      <p class="ph">Run this every time. Tap to tick, reset between calls.</p>
+      <div class="checks" id="checks"></div>
+      <button class="resetbtn" onclick="resetChecks()">Reset for next call</button>
+    </div>
+    <div class="panel">
+      <h3>No agent available</h3>
+      <p class="ph">Two options, depending on how far out the agent is. Minutes away &mdash; hold the line and work the Filler Bank. Longer than that &mdash; book a specific day and time, log it, and move on. What you never do is park the client on hold hunting for someone.</p>
+      <div class="say">"[He's/She's] with a client right now and I don't want to leave you holding. Are you better in the morning or the afternoon? &hellip; Perfect &mdash; I'm putting you down for Thursday at 10:15 and [he'll/she'll] call you at this number."
+        <button class="copy" onclick="copyEl(this)">Copy</button></div>
+      <p class="note">An appointment set protects the lead but it does <b>not</b> count as a transfer on your quad. Log it in IX the same day with the agent's name and the booked time.</p>
+    </div>
+  </section>
+  <!-- VOICEMAIL -->
+  <section class="view" id="v-vm">
+    <div class="lede">
+      <h2>Voicemail, text, and the follow-up cadence</h2>
+      <p>Thirty seconds, no pitch, curiosity only. You are not trying to sell on a voicemail &mdash; you are trying to earn a callback. Never leave a number, a rate, or the word "quote" on a message.</p>
+    </div>
+    <div id="vmlist"></div>
+    <div class="panel" style="margin-top:16px">
+      <h3>Attempt cadence</h3>
+      <p class="ph">Two live attempts and a message before you disposition. Vary the time of day &mdash; the same 2pm dial three days running is three dials wasted.</p>
+      <div class="tw">
+        <table class="t">
+          <thead><tr><th>Attempt</th><th>When</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td class="rl">1</td><td>Day 1, morning block</td><td>Dial. No answer &rarr; voicemail #1. Say you'll try again Thursday.</td></tr>
+            <tr><td class="rl">2</td><td>Day 3, afternoon block</td><td>Dial. Different time of day. No answer &rarr; no message.</td></tr>
+            <tr><td class="rl">3</td><td>Day 5</td><td>Dial. No answer &rarr; voicemail #2 (the close-the-loop message).</td></tr>
+            <tr><td class="rl">4</td><td>Day 10&ndash;14</td><td>One more dial, then disposition and recycle to the long-term list.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note"><b>Before any text message:</b> confirm the household's contact-consent status in IX and follow KOI Data Policy v1.5. Texting a client who has not opted in is a compliance issue, not a judgement call.</p>
+    </div>
+  </section>
+  <!-- GAME PLAN -->
+  <section class="view" id="v-plan">
+    <div class="lede">
+      <h2>One rule sits above the schedule</h2>
+      <p><b>A live inbound always beats the block.</b> If a call-in, a web lead, or a transfer request lands at 10am and your sheet says you're on campaign work until one, you drop the campaign and call it. Speed to lead is measured in minutes, not in blocks. The schedule below is what you do when nothing is on fire &mdash; it is a default, never a defence.</p>
+    </div>
+    <div class="panel">
+      <h3>Your calling window</h3>
+      <p class="ph">The office runs <b>8:30am &ndash; 5:30pm EST, Monday to Friday</b>. Your dialling window is <b>9:00am &ndash; 5:30pm</b>. Nothing goes out before nine or after half five &mdash; not a dial, not a text.</p>
+      <p class="note">Use <b>8:30 to 9:00</b> to pull and prep the list you're about to work. That half hour is free: you can't dial in it anyway, and if you spend it prepping, nine o'clock arrives and you're already calling instead of still searching.</p>
+    </div>
+    <div class="panel">
+      <h3>Two power hours</h3>
+      <p class="ph">Your two best contact windows. Keep them clear of meetings, admin, and data entry where you can &mdash; and if the Sales Lead needs you on something else, that comes first. Move the block rather than losing it.</p>
+      <div class="routegrid">
+        <div class="route" style="--accent:var(--c-homie)"><div class="h">10:00 &ndash; 11:30am</div><div class="b">People are at their desks and past the morning scramble. Best window for working households before the day runs away from them.</div></div>
+        <div class="route" style="--accent:var(--c-hunter)"><div class="h">4:00 &ndash; 5:30pm</div><div class="b">People are home, back from the school run, and winding down. Strongest window of the day for reaching a working household &mdash; and it runs right up to close.</div></div>
+      </div>
+      <p class="note"><b>Do your admin at 1pm, not at the end of the day.</b> Dispositioning, CRM entry, and list prep belong in the post-lunch dead zone when nobody answers anyway. The last ninety minutes are prime calling time &mdash; spending them on data entry because it feels like winding down is the most common way a good SDR quietly underperforms.</p>
+    </div>
+    <div class="panel">
+      <h3>A week that works</h3>
+      <p class="ph">A starting shape, not a straitjacket. Once you have four weeks of your own connect data, rebuild it around what actually answers.</p>
+      <div class="tw">
+        <table class="t">
+          <thead><tr><th>Day</th><th>Morning</th><th>Afternoon</th><th>Power hour</th></tr></thead>
+          <tbody>
+            <tr><td class="rl">Monday</td><td>Weekend inbound and web leads first &mdash; they are already cold by now</td><td>Admin, then Renewals</td><td>Renewals (P10)</td></tr>
+            <tr><td class="rl">Tuesday</td><td>OTH campaign work (P1, P2)</td><td>Admin, then Source lists</td><td>OTH campaign (P1, P2)</td></tr>
+            <tr><td class="rl">Wednesday</td><td>Renewals (P10)</td><td>Admin, then requotes</td><td>Requotes (P9)</td></tr>
+            <tr><td class="rl">Thursday</td><td>OTH campaign work (P1, P2)</td><td>Admin, then Source lists</td><td>OTH campaign (P1, P2)</td></tr>
+            <tr><td class="rl">Friday</td><td>Callbacks and anyone who asked for a time</td><td>Book next week, then recycle list</td><td>Appointment-setting for Monday</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note"><b>Tuesday through Thursday are your contact days</b> &mdash; that is where the campaign volume belongs. Monday morning is the worst cold window of the week, so it goes to inbound that is already warm. Friday afternoon is poor for cold but fine for warm, which is why it is callbacks and booking rather than fresh dials.</p>
+    </div>
+    <div class="panel">
+      <h3>Every block needs four things</h3>
+      <p class="ph">If you cannot answer all four before the block starts, you are not ready to dial.</p>
+      <div class="routegrid">
+        <div class="route" style="--accent:var(--c-homie)"><div class="h">1. Which list</div><div class="b">One named campaign or source, not "leads". Pull it before the block, not during it.</div></div>
+        <div class="route" style="--accent:var(--c-hunter)"><div class="h">2. Which path</div><div class="b">P1 through P10. Knowing the path before you dial is what stops you improvising badly.</div></div>
+        <div class="route" style="--accent:var(--c-either)"><div class="h">3. A dial target</div><div class="b">A number for this block, not for the day. Forty in a ninety-minute block is a real target.</div></div>
+        <div class="route" style="--accent:var(--c-comm)"><div class="h">4. What done looks like</div><div class="b">List worked to the end, or the clock ran out and you noted where you stopped.</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Your list inventory</h3>
+      <p class="ph">Everything available to you, and which path each one runs. Tap to tick off as you work through a block.</p>
+      <div class="fgrid" id="lists"></div>
+    </div>
+    <div class="panel">
+      <h3>Your first two weeks look different</h3>
+      <p class="ph">Do not try to run five list types in week one.</p>
+      <div class="checks" id="ramp"></div>
+    </div>
+  </section>
+  <!-- RULES -->
+  <section class="view" id="v-rules">
+    <div class="lede">
+      <h2>How you are graded</h2>
+      <p>You are credited on <b>live transfers</b>. That is the one outcome your bonus is built on &mdash; not items sold, and not the policies that get written off the back of your calls. Everything else on this page is logged so the agency can see what your calls actually produce, but it is not what you are paid on. Nothing is credited at all unless it is dispositioned in IX the same day.</p>
+    </div>
+    <div class="panel">
+      <h3>The SDR quad</h3>
+      <p class="ph">Same framework the agents run, measured on the activity that drives transfers. Hit two of the four every day once you are past your first week.</p>
+      <div class="quad">
+        <div class="qbox"><div class="v">150</div><div class="l">Outbound dials</div></div>
+        <div class="qbox"><div class="v">2.5</div><div class="l">Hours talk time</div></div>
+        <div class="qbox"><div class="v">5</div><div class="l">Live transfers</div></div>
+        <div class="qbox"><div class="v">2</div><div class="l">Crosses bound</div></div>
+      </div>
+      <p class="note">All four are measured. Only <b>live transfers</b> carry credit &mdash; the other three tell you and the Sales Lead whether the transfers are going to show up.</p>
+    </div>
+    <div class="panel">
+      <h3>What counts and what doesn't</h3>
+      <div class="tw">
+        <table class="t">
+          <thead><tr><th>Outcome</th><th>Credit</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td class="rl">Live transfer</td><td class="yes">Credited</td><td>The one outcome you are paid on. Client on the phone, gap identified, agent accepted the handoff live.</td></tr>
+            <tr><td class="rl">Cross bound</td><td class="mid">Logged</td><td>Tracked at household level so the agency can see what your transfers turn into. It is not your credit &mdash; the writing agent owns the sale.</td></tr>
+            <tr><td class="rl">Appointment set</td><td class="mid">Logged</td><td>Protects the lead and is tracked separately. It is not a transfer.</td></tr>
+            <tr><td class="rl">Blind transfer</td><td class="mid">Logged</td><td>Recorded, but it earns you nothing. Stay on the line, introduce the client, and confirm the agent picked up before you drop.</td></tr>
+            <tr><td class="rl">Not dispositioned same day</td><td class="no">Zero</td><td>If it isn't logged in IX, it didn't happen.</td></tr>
+            <tr><td class="rl">Flood quote alone</td><td class="no">Zero</td><td>Valuable conversation, but it does not satisfy the cross-sell requirement.</td></tr>
+            <tr><td class="rl">Wrong seat</td><td class="no">Zero</td><td>Property to a Homie, auto to a Hunter, commercial to a Commercial agent.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>End-of-call, every call</h3>
+      <div class="checks" id="eod"></div>
+    </div>
+    <div class="panel">
+      <h3>Three things that will make or break your first ninety days</h3>
+      <div class="tw">
+        <table class="t">
+          <thead><tr><th>Habit</th><th>What it looks like</th></tr></thead>
+          <tbody>
+            <tr><td class="rl">Ask one question, then stop</td><td>New SDRs stack three questions and answer them themselves. Ask the one question and hold the silence. The pause is where the information comes from.</td></tr>
+            <tr><td class="rl">Never quote, never guess</td><td>The second you throw out a number you can't stand behind, you have set the agent up to lose. "That's exactly why I'm handing you off" is always the better answer.</td></tr>
+            <tr><td class="rl">Disposition before the next dial</td><td>Not at lunch, not at the end of the day. The call is not finished until IX says it is.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+<div class="foot">
+  <p><strong>Kasey Osman Insurance</strong> &mdash; internal sales training reference for the SDR seat. Language is a starting frame, not a mandated script; adapt to the client in front of you and stay inside carrier, state, and KOI compliance requirements at all times. Nothing here is a coverage representation or a rate quote. Confirm contact-consent status before any outbound text. Questions or corrections go to the Sales Lead.</p>
+</div>

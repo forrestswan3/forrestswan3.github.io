@@ -18,7 +18,7 @@ const idx = all.findIndex((x) => x.name === p.name);
 const next = all[(idx + 1) % all.length];
 const ld = {
   '@context': 'https://schema.org', '@type': 'SoftwareSourceCode', name: p.title, description: p.tagline,
-  codeRepository: p.repo, programmingLanguage: p.lang, keywords: p.topics.join(', '),
+  programmingLanguage: p.lang, keywords: p.topics.join(', '),
   author: { '@id': 'https://forrestswan3.github.io/#person' }, ...(p.shipped ? { dateModified: p.shipped } : {}),
 };
 ---
@@ -35,14 +35,15 @@ const ld = {
       <p class="lede">{p.tagline}</p>
       <div class="btn-row">
         {p.demo && <a class="btn btn--primary" href={p.demo.url}>{p.demo.label} <Icon name="arrow" /></a>}
-        <a class={p.demo ? 'btn btn--ghost' : 'btn btn--primary'} href={p.repo}><Icon name="github" /> Source on GitHub</a>
+        {p.source === 'private' && p.lang !== 'Operations' && p.lang !== 'Infrastructure' && <a class={p.demo ? 'btn btn--ghost' : 'btn btn--primary'} href={`mailto:forrestswan3@gmail.com?subject=${encodeURIComponent('Code walkthrough request: ' + p.title)}`}>Request a code walkthrough</a>}
         {p.page && <a class="btn btn--ghost" href={p.page}>Project page</a>}
       </div>
+      {p.source === 'private' && p.lang !== 'Operations' && p.lang !== 'Infrastructure' && <p class="small muted" style="margin-top:.75rem">Source code is private. Walkthroughs are available on request.</p>}
       {p.demo?.note && <p class="small muted" style="margin-top:.75rem">{p.demo.note}</p>}
 
       {p.preview && (
         <figure style="margin:2.5rem 0 0">
-          <img src={`/previews/${p.name}.webp`} alt={`Screenshot of ${p.title}`} width="960" height="600" style="border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)" />
+          <img src={`/previews/${p.preview_img}.webp`} alt={`Screenshot of ${p.title}`} width="960" height="600" style="border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)" />
         </figure>
       )}
 
