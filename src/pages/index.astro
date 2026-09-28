@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Mark from '../components/Mark.astro';
 import Icon from '../components/Icon.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import SocialLinks from '../components/SocialLinks.astro';
 import profile from '../data/profile.json';
 import portfolio from '../data/portfolio.json';
 import services from '../data/services.json';
@@ -27,12 +28,14 @@ const valueIcons = ['target', 'person', 'lotus'];
           <a class="btn btn--ghost" href="/resume/">Resume</a>
           <a class="btn btn--ghost" href="/contact/">Contact</a>
         </div>
+        <p class="social-label" id="find-me">Find me online</p>
+        <SocialLinks label="Find me online" />
       </div>
       <Mark class="hero-mark" />
     </div>
     <div class="wrap">
       <div class="proof" role="list" aria-label="At a glance">
-        <div role="listitem"><strong>{pub.length}</strong><span>internal systems built and documented</span></div>
+        <div role="listitem"><strong>{pub.length}</strong><span>projects delivered: software, infrastructure and operations</span></div>
         <div role="listitem"><strong>{inProd}</strong><span>in daily production</span></div>
         <div role="listitem"><strong>118</strong><span>passing automated tests across 3 apps (FileGate, training, exam prep)</span></div>
         <div role="listitem"><strong>2016</strong><span>started in Salesforce systems administration</span></div>

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
+import SocialLinks from '../components/SocialLinks.astro';
 import profile from '../data/profile.json';
 const [koi, avidyne, paramount] = profile.experience;
 ---
@@ -14,8 +15,10 @@ const [koi, avidyne, paramount] = profile.experience;
         <p class="muted">{profile.title}<br />{profile.employer} · {profile.location}</p>
         <div class="btn-row">
           <a class="btn btn--primary" href="/resume/">Resume</a>
-          <a class="btn btn--ghost" href={profile.social.linkedin}><Icon name="linkedin" /> LinkedIn</a>
+          <a class="btn btn--ghost" href="/contact/">Contact</a>
         </div>
+        <p class="social-label">Find me online</p>
+        <SocialLinks label="Find me online" />
       </div>
       <div class="prose">
         <p class="lede">I make operations legible: I write down how the work is supposed to flow, then build the systems that keep it flowing that way.</p>

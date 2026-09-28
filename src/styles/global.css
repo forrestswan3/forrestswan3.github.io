@@ -249,3 +249,15 @@ dialog.palette::backdrop { background: rgba(11,31,51,.55); }
   .skills { gap: 0 10pt !important; margin: 3pt 0 !important; }
   .resume-head h1 { margin-bottom: 1pt !important; }
 }
+
+/* Social profile links */
+.social { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .6rem; }
+.social a { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; transition: border-color .15s ease, color .15s ease, transform .15s ease, box-shadow .15s ease; }
+.social svg { width: 18px; height: 18px; color: var(--accent); flex: none; }
+.social--pills a { min-height: 44px; padding: .5rem 1rem .5rem .8rem; font-weight: 600; font-size: .92rem; }
+.social--icons a { width: 44px; height: 44px; justify-content: center; }
+.social a:hover { border-color: var(--accent-ui); color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow); }
+.social a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.social-label { margin: 1.75rem 0 .6rem; font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+.site-footer .social { order: 2; }
+@media (prefers-reduced-motion: reduce) { .social a { transition: none; } .social a:hover { transform: none; } }

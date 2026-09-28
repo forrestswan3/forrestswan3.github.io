@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import profile from '../data/profile.json';
 ---
-<Base title="Contact" description={`Contact ${profile.name} by email, phone or LinkedIn.`}>
+<Base title="Contact" description={`Contact ${profile.name} by email, phone, LinkedIn, GitHub or Linktree.`}>
   <section class="section">
     <div class="wrap split">
       <div>
@@ -14,7 +14,9 @@ import profile from '../data/profile.json';
       <ul class="link-list" style="margin:0;max-width:none">
         <li><a href={`mailto:${profile.email}`}><Icon name="mail" /><span>Email<span class="sub">{profile.email}</span></span></a></li>
         <li><a href={`tel:${profile.phone}`}><Icon name="phone" /><span>Phone<span class="sub">{profile.phoneDisplay}</span></span></a></li>
-        <li><a href={profile.social.linkedin}><Icon name="linkedin" /><span>LinkedIn<span class="sub">Message me on LinkedIn</span></span></a></li>
+        <li><a href={profile.social.linkedin} rel="me noopener" target="_blank"><Icon name="linkedin" /><span>LinkedIn<span class="sub">Message me on LinkedIn</span></span></a></li>
+        <li><a href={profile.social.github} rel="me noopener" target="_blank"><Icon name="github" /><span>GitHub<span class="sub">Open-source tools and profile</span></span></a></li>
+        <li><a href={profile.social.linktree} rel="me noopener" target="_blank"><Icon name="link" /><span>Linktree<span class="sub">All my links in one place</span></span></a></li>
         <li><a href="/forrest-swan.vcf" download><Icon name="card" /><span>Save contact card<span class="sub">vCard (.vcf) for phone or Outlook</span></span></a></li>
         <li><a href="/resume.pdf"><Icon name="file" /><span>Resume<span class="sub">PDF</span></span></a></li>
       </ul>
