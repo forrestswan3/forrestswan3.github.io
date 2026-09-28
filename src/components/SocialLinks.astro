@@ -1,0 +1,23 @@
+---
+// Social profile links (LinkedIn, GitHub, Linktree) in two styles:
+//   pills: icon + label, for page bodies     icons: round icon buttons, for the footer
+import Icon from './Icon.astro';
+import profile from '../data/profile.json';
+interface Props { variant?: 'pills' | 'icons'; label?: string }
+const { variant = 'pills', label = 'Social profiles' } = Astro.props;
+const items = [
+  { label: 'LinkedIn', icon: 'linkedin', href: profile.social.linkedin },
+  { label: 'GitHub', icon: 'github', href: profile.social.github },
+  { label: 'Linktree', icon: 'link', href: profile.social.linktree },
+];
+---
+<ul class={`social social--${variant}`} aria-label={label}>
+  {items.map((i) => (
+    <li>
+      <a href={i.href} rel="me noopener" target="_blank" aria-label={variant === 'icons' ? `${i.label} (opens in a new tab)` : undefined} title={variant === 'icons' ? i.label : undefined}>
+        <Icon name={i.icon} />
+        {variant === 'pills' && <span>{i.label}<span class="sr-only"> (opens in a new tab)</span></span>}
+      </a>
+    </li>
+  ))}
+</ul>

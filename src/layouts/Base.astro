@@ -7,6 +7,7 @@ import poppins600Url from '@fontsource/poppins/files/poppins-latin-600-normal.wo
 import poppins700Url from '@fontsource/poppins/files/poppins-latin-700-normal.woff2?url';
 import Mark from '../components/Mark.astro';
 import Icon from '../components/Icon.astro';
+import SocialLinks from '../components/SocialLinks.astro';
 import profile from '../data/profile.json';
 import portfolio from '../data/portfolio.json';
 
@@ -52,6 +53,7 @@ const paletteItems = [
   { label: 'Email Forrest', href: `mailto:${profile.email}`, group: 'Contact' },
   { label: 'LinkedIn', href: profile.social.linkedin, group: 'Contact' },
   { label: 'GitHub', href: profile.social.github, group: 'Contact' },
+  { label: 'Linktree', href: profile.social.linktree, group: 'Contact' },
 ];
 const latin = 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD';
 const fontCss = `@font-face{font-family:'Inter Variable';font-style:normal;font-display:optional;font-weight:100 900;src:url(${interUrl}) format('woff2');unicode-range:${latin}}`
@@ -135,11 +137,10 @@ const built = new Date(portfolio.updated + 'T12:00:00').toLocaleDateString('en-U
       </div>
       <nav aria-label="Footer">
         <a href="/links/">Links</a>
-        <a href={profile.social.linkedin}>LinkedIn</a>
-        <a href={profile.social.github}>GitHub</a>
         <a href="/resume.pdf">Resume PDF</a>
         <a href="/forrest-swan.vcf">vCard</a>
       </nav>
+      <SocialLinks variant="icons" label="Social profiles" />
     </div>
   </footer>
 
