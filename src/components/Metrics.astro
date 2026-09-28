@@ -1,0 +1,7 @@
+---
+interface Props { items: { value: string; label: string }[]; label?: string }
+const { items, label = 'Headline numbers' } = Astro.props;
+---
+<div class="proof proof--auto" role="list" aria-label={label}>
+  {items.map((m) => <div role="listitem"><strong>{m.value}</strong><span>{m.label}</span></div>)}
+</div>

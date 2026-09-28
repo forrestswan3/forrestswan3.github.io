@@ -10,6 +10,8 @@ import Icon from '../components/Icon.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import profile from '../data/profile.json';
 import portfolio from '../data/portfolio.json';
+import posts from '../data/posts.json';
+import oss from '../data/opensource.json';
 
 interface Props { title?: string; description?: string; jsonld?: object[] }
 const { title, description = `${profile.name}: ${profile.title} at ${profile.employer}. Systems architecture, automation and data governance. ${profile.brand.name}: ${profile.brand.tagline}`, jsonld = [] } = Astro.props;
@@ -18,6 +20,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const path = Astro.url.pathname;
 const nav = [
   { href: '/work/', label: 'Work' },
+  { href: '/writing/', label: 'Writing' },
   { href: '/about/', label: 'About' },
   { href: '/services/', label: 'Services' },
   { href: '/resume/', label: 'Resume' },
@@ -46,6 +49,9 @@ const paletteItems = [
   { label: 'Home', href: '/', group: 'Page' },
   ...nav.map((n) => ({ label: n.label, href: n.href, group: 'Page' })),
   { label: 'Case studies', href: '/work/#case-studies', group: 'Page' },
+  { label: 'Open source', href: '/work/#open-source', group: 'Page' },
+  ...posts.posts.map((p) => ({ label: p.title, href: `/writing/${p.slug}/`, group: 'Post' })),
+  ...oss.repos.map((r) => ({ label: `${r.title} (GitHub)`, href: r.url, group: 'Open source' })),
   { label: 'Links', href: '/links/', group: 'Page' },
   { label: 'Download resume (PDF)', href: '/resume.pdf', group: 'File' },
   { label: 'Save contact card (vCard)', href: '/forrest-swan.vcf', group: 'File' },

@@ -1,0 +1,48 @@
+---
+import Base from '../../layouts/Base.astro';
+import data from '../../data/posts.json';
+import portfolio from '../../data/portfolio.json';
+import oss from '../../data/opensource.json';
+export function getStaticPaths() {
+  return data.posts.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props as { p: any };
+const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const md = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/`([^`]+)`/g, '<code>$1</code>')
+  .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+  .replace(/\[([^\]]+)\]\(((?:https:\/\/|\/)[^)\s]*)\)/g, '<a href="$2">$1</a>');
+const project = portfolio.projects.find((x) => x.name === p.related?.project);
+const repo = oss.repos.find((r) => r.name === p.related?.repo);
+const ld = {
+  '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: p.summary,
+  datePublished: p.date, keywords: p.tags.join(', '), author: { '@id': 'https://forrestswan3.github.io/#person' },
+  mainEntityOfPage: `https://forrestswan3.github.io/writing/${p.slug}/`,
+};
+---
+<Base title={p.title} description={p.summary} jsonld={[ld]}>
+  <article class="section">
+    <div class="wrap" style="max-width:860px">
+      <p class="eyebrow"><a href="/writing/">Writing</a> / Post</p>
+      <h1 style="font-size:var(--step-3)">{p.title}</h1>
+      <div class="meta"><span class="pill"><time datetime={p.date}>{fmt(p.date)}</time></span>{p.tags.map((t: string) => <span class="pill">{t}</span>)}</div>
+      <p class="lede">{p.summary}</p>
+      <div class="prose">
+        {p.body.map((b: any) => (
+          b.h ? <h2>{b.h}</h2>
+          : b.ul ? <ul>{b.ul.map((i: string) => <li set:html={md(i)} />)}</ul>
+          : b.ol ? <ol>{b.ol.map((i: string) => <li set:html={md(i)} />)}</ol>
+          : <p set:html={md(b.p)} />
+        ))}
+      </div>
+      {(project || repo) && (
+        <aside class="notice" style="margin-top:2.5rem" aria-label="Related">
+          {project && <>Case study: <a href={`/work/${project.name}/`}>{project.title}</a></>}
+          {project && repo && <> · </>}
+          {repo && <>Open source: <a href={repo.url}>{repo.title}</a></>}
+        </aside>
+      )}
+      <p style="margin-top:2rem"><a href="/writing/">← All writing</a></p>
+    </div>
+  </article>
+</Base>

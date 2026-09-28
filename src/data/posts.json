@@ -1,0 +1,188 @@
+{
+  "posts": [
+    {
+      "slug": "vpn-throughput-root-cause",
+      "title": "Why a weekly file scan stalled over the VPN, and how the fix brought it to 24 minutes",
+      "date": "2026-09-27",
+      "summary": "A root cause analysis of a compliance scan that ran at about 178 items per second on the office LAN and about 7 over the VPN, and the four changes that made it reliable.",
+      "tags": [
+        "Root cause analysis",
+        "Networking",
+        "Python",
+        "Reliability"
+      ],
+      "related": {
+        "project": "filegate",
+        "repo": "naming-policy-validator"
+      },
+      "body": [
+        {
+          "p": "FileGate audits every item on the agency file share against the naming and records policy once a week, about 67,000 files and folders. The scan worked in testing, then stalled in production."
+        },
+        {
+          "h": "Measure before fixing"
+        },
+        {
+          "p": "The first step was a benchmark, not a code change. The same scan ran against the same share from two places: on the office LAN and over the WireGuard VPN. On the LAN it processed about **178 items per second**. Over the VPN it processed about **7**, roughly 25 times slower. At that rate the directory walk alone takes hours, and a dropped connection could cost the entire run."
+        },
+        {
+          "p": "The code wasn't slow; the network path was. A scan like this is dominated by small metadata operations: list a folder, read a name, check a timestamp. Each one is a network round trip, so extra latency is multiplied by every item in the tree. Bandwidth barely matters when no single request moves much data."
+        },
+        {
+          "h": "What changed"
+        },
+        {
+          "ul": [
+            "**A network gate.** The scan now checks that it is on the office network before it starts, and refuses to run over the VPN instead of limping along.",
+            "**Incremental commits.** Results are written in batches as the scan goes, so an interruption loses minutes of work instead of the whole run.",
+            "**Explicit failure states.** A run ends as completed, failed or interrupted, with the reason recorded. \"Still running\" is no longer a state that can last forever.",
+            "**The right host.** The weekly job moved to an always-on machine on the office network, so nobody's laptop has to stay awake and connected."
+          ]
+        },
+        {
+          "h": "Result"
+        },
+        {
+          "p": "The production scan on September 22, 2026 processed **67,240 items in 24 minutes with 0 errors**. The benchmark also changed a broader decision: bulk file workloads now run on-network by default, and the VPN is for people, not batch jobs."
+        },
+        {
+          "h": "Takeaways"
+        },
+        {
+          "ul": [
+            "Benchmark the same workload on both paths before touching code. The ratio tells you whether you have a software problem or a placement problem.",
+            "Metadata-heavy jobs are latency-bound. Move the job to the data rather than the data to the job.",
+            "Long-running jobs need checkpoints and a defined way to fail."
+          ]
+        },
+        {
+          "p": "The policy rule engine is available as a standalone open-source tool: [naming-policy-validator](https://github.com/forrestswan3/naming-policy-validator)."
+        }
+      ]
+    },
+    {
+      "slug": "windows-trailing-dots",
+      "title": "Windows silently drops trailing periods from folder names, and your naming policy should know",
+      "date": "2026-09-27",
+      "summary": "A naming-policy test passed on Linux and failed on Windows because \"Sample Bakery, LLC.\" quietly became \"Sample Bakery, LLC\". Here is why, and how to write rules that survive it.",
+      "tags": [
+        "Windows",
+        "Data governance",
+        "Testing",
+        "Cross-platform"
+      ],
+      "related": {
+        "project": "filegate",
+        "repo": "naming-policy-validator"
+      },
+      "body": [
+        {
+          "p": "Our records policy names business client folders with the legal suffix, as in `Sample Bakery, LLC.`, with a period after the suffix. When I published a clean-room version of the policy engine, the end-to-end test built a sample folder tree and audited it. It passed on Linux. On the Windows CI runner the same test failed: a business folder that should have been compliant was flagged."
+        },
+        {
+          "h": "What happened"
+        },
+        {
+          "p": "The folder was never created with the period. Windows path normalization trims trailing periods and spaces from the last segment of a path, so a request to create `Sample Bakery, LLC.` produces `Sample Bakery, LLC`. No error, no warning. Microsoft's own naming guidance says not to end a file or folder name with a space or a period, because even where the file system can store one, the Windows shell and user interface don't support it."
+        },
+        {
+          "p": "Prefixing a path with `\\\\?\\` skips normalization and can create the name as typed, but then staff get a folder that Explorer and many applications can't open or rename properly. That trades one problem for a worse one."
+        },
+        {
+          "h": "Why it matters beyond a test"
+        },
+        {
+          "p": "If your file server stores names created from a non-Windows system, or a policy demands a trailing period, people on Windows will either be unable to create compliant names or will end up with names that behave strangely. A compliance scan will then flag work that staff physically couldn't do right."
+        },
+        {
+          "h": "The fix"
+        },
+        {
+          "ul": [
+            "Make the period after a business suffix optional in the policy pattern: `(?:LLC|Inc|Corp|LLP|PLLC)\\.?`.",
+            "Add a note to the written policy so humans and code agree.",
+            "Run the test suite on Windows as well as Linux, because the operating system your users run is part of the specification."
+          ]
+        },
+        {
+          "h": "Takeaway"
+        },
+        {
+          "p": "A naming standard is only valid if it can be followed on the platforms people actually use. Test naming rules where the files get created, not just where the code runs."
+        },
+        {
+          "p": "References: Microsoft, [Naming files, paths, and namespaces](https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file). The validator with the Windows-safe example policy: [naming-policy-validator](https://github.com/forrestswan3/naming-policy-validator)."
+        }
+      ]
+    },
+    {
+      "slug": "wireguard-without-admin-rights",
+      "title": "Rolling out WireGuard to 20+ Windows users without giving anyone admin rights",
+      "date": "2026-09-27",
+      "summary": "WireGuard for Windows normally needs Administrator rights to manage tunnels. Its limited operator UI lets standard users connect and disconnect without ever seeing a key.",
+      "tags": [
+        "WireGuard",
+        "Windows",
+        "Least privilege",
+        "PowerShell"
+      ],
+      "related": {
+        "project": "pfsense-wireguard-vpn",
+        "repo": "wireguard-nonadmin-windows"
+      },
+      "body": [
+        {
+          "p": "When the agency moved to a pfSense firewall with a WireGuard VPN, the plan hit a familiar wall. WireGuard for Windows expects an administrator to manage tunnels, and the team's laptops run as standard users. The usual outcomes are both bad: hand out local admin rights, or have IT take a ticket every time someone needs to connect."
+        },
+        {
+          "h": "The built-in answer"
+        },
+        {
+          "p": "WireGuard for Windows has a documented, easy-to-miss option called the limited operator UI. With it turned on, members of the built-in Windows **Network Configuration Operators** group can start and stop tunnels from the WireGuard window. Their view has keys stripped, and they can't add, edit, import, export or delete configurations."
+        },
+        {
+          "h": "The rollout, per device"
+        },
+        {
+          "ul": [
+            "Install WireGuard (for example with `winget`).",
+            "Copy the device's own configuration into a folder only Administrators and SYSTEM can read.",
+            "Install the tunnel as a Windows service with `wireguard.exe /installtunnelservice`.",
+            "Set `HKLM\\Software\\WireGuard\\LimitedOperatorUI` to `1`.",
+            "Add the user to Network Configuration Operators, then have them sign out and back in once.",
+            "Delete the original configuration file, since it contains the private key."
+          ]
+        },
+        {
+          "h": "Security rules worth keeping"
+        },
+        {
+          "ul": [
+            "Use one key pair per device. Don't reuse a configuration across people or machines, and don't send configurations or keys by email or chat.",
+            "Prefer split tunneling, so only office networks go through the tunnel, unless you mean to route all traffic.",
+            "Revoke on the server. Removing the peer on the firewall belongs in the offboarding checklist, because deleting the app from a laptop doesn't revoke anything."
+          ]
+        },
+        {
+          "h": "Troubleshooting in the right order"
+        },
+        {
+          "ol": [
+            "Is the tunnel service running?",
+            "Did a handshake happen recently? If not, look at the endpoint, the keys, or whether the server lists this peer.",
+            "Is the target reachable? A handshake with no traffic points at allowed IPs, routing, NAT or firewall rules on the server side."
+          ]
+        },
+        {
+          "h": "Result"
+        },
+        {
+          "p": "More than 20 remote and in-office users connect on their own, nobody received local admin rights for it, and access is revoked in one place when someone leaves."
+        },
+        {
+          "p": "The scripts are open source: [wireguard-nonadmin-windows](https://github.com/forrestswan3/wireguard-nonadmin-windows). Reference: WireGuard for Windows [enterprise usage documentation](https://git.zx2c4.com/wireguard-windows/about/docs/enterprise.md)."
+        }
+      ]
+    }
+  ]
+}

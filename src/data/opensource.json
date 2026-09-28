@@ -1,0 +1,64 @@
+{
+  "repos": [
+    {
+      "name": "repo-privacy-scan",
+      "title": "repo-privacy-scan",
+      "lang": "Python",
+      "summary": "Finds staff names, internal hostnames, private IPs and secrets before a repository or website goes public, including in git history you thought you deleted.",
+      "topics": [
+        "Python",
+        "Data privacy",
+        "DevSecOps",
+        "Git history"
+      ],
+      "url": "https://github.com/forrestswan3/repo-privacy-scan",
+      "ci": "test.yml",
+      "related": null
+    },
+    {
+      "name": "naming-policy-validator",
+      "title": "naming-policy-validator",
+      "lang": "Python",
+      "summary": "Policy-as-code for shared drives: audits every folder and file name against a records policy written in JSON and scores compliance with a reason code per violation.",
+      "topics": [
+        "Python",
+        "Data governance",
+        "Policy as code",
+        "Records management"
+      ],
+      "url": "https://github.com/forrestswan3/naming-policy-validator",
+      "ci": "test.yml",
+      "related": "filegate"
+    },
+    {
+      "name": "wireguard-nonadmin-windows",
+      "title": "wireguard-nonadmin-windows",
+      "lang": "PowerShell",
+      "summary": "Rolls out a WireGuard VPN to Windows laptops where users don't have admin rights, and lets them turn the tunnel on and off without ever seeing a key.",
+      "topics": [
+        "PowerShell",
+        "WireGuard",
+        "Least privilege",
+        "Windows"
+      ],
+      "url": "https://github.com/forrestswan3/wireguard-nonadmin-windows",
+      "ci": "lint.yml",
+      "related": "pfsense-wireguard-vpn"
+    },
+    {
+      "name": "business-hours-sla",
+      "title": "business-hours-sla",
+      "lang": "Google Apps Script",
+      "summary": "Two Google Sheets custom functions for SLA reporting: business hours elapsed between two timestamps, and the due time for an SLA measured in business hours.",
+      "topics": [
+        "Google Apps Script",
+        "Google Sheets",
+        "SLA reporting",
+        "JavaScript"
+      ],
+      "url": "https://github.com/forrestswan3/business-hours-sla",
+      "ci": "test.yml",
+      "related": "apps-script-toolkit"
+    }
+  ]
+}

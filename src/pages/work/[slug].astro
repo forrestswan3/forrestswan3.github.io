@@ -2,6 +2,10 @@
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import portfolio from '../../data/portfolio.json';
+import oss from '../../data/opensource.json';
+import posts from '../../data/posts.json';
+import Flow from '../../components/Flow.astro';
+import Metrics from '../../components/Metrics.astro';
 
 export function getStaticPaths() {
   return portfolio.projects
@@ -13,6 +17,8 @@ const d = p.detail ?? {};
 const fmt = (s: string | null) => s ? new Date(s + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : null;
 // Render `code` spans from the source text safely.
 const md = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/`([^`]+)`/g, '<code>$1</code>');
+const repos = (d.oss ?? []).map((n: string) => oss.repos.find((r) => r.name === n)).filter(Boolean);
+const related = posts.posts.filter((x) => x.related?.project === p.name);
 const all = portfolio.projects.filter((x) => x.visibility === 'public');
 const idx = all.findIndex((x) => x.name === p.name);
 const next = all[(idx + 1) % all.length];
@@ -41,6 +47,8 @@ const ld = {
       {p.source === 'private' && p.lang !== 'Operations' && p.lang !== 'Infrastructure' && <p class="small muted" style="margin-top:.75rem">Source code is private. Walkthroughs are available on request.</p>}
       {p.demo?.note && <p class="small muted" style="margin-top:.75rem">{p.demo.note}</p>}
 
+      {d.metrics && <Metrics items={d.metrics} label={`${p.title}: headline numbers`} />}
+
       {p.preview && (
         <figure style="margin:2.5rem 0 0">
           <img src={`/previews/${p.preview_img}.webp`} alt={`Screenshot of ${p.title}`} width="960" height="600" style="border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)" />
@@ -56,8 +64,11 @@ const ld = {
         <div class="prose">
           {d.problem && (<><h2 style="margin-top:0">Problem</h2><p set:html={md(d.problem)} /></>)}
           {d.solution && (<><h2>Solution</h2><p set:html={md(d.solution)} /></>)}
+          {d.flow && (<><h2>Architecture</h2><Flow steps={d.flow} title={p.title} /></>)}
           {d.highlights && (<><h2>Results & highlights</h2><ul>{d.highlights.map((h: string) => <li set:html={md(h)} />)}</ul></>)}
           {d.notes && (<><h2>Notes</h2><ul>{d.notes.map((h: string) => <li set:html={md(h)} />)}</ul></>)}
+          {repos.length > 0 && (<><h2>Open-source companion</h2>{repos.map((r: any) => <p><a href={r.url}>{r.title}</a> on GitHub: {r.summary}</p>)}</>)}
+          {related.length > 0 && (<><h2>Related writing</h2><ul>{related.map((x) => <li><a href={`/writing/${x.slug}/`}>{x.title}</a></li>)}</ul></>)}
         </div>
       </div>
 
