@@ -7,6 +7,9 @@ import SocialLinks from '../components/SocialLinks.astro';
 import profile from '../data/profile.json';
 import portfolio from '../data/portfolio.json';
 import services from '../data/services.json';
+import oss from '../data/opensource.json';
+import posts from '../data/posts.json';
+import RepoCard from '../components/RepoCard.astro';
 
 const pub = portfolio.projects.filter((p) => p.visibility === 'public');
 const inProd = pub.filter((p) => p.status === 'In production').length;
@@ -66,7 +69,17 @@ const valueIcons = ['target', 'person', 'lotus'];
     </div>
   </section>
 
-  <section class="section section--alt" aria-labelledby="how-h">
+  <section class="section section--alt" aria-labelledby="oss-home-h">
+    <div class="wrap">
+      <p class="eyebrow">Open source</p>
+      <h2 id="oss-home-h">Code you can read today</h2>
+      <p class="lede">Production source stays private. These {oss.repos.length} public tools distill the same patterns, with tests on every push.</p>
+      <div class="grid grid--2" style="margin-top:2rem">{oss.repos.map((r) => <RepoCard r={r} />)}</div>
+      <div class="btn-row"><a class="btn btn--ghost" href="/writing/">Read the technical write-ups ({posts.posts.length}) <Icon name="arrow" /></a></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="how-h">
     <div class="wrap split">
       <div>
         <p class="eyebrow">How I work</p>
@@ -81,7 +94,7 @@ const valueIcons = ['target', 'person', 'lotus'];
     </div>
   </section>
 
-  <section class="section" aria-labelledby="svc-h">
+  <section class="section section--alt" aria-labelledby="svc-h">
     <div class="wrap">
       <p class="eyebrow">Services</p>
       <h2 id="svc-h">Need this kind of clarity in your business?</h2>

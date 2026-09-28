@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import data from '../../data/posts.json';
+const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const posts = [...data.posts].sort((a, b) => b.date.localeCompare(a.date));
+---
+<Base title="Writing" description="Technical write-ups by Forrest Swan III: root cause analyses, Windows and networking gotchas, and least-privilege rollouts from real agency IT work.">
+  <section class="section">
+    <div class="wrap" style="max-width:860px">
+      <p class="eyebrow">Writing</p>
+      <h1 style="font-size:var(--step-3)">Notes from the field</h1>
+      <p class="lede">Short technical write-ups from building and running agency systems. Each one is generic by design: no hostnames, addresses or client details.</p>
+      <div class="post-list">
+        {posts.map((p) => (
+          <article class="card">
+            <div class="meta"><span class="pill">{fmt(p.date)}</span>{p.tags.slice(0, 3).map((t) => <span class="pill">{t}</span>)}</div>
+            <h2 style="font-size:var(--step-1)"><a href={`/writing/${p.slug}/`}>{p.title}</a></h2>
+            <p>{p.summary}</p>
+            <div class="foot"><a href={`/writing/${p.slug}/`}>Read<span class="sr-only">: {p.title}</span></a></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

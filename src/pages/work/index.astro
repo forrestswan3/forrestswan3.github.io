@@ -2,6 +2,8 @@
 import Base from '../../layouts/Base.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import portfolio from '../../data/portfolio.json';
+import oss from '../../data/opensource.json';
+import RepoCard from '../../components/RepoCard.astro';
 
 const pub = portfolio.projects.filter((p) => p.visibility === 'public');
 const groups = [
@@ -22,7 +24,7 @@ const itemList = {
     <div class="wrap">
       <p class="eyebrow">Work</p>
       <h1 style="font-size:var(--step-3)">Projects & case studies</h1>
-      <p class="lede">{pub.length} systems built for day-to-day agency operations. Each has a written case study; source code is private and available for walkthrough on request.</p>
+      <p class="lede">{pub.length} projects across software, infrastructure and operations, each with a written case study. Production source code is private and available for walkthrough on request; <a href="#open-source">{oss.repos.length} companion tools are open source</a>.</p>
       <p class="notice">Case studies describe systems at a design level: staff names, IDs and network details are omitted, and no client data is shown.</p>
 
       {groups.map((g) => g.items.length > 0 && (
@@ -31,6 +33,13 @@ const itemList = {
           <div class="grid grid--3">{g.items.map((p) => <ProjectCard p={p} />)}</div>
         </section>
       ))}
+
+      <section id="open-source" aria-labelledby="oss-h" style="margin-top:4rem">
+        <p class="eyebrow">Open source</p>
+        <h2 id="oss-h" style="font-size:var(--step-2)">Public tools, MIT licensed</h2>
+        <p class="lede">Clean-room, organization-free versions of patterns from the projects above. Each repository has automated tests or linting on every push.</p>
+        <div class="grid grid--2" style="margin-top:1.5rem">{oss.repos.map((r) => <RepoCard r={r} />)}</div>
+      </section>
 
       <section id="case-studies" aria-labelledby="cs-h" style="margin-top:4rem">
         <p class="eyebrow">Documentation case studies</p>

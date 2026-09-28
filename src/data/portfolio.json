@@ -1,7 +1,7 @@
 {
   "owner": "forrestswan3",
   "author": "Forrest Swan III",
-  "updated": "2026-09-26",
+  "updated": "2026-09-27",
   "projects": [
     {
       "name": "license-exam-prep",
@@ -45,6 +45,46 @@
         "notes": [
           "Question content is original training material written to the public content outlines; it is not sourced from secured exam items.",
           "Logo files in `web/assets/` are neutral placeholders."
+        ],
+        "metrics": [
+          {
+            "value": "1,467",
+            "label": "outline-mapped questions"
+          },
+          {
+            "value": "6",
+            "label": "license tracks"
+          },
+          {
+            "value": "17",
+            "label": "automated tests passing"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Blueprints as data",
+            "note": "exam weights validated at startup"
+          },
+          {
+            "label": "Weighted assembler",
+            "note": "samples the item bank"
+          },
+          {
+            "label": "Desktop UI",
+            "note": "offline"
+          },
+          {
+            "label": "Attempt history",
+            "note": "SQLite"
+          },
+          {
+            "label": "Mastery projection",
+            "note": "recency-weighted"
+          },
+          {
+            "label": "Reports",
+            "note": "PDF + optional AI narrative"
+          }
         ]
       },
       "demo": null,
@@ -96,6 +136,42 @@
         "notes": [
           "`content/` (training videos and decks) and `config/roster.json` are not in the repo; the roster in `koi_training/roster.py` is fictional.",
           "`web-portal/` holds a later browser-based variant (single HTML page + PHP roster API) and its Playwright end-to-end test."
+        ],
+        "metrics": [
+          {
+            "value": "39",
+            "label": "automated tests passing"
+          },
+          {
+            "value": "1",
+            "label": "Playwright end-to-end suite (web variant)"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Import wizard",
+            "note": "slides + draft quiz"
+          },
+          {
+            "label": "Module folders",
+            "note": "schema-validated"
+          },
+          {
+            "label": "Video + search UI",
+            "note": "local media server"
+          },
+          {
+            "label": "Assessment engine",
+            "note": "randomized draws"
+          },
+          {
+            "label": "Remediation gate",
+            "note": "rewatch before retake"
+          },
+          {
+            "label": "Manager report",
+            "note": "PDF by email, retry queue"
+          }
         ]
       },
       "demo": null,
@@ -135,6 +211,53 @@
         ],
         "notes": [
           "Completed: in production since 2026-09-23. Compliance-rate improvement will be published once rename cycles begin."
+        ],
+        "metrics": [
+          {
+            "value": "67,240",
+            "label": "items per production scan"
+          },
+          {
+            "value": "24 min",
+            "label": "full scan run time"
+          },
+          {
+            "value": "0",
+            "label": "errors (2026-09-22)"
+          },
+          {
+            "value": "62",
+            "label": "automated tests passing"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Weekly schedule",
+            "note": "always-on host on the office network"
+          },
+          {
+            "label": "Network gate",
+            "note": "refuses to run off-LAN"
+          },
+          {
+            "label": "File-share scan",
+            "note": "~67,000 items"
+          },
+          {
+            "label": "Policy as code",
+            "note": "versioned JSON ruleset"
+          },
+          {
+            "label": "Incremental commits",
+            "note": "results database, explicit failure states"
+          },
+          {
+            "label": "Report + review queue",
+            "note": "humans decide what can't be derived"
+          }
+        ],
+        "oss": [
+          "naming-policy-validator"
         ]
       },
       "page": null,
@@ -169,6 +292,42 @@
           "Built two-way Slack integration within platform constraints (polling, since Apps Script can't read Slack signing headers), with every write going through one controlled path",
           "Standardized SLA visibility: one Past Due flag measured in days, plus an end-of-day digest",
           "Regression suites recorded 0 failures at v2.10"
+        ],
+        "metrics": [
+          {
+            "value": "0",
+            "label": "regression failures at v2.10"
+          },
+          {
+            "value": "2-way",
+            "label": "Slack integration"
+          },
+          {
+            "value": "1",
+            "label": "Past Due flag, measured in days"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Notice intake",
+            "note": "underwriting notices"
+          },
+          {
+            "label": "LLM triage",
+            "note": "AI-assisted classification"
+          },
+          {
+            "label": "Web work board",
+            "note": "Google Apps Script"
+          },
+          {
+            "label": "Two-way Slack",
+            "note": "polling sync, one write path"
+          },
+          {
+            "label": "SLA tracking",
+            "note": "Past Due flag + end-of-day digest"
+          }
         ]
       },
       "page": null,
@@ -202,6 +361,34 @@
           "Pure, unit-tested scoring and sampling functions",
           "Designed the database schema and migrations (000–003), including a unified issue model for scheduled audits and reactive intake",
           "Built for a hard constraint: the carrier portal allows no automation, so about 30–40% of checks stay human-in-the-loop by design"
+        ],
+        "metrics": [
+          {
+            "value": "4",
+            "label": "database migrations (000–003)"
+          },
+          {
+            "value": "30–40%",
+            "label": "of checks human-in-the-loop by design"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Statistical sampling",
+            "note": "pure, unit-tested"
+          },
+          {
+            "label": "Rubric scoring",
+            "note": "human + automated checks"
+          },
+          {
+            "label": "Unified issue model",
+            "note": "scheduled + reactive"
+          },
+          {
+            "label": "BI dashboards",
+            "note": "trend and accountability"
+          }
         ]
       },
       "page": null,
@@ -234,6 +421,41 @@
           "Assessment generator: builds five auto-graded Google Forms with shuffled choices and per-item feedback",
           "Spend tracker: CSV import, formula repair and a custom menu for a multi-source spend workbook",
           "Quick-Launch Hub: a web-app portal embedded in the team intranet (v1.2, 2026-09-22)"
+        ],
+        "metrics": [
+          {
+            "value": "4",
+            "label": "automations in the suite"
+          },
+          {
+            "value": "10 min",
+            "label": "KPI refresh interval"
+          },
+          {
+            "value": "5",
+            "label": "auto-graded Google Forms generated"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Google Sheets data",
+            "note": "rosters, KPIs, spend"
+          },
+          {
+            "label": "Apps Script triggers",
+            "note": "10-minute refresh"
+          },
+          {
+            "label": "Business-hours math",
+            "note": "Mon–Fri, 8 AM–6 PM"
+          },
+          {
+            "label": "Outputs",
+            "note": "KPI dashboards, Forms, team portal"
+          }
+        ],
+        "oss": [
+          "business-hours-sla"
         ]
       },
       "page": null,
@@ -280,6 +502,42 @@
         "diagram": "flowchart LR\n  PPTX[Deck] --> PNG[LibreOffice → pdftoppm<br/>slide PNGs]\n  SCR[docs/narration-*.md] --> SEG[src/segments_tts.json]\n  SEG --> TTS[src/tts_generate.py<br/>edge-tts per segment]\n  PNG --> FF[ffmpeg segment encode]\n  TTS --> FF\n  FF --> MP4[Video MP4]\n  MP4 --> PL[players/player-*.html<br/>time-synced link overlays]",
         "notes": [
           "Voice used: en-US-AndrewMultilingualNeural at -4% rate."
+        ],
+        "metrics": [
+          {
+            "value": "6",
+            "label": "training videos shipped"
+          },
+          {
+            "value": "2 days",
+            "label": "from first to last video"
+          },
+          {
+            "value": "3",
+            "label": "software rollouts supported"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Slide deck",
+            "note": "exported to images"
+          },
+          {
+            "label": "Narration script",
+            "note": "per-segment text"
+          },
+          {
+            "label": "Text-to-speech",
+            "note": "pronunciation rules"
+          },
+          {
+            "label": "ffmpeg encode",
+            "note": "segments validated with ffprobe"
+          },
+          {
+            "label": "MP4 + HTML player",
+            "note": "time-synced clickable links"
+          }
         ]
       },
       "demo": null,
@@ -321,6 +579,34 @@
         "diagram": "flowchart LR\n  T[src/tokens.css] --> J[src/theme.js]\n  T --> TW[tailwind.config.js]\n  T --> C[src/components/*.jsx]\n  C --> P[preview.html]",
         "notes": [
           "Brand logo URLs were replaced with a placeholder."
+        ],
+        "metrics": [
+          {
+            "value": "10",
+            "label": "reusable React components"
+          },
+          {
+            "value": "WCAG AA",
+            "label": "contrast rules built into tokens"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Design tokens",
+            "note": "CSS variables"
+          },
+          {
+            "label": "Theme + Tailwind config",
+            "note": "generated from tokens"
+          },
+          {
+            "label": "React components",
+            "note": "10, barrel-exported"
+          },
+          {
+            "label": "Preview page",
+            "note": "visual QA"
+          }
         ]
       },
       "demo": {
@@ -364,6 +650,26 @@
         "diagram": "flowchart LR\n  DATA[Talk-path data in JS] --> UI[Widget UI<br/>search + steps]\n  UI --> WP[WordPress page via Elementor or WPCode]",
         "notes": [
           "Staff routing names in the data are fictional."
+        ],
+        "metrics": [
+          {
+            "value": "3",
+            "label": "delivery formats for the CMS"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Talk-path data",
+            "note": "situations and steps"
+          },
+          {
+            "label": "Widget UI",
+            "note": "search + guided steps"
+          },
+          {
+            "label": "WordPress page",
+            "note": "Elementor or WPCode"
+          }
         ]
       },
       "demo": {
@@ -411,6 +717,45 @@
         ],
         "notes": [
           "Network specifics (addresses, interfaces, peers) are intentionally omitted."
+        ],
+        "metrics": [
+          {
+            "value": "20+",
+            "label": "remote and in-office users"
+          },
+          {
+            "value": "$0",
+            "label": "VPN licensing cost (WireGuard)"
+          },
+          {
+            "value": "~25×",
+            "label": "LAN vs VPN file-scan throughput, measured"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Staff laptop",
+            "note": "tunnel runs as a Windows service"
+          },
+          {
+            "label": "Non-admin toggle",
+            "note": "limited operator UI, no keys shown"
+          },
+          {
+            "label": "Encrypted WireGuard tunnel",
+            "note": "remote access"
+          },
+          {
+            "label": "pfSense firewall",
+            "note": "perimeter + VPN endpoint"
+          },
+          {
+            "label": "Office resources",
+            "note": "file storage, printing, internal tools"
+          }
+        ],
+        "oss": [
+          "wireguard-nonadmin-windows"
         ]
       },
       "repo": null,
@@ -458,6 +803,42 @@
         ],
         "notes": [
           "Share names, addresses and accounts are intentionally omitted."
+        ],
+        "metrics": [
+          {
+            "value": "~67,000",
+            "label": "client-file items consolidated"
+          },
+          {
+            "value": "RAID 1",
+            "label": "mirrored storage"
+          },
+          {
+            "value": "3",
+            "label": "platforms evaluated"
+          },
+          {
+            "value": "Quarterly",
+            "label": "backup cadence"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Staff + VPN users",
+            "note": "least-privilege access"
+          },
+          {
+            "label": "NAS",
+            "note": "RAID 1 mirror"
+          },
+          {
+            "label": "Weekly compliance scan",
+            "note": "service account, file sharing only"
+          },
+          {
+            "label": "Quarterly backup",
+            "note": "scheduled cadence"
+          }
         ]
       },
       "repo": null,
@@ -496,6 +877,30 @@
         ],
         "notes": [
           "In progress. Next milestone: remote staff setup and testing, then a training SOP and Core Process module."
+        ],
+        "metrics": [
+          {
+            "value": "3",
+            "label": "setup steps for staff (guide v1.1)"
+          },
+          {
+            "value": "Aug 2026",
+            "label": "live for shared office printers"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Remote laptop",
+            "note": "connect the VPN"
+          },
+          {
+            "label": "Print server",
+            "note": "jobs queue while offline"
+          },
+          {
+            "label": "Office printers",
+            "note": "release on reconnect"
+          }
         ]
       },
       "repo": null,
@@ -540,7 +945,39 @@
           "EOS / Ninety.io",
           "Systems ledger"
         ],
-        "notes": []
+        "notes": [],
+        "metrics": [
+          {
+            "value": "81",
+            "label": "tools in the systems ledger"
+          },
+          {
+            "value": "41",
+            "label": "as System Administrator"
+          },
+          {
+            "value": "1 day",
+            "label": "IT request response SLA"
+          }
+        ],
+        "flow": [
+          {
+            "label": "AI support chatbot",
+            "note": "first line"
+          },
+          {
+            "label": "IT request form",
+            "note": "1-business-day SLA"
+          },
+          {
+            "label": "Weekly procurement",
+            "note": "standard intake"
+          },
+          {
+            "label": "Device lifecycle",
+            "note": "image, deploy, wipe, recycle or donate"
+          }
+        ]
       },
       "repo": null,
       "source": "private",
@@ -579,7 +1016,35 @@
           "PT label maker",
           "Spreadsheet register on the NAS"
         ],
-        "notes": []
+        "notes": [],
+        "metrics": [
+          {
+            "value": "150+",
+            "label": "tagged assets"
+          },
+          {
+            "value": "1",
+            "label": "central asset register"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Tag",
+            "note": "numbered asset code + label"
+          },
+          {
+            "label": "Register",
+            "note": "central spreadsheet"
+          },
+          {
+            "label": "Assign",
+            "note": "remote-equipment register"
+          },
+          {
+            "label": "Reclaim",
+            "note": "return-to-pool drives"
+          }
+        ]
       },
       "repo": null,
       "source": "private",
@@ -618,7 +1083,35 @@
           "Stamps.com",
           "Pitney Bowes (previous)"
         ],
-        "notes": []
+        "notes": [],
+        "metrics": [
+          {
+            "value": "0",
+            "label": "postage reconciliation discrepancies"
+          },
+          {
+            "value": "Apr 2026",
+            "label": "migrated to Zebra ZD421 + Shippo"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Package + scale",
+            "note": "in-office station"
+          },
+          {
+            "label": "Zebra ZD421",
+            "note": "thermal labels"
+          },
+          {
+            "label": "Shippo",
+            "note": "multi-carrier rates and labels"
+          },
+          {
+            "label": "Reconcile",
+            "note": "against card statements"
+          }
+        ]
       },
       "repo": null,
       "source": "private",
@@ -656,7 +1149,21 @@
           "CyberPower CP1500PFCLCD",
           "Daran 89.6 Wh LiFePO4 power station"
         ],
-        "notes": []
+        "notes": [],
+        "metrics": [
+          {
+            "value": "1 per desk",
+            "label": "CyberPower UPS in the office"
+          },
+          {
+            "value": "89.6 Wh",
+            "label": "LiFePO4 station per remote employee"
+          },
+          {
+            "value": "5",
+            "label": "fire-code-compliant install options"
+          }
+        ]
       },
       "repo": null,
       "source": "private",

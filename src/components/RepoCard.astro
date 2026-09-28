@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+interface Props { r: any; headingLevel?: 'h2' | 'h3' }
+const { r, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+---
+<article class="card repo-card">
+  <div class="meta"><span class="pill">Open source</span><span class="pill">{r.lang}</span><span class="pill">MIT</span></div>
+  <H><a href={r.url}><Icon name="github" class="repo-i" /> {r.title}</a></H>
+  <p>{r.summary}</p>
+  <ul class="tags" aria-label="Topics">{r.topics.map((t: string) => <li>{t}</li>)}</ul>
+  <div class="foot">
+    <a href={r.url}>Source on GitHub<span class="sr-only">: {r.title}</span></a>
+    <a href={`${r.url}/actions/workflows/${r.ci}`}>CI runs<span class="sr-only">: {r.title}</span></a>
+    {r.related && <a href={`/work/${r.related}/`}>Related case study<span class="sr-only">: {r.title}</span></a>}
+  </div>
+</article>

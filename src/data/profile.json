@@ -13,14 +13,32 @@
     "name": "SystemSerenity",
     "tagline": "Operational clarity at scale.",
     "pillars": [
-      { "title": "Trusted", "text": "Dependable systems you can count on." },
-      { "title": "Connected", "text": "Workflows and data that work together." },
-      { "title": "Optimized", "text": "Built to scale with your business." }
+      {
+        "title": "Trusted",
+        "text": "Dependable systems you can count on."
+      },
+      {
+        "title": "Connected",
+        "text": "Workflows and data that work together."
+      },
+      {
+        "title": "Optimized",
+        "text": "Built to scale with your business."
+      }
     ],
     "values": [
-      { "title": "Clarity", "text": "Clear processes. Clear direction." },
-      { "title": "Confidence", "text": "Make better decisions with the right information." },
-      { "title": "Serenity", "text": "Less chaos. Less stress. More time to lead." }
+      {
+        "title": "Clarity",
+        "text": "Clear processes. Clear direction."
+      },
+      {
+        "title": "Confidence",
+        "text": "Make better decisions with the right information."
+      },
+      {
+        "title": "Serenity",
+        "text": "Less chaos. Less stress. More time to lead."
+      }
     ]
   },
   "summary": "Promoted from Licensed Sales Producer to Technical Solutions Manager to Agency Operations & Systems Manager at an Allstate agency, owning systems architecture, automation, data governance, and cybersecurity.",
@@ -30,12 +48,27 @@
     "linktree": "https://linktr.ee/forrestswan3"
   },
   "skills": [
-    "Information Systems Planning", "Software-as-a-Service (SaaS)", "Customer Relationship Managers",
-    "Systems Administration", "Salesforce Implementations", "Data Policies",
-    "SQL/SOQL", "Microsoft Excel", "VBA Macros",
-    "Automation Strategies", "Workflow Development", "Project Management",
-    "Communication", "WordPress", "Critical-Thinking",
-    "Initiative", "Adaptability", "Creativity"
+    "Information Systems Planning",
+    "Software-as-a-Service (SaaS)",
+    "Customer Relationship Managers",
+    "Systems Administration",
+    "Salesforce Implementations",
+    "Data Policies",
+    "SQL/SOQL",
+    "Microsoft Excel",
+    "VBA Macros",
+    "Automation Strategies",
+    "Workflow Development",
+    "Project Management",
+    "Communication",
+    "WordPress",
+    "Critical-Thinking",
+    "Initiative",
+    "Adaptability",
+    "Creativity",
+    "Python & Google Apps Script",
+    "Network Security (pfSense, WireGuard)",
+    "IT Asset Management"
   ],
   "experience": [
     {
@@ -47,9 +80,13 @@
       "startISO": "2024-06",
       "summary": "Promoted from Licensed Sales Producer to Technical Solutions Manager to Agency Operations & Systems Manager at an Allstate agency, owning systems architecture, automation, data governance, and cybersecurity.",
       "bullets": [
-        "Built and documented 9 internal systems, 2 in daily production, including a file-naming compliance auditor.",
+        "Built and documented 9 internal software systems and led 8 infrastructure and IT operations projects; 2 systems run in daily production.",
+        "Built the agency's IT function: FY2026 technology budget, IT service desk with a 1-business-day SLA, and a systems ledger of 81 tools (System Administrator for 41).",
+        "Deployed a pfSense firewall and WireGuard VPN for 20+ users without granting local admin rights, and a RAID 1 NAS that became the system of record for client files.",
+        "Led a root cause analysis of a stalled compliance scan (about 178 vs 7 items/s, LAN vs VPN); the rebuilt job processes 67,240 items in 24 minutes with 0 errors.",
         "Launched AI-assisted underwriting-notice triage with a web board and two-way Slack updates for agents.",
-        "Developed offline Windows apps for staff training and license exam prep, backed by 56 passing automated tests."
+        "Developed offline Windows apps for staff training and license exam prep, backed by 56 passing automated tests.",
+        "Published 4 open-source tools on GitHub (MIT): a repository privacy scanner, a naming-policy validator, a business-hours SLA library and a non-admin WireGuard installer."
       ]
     },
     {

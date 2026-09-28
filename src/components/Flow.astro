@@ -1,0 +1,11 @@
+---
+// Design-level architecture flow, rendered as an accessible ordered list (no client JS, no images).
+interface Props { steps: { label: string; note?: string }[]; title: string }
+const { steps, title } = Astro.props;
+---
+<figure class="flow-fig">
+  <ol class="flow" aria-label={`${title}: architecture flow`}>
+    {steps.map((s) => <li><strong>{s.label}</strong>{s.note && <span>{s.note}</span>}</li>)}
+  </ol>
+  <figcaption class="small muted">Design-level view. Hostnames, addresses and account details are intentionally omitted.</figcaption>
+</figure>
