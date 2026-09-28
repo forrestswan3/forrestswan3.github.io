@@ -1,7 +1,7 @@
 {
   "owner": "forrestswan3",
   "author": "Forrest Swan III",
-  "updated": "2026-09-27",
+  "updated": "2026-09-28",
   "projects": [
     {
       "name": "license-exam-prep",
@@ -85,6 +85,47 @@
             "label": "Reports",
             "note": "PDF + optional AI narrative"
           }
+        ],
+        "impact": "A self-serve exam-prep product built to shorten the path from new hire to licensed, revenue-producing agent. It runs on locked-down, carrier-managed workstations with no installs, add-ins or cloud services, and gives each learner a projected score and per-domain analytics.",
+        "competencies": [
+          {
+            "skill": "Product ownership",
+            "evidence": "Owned requirements through deployment of a single-file Windows desktop application."
+          },
+          {
+            "skill": "Software engineering (Python)",
+            "evidence": "PyWebView interface, SQLite attempt history, ReportLab PDF reporting and PyInstaller packaging."
+          },
+          {
+            "skill": "Data-driven design",
+            "evidence": "Exam blueprints stored as data and validated at startup; blueprint-weighted sampling across six license tracks and a 1,467-question bank."
+          },
+          {
+            "skill": "Learning analytics",
+            "evidence": "Projected-score gauge and recency-weighted mastery by content domain."
+          },
+          {
+            "skill": "AI integration & security",
+            "evidence": "Optional Anthropic API study narratives, with the API key DPAPI-encrypted at rest and a deterministic offline fallback."
+          },
+          {
+            "skill": "Quality assurance",
+            "evidence": "17 automated tests passing."
+          }
+        ],
+        "keywords": [
+          "Product Development",
+          "Product Ownership",
+          "Python",
+          "Desktop Application",
+          "SQLite",
+          "LLM Integration",
+          "EdTech",
+          "Learning Analytics",
+          "Insurance Licensing",
+          "Test Automation",
+          "PyInstaller",
+          "Data Security"
         ]
       },
       "demo": null,
@@ -172,6 +213,43 @@
             "label": "Manager report",
             "note": "PDF by email, retry queue"
           }
+        ],
+        "impact": "Standardized onboarding into one measurable program: consistent content, enforced mastery and automatic manager reporting, so training accountability no longer depends on manual follow-up.",
+        "competencies": [
+          {
+            "skill": "Learning management system (LMS) design",
+            "evidence": "Content-driven modules (video, slides, chapters, question bank, Core Process document) published through an import wizard with no code changes."
+          },
+          {
+            "skill": "Assessment engineering",
+            "evidence": "Randomized round-robin draws with shuffled questions and answers, plus a server-enforced remediation gate before retakes."
+          },
+          {
+            "skill": "Enterprise integration",
+            "evidence": "Automated manager score reports through Outlook COM, working around a tenant that blocks SMTP AUTH, with a SQLite retry queue."
+          },
+          {
+            "skill": "Search & document viewing",
+            "evidence": "In-app PDF.js viewer and search across narration, slides, documents and links."
+          },
+          {
+            "skill": "Test automation",
+            "evidence": "39 automated tests passing, plus a Playwright end-to-end suite for the web variant."
+          }
+        ],
+        "keywords": [
+          "Learning Management System (LMS)",
+          "E-Learning",
+          "Employee Onboarding",
+          "Training & Development",
+          "Instructional Design",
+          "Assessment Design",
+          "Python",
+          "SQLite",
+          "Microsoft Outlook Automation",
+          "Playwright",
+          "Test Automation",
+          "Workflow Automation"
         ]
       },
       "demo": null,
@@ -258,6 +336,45 @@
         ],
         "oss": [
           "naming-policy-validator"
+        ],
+        "impact": "Turned an unenforced records policy into a measurable data-governance program. FileGate gives leadership an auditable compliance baseline across about 67,000 client files, targets the E&O exposure of misfiled records, and automates document intake with LLM field extraction while keeping humans in the loop for anything uncertain.",
+        "competencies": [
+          {
+            "skill": "Data governance & compliance",
+            "evidence": "Encoded the agency's records and naming policy as a versioned, machine-readable ruleset with per-employee compliance baselines and reversible renames."
+          },
+          {
+            "skill": "AI / LLM integration",
+            "evidence": "Automated document intake with Claude API field extraction (client, document type, address), with a human review queue for anything unmatched."
+          },
+          {
+            "skill": "Root cause analysis & performance tuning",
+            "evidence": "Diagnosed a roughly 25× throughput gap (LAN vs VPN) and re-architected the job with a network gate, incremental commits and explicit failure states."
+          },
+          {
+            "skill": "Software quality",
+            "evidence": "62 automated tests passing and a 388,000-row database migration verified before go-live."
+          },
+          {
+            "skill": "Change management & training",
+            "evidence": "Drove adoption with a 33-slide training deck, two narrated videos, a 24-question assessment and two SOPs."
+          }
+        ],
+        "keywords": [
+          "Data Governance",
+          "Records Management",
+          "Compliance Automation",
+          "Policy as Code",
+          "Python",
+          "LLM Integration (Claude API)",
+          "Intelligent Document Processing",
+          "Human-in-the-Loop AI",
+          "SQLite",
+          "Root Cause Analysis",
+          "Performance Tuning",
+          "Test Automation",
+          "Change Management",
+          "E&O Risk Reduction"
         ]
       },
       "page": null,
@@ -328,6 +445,43 @@
             "label": "SLA tracking",
             "note": "Past Due flag + end-of-day digest"
           }
+        ],
+        "impact": "Replaced an email inbox with an accountable, SLA-driven workflow. Every carrier underwriting notice becomes a tracked work item with an owner and a due date, protecting policy retention and giving leadership real-time visibility into what is past due.",
+        "competencies": [
+          {
+            "skill": "Workflow automation",
+            "evidence": "Built an intake-to-resolution pipeline in Google Apps Script that turns underwriting emails into tracked work items on a central board."
+          },
+          {
+            "skill": "AI / LLM integration",
+            "evidence": "The Claude API extracts structured fields from each notice before it reaches the board."
+          },
+          {
+            "skill": "Systems integration (Slack API)",
+            "evidence": "Two-way Slack sync (DMs, a daily digest and commands from threads) with every write going through one controlled path."
+          },
+          {
+            "skill": "SLA management & reporting",
+            "evidence": "One Past Due flag measured in days, plus an end-of-day digest for accountability."
+          },
+          {
+            "skill": "Iterative delivery & QA",
+            "evidence": "Shipped through board v2.10.5 and engine v1.4, backfilled legacy notices, and recorded 0 regression failures at v2.10."
+          }
+        ],
+        "keywords": [
+          "Workflow Automation",
+          "Google Apps Script",
+          "LLM Integration (Claude API)",
+          "Slack API",
+          "Systems Integration",
+          "SLA Tracking",
+          "Kanban Work Board",
+          "Process Improvement",
+          "Insurance Operations",
+          "Underwriting",
+          "Client Retention",
+          "Regression Testing"
         ]
       },
       "page": null,
@@ -389,6 +543,43 @@
             "label": "BI dashboards",
             "note": "trend and accountability"
           }
+        ],
+        "impact": "Brings defensible, repeatable quality assurance to policy-file audits: statistically sampled, rubric-scored and trended over time, on a zero-license-cost, self-hosted stack.",
+        "competencies": [
+          {
+            "skill": "Quality assurance & compliance",
+            "evidence": "Seeded stratified sampling and a versioned YAML scoring rubric make audit results defensible and repeatable."
+          },
+          {
+            "skill": "Data modeling",
+            "evidence": "Database schema and migrations (000–003), including a unified issue model for scheduled audits and reactive intake."
+          },
+          {
+            "skill": "Solution architecture",
+            "evidence": "Self-hosted Docker stack: n8n workflows, PostgreSQL, Metabase dashboards and Jotform checklists."
+          },
+          {
+            "skill": "Business intelligence",
+            "evidence": "Leadership dashboards for trend and accountability reporting."
+          },
+          {
+            "skill": "Human-in-the-loop design",
+            "evidence": "About 30–40% of checks stay manual by design, because the carrier portal allows no automation."
+          }
+        ],
+        "keywords": [
+          "Quality Assurance",
+          "Compliance Auditing",
+          "Statistical Sampling",
+          "Data Modeling",
+          "PostgreSQL",
+          "Docker",
+          "n8n",
+          "Metabase",
+          "Business Intelligence",
+          "Python",
+          "Solution Architecture",
+          "Cost Optimization"
         ]
       },
       "page": null,
@@ -456,6 +647,42 @@
         ],
         "oss": [
           "business-hours-sla"
+        ],
+        "impact": "Replaced manual reporting and scattered tools with automations inside the platform the agency is permitted to automate, cutting manual work in KPI reporting, training and finance tracking.",
+        "competencies": [
+          {
+            "skill": "KPI & SLA reporting",
+            "evidence": "Business-hours SLA metrics (Mon–Fri, 8 AM–6 PM), generated weekly roster rows and a 10-minute refresh."
+          },
+          {
+            "skill": "Google Workspace automation",
+            "evidence": "Generates five auto-graded Google Forms with shuffled choices and per-item feedback."
+          },
+          {
+            "skill": "Finance operations",
+            "evidence": "CSV import, formula repair and a custom menu for a multi-source spend workbook."
+          },
+          {
+            "skill": "Internal tools & web apps",
+            "evidence": "Quick-Launch Hub web-app portal embedded in the team intranet."
+          },
+          {
+            "skill": "Working within constraints",
+            "evidence": "The carrier-managed Microsoft 365 environment blocks macros and add-ins, so automation runs in Google Workspace."
+          }
+        ],
+        "keywords": [
+          "Google Apps Script",
+          "Google Workspace",
+          "Workflow Automation",
+          "KPI Reporting",
+          "SLA Tracking",
+          "Dashboards",
+          "Google Forms",
+          "Spend Tracking",
+          "Web App Development",
+          "JavaScript",
+          "Process Improvement"
         ]
       },
       "page": null,
@@ -538,6 +765,41 @@
             "label": "MP4 + HTML player",
             "note": "time-synced clickable links"
           }
+        ],
+        "impact": "Made training content self-serve and repeatable: six narrated videos shipped in two days across three software rollouts, with no hand-recorded voiceovers and clickable links inside the video.",
+        "competencies": [
+          {
+            "skill": "Content automation",
+            "evidence": "Scripted pipeline from slide deck and narration script to a finished, narrated MP4."
+          },
+          {
+            "skill": "AI text-to-speech",
+            "evidence": "Neural text-to-speech per segment, with pronunciation rules for acronyms and product names."
+          },
+          {
+            "skill": "Media engineering",
+            "evidence": "FFmpeg assembly, with every segment validated by ffprobe before it is used."
+          },
+          {
+            "skill": "Interactive learning",
+            "evidence": "HTML player with time-synced, clickable hotspots placed automatically from slide-shape positions (python-pptx)."
+          },
+          {
+            "skill": "Change management",
+            "evidence": "Supported three software rollouts with ready-to-watch training."
+          }
+        ],
+        "keywords": [
+          "Content Automation",
+          "Video Production",
+          "Text-to-Speech (TTS)",
+          "FFmpeg",
+          "Python",
+          "Instructional Design",
+          "E-Learning",
+          "Interactive Video",
+          "Software Rollout",
+          "Quality Control"
         ]
       },
       "demo": null,
@@ -607,6 +869,40 @@
             "label": "Preview page",
             "note": "visual QA"
           }
+        ],
+        "impact": "Gives every web property one source of truth for brand and accessibility, so pages stay consistent and meet WCAG AA contrast by default.",
+        "competencies": [
+          {
+            "skill": "Design systems",
+            "evidence": "Palette, type scale, spacing, radius and elevation defined as design tokens."
+          },
+          {
+            "skill": "Accessibility (WCAG AA)",
+            "evidence": "Contrast rules built into the token set."
+          },
+          {
+            "skill": "Front-end engineering (React)",
+            "evidence": "10 reusable, barrel-exported components, from Button and Card to NavBar and Hero."
+          },
+          {
+            "skill": "Tooling integration",
+            "evidence": "Tokens mirrored into a JavaScript theme and a Tailwind CSS config."
+          },
+          {
+            "skill": "Documentation",
+            "evidence": "Usage guide and a live preview page."
+          }
+        ],
+        "keywords": [
+          "Design Systems",
+          "Design Tokens",
+          "React",
+          "Tailwind CSS",
+          "Accessibility (WCAG AA)",
+          "Front-End Development",
+          "UI/UX",
+          "Component Library",
+          "Brand Governance"
         ]
       },
       "demo": {
@@ -670,6 +966,36 @@
             "label": "WordPress page",
             "note": "Elementor or WPCode"
           }
+        ],
+        "impact": "Gives sales development reps consistent, situation-specific cross-sell guidance on every call, designed to make conversations repeatable and new reps productive sooner.",
+        "competencies": [
+          {
+            "skill": "Sales enablement",
+            "evidence": "Talk paths for each client situation, for example auto-only, home-only or renter."
+          },
+          {
+            "skill": "Front-end development",
+            "evidence": "Self-contained JavaScript and HTML widget with keyword search and routing guidance."
+          },
+          {
+            "skill": "CMS deployment",
+            "evidence": "Three delivery formats: Elementor embed, Elementor widget and WPCode snippet."
+          },
+          {
+            "skill": "Revenue operations",
+            "evidence": "Standardizes cross-sell conversations across the team."
+          }
+        ],
+        "keywords": [
+          "Sales Enablement",
+          "Revenue Operations",
+          "Cross-Sell Strategy",
+          "JavaScript",
+          "WordPress",
+          "Elementor",
+          "Front-End Development",
+          "CMS",
+          "Call Guidance"
         ]
       },
       "demo": {
@@ -756,6 +1082,43 @@
         ],
         "oss": [
           "wireguard-nonadmin-windows"
+        ],
+        "impact": "Delivered secure, zero-license-cost remote access for a hybrid workforce of 20+ users without granting local admin rights, and made VPN access part of the offboarding control set.",
+        "competencies": [
+          {
+            "skill": "Network security",
+            "evidence": "Netgate 2100 running pfSense as the agency's perimeter firewall."
+          },
+          {
+            "skill": "VPN engineering (WireGuard)",
+            "evidence": "One standardized VPN, with the tunnel deployed as a Windows service."
+          },
+          {
+            "skill": "Identity & access management",
+            "evidence": "Least-privilege network-operator role, and access revocation built into the offboarding checklist."
+          },
+          {
+            "skill": "Incident response",
+            "evidence": "Diagnosed and resolved a server-side issue blocking remote access to on-prem systems (August 2026)."
+          },
+          {
+            "skill": "Performance benchmarking",
+            "evidence": "Measured LAN vs VPN throughput and used the data to move bulk workloads on-network."
+          }
+        ],
+        "keywords": [
+          "Network Security",
+          "Firewall Administration",
+          "pfSense",
+          "WireGuard VPN",
+          "Remote Access",
+          "Identity & Access Management (IAM)",
+          "Least Privilege",
+          "Access Governance",
+          "Incident Response",
+          "Hybrid Workforce",
+          "Performance Benchmarking",
+          "Zero-Cost Solutions"
         ]
       },
       "repo": null,
@@ -839,6 +1202,42 @@
             "label": "Quarterly backup",
             "note": "scheduled cadence"
           }
+        ],
+        "impact": "Consolidated scattered client files into a single, access-controlled system of record, addressing data-loss, privacy and E&O exposure and making automated compliance scanning possible.",
+        "competencies": [
+          {
+            "skill": "Vendor evaluation & business case",
+            "evidence": "Compared three NAS platforms across price and capability tiers and presented a recommendation to ownership."
+          },
+          {
+            "skill": "Budget ownership",
+            "evidence": "Authored the FY2026 Technology Budget Proposal, including the storage line item."
+          },
+          {
+            "skill": "Storage administration",
+            "evidence": "QNAP TVS-h674 on QuTS hero (ZFS), with two 4 TB WD Red drives in RAID 1."
+          },
+          {
+            "skill": "Access control",
+            "evidence": "Per-employee accounts, a designed folder-permission model and a least-privilege service account for automation."
+          },
+          {
+            "skill": "Business continuity",
+            "evidence": "Mirrored storage, a quarterly backup cadence and VPN-based remote access."
+          }
+        ],
+        "keywords": [
+          "Storage Administration",
+          "Network-Attached Storage (NAS)",
+          "Data Governance",
+          "Access Control",
+          "RAID",
+          "ZFS",
+          "Business Continuity",
+          "Backup Strategy",
+          "Vendor Evaluation",
+          "Budget Management",
+          "Least Privilege"
         ]
       },
       "repo": null,
@@ -901,6 +1300,34 @@
             "label": "Office printers",
             "note": "release on reconnect"
           }
+        ],
+        "impact": "Removes the in-office requirement for printing, so hybrid staff can print from anywhere, with a self-service setup designed to cut support tickets.",
+        "competencies": [
+          {
+            "skill": "Remote access enablement",
+            "evidence": "Office printers shared securely over the WireGuard VPN."
+          },
+          {
+            "skill": "Print management",
+            "evidence": "Centralized print server; jobs sent while offline queue and release on reconnect."
+          },
+          {
+            "skill": "End-user documentation",
+            "evidence": "One-page self-service setup guide (v1.1)."
+          },
+          {
+            "skill": "Rollout planning",
+            "evidence": "Next: remote staff setup and testing, then a training SOP and Core Process module."
+          }
+        ],
+        "keywords": [
+          "Print Management",
+          "Remote Access",
+          "Hybrid Work Enablement",
+          "End-User Support",
+          "Self-Service IT",
+          "Technical Documentation",
+          "VPN"
         ]
       },
       "repo": null,
@@ -977,6 +1404,47 @@
             "label": "Device lifecycle",
             "note": "image, deploy, wipe, recycle or donate"
           }
+        ],
+        "impact": "Built the agency's IT function from zero: budget, service levels, vendor governance and device lifecycle, turning ad-hoc purchasing and support into a managed, accountable operation.",
+        "competencies": [
+          {
+            "skill": "IT leadership",
+            "evidence": "Progressed from Licensed Sales Producer to Technical Solutions Manager to Agency Operations & Systems Manager."
+          },
+          {
+            "skill": "Budget ownership",
+            "evidence": "Authored and own the FY2026 Technology Department Budget."
+          },
+          {
+            "skill": "IT service management (ITSM)",
+            "evidence": "Tiered service desk: an AI support chatbot as first line, escalating to an IT request form with a 1-business-day SLA."
+          },
+          {
+            "skill": "Vendor & systems governance",
+            "evidence": "Centralized ledger tracking 81 tools; System Administrator for 41."
+          },
+          {
+            "skill": "Procurement",
+            "evidence": "Standardized equipment-request intake with a weekly procurement cycle."
+          },
+          {
+            "skill": "Asset lifecycle management",
+            "evidence": "Onboarding and offboarding, device imaging, and a secure wipe, recycle and donation pipeline."
+          }
+        ],
+        "keywords": [
+          "IT Management",
+          "IT Leadership",
+          "IT Service Management (ITSM)",
+          "Service Desk",
+          "SLA Management",
+          "Budget Ownership",
+          "Vendor Management",
+          "Procurement",
+          "Asset Lifecycle Management",
+          "Onboarding & Offboarding",
+          "Systems Governance",
+          "EOS"
         ]
       },
       "repo": null,
@@ -1044,6 +1512,38 @@
             "label": "Reclaim",
             "note": "return-to-pool drives"
           }
+        ],
+        "impact": "Brought 150+ assets under control with tagging and a central register, addressing loss risk, duplicate purchases and slow replacements across the office and remote staff.",
+        "competencies": [
+          {
+            "skill": "IT asset management (ITAM)",
+            "evidence": "150+ tracked assets, including cords and cables."
+          },
+          {
+            "skill": "Inventory control",
+            "evidence": "Numbered asset codes and label-maker labels."
+          },
+          {
+            "skill": "Remote equipment tracking",
+            "evidence": "Serial, brand and model recorded for agency equipment held by remote staff."
+          },
+          {
+            "skill": "Cost recovery",
+            "evidence": "Return-to-pool reclamation drive to recover unused equipment (December 2025)."
+          },
+          {
+            "skill": "Facilities organization",
+            "evidence": "Labeled bins and new cube shelving (August 2026)."
+          }
+        ],
+        "keywords": [
+          "IT Asset Management (ITAM)",
+          "Inventory Control",
+          "Asset Tagging",
+          "Facilities Management",
+          "Remote Equipment Tracking",
+          "Cost Control",
+          "Process Improvement"
         ]
       },
       "repo": null,
@@ -1111,6 +1611,35 @@
             "label": "Reconcile",
             "note": "against card statements"
           }
+        ],
+        "impact": "Kept shipping in-house and on budget: a resilient multi-carrier setup after a hardware failure, on-demand postage instead of an idle subscription, and clean reconciliations.",
+        "competencies": [
+          {
+            "skill": "Operations management",
+            "evidence": "Stood up an in-office shipping and postage station (November 2025)."
+          },
+          {
+            "skill": "Vendor migration",
+            "evidence": "Moved from Pitney Bowes to a Zebra ZD421 thermal printer and Shippo after the out-of-warranty failure (April 2026)."
+          },
+          {
+            "skill": "Cost control",
+            "evidence": "Stamps.com used on demand, with stamps printed in batches and the subscription cancelled between uses."
+          },
+          {
+            "skill": "Financial reconciliation",
+            "evidence": "Postage charges reconciled against card statements with no discrepancies."
+          }
+        ],
+        "keywords": [
+          "Operations Management",
+          "Logistics",
+          "Vendor Migration",
+          "Multi-Carrier Shipping",
+          "Cost Control",
+          "Financial Reconciliation",
+          "Business Continuity",
+          "Process Improvement"
         ]
       },
       "repo": null,
@@ -1163,6 +1692,35 @@
             "value": "5",
             "label": "fire-code-compliant install options"
           }
+        ],
+        "impact": "Keeps office workstations, the network edge and every remote employee's internet connection running through power interruptions, with a fire-code-reviewed installation standard.",
+        "competencies": [
+          {
+            "skill": "Business continuity planning",
+            "evidence": "One UPS per office desk, plus a dedicated UPS for the office modem and router."
+          },
+          {
+            "skill": "Remote workforce enablement",
+            "evidence": "A LiFePO4 power station for each remote employee's modem and router."
+          },
+          {
+            "skill": "Procurement",
+            "evidence": "Sourced with spares at a volume discount; exact replacement batteries extended the life of legacy units."
+          },
+          {
+            "skill": "Compliance review",
+            "evidence": "Reviewed NFPA 1, the Florida Fire Prevention Code and UL guidance, and defined five compliant installation options."
+          }
+        ],
+        "keywords": [
+          "Business Continuity",
+          "Disaster Recovery",
+          "Power Protection (UPS)",
+          "Hardware Deployment",
+          "Remote Workforce",
+          "Fire Code Compliance",
+          "Procurement",
+          "Risk Management"
         ]
       },
       "repo": null,
@@ -1200,6 +1758,29 @@
         ],
         "notes": [
           "Active since about May 2026. Spend tracking through QuickBooks is planned for Q4 2026."
+        ],
+        "impact": "Moved office purchasing from one-off orders to a controlled, subscription-based process with a shared request queue, laying the groundwork for spend tracking in QuickBooks.",
+        "competencies": [
+          {
+            "skill": "Procurement",
+            "evidence": "Amazon Business Subscribe & Save for recurring items such as drinks, snacks and printer paper."
+          },
+          {
+            "skill": "Process improvement",
+            "evidence": "A shared request queue replaces one-off orders."
+          },
+          {
+            "skill": "Spend governance",
+            "evidence": "Centralized account administration and purchasing control; QuickBooks tracking planned for Q4 2026."
+          }
+        ],
+        "keywords": [
+          "Procurement",
+          "Spend Management",
+          "Purchasing Controls",
+          "Process Improvement",
+          "Amazon Business",
+          "Operations Management"
         ]
       },
       "repo": null,

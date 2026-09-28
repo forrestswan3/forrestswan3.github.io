@@ -16,7 +16,7 @@ const hasPreview = showImage && p.preview;
   </div>
   <H><a href={`/work/${p.name}/`}>{p.title}</a></H>
   <p>{p.tagline}</p>
-  <ul class="tags" aria-label="Technologies">{p.topics.slice(0, 5).map((t: string) => <li>{t}</li>)}</ul>
+  <ul class="tags" aria-label="Technologies">{(p.detail?.keywords ?? p.topics).slice(0, 5).map((t: string) => <li>{t}</li>)}</ul>
   <div class="foot">
     <a href={`/work/${p.name}/`}>Case study<span class="sr-only">: {p.title}</span></a>
     {p.demo && <a href={p.demo.url}>{p.demo.kind === 'live' ? 'Live demo' : 'Interface'}<span class="sr-only">: {p.title}</span></a>}
