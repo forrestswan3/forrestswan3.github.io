@@ -46,7 +46,7 @@ const itemList = {
               <div class="card-img"><img src={c.image} alt={c.alt} width="960" height="600" loading="lazy" decoding="async" /></div>
               <div class="meta"><span class="pill">Concept</span><span class="pill">{fmt(c.date)}</span></div>
               <h3>{c.title}</h3>
-              <p>Fixed: {c.fixes.join(', ')}.</p>
+              <p>Problems the redesign addresses: {c.fixes.join(', ')}.</p>
               <ul class="tags" aria-label="Versions built">{c.built.map((b) => <li>{b}</li>)}</ul>
             </article>
           ))}
