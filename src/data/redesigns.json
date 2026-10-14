@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-13",
+  "updated": "2026-10-14",
   "concepts": [
     {
       "id": "B3-0007",
@@ -148,6 +148,54 @@
       "date": "2026-10-13",
       "image": "/previews/redesigns/redesign-b3-0015.webp",
       "alt": "Five-page redesign concept for a sandblasting and powder coating shop in Orange County, with the business name and phone replaced by placeholders"
+    },
+    {
+      "id": "B3-0016",
+      "title": "Eyelash extension studio, Orange County, FL",
+      "county": "Orange",
+      "fixes": [
+        "outdated details",
+        "phone links"
+      ],
+      "built": [
+        "One-page site",
+        "Five-page site"
+      ],
+      "date": "2026-10-14",
+      "image": "/previews/redesigns/redesign-b3-0016.webp",
+      "alt": "Five-page redesign concept for a eyelash extension studio in Orange County, with the business name and phone replaced by placeholders"
+    },
+    {
+      "id": "B3-0017",
+      "title": "Barber spa, Orange County, FL",
+      "county": "Orange",
+      "fixes": [
+        "outdated details",
+        "hours listing"
+      ],
+      "built": [
+        "One-page site",
+        "Five-page site"
+      ],
+      "date": "2026-10-14",
+      "image": "/previews/redesigns/redesign-b3-0017.webp",
+      "alt": "Five-page redesign concept for a barber spa in Orange County, with the business name and phone replaced by placeholders"
+    },
+    {
+      "id": "B3-0018",
+      "title": "Hair salon, Brevard County, FL",
+      "county": "Brevard",
+      "fixes": [
+        "phone links",
+        "placeholder content"
+      ],
+      "built": [
+        "One-page site",
+        "Five-page site"
+      ],
+      "date": "2026-10-14",
+      "image": "/previews/redesigns/redesign-b3-0018.webp",
+      "alt": "Five-page redesign concept for a hair salon in Brevard County, with the business name and phone replaced by placeholders"
     }
   ],
   "demos": [
