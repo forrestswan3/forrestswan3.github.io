@@ -6,9 +6,9 @@
       "title": "Lawn care company, Brevard County, FL",
       "county": "Brevard",
       "fixes": [
-        "broken menu links",
-        "no tap-to-call phone",
-        "outdated footer"
+        "navigation",
+        "phone links",
+        "outdated details"
       ],
       "built": [
         "One-page site",
@@ -23,9 +23,9 @@
       "title": "Landscaping and home services company, Brevard County, FL",
       "county": "Brevard",
       "fixes": [
-        "placeholder phone links",
-        "outdated footer",
-        "placeholder image"
+        "phone links",
+        "outdated details",
+        "placeholder content"
       ],
       "built": [
         "One-page site",
@@ -40,8 +40,8 @@
       "title": "Paver installation company, Brevard County, FL",
       "county": "Brevard",
       "fixes": [
-        "buttons that went to the wrong section",
-        "malformed phone link"
+        "navigation",
+        "phone links"
       ],
       "built": [
         "One-page site",
@@ -56,9 +56,9 @@
       "title": "Dent repair company, Brevard County, FL",
       "county": "Brevard",
       "fixes": [
-        "social links pointing at the site builder",
-        "no tap-to-call phone",
-        "outdated footer"
+        "contact links",
+        "phone links",
+        "outdated details"
       ],
       "built": [
         "One-page site",
@@ -73,8 +73,8 @@
       "title": "Handyman company, Orange County, FL",
       "county": "Orange",
       "fixes": [
-        "broken menu links",
-        "outdated footer"
+        "navigation",
+        "outdated details"
       ],
       "built": [
         "One-page site",
@@ -89,9 +89,9 @@
       "title": "Remodeling company, Orange County, FL",
       "county": "Orange",
       "fixes": [
-        "unlabeled buttons that went nowhere",
-        "template placeholder logo",
-        "empty call link"
+        "navigation",
+        "placeholder content",
+        "phone links"
       ],
       "built": [
         "One-page site",
@@ -106,8 +106,8 @@
       "title": "House cleaning company, Orange County, FL",
       "county": "Orange",
       "fixes": [
-        "social link to another business",
-        "call buttons with the wrong number"
+        "contact links",
+        "phone links"
       ],
       "built": [
         "One-page site",
@@ -122,8 +122,8 @@
       "title": "Pool service company, Orange County, FL",
       "county": "Orange",
       "fixes": [
-        "\"under construction\" homepage",
-        "outdated footer"
+        "placeholder content",
+        "outdated details"
       ],
       "built": [
         "One-page site",
@@ -138,8 +138,8 @@
       "title": "Sandblasting and powder coating shop, Orange County, FL",
       "county": "Orange",
       "fixes": [
-        "outdated footer",
-        "dead links"
+        "outdated details",
+        "navigation"
       ],
       "built": [
         "One-page site",

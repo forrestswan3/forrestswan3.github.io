@@ -35,7 +35,6 @@ const itemList = {
         </section>
       ))}
 
-
       <section id="redesigns" aria-labelledby="rd-h" style="margin-top:4rem">
         <p class="eyebrow">Small-business websites</p>
         <h2 id="rd-h" style="font-size:var(--step-2)">Website redesign concepts</h2>
@@ -48,7 +47,7 @@ const itemList = {
               <div class="meta"><span class="pill">Concept</span><span class="pill">{fmt(c.date)}</span></div>
               <h3>{c.title}</h3>
               <p>Fixed: {c.fixes.join(', ')}.</p>
-              <ul class="tags" aria-label="Deliverables">{c.built.map((b) => <li>{b}</li>)}</ul>
+              <ul class="tags" aria-label="Versions built">{c.built.map((b) => <li>{b}</li>)}</ul>
             </article>
           ))}
         </div>
