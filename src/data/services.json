@@ -4,15 +4,16 @@
     {
       "id": "websites",
       "title": "Small-business websites",
-      "price": "$599",
+      "price": "From $399",
       "priceNote": "one-time build",
-      "summary": "A 5-page website delivered in 7 days, with no CMS to maintain.",
+      "summary": "A one-page site ($399) or a 5-page site ($599), delivered in 7 days, with no CMS to maintain.",
       "includes": [
-        "5 pages covering your services, about, reviews, service area and contact",
+        "One page, or 5 pages covering your services, about, reviews, service area and contact",
         "Click-to-call, contact form, service area and Google Business Profile link",
         "Search-friendly structured data for local businesses",
-        "Hosting on Cloudflare Pages at no monthly hosting cost; your own .com at cost",
-        "Two revision rounds before launch"
+        "Hosting on Cloudflare at no monthly hosting cost; your own .com at cost, registered in your name",
+        "Two revision rounds before launch",
+        "First client: the site is free in exchange for featuring it in this portfolio (until claimed)"
       ],
       "addon": {
         "title": "Optional maintenance",

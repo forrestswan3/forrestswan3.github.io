@@ -4,6 +4,7 @@ import ProjectCard from '../../components/ProjectCard.astro';
 import portfolio from '../../data/portfolio.json';
 import oss from '../../data/opensource.json';
 import RepoCard from '../../components/RepoCard.astro';
+import redesigns from '../../data/redesigns.json';
 
 const pub = portfolio.projects.filter((p) => p.visibility === 'public');
 const groups = [
@@ -33,6 +34,41 @@ const itemList = {
           <div class="grid grid--3">{g.items.map((p) => <ProjectCard p={p} />)}</div>
         </section>
       ))}
+
+      <section id="redesigns" aria-labelledby="rd-h" style="margin-top:4rem">
+        <p class="eyebrow">Small-business websites</p>
+        <h2 id="rd-h" style="font-size:var(--step-2)">Website redesign concepts</h2>
+        <p class="lede">Unsolicited sample redesigns for {redesigns.concepts.length} local Florida businesses whose current sites had problems. Each got a one-page and a five-page version, built from the facts on its existing site.</p>
+        <p class="notice">Shown without business names, phone numbers or links until the owner agrees. Screenshots use placeholders in place of each business's details. Last updated {fmt(redesigns.updated)}.</p>
+        <div class="grid grid--3" style="margin-top:1.5rem">
+          {redesigns.concepts.map((c) => (
+            <article class="card">
+              <div class="card-img"><img src={c.image} alt={c.alt} width="960" height="600" loading="lazy" decoding="async" /></div>
+              <div class="meta"><span class="pill">Concept</span><span class="pill">{fmt(c.date)}</span></div>
+              <h3>{c.title}</h3>
+              <p>Problems the redesign addresses: {c.fixes.join(', ')}.</p>
+              <ul class="tags" aria-label="Versions built">{c.built.map((b) => <li>{b}</li>)}</ul>
+            </article>
+          ))}
+        </div>
+        <h3 style="margin-top:2.5rem">Demo sites (fictional businesses)</h3>
+        <p class="lede">Invented businesses with invented details, so the full builds can be opened.</p>
+        <div class="grid grid--3" style="margin-top:1.5rem">
+          {redesigns.demos.map((d) => (
+            <article class="card">
+              <div class="card-img"><img src={d.image} alt={d.alt} width="960" height="600" loading="lazy" decoding="async" /></div>
+              <div class="meta"><span class="pill">Demo</span><span class="pill">{d.trade}</span></div>
+              <h4 style="font-size:var(--step-1)">{d.title}</h4>
+              <p>{d.blurb}</p>
+              <div class="foot">
+                <a href={d.one_page}>One-page site<span class="sr-only">: {d.title}</span></a>
+                <a href={d.five_page}>Five-page site<span class="sr-only">: {d.title}</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p style="margin-top:1.5rem"><a href="/services/#websites">Website pricing</a></p>
+      </section>
 
       <section id="open-source" aria-labelledby="oss-h" style="margin-top:4rem">
         <p class="eyebrow">Open source</p>

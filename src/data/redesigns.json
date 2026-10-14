@@ -1,0 +1,185 @@
+{
+  "updated": "2026-10-13",
+  "concepts": [
+    {
+      "id": "B3-0007",
+      "title": "Lawn care company, Brevard County, FL",
+      "county": "Brevard",
+      "fixes": [
+        "navigation",
+        "phone links",
+        "outdated details"
+      ],
+      "built": [
+        "One-page site",
+        "Five-page site"
+      ],
+      "date": "2026-10-13",
+      "image": "/previews/redesigns/redesign-b3-0007.webp",
+      "alt": "Five-page redesign concept for a lawn care company in Brevard County, with the business name and phone replaced by placeholders"
+    },
+    {
+      "id": "B3-0008",
+      "title": "Landscaping and home services company, Brevard County, FL",
+      "county": "Brevard",
+      "fixes": [
+        "phone links",
+        "outdated details",
+        "placeholder content"
+      ],
+      "built": [
+        "One-page site",
+        "Five-page site"
+      ],
+      "date": "2026-10-13",
+      "image": "/previews/redesigns/redesign-b3-0008.webp",
+      "alt": "Five-page redesign concept for a landscaping and home services company in Brevard County, with the business name and phone replaced by placeholders"
+    },
+    {
+      "id": "B3-0009",
+      "title": "Paver installation company, Brevard County, FL",
+      "county": "Brevard",
+      "fixes": [
+        "navigation",
+        "phone links"
+      ],
+      "built": [
+        "One-page site",
+        "Five-page site"
+      ],
+      "date": "2026-10-13",
+      "image": "/previews/redesigns/redesign-b3-0009.webp",
+      "alt": "Five-page redesign concept for a paver installation company in Brevard County, with the business name and phone replaced by placeholders"
+    },
+    {
+      "id": "B3-0010",
+      "title": "Dent repair company, Brevard County, FL",
+      "county": "Brevard",
+      "fixes": [
+        "contact links",
+        "phone links",
+        "outdated details"
+      ],
+      "built": [
+        "One-page site",
+        "Five-page site"
+      ],
+      "date": "2026-10-13",
+      "image": "/previews/redesigns/redesign-b3-0010.webp",
+      "alt": "Five-page redesign concept for a dent repair company in Brevard County, with the business name and phone replaced by placeholders"
+    },
+    {
+      "id": "B3-0011",
+      "title": "Handyman company, Orange County, FL",
+      "county": "Orange",
+      "fixes": [
+        "navigation",
+        "outdated details"
+      ],
+      "built": [
+        "One-page site",
+        "Five-page site"
+      ],
+      "date": "2026-10-13",
+      "image": "/previews/redesigns/redesign-b3-0011.webp",
+      "alt": "Five-page redesign concept for a handyman company in Orange County, with the business name and phone replaced by placeholders"
+    },
+    {
+      "id": "B3-0012",
+      "title": "Remodeling company, Orange County, FL",
+      "county": "Orange",
+      "fixes": [
+        "navigation",
+        "placeholder content",
+        "phone links"
+      ],
+      "built": [
+        "One-page site",
+        "Five-page site"
+      ],
+      "date": "2026-10-13",
+      "image": "/previews/redesigns/redesign-b3-0012.webp",
+      "alt": "Five-page redesign concept for a remodeling company in Orange County, with the business name and phone replaced by placeholders"
+    },
+    {
+      "id": "B3-0013",
+      "title": "House cleaning company, Orange County, FL",
+      "county": "Orange",
+      "fixes": [
+        "contact links",
+        "phone links"
+      ],
+      "built": [
+        "One-page site",
+        "Five-page site"
+      ],
+      "date": "2026-10-13",
+      "image": "/previews/redesigns/redesign-b3-0013.webp",
+      "alt": "Five-page redesign concept for a house cleaning company in Orange County, with the business name and phone replaced by placeholders"
+    },
+    {
+      "id": "B3-0014",
+      "title": "Pool service company, Orange County, FL",
+      "county": "Orange",
+      "fixes": [
+        "placeholder content",
+        "outdated details"
+      ],
+      "built": [
+        "One-page site",
+        "Five-page site"
+      ],
+      "date": "2026-10-13",
+      "image": "/previews/redesigns/redesign-b3-0014.webp",
+      "alt": "Five-page redesign concept for a pool service company in Orange County, with the business name and phone replaced by placeholders"
+    },
+    {
+      "id": "B3-0015",
+      "title": "Sandblasting and powder coating shop, Orange County, FL",
+      "county": "Orange",
+      "fixes": [
+        "outdated details",
+        "navigation"
+      ],
+      "built": [
+        "One-page site",
+        "Five-page site"
+      ],
+      "date": "2026-10-13",
+      "image": "/previews/redesigns/redesign-b3-0015.webp",
+      "alt": "Five-page redesign concept for a sandblasting and powder coating shop in Orange County, with the business name and phone replaced by placeholders"
+    }
+  ],
+  "demos": [
+    {
+      "slug": "roofing",
+      "title": "Tidewrack Roofing Co.",
+      "trade": "Roofing",
+      "blurb": "Leak repair, re-roofs and storm inspections.",
+      "image": "/previews/redesigns/demo-roofing.webp",
+      "one_page": "https://b3-sites.forrestswan3.workers.dev/demos/roofing/a/",
+      "five_page": "https://b3-sites.forrestswan3.workers.dev/demos/roofing/b/",
+      "alt": "Five-page demo site for Tidewrack Roofing Co., a fictional roofing business"
+    },
+    {
+      "slug": "hvac",
+      "title": "Coquina Coolworks",
+      "trade": "Air conditioning",
+      "blurb": "Same-day repair, replacements and maintenance visits.",
+      "image": "/previews/redesigns/demo-hvac.webp",
+      "one_page": "https://b3-sites.forrestswan3.workers.dev/demos/hvac/a/",
+      "five_page": "https://b3-sites.forrestswan3.workers.dev/demos/hvac/b/",
+      "alt": "Five-page demo site for Coquina Coolworks, a fictional air conditioning business"
+    },
+    {
+      "slug": "lawn",
+      "title": "Crestgrass Lawn Studio",
+      "trade": "Lawn care",
+      "blurb": "Weekly mowing, hedges, beds and clean-ups.",
+      "image": "/previews/redesigns/demo-lawn.webp",
+      "one_page": "https://b3-sites.forrestswan3.workers.dev/demos/lawn/a/",
+      "five_page": "https://b3-sites.forrestswan3.workers.dev/demos/lawn/b/",
+      "alt": "Five-page demo site for Crestgrass Lawn Studio, a fictional lawn care business"
+    }
+  ]
+}
