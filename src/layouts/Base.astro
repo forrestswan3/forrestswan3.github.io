@@ -119,7 +119,7 @@ const built = new Date(portfolio.updated + 'T12:00:00').toLocaleDateString('en-U
       <nav class="nav" id="site-nav" aria-label="Main">
         {nav.map((n) => <a href={n.href} aria-current={current(n.href)}>{n.label}</a>)}
       </nav>
-      <button class="icon-btn" type="button" data-open-palette aria-label="Search the site (Ctrl+K)">
+      <button class="icon-btn" type="button" data-open-palette aria-label="Search the site (Ctrl K)">
         <Icon name="search" /><kbd class="kbd-hint">Ctrl K</kbd>
       </button>
       <button class="icon-btn" type="button" id="theme-toggle" aria-label="Toggle dark mode">
