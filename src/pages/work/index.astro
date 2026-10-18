@@ -5,6 +5,7 @@ import portfolio from '../../data/portfolio.json';
 import oss from '../../data/opensource.json';
 import RepoCard from '../../components/RepoCard.astro';
 import redesigns from '../../data/redesigns.json';
+import designs from '../../data/designs.json';
 
 const pub = portfolio.projects.filter((p) => p.visibility === 'public');
 const groups = [
@@ -67,7 +68,23 @@ const itemList = {
             </article>
           ))}
         </div>
-        <p style="margin-top:1.5rem"><a href="/services/#websites">Website pricing</a></p>
+        <p style="margin-top:1.5rem"><a href="/services/#websites">Website pricing</a> · <a href="/work/website-outreach-pipeline/">How these samples are built</a></p>
+      </section>
+
+      <section id="designs" aria-labelledby="ds-h" style="margin-top:4rem">
+        <p class="eyebrow">Graphic design</p>
+        <h2 id="ds-h" style="font-size:var(--step-2)">Minimalist apparel designs</h2>
+        <p class="lede">{designs.designs.length} original vector designs built from early Christian symbols (Chi-Rho, staurogram, Alpha and Omega, IC XC NIKA). Each is drawn as SVG and exported as a 4500 × 5400 px print file in two inks, one for light garments and one for dark.</p>
+        <p class="notice">The symbols are public domain; the artwork is original. Scripture text is from the King James Version. Last updated {fmt(designs.updated)}.</p>
+        <div class="grid grid--3" style="margin-top:1.5rem">
+          {designs.designs.map((x) => (
+            <article class="card">
+              <div class="card-img"><img src={x.image} alt={x.alt} width="960" height="600" loading="lazy" decoding="async" /></div>
+              <h3>{x.title}</h3>
+              <p>{x.blurb}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section id="open-source" aria-labelledby="oss-h" style="margin-top:4rem">

@@ -1,7 +1,7 @@
 {
   "owner": "forrestswan3",
   "author": "Forrest Swan III",
-  "updated": "2026-09-28",
+  "updated": "2026-10-18",
   "projects": [
     {
       "name": "license-exam-prep",
@@ -1790,6 +1790,127 @@
       "demo": null,
       "preview": null,
       "preview_img": null
+    },
+    {
+      "name": "website-outreach-pipeline",
+      "title": "Local Website Outreach Pipeline",
+      "status": "In progress",
+      "shipped": "2026-10-18",
+      "lang": "Python",
+      "tagline": "A pipeline that finds Florida small businesses with missing or broken websites, builds two sample sites for each from public facts, publishes them for preview and runs compliant email outreach.",
+      "topics": [
+        "python",
+        "static-site-generation",
+        "cloudflare-workers",
+        "email-deliverability",
+        "playwright",
+        "lead-generation"
+      ],
+      "repo": null,
+      "visibility": "public",
+      "detail": {
+        "impact": "Turns a manual prospecting job (search, check each site, write a pitch, mock up a design) into a repeatable pipeline: one source-fact file per business produces two working sample sites and a personalized email, with checks at each step.",
+        "problem": "Many local trades and service businesses have no website, a builder placeholder, or a site with broken links and phone numbers. Pitching them one at a time with generic mockups is slow and rarely specific enough to be useful.",
+        "solution": "Built a screening script that pulls businesses from OpenStreetMap and checks each listed website (reachable, HTTPS, mobile viewport, tap-to-call, contact form, builder, copyright year). Qualified businesses get a source-fact file, and a generator turns each one into a one-page and a five-page static site. Every page passes automated checks, then deploys to Cloudflare as a private, noindexed preview. Outreach goes through a transactional email API with suppression, bounce stop rules, unsubscribe links and a postal address in every message.",
+        "highlights": [
+          "Screened 671 businesses across three Florida counties; 217 listed a website and 175 were checked automatically",
+          "Generated sample sites for 65 businesses (130 builds, one-page and five-page), plus 3 fictional demo businesses",
+          "Automated page audit with Playwright: one h1 per page, labeled form fields, no horizontal overflow, noindex and a sample banner on every page",
+          "Every factual claim about a business's current site is verified, then checked by an independent reviewer before any email goes out",
+          "Deliverability guardrails: suppression list, hard-bounce stop rule, sender-domain authentication and a per-message unsubscribe link"
+        ],
+        "metrics": [
+          {
+            "value": "671",
+            "label": "businesses screened"
+          },
+          {
+            "value": "130",
+            "label": "sample sites generated"
+          },
+          {
+            "value": "8",
+            "label": "website checks per business screened"
+          }
+        ],
+        "flow": [
+          {
+            "label": "OpenStreetMap pull",
+            "note": "three Florida counties"
+          },
+          {
+            "label": "Website screen",
+            "note": "HTTPS, mobile, tap-to-call, builder"
+          },
+          {
+            "label": "Source-fact file",
+            "note": "one JSON per business"
+          },
+          {
+            "label": "Site generator",
+            "note": "one-page + five-page builds"
+          },
+          {
+            "label": "Playwright audit",
+            "note": "then noindexed preview deploy"
+          },
+          {
+            "label": "Email outreach",
+            "note": "suppression and bounce rules"
+          }
+        ],
+        "competencies": [
+          {
+            "skill": "Data collection & screening",
+            "evidence": "Python scripts that pull business listings and check each website for HTTPS, mobile viewport, tap-to-call links, contact forms and site builder."
+          },
+          {
+            "skill": "Static site generation",
+            "evidence": "One JSON source file per business produces a one-page and a five-page site with local-business structured data."
+          },
+          {
+            "skill": "Automated QA",
+            "evidence": "Playwright audit of every page plus a separate human-style review of every factual claim before sending."
+          },
+          {
+            "skill": "Email deliverability & compliance",
+            "evidence": "Authenticated sender domain, suppression list, hard-bounce stop rule, unsubscribe link and postal address in every message."
+          },
+          {
+            "skill": "Cloud deployment",
+            "evidence": "Push-to-deploy static hosting on Cloudflare Workers with site-wide noindex headers."
+          }
+        ],
+        "keywords": [
+          "Python",
+          "Static Site Generation",
+          "Cloudflare Workers",
+          "Playwright",
+          "Web Scraping",
+          "OpenStreetMap",
+          "Email Deliverability",
+          "CAN-SPAM",
+          "Lead Generation",
+          "Automated Testing",
+          "Small Business Websites"
+        ],
+        "notes": [
+          "Sample sites for real businesses are private previews and are not linked here; anonymized screenshots are in the redesign concepts section of the Work page.",
+          "Source code is private. Walkthroughs are available on request."
+        ],
+        "stack": [
+          "Python 3",
+          "Playwright (Node)",
+          "Cloudflare Workers static assets",
+          "GitHub",
+          "Brevo transactional email API",
+          "Google Sheets CRM"
+        ]
+      },
+      "page": "/work/#redesigns",
+      "demo": null,
+      "preview_img": null,
+      "source": "private"
     }
   ],
   "case_studies": [
