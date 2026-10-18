@@ -1,0 +1,75 @@
+{
+  "updated": "2026-10-18",
+  "designs": [
+    {
+      "id": "01-chi-rho-line",
+      "title": "Chi-Rho, single line",
+      "blurb": "A single-weight line drawing of the Chi-Rho monogram.",
+      "image": "/previews/designs/01-chi-rho-line.webp",
+      "alt": "Chi-Rho, single line design shown twice: dark ink on a cream background and cream ink on a dark green background"
+    },
+    {
+      "id": "02-chi-rho-ring",
+      "title": "Chi-Rho in a ring",
+      "blurb": "The monogram inside a plain ring, after the wreathed Chi-Rho of early Christian art.",
+      "image": "/previews/designs/02-chi-rho-ring.webp",
+      "alt": "Chi-Rho in a ring design shown twice: dark ink on a cream background and cream ink on a dark green background"
+    },
+    {
+      "id": "03-labarum-alpha-omega",
+      "title": "Chi-Rho with Alpha and Omega",
+      "blurb": "The Chi-Rho flanked by Alpha and Omega.",
+      "image": "/previews/designs/03-labarum-alpha-omega.webp",
+      "alt": "Chi-Rho with Alpha and Omega design shown twice: dark ink on a cream background and cream ink on a dark green background"
+    },
+    {
+      "id": "04-staurogram",
+      "title": "Staurogram",
+      "blurb": "The tau-rho cross drawn with square terminals.",
+      "image": "/previews/designs/04-staurogram.webp",
+      "alt": "Staurogram design shown twice: dark ink on a cream background and cream ink on a dark green background"
+    },
+    {
+      "id": "05-alpha-omega-kjv",
+      "title": "Alpha and Omega",
+      "blurb": "Serif Alpha and Omega over a rule and a Revelation 22:13 (KJV) caption.",
+      "image": "/previews/designs/05-alpha-omega-kjv.webp",
+      "alt": "Alpha and Omega design shown twice: dark ink on a cream background and cream ink on a dark green background"
+    },
+    {
+      "id": "06-icxc-nika-cross",
+      "title": "IC XC NIKA cross",
+      "blurb": "A plain cross with the four abbreviations set in the quadrants.",
+      "image": "/previews/designs/06-icxc-nika-cross.webp",
+      "alt": "IC XC NIKA cross design shown twice: dark ink on a cream background and cream ink on a dark green background"
+    },
+    {
+      "id": "07-chi-rho-pocket",
+      "title": "Pocket Chi-Rho",
+      "blurb": "A small left-chest mark with the Greek word below.",
+      "image": "/previews/designs/07-chi-rho-pocket.webp",
+      "alt": "Pocket Chi-Rho design shown twice: dark ink on a cream background and cream ink on a dark green background"
+    },
+    {
+      "id": "08-chi-rho-bold",
+      "title": "Bold Chi-Rho",
+      "blurb": "A heavy geometric version built from thick strokes.",
+      "image": "/previews/designs/08-chi-rho-bold.webp",
+      "alt": "Bold Chi-Rho design shown twice: dark ink on a cream background and cream ink on a dark green background"
+    },
+    {
+      "id": "09-christos-seal",
+      "title": "Seal",
+      "blurb": "The monogram inside a double ring with Greek lettering set on a circular path.",
+      "image": "/previews/designs/09-christos-seal.webp",
+      "alt": "Seal design shown twice: dark ink on a cream background and cream ink on a dark green background"
+    },
+    {
+      "id": "10-alpha-chirho-omega-line",
+      "title": "Alpha, Chi-Rho, Omega",
+      "blurb": "Line-art monogram between Alpha and Omega, with a fine rule and small caps.",
+      "image": "/previews/designs/10-alpha-chirho-omega-line.webp",
+      "alt": "Alpha, Chi-Rho, Omega design shown twice: dark ink on a cream background and cream ink on a dark green background"
+    }
+  ]
+}
