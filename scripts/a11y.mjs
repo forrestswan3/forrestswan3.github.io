@@ -19,6 +19,8 @@ for (const scheme of ['light', 'dark']) {
     const minor = r.violations.length - bad.length;
     console.log(`${bad.length ? 'FAIL' : 'ok  '} [${scheme}] ${p}${minor ? ` (${minor} minor)` : ''}`);
     for (const v of r.violations) console.log(`      ${v.impact}: ${v.id}: ${v.help} (${v.nodes.length} node(s))`);
+    // Surface serious/critical violations as GitHub annotations so they're visible without opening the log.
+    if (process.env.GITHUB_ACTIONS) for (const v of bad) console.log(`::error title=axe ${v.id}::[${scheme}] ${p}: ${v.help} at ${v.nodes.slice(0, 3).map((n) => n.target.join(' ')).join(' | ')}`);
     failures += bad.length;
   }
   await ctx.close();
