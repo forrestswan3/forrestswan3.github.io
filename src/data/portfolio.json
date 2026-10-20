@@ -1,7 +1,7 @@
 {
   "owner": "forrestswan3",
   "author": "Forrest Swan III",
-  "updated": "2026-10-19",
+  "updated": "2026-10-20",
   "projects": [
     {
       "name": "filegate",
@@ -57,7 +57,7 @@
           },
           {
             "value": "62",
-            "label": "automated tests passing"
+            "label": "engine + integration tests passing"
           }
         ],
         "flow": [
@@ -282,7 +282,7 @@
           "Architected blueprints as data: exam weights are validated at startup, so outline changes need no code change or redeploy",
           "Integrated an LLM (Anthropic API) for AI-generated study narratives, with the API key DPAPI-encrypted at rest and a deterministic offline fallback",
           "Quality gate: 17 automated tests passing (verified 2026-09-22)",
-          "Re-platformed as a Google Apps Script web app embedded in the team portal (live 2026-10-19): the same 1,467-question bank ships as a bundled data file, admin tools sit behind a PIN hash in Script Properties, and AI study narratives use the Anthropic API; the desktop build is retained as legacy"
+          "Re-platformed as a Google Apps Script web app embedded in the team portal (live 2026-10-19): the same 1,467-question bank ships as a bundled data file, admin tools sit behind an admin PIN kept in Script Properties, and AI study narratives use the Anthropic API; the desktop build is retained as legacy"
         ],
         "stack": [
           "Python 3.10+",
@@ -309,7 +309,7 @@
           },
           {
             "value": "17",
-            "label": "automated tests passing"
+            "label": "engine + integration tests passing"
           }
         ],
         "flow": [
@@ -441,7 +441,7 @@
         "metrics": [
           {
             "value": "39",
-            "label": "automated tests passing"
+            "label": "engine + integration tests passing"
           },
           {
             "value": "1",
@@ -1873,12 +1873,12 @@
         "problem": "Past-due task counts lived in a shared spreadsheet tab with no validation, no trend view and no accountability for who entered what. Moving the numbers onto the EOS scorecard was a manual chore, and the counts came from several systems, some of which have no export at all.",
         "solution": "A Google Apps Script web app embedded in the team portal. Staff pick their name from the roster, enter counts for the items assigned to them, or fill the grid from an export or a screenshot; managers and admins see team trends, a Friday Slack digest and draft Issues for the leadership meeting; the weekly metrics are pushed to the Ninety.io scorecard through a Zapier catch hook.",
         "highlights": [
-          "Shipped v1.0 on 2026-09-30 and iterated to v1.6.1 by 2026-10-14: spreadsheet import (v1.3), screenshot import (v1.4), single-total and separate-box items (v1.4.x), an 'in metrics' switch per item (v1.5), range completeness and an onboarding average (v1.6)",
+          "Shipped v1.0 on 2026-09-30 and iterated through nine releases to v1.6.1 by 2026-10-14: spreadsheet import (v1.3), screenshot import (v1.4), single-total and separate-box items (v1.4.x), an 'in metrics' switch per item (v1.5), range completeness and an onboarding average (v1.6)",
           "Privacy by design: Excel/CSV exports and screenshots are parsed in the browser; only per-person counts reach the server, with the file's SHA-256 logged for duplicate detection and raw task rows never stored",
           "Screenshot import with Tesseract OCR: every queue column must add up to the TOTAL row, or the affected cells are flagged for human review before anything is saved",
           "Role precedence and effective-dated assignments: Import < Agent < Manager < Admin decides who may overwrite an entry, and switching an item on or off never rewrites earlier weeks",
           "Weekly scorecard push with dry run, push log and corrected-week re-push; Slack reminders and digests start switched off and are previewed before they are enabled",
-          "Quality gate: 36 automated tests at v1.6 (24 engine tests in pure Node, 12 integration tests through an Apps Script shim), plus idempotent, editor-run migrations"
+          "Quality gate: 36 engine and integration tests at v1.6 (24 engine tests in pure Node, 12 integration tests through an Apps Script shim), plus idempotent, editor-run migrations"
         ],
         "stack": [
           "Google Apps Script",
@@ -1892,12 +1892,12 @@
         ],
         "metrics": [
           {
-            "value": "7",
-            "label": "releases in 15 days"
+            "value": "9",
+            "label": "releases in 15 days (v1.0 to v1.6.1)"
           },
           {
             "value": "36",
-            "label": "automated tests"
+            "label": "engine + integration tests"
           },
           {
             "value": "0",
@@ -1953,7 +1953,7 @@
           },
           {
             "skill": "Test automation",
-            "evidence": "36 automated tests, including integration tests through an Apps Script shim in Node."
+            "evidence": "36 engine and integration tests at v1.6 (plus import and OCR suites), including integration tests through an Apps Script shim in Node."
           }
         ],
         "keywords": [
