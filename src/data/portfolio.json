@@ -1,15 +1,265 @@
 {
   "owner": "forrestswan3",
   "author": "Forrest Swan III",
-  "updated": "2026-10-18",
+  "updated": "2026-10-20",
   "projects": [
+    {
+      "name": "filegate",
+      "title": "FileGate — Naming Compliance Auditor + AI Intake",
+      "category": "Automation",
+      "status": "Maintained",
+      "status_as_of": "2026-10-10",
+      "shipped": "2026-09-23",
+      "lang": "Python",
+      "tagline": "Built and deployed an AI-powered data-governance platform that audits about 67,000 client files against policy and files new documents automatically using LLM field extraction.",
+      "topics": [
+        "data-governance",
+        "python",
+        "llm-integration",
+        "compliance",
+        "workflow-automation",
+        "document-processing",
+        "sqlite",
+        "root-cause-analysis",
+        "test-automation"
+      ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
+      "detail": {
+        "problem": "Client records on the shared file server had drifted from the agency's naming and folder policy, which hurt retrieval and created compliance and E&O risk. No one could see where violations were or who owned them.",
+        "solution": "Designed, built and put into production a two-part system. The Naming Compliance Auditor encodes the data policy as a machine-readable ruleset, attributes file ownership, locks a baseline compliance score per employee and supports reversible renames. FileGate Intake is an automated document-ingestion pipeline: staff upload a file and an on-site agent uses LLM extraction (Claude API) to identify the client, document type and address, renames it to policy and files it.",
+        "highlights": [
+          "Treated policy as code (versioned JSON ruleset); anything that can't be derived goes to a human review queue instead of being guessed",
+          "Ran a root cause analysis on stalled weekly scans: throughput fell from about 178 items/s on the office LAN to about 7 over the VPN. Fixed it with a network gate, incremental commits and explicit failure states, then migrated the job to an always-on host",
+          "Production scan: 67,240 items processed in 24 minutes with 0 errors (2026-09-22)",
+          "Human-in-the-loop design: unmatched documents are parked for review, never mis-filed",
+          "Quality gate: 62 automated tests passing; a 388,000-row database migration verified before go-live",
+          "Drove adoption with change-management deliverables: a 33-slide training deck, two narrated videos, a 24-question assessment and two SOPs (2026-09-24)",
+          "Added a Scan Dashboard (v1.0 to v1.5, 2026-09-28 to 2026-10-02): a web dashboard plus an on-site sidecar that lets admins batch-rename confidently classified files in place, read client names with AI, limit scans to a two-year activity window and target specific document types",
+          "Intake v1.3 (2026-09-30) added a property-folder picker and dashboard admin roles; scheduled jobs on the always-on host now run headless (2026-10-09)"
+        ],
+        "notes": [
+          "Completed: in production since 2026-09-23. Compliance-rate improvement will be published once rename cycles begin."
+        ],
+        "metrics": [
+          {
+            "value": "67,240",
+            "label": "items per production scan"
+          },
+          {
+            "value": "24 min",
+            "label": "full scan run time"
+          },
+          {
+            "value": "0",
+            "label": "errors (2026-09-22)"
+          },
+          {
+            "value": "62",
+            "label": "automated tests passing"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Weekly schedule",
+            "note": "always-on host on the office network"
+          },
+          {
+            "label": "Network gate",
+            "note": "refuses to run off-LAN"
+          },
+          {
+            "label": "File-share scan",
+            "note": "~67,000 items"
+          },
+          {
+            "label": "Policy as code",
+            "note": "versioned JSON ruleset"
+          },
+          {
+            "label": "Incremental commits",
+            "note": "results database, explicit failure states"
+          },
+          {
+            "label": "Report + review queue",
+            "note": "humans decide what can't be derived"
+          },
+          {
+            "label": "Scan Dashboard",
+            "note": "batch rename, review queue, admin actions"
+          }
+        ],
+        "oss": [
+          "naming-policy-validator"
+        ],
+        "impact": "Turned an unenforced records policy into a measurable data-governance program. FileGate gives leadership an auditable compliance baseline across about 67,000 client files, targets the E&O exposure of misfiled records, and automates document intake with LLM field extraction while keeping humans in the loop for anything uncertain.",
+        "competencies": [
+          {
+            "skill": "Data governance & compliance",
+            "evidence": "Encoded the agency's records and naming policy as a versioned, machine-readable ruleset with per-employee compliance baselines and reversible renames."
+          },
+          {
+            "skill": "AI / LLM integration",
+            "evidence": "Automated document intake with Claude API field extraction (client, document type, address), with a human review queue for anything unmatched."
+          },
+          {
+            "skill": "Root cause analysis & performance tuning",
+            "evidence": "Diagnosed a roughly 25× throughput gap (LAN vs VPN) and re-architected the job with a network gate, incremental commits and explicit failure states."
+          },
+          {
+            "skill": "Software quality",
+            "evidence": "62 automated tests passing and a 388,000-row database migration verified before go-live."
+          },
+          {
+            "skill": "Change management & training",
+            "evidence": "Drove adoption with a 33-slide training deck, two narrated videos, a 24-question assessment and two SOPs."
+          }
+        ],
+        "keywords": [
+          "Data Governance",
+          "Records Management",
+          "Compliance Automation",
+          "Policy as Code",
+          "Python",
+          "LLM Integration (Claude API)",
+          "Intelligent Document Processing",
+          "Human-in-the-Loop AI",
+          "SQLite",
+          "Root Cause Analysis",
+          "Performance Tuning",
+          "Test Automation",
+          "Change Management",
+          "E&O Risk Reduction"
+        ]
+      },
+      "demo": null,
+      "preview_img": null,
+      "source": "private"
+    },
+    {
+      "name": "uw-triage",
+      "title": "UW Triage Engine + Board",
+      "category": "Automation",
+      "status": "Maintained",
+      "status_as_of": "2026-10-15",
+      "shipped": "2026-09-22",
+      "lang": "Google Apps Script",
+      "tagline": "Automated the underwriting-notice workflow end to end: LLM-powered triage, a web-based work board and two-way Slack integration for accountability and SLA tracking.",
+      "topics": [
+        "workflow-automation",
+        "llm-integration",
+        "google-apps-script",
+        "slack-api",
+        "process-improvement",
+        "sla-tracking",
+        "insurance-operations",
+        "kanban"
+      ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
+      "detail": {
+        "problem": "Carrier underwriting notices arrived by email and fell through the cracks. There was no single source of truth for what was due, who owned it, or what was past due, which put policies and client retention at risk.",
+        "solution": "Built an intake-to-resolution pipeline. An Apps Script engine monitors the notices mailbox, uses the Claude API to extract structured fields, and writes work items to a central tracker. A web-app board lets agents claim and close items, with Slack DMs, a daily digest and commands issued straight from Slack threads.",
+        "highlights": [
+          "Shipped iteratively: engine v1.4 (legacy-notice backfill) and board v2.10.5 went into production on 2026-09-22, followed by eight board releases (v2.11 to v2.18) between 2026-09-30 and mid-October 2026: archive from any card, split multi-policy emails, unresolved-contact outcomes, associated-agent attribution, round-robin and mass auto-assign",
+          "Built two-way Slack integration within platform constraints (polling, since Apps Script can't read Slack signing headers), with every write going through one controlled path",
+          "Standardized SLA visibility: one Past Due flag measured in days, plus an end-of-day digest",
+          "Regression suites recorded 0 failures at v2.10",
+          "Change management kept pace with the code: SOP, Quick-Reference Guide and narrated training videos revised through Training v1.4 (2026-10-15)"
+        ],
+        "metrics": [
+          {
+            "value": "0",
+            "label": "regression failures at v2.10"
+          },
+          {
+            "value": "2-way",
+            "label": "Slack integration"
+          },
+          {
+            "value": "1",
+            "label": "Past Due flag, measured in days"
+          },
+          {
+            "value": "8",
+            "label": "board releases, 2026-09-30 to mid-Oct"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Notice intake",
+            "note": "underwriting notices"
+          },
+          {
+            "label": "LLM triage",
+            "note": "AI-assisted classification"
+          },
+          {
+            "label": "Web work board",
+            "note": "Google Apps Script"
+          },
+          {
+            "label": "Two-way Slack",
+            "note": "polling sync, one write path"
+          },
+          {
+            "label": "SLA tracking",
+            "note": "Past Due flag + end-of-day digest"
+          }
+        ],
+        "impact": "Replaced an email inbox with an accountable, SLA-driven workflow. Every carrier underwriting notice becomes a tracked work item with an owner and a due date, protecting policy retention and giving leadership real-time visibility into what is past due.",
+        "competencies": [
+          {
+            "skill": "Workflow automation",
+            "evidence": "Built an intake-to-resolution pipeline in Google Apps Script that turns underwriting emails into tracked work items on a central board."
+          },
+          {
+            "skill": "AI / LLM integration",
+            "evidence": "The Claude API extracts structured fields from each notice before it reaches the board."
+          },
+          {
+            "skill": "Systems integration (Slack API)",
+            "evidence": "Two-way Slack sync (DMs, a daily digest and commands from threads) with every write going through one controlled path."
+          },
+          {
+            "skill": "SLA management & reporting",
+            "evidence": "One Past Due flag measured in days, plus an end-of-day digest for accountability."
+          },
+          {
+            "skill": "Iterative delivery & QA",
+            "evidence": "Shipped through board v2.10.5 and engine v1.4, backfilled legacy notices, and recorded 0 regression failures at v2.10."
+          }
+        ],
+        "keywords": [
+          "Workflow Automation",
+          "Google Apps Script",
+          "LLM Integration (Claude API)",
+          "Slack API",
+          "Systems Integration",
+          "SLA Tracking",
+          "Kanban Work Board",
+          "Process Improvement",
+          "Insurance Operations",
+          "Underwriting",
+          "Client Retention",
+          "Regression Testing"
+        ]
+      },
+      "demo": null,
+      "preview_img": null,
+      "source": "private"
+    },
     {
       "name": "license-exam-prep",
       "title": "License Exam Prep",
-      "status": "Shipped",
+      "category": "Desktop App & Training",
+      "status": "Maintained",
+      "status_as_of": "2026-10-19",
       "shipped": "2026-07-02",
       "lang": "Python",
-      "tagline": "Designed and shipped an offline Python desktop application that prepares insurance agents for Florida state licensing exams across six license tracks.",
+      "tagline": "Designed and shipped an offline desktop exam-prep app for Florida insurance licensing across six license tracks, then re-platformed it as a web app on the team portal.",
       "topics": [
         "python",
         "desktop-application",
@@ -31,7 +281,8 @@
           "Built a 1,467-question, outline-mapped item bank (500 hand-written master items) across six license tracks: 2-20, 20-44, 4-40, 2-15, 2-14 and 2-40",
           "Architected blueprints as data: exam weights are validated at startup, so outline changes need no code change or redeploy",
           "Integrated an LLM (Anthropic API) for AI-generated study narratives, with the API key DPAPI-encrypted at rest and a deterministic offline fallback",
-          "Quality gate: 17 automated tests passing (verified 2026-09-22)"
+          "Quality gate: 17 automated tests passing (verified 2026-09-22)",
+          "Re-platformed as a Google Apps Script web app embedded in the team portal (live 2026-10-19): the same 1,467-question bank ships as a bundled data file, admin tools sit behind an admin PIN kept in Script Properties, and AI study narratives use the Anthropic API; the desktop build is retained as legacy"
         ],
         "stack": [
           "Python 3.10+",
@@ -39,7 +290,8 @@
           "SQLite",
           "ReportLab",
           "PyInstaller",
-          "Vanilla JS/CSS"
+          "Vanilla JS/CSS",
+          "Google Apps Script (web edition)"
         ],
         "diagram": "flowchart LR\n  UI[Web UI<br/>index.html + app.js] -- js_api --> API[api.py]\n  API --> ASM[assembler.py<br/>blueprint-weighted sampling]\n  ASM --> BANK[(data/banks/*.json)]\n  ASM --> BP[(blueprints.json)]\n  API --> DB[(SQLite attempts)]\n  DB --> PROJ[projection.py<br/>recency-weighted mastery]\n  API --> RPT[reports_ai.py / reports_pdf.py]\n  RPT -->|optional| ANT[Anthropic API]\n  RPT --> PDF[PDF report]",
         "notes": [
@@ -84,6 +336,10 @@
           {
             "label": "Reports",
             "note": "PDF + optional AI narrative"
+          },
+          {
+            "label": "Web edition",
+            "note": "Apps Script, embedded in the team portal"
           }
         ],
         "impact": "A self-serve exam-prep product built to shorten the path from new hire to licensed, revenue-producing agent. It runs on locked-down, carrier-managed workstations with no installs, add-ins or cloud services, and gives each learner a projected score and per-domain analytics.",
@@ -135,7 +391,9 @@
     {
       "name": "training-program",
       "title": "Agency Training Program",
-      "status": "Shipped",
+      "category": "Desktop App & Training",
+      "status": "Maintained",
+      "status_as_of": "2026-10-08",
       "shipped": "2026-07-14",
       "lang": "Python",
       "tagline": "Built an internal learning management system (LMS) that standardizes staff onboarding with video modules, randomized assessments, remediation gates and automated manager reporting.",
@@ -161,7 +419,9 @@
           "Enforced mastery: a failed attempt triggers a server-enforced remediation gate, so staff must rewatch the sections they missed before retaking",
           "Automated score reporting to the right manager through Outlook COM, working around a tenant that blocks SMTP AUTH; failed sends queue in SQLite and retry",
           "Added in-app PDF.js document viewing and cross-content search across narration, slides, documents and links",
-          "Quality gate: 39 automated tests passing (verified 2026-09-22), plus a Playwright end-to-end suite for the web variant"
+          "Quality gate: 39 automated tests passing (verified 2026-09-22), plus a Playwright end-to-end suite for the web variant",
+          "Web edition (September 2026) moved the platform onto the office file server for use over LAN and VPN; v2.10 merged the sales sub-teams and v2.11 added assignment progress tracking (2026-09-29)",
+          "Module library grew through an SOP builder: eight SOP modules (2026-09-25), then Agency Handbook and Call Recording Scoring trainings (2026-10-08); the 'Core Process' concept was renamed 'Quick-Reference Guide' across schema, UI and search index with a data migration (2026-10-07)"
         ],
         "stack": [
           "Python",
@@ -257,343 +517,14 @@
       "source": "private"
     },
     {
-      "name": "filegate",
-      "title": "FileGate — Naming Compliance Auditor + AI Intake",
-      "status": "In production",
-      "shipped": "2026-09-23",
-      "lang": "Python",
-      "tagline": "Built and deployed an AI-powered data-governance platform that audits about 67,000 client files against policy and files new documents automatically using LLM field extraction.",
-      "topics": [
-        "data-governance",
-        "python",
-        "llm-integration",
-        "compliance",
-        "workflow-automation",
-        "document-processing",
-        "sqlite",
-        "root-cause-analysis",
-        "test-automation"
-      ],
-      "repo": null,
-      "visibility": "public",
-      "detail": {
-        "problem": "Client records on the shared file server had drifted from the agency's naming and folder policy, which hurt retrieval and created compliance and E&O risk. No one could see where violations were or who owned them.",
-        "solution": "Designed, built and put into production a two-part system. The Naming Compliance Auditor encodes the data policy as a machine-readable ruleset, attributes file ownership, locks a baseline compliance score per employee and supports reversible renames. FileGate Intake is an automated document-ingestion pipeline: staff upload a file and an on-site agent uses LLM extraction (Claude API) to identify the client, document type and address, renames it to policy and files it.",
-        "highlights": [
-          "Treated policy as code (versioned JSON ruleset); anything that can't be derived goes to a human review queue instead of being guessed",
-          "Ran a root cause analysis on stalled weekly scans: throughput fell from about 178 items/s on the office LAN to about 7 over the VPN. Fixed it with a network gate, incremental commits and explicit failure states, then migrated the job to an always-on host",
-          "Production scan: 67,240 items processed in 24 minutes with 0 errors (2026-09-22)",
-          "Human-in-the-loop design: unmatched documents are parked for review, never mis-filed",
-          "Quality gate: 62 automated tests passing; a 388,000-row database migration verified before go-live",
-          "Drove adoption with change-management deliverables: a 33-slide training deck, two narrated videos, a 24-question assessment and two SOPs (2026-09-24)"
-        ],
-        "notes": [
-          "Completed: in production since 2026-09-23. Compliance-rate improvement will be published once rename cycles begin."
-        ],
-        "metrics": [
-          {
-            "value": "67,240",
-            "label": "items per production scan"
-          },
-          {
-            "value": "24 min",
-            "label": "full scan run time"
-          },
-          {
-            "value": "0",
-            "label": "errors (2026-09-22)"
-          },
-          {
-            "value": "62",
-            "label": "automated tests passing"
-          }
-        ],
-        "flow": [
-          {
-            "label": "Weekly schedule",
-            "note": "always-on host on the office network"
-          },
-          {
-            "label": "Network gate",
-            "note": "refuses to run off-LAN"
-          },
-          {
-            "label": "File-share scan",
-            "note": "~67,000 items"
-          },
-          {
-            "label": "Policy as code",
-            "note": "versioned JSON ruleset"
-          },
-          {
-            "label": "Incremental commits",
-            "note": "results database, explicit failure states"
-          },
-          {
-            "label": "Report + review queue",
-            "note": "humans decide what can't be derived"
-          }
-        ],
-        "oss": [
-          "naming-policy-validator"
-        ],
-        "impact": "Turned an unenforced records policy into a measurable data-governance program. FileGate gives leadership an auditable compliance baseline across about 67,000 client files, targets the E&O exposure of misfiled records, and automates document intake with LLM field extraction while keeping humans in the loop for anything uncertain.",
-        "competencies": [
-          {
-            "skill": "Data governance & compliance",
-            "evidence": "Encoded the agency's records and naming policy as a versioned, machine-readable ruleset with per-employee compliance baselines and reversible renames."
-          },
-          {
-            "skill": "AI / LLM integration",
-            "evidence": "Automated document intake with Claude API field extraction (client, document type, address), with a human review queue for anything unmatched."
-          },
-          {
-            "skill": "Root cause analysis & performance tuning",
-            "evidence": "Diagnosed a roughly 25× throughput gap (LAN vs VPN) and re-architected the job with a network gate, incremental commits and explicit failure states."
-          },
-          {
-            "skill": "Software quality",
-            "evidence": "62 automated tests passing and a 388,000-row database migration verified before go-live."
-          },
-          {
-            "skill": "Change management & training",
-            "evidence": "Drove adoption with a 33-slide training deck, two narrated videos, a 24-question assessment and two SOPs."
-          }
-        ],
-        "keywords": [
-          "Data Governance",
-          "Records Management",
-          "Compliance Automation",
-          "Policy as Code",
-          "Python",
-          "LLM Integration (Claude API)",
-          "Intelligent Document Processing",
-          "Human-in-the-Loop AI",
-          "SQLite",
-          "Root Cause Analysis",
-          "Performance Tuning",
-          "Test Automation",
-          "Change Management",
-          "E&O Risk Reduction"
-        ]
-      },
-      "page": null,
-      "demo": null,
-      "preview_img": null,
-      "source": "private"
-    },
-    {
-      "name": "uw-triage",
-      "title": "UW Triage Engine + Board",
-      "status": "In production",
-      "shipped": "2026-09-22",
-      "lang": "Google Apps Script",
-      "tagline": "Automated the underwriting-notice workflow end to end: LLM-powered triage, a web-based work board and two-way Slack integration for accountability and SLA tracking.",
-      "topics": [
-        "workflow-automation",
-        "llm-integration",
-        "google-apps-script",
-        "slack-api",
-        "process-improvement",
-        "sla-tracking",
-        "insurance-operations",
-        "kanban"
-      ],
-      "repo": null,
-      "visibility": "public",
-      "detail": {
-        "problem": "Carrier underwriting notices arrived by email and fell through the cracks. There was no single source of truth for what was due, who owned it, or what was past due, which put policies and client retention at risk.",
-        "solution": "Built an intake-to-resolution pipeline. An Apps Script engine monitors the notices mailbox, uses the Claude API to extract structured fields, and writes work items to a central tracker. A web-app board lets agents claim and close items, with Slack DMs, a daily digest and commands issued straight from Slack threads.",
-        "highlights": [
-          "Shipped iteratively through board v2.10.5 and engine v1.4, including backfill of legacy notices",
-          "Built two-way Slack integration within platform constraints (polling, since Apps Script can't read Slack signing headers), with every write going through one controlled path",
-          "Standardized SLA visibility: one Past Due flag measured in days, plus an end-of-day digest",
-          "Regression suites recorded 0 failures at v2.10"
-        ],
-        "metrics": [
-          {
-            "value": "0",
-            "label": "regression failures at v2.10"
-          },
-          {
-            "value": "2-way",
-            "label": "Slack integration"
-          },
-          {
-            "value": "1",
-            "label": "Past Due flag, measured in days"
-          }
-        ],
-        "flow": [
-          {
-            "label": "Notice intake",
-            "note": "underwriting notices"
-          },
-          {
-            "label": "LLM triage",
-            "note": "AI-assisted classification"
-          },
-          {
-            "label": "Web work board",
-            "note": "Google Apps Script"
-          },
-          {
-            "label": "Two-way Slack",
-            "note": "polling sync, one write path"
-          },
-          {
-            "label": "SLA tracking",
-            "note": "Past Due flag + end-of-day digest"
-          }
-        ],
-        "impact": "Replaced an email inbox with an accountable, SLA-driven workflow. Every carrier underwriting notice becomes a tracked work item with an owner and a due date, protecting policy retention and giving leadership real-time visibility into what is past due.",
-        "competencies": [
-          {
-            "skill": "Workflow automation",
-            "evidence": "Built an intake-to-resolution pipeline in Google Apps Script that turns underwriting emails into tracked work items on a central board."
-          },
-          {
-            "skill": "AI / LLM integration",
-            "evidence": "The Claude API extracts structured fields from each notice before it reaches the board."
-          },
-          {
-            "skill": "Systems integration (Slack API)",
-            "evidence": "Two-way Slack sync (DMs, a daily digest and commands from threads) with every write going through one controlled path."
-          },
-          {
-            "skill": "SLA management & reporting",
-            "evidence": "One Past Due flag measured in days, plus an end-of-day digest for accountability."
-          },
-          {
-            "skill": "Iterative delivery & QA",
-            "evidence": "Shipped through board v2.10.5 and engine v1.4, backfilled legacy notices, and recorded 0 regression failures at v2.10."
-          }
-        ],
-        "keywords": [
-          "Workflow Automation",
-          "Google Apps Script",
-          "LLM Integration (Claude API)",
-          "Slack API",
-          "Systems Integration",
-          "SLA Tracking",
-          "Kanban Work Board",
-          "Process Improvement",
-          "Insurance Operations",
-          "Underwriting",
-          "Client Retention",
-          "Regression Testing"
-        ]
-      },
-      "page": null,
-      "demo": null,
-      "preview_img": null,
-      "source": "private"
-    },
-    {
-      "name": "audit-system",
-      "title": "Audit & Compliance Scoring System",
-      "status": "In progress",
-      "shipped": null,
-      "lang": "Python",
-      "tagline": "Architecting a self-hosted quality-assurance and compliance audit platform: statistical sampling, rubric-based scoring, issue tracking and BI dashboards.",
-      "topics": [
-        "quality-assurance",
-        "compliance",
-        "python",
-        "postgresql",
-        "docker",
-        "business-intelligence",
-        "n8n",
-        "data-modeling"
-      ],
-      "repo": null,
-      "visibility": "public",
-      "detail": {
-        "problem": "Policy-file quality was checked ad hoc, with no sampling method, no scoring rubric and no audit trail, so QA results couldn't be defended or trended.",
-        "solution": "Designing a zero-license-cost, self-hosted stack on the office NAS (Docker): seeded stratified sampling, a versioned YAML scoring rubric, human-in-the-loop checklists (Jotform) feeding n8n workflows, findings stored in PostgreSQL, and Metabase dashboards for leadership reporting.",
-        "highlights": [
-          "Pure, unit-tested scoring and sampling functions",
-          "Designed the database schema and migrations (000–003), including a unified issue model for scheduled audits and reactive intake",
-          "Built for a hard constraint: the carrier portal allows no automation, so about 30–40% of checks stay human-in-the-loop by design"
-        ],
-        "metrics": [
-          {
-            "value": "4",
-            "label": "database migrations (000–003)"
-          },
-          {
-            "value": "30–40%",
-            "label": "of checks human-in-the-loop by design"
-          }
-        ],
-        "flow": [
-          {
-            "label": "Statistical sampling",
-            "note": "pure, unit-tested"
-          },
-          {
-            "label": "Rubric scoring",
-            "note": "human + automated checks"
-          },
-          {
-            "label": "Unified issue model",
-            "note": "scheduled + reactive"
-          },
-          {
-            "label": "BI dashboards",
-            "note": "trend and accountability"
-          }
-        ],
-        "impact": "Brings defensible, repeatable quality assurance to policy-file audits: statistically sampled, rubric-scored and trended over time, on a zero-license-cost, self-hosted stack.",
-        "competencies": [
-          {
-            "skill": "Quality assurance & compliance",
-            "evidence": "Seeded stratified sampling and a versioned YAML scoring rubric make audit results defensible and repeatable."
-          },
-          {
-            "skill": "Data modeling",
-            "evidence": "Database schema and migrations (000–003), including a unified issue model for scheduled audits and reactive intake."
-          },
-          {
-            "skill": "Solution architecture",
-            "evidence": "Self-hosted Docker stack: n8n workflows, PostgreSQL, Metabase dashboards and Jotform checklists."
-          },
-          {
-            "skill": "Business intelligence",
-            "evidence": "Leadership dashboards for trend and accountability reporting."
-          },
-          {
-            "skill": "Human-in-the-loop design",
-            "evidence": "About 30–40% of checks stay manual by design, because the carrier portal allows no automation."
-          }
-        ],
-        "keywords": [
-          "Quality Assurance",
-          "Compliance Auditing",
-          "Statistical Sampling",
-          "Data Modeling",
-          "PostgreSQL",
-          "Docker",
-          "n8n",
-          "Metabase",
-          "Business Intelligence",
-          "Python",
-          "Solution Architecture",
-          "Cost Optimization"
-        ]
-      },
-      "page": null,
-      "demo": null,
-      "preview_img": null,
-      "source": "private"
-    },
-    {
       "name": "apps-script-toolkit",
       "title": "Apps Script Toolkit",
-      "status": "Shipped",
+      "category": "Automation",
+      "status": "Maintained",
+      "status_as_of": "2026-10-19",
       "shipped": "2026-09-22",
       "lang": "Google Apps Script",
-      "tagline": "A suite of Google Apps Script automations that replaced manual reporting and scattered tools: KPI and SLA tracking, assessment generation, spend-data import and a team portal.",
+      "tagline": "A suite of Google Apps Script and Zapier automations that replaced manual reporting and scattered tools: KPI and SLA tracking, assessment generation, spend-data import, a team portal and Zap failure monitoring.",
       "topics": [
         "google-apps-script",
         "workflow-automation",
@@ -604,6 +535,7 @@
       ],
       "repo": null,
       "visibility": "public",
+      "page": null,
       "detail": {
         "problem": "Operations reporting and staff tools lived in manual spreadsheets and bookmarks, and the carrier-managed Microsoft 365 environment blocks macros and add-ins.",
         "solution": "Delivered focused automations in the Google environment the agency is permitted to automate, cutting manual work in reporting, training and finance tracking.",
@@ -611,11 +543,12 @@
           "KPI tracker: computes business-hours SLA metrics (Mon–Fri, 8 AM–6 PM), generates weekly roster rows and refreshes every 10 minutes",
           "Assessment generator: builds five auto-graded Google Forms with shuffled choices and per-item feedback",
           "Spend tracker: CSV import, formula repair and a custom menu for a multi-source spend workbook",
-          "Quick-Launch Hub: a web-app portal embedded in the team intranet (v1.2, 2026-09-22)"
+          "Quick-Launch Hub: a web-app portal embedded in the team intranet, iterated from v1.2 (2026-09-22) to v1.12 (2026-10-19) as the launch point for every internal tool",
+          "Zapier failure monitoring: a watchdog Zap that posts silent Zap failures to Slack, backed by a health log and an operating SOP (July 2026)"
         ],
         "metrics": [
           {
-            "value": "4",
+            "value": "5",
             "label": "automations in the suite"
           },
           {
@@ -685,7 +618,6 @@
           "Process Improvement"
         ]
       },
-      "page": null,
       "demo": null,
       "preview_img": null,
       "source": "private"
@@ -693,7 +625,9 @@
     {
       "name": "training-video-pipeline",
       "title": "Narrated Training Video Pipeline",
+      "category": "Desktop App & Training",
       "status": "Shipped",
+      "status_as_of": "2026-09-28",
       "shipped": "2026-07-15",
       "lang": "Python",
       "tagline": "Automated training-video production: turns slide decks and scripts into narrated MP4s with AI text-to-speech and interactive HTML players with clickable links.",
@@ -810,7 +744,9 @@
     {
       "name": "design-system",
       "title": "Design System",
+      "category": "Web & Design",
       "status": "Shipped",
+      "status_as_of": "2026-06-26",
       "shipped": "2026-06-26",
       "lang": "JavaScript",
       "tagline": "Created a design system (design tokens plus a React component library) to enforce brand consistency and WCAG AA accessibility across web properties.",
@@ -917,7 +853,9 @@
     {
       "name": "sdr-talk-path",
       "title": "SDR Talk Path Companion",
+      "category": "Web & Design",
       "status": "Shipped",
+      "status_as_of": "2026-08-21",
       "shipped": "2026-08-21",
       "lang": "JavaScript",
       "tagline": "Built a sales-enablement tool: an interactive call-guidance widget that gives sales development reps (SDRs) consistent, situation-specific cross-sell talk paths.",
@@ -1008,9 +946,111 @@
       "source": "private"
     },
     {
+      "name": "audit-system",
+      "title": "Audit & Compliance Scoring System",
+      "category": "Automation",
+      "status": "In Progress",
+      "status_as_of": "2026-10-19",
+      "shipped": null,
+      "lang": "Python",
+      "tagline": "Architecting a self-hosted quality-assurance and compliance audit platform: statistical sampling, rubric-based scoring, issue tracking and BI dashboards.",
+      "topics": [
+        "quality-assurance",
+        "compliance",
+        "python",
+        "postgresql",
+        "docker",
+        "business-intelligence",
+        "n8n",
+        "data-modeling"
+      ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
+      "detail": {
+        "problem": "Policy-file quality was checked ad hoc, with no sampling method, no scoring rubric and no audit trail, so QA results couldn't be defended or trended.",
+        "solution": "Designing a zero-license-cost, self-hosted stack on the office NAS (Docker): seeded stratified sampling, a versioned YAML scoring rubric, human-in-the-loop checklists (Jotform) feeding n8n workflows, findings stored in PostgreSQL, and Metabase dashboards for leadership reporting.",
+        "highlights": [
+          "Pure, unit-tested scoring and sampling functions",
+          "Designed the database schema and migrations (000–003), including a unified issue model for scheduled audits and reactive intake",
+          "Built for a hard constraint: the carrier portal allows no automation, so about 30–40% of checks stay human-in-the-loop by design"
+        ],
+        "metrics": [
+          {
+            "value": "4",
+            "label": "database migrations (000–003)"
+          },
+          {
+            "value": "30–40%",
+            "label": "of checks human-in-the-loop by design"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Statistical sampling",
+            "note": "pure, unit-tested"
+          },
+          {
+            "label": "Rubric scoring",
+            "note": "human + automated checks"
+          },
+          {
+            "label": "Unified issue model",
+            "note": "scheduled + reactive"
+          },
+          {
+            "label": "BI dashboards",
+            "note": "trend and accountability"
+          }
+        ],
+        "impact": "Brings defensible, repeatable quality assurance to policy-file audits: statistically sampled, rubric-scored and trended over time, on a zero-license-cost, self-hosted stack.",
+        "competencies": [
+          {
+            "skill": "Quality assurance & compliance",
+            "evidence": "Seeded stratified sampling and a versioned YAML scoring rubric make audit results defensible and repeatable."
+          },
+          {
+            "skill": "Data modeling",
+            "evidence": "Database schema and migrations (000–003), including a unified issue model for scheduled audits and reactive intake."
+          },
+          {
+            "skill": "Solution architecture",
+            "evidence": "Self-hosted Docker stack: n8n workflows, PostgreSQL, Metabase dashboards and Jotform checklists."
+          },
+          {
+            "skill": "Business intelligence",
+            "evidence": "Leadership dashboards for trend and accountability reporting."
+          },
+          {
+            "skill": "Human-in-the-loop design",
+            "evidence": "About 30–40% of checks stay manual by design, because the carrier portal allows no automation."
+          }
+        ],
+        "keywords": [
+          "Quality Assurance",
+          "Compliance Auditing",
+          "Statistical Sampling",
+          "Data Modeling",
+          "PostgreSQL",
+          "Docker",
+          "n8n",
+          "Metabase",
+          "Business Intelligence",
+          "Python",
+          "Solution Architecture",
+          "Cost Optimization"
+        ]
+      },
+      "demo": null,
+      "preview_img": null,
+      "source": "private"
+    },
+    {
       "name": "pfsense-wireguard-vpn",
       "title": "Secure Remote Access — pfSense Firewall + WireGuard VPN",
-      "status": "Operational",
+      "category": "Infrastructure & Ops",
+      "status": "Maintained",
+      "status_as_of": "2026-08-31",
       "shipped": "2025-12-29",
       "lang": "Infrastructure",
       "tagline": "Designed, deployed and administer the agency's perimeter firewall and zero-cost WireGuard VPN, enabling secure remote access for a hybrid workforce of 20+ users.",
@@ -1024,6 +1064,9 @@
         "incident-response",
         "identity-access-management"
       ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
       "detail": {
         "problem": "Remote and hybrid staff needed secure access to on-premises resources (file server and printers), but the agency had no managed firewall or VPN, and staff laptops don't grant local admin rights.",
         "solution": "Procured and deployed a Netgate 2100 running pfSense as the network perimeter, with WireGuard as the single standardized VPN. The rollout was engineered so non-admin users can connect and disconnect on their own, without weakening endpoint controls.",
@@ -1121,18 +1164,17 @@
           "Zero-Cost Solutions"
         ]
       },
-      "repo": null,
-      "source": "private",
-      "visibility": "public",
-      "page": null,
       "demo": null,
       "preview": null,
-      "preview_img": null
+      "preview_img": null,
+      "source": "private"
     },
     {
       "name": "qnap-nas",
       "title": "Agency File Server — QNAP NAS as System of Record",
-      "status": "Operational",
+      "category": "Infrastructure & Ops",
+      "status": "Maintained",
+      "status_as_of": "2026-09-30",
       "shipped": "2025-12-12",
       "lang": "Infrastructure",
       "tagline": "Led the business case, procurement and deployment of a centralized network-attached storage (NAS) system that became the agency's system of record for client data.",
@@ -1146,6 +1188,9 @@
         "budget-management",
         "vendor-evaluation"
       ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
       "detail": {
         "problem": "Client files were scattered across personal drives and laptops, creating data-loss, privacy and E&O exposure and slowing retrieval.",
         "solution": "Ran a vendor evaluation, secured owner approval and deployed a QNAP TVS-h674 on QuTS hero (ZFS) with two 4 TB WD Red drives in RAID 1. It has per-employee accounts, a designed folder-permission model, a least-privilege service account for automation, VPN-based remote access and quarterly backups.",
@@ -1153,9 +1198,10 @@
           "Evaluated three NAS platforms across price and capability tiers and presented a recommendation to ownership (July 2025)",
           "Authored the FY2026 Technology Budget Proposal, including the storage line item (October 2025)",
           "Procured in October 2025; built and brought to production in-office (November–December 2025)",
-          "Improved data resilience: mirrored storage (RAID 1) plus a quarterly backup cadence",
+          "Improved data resilience: mirrored storage (RAID 1), daily snapshots with smart versioning and a monthly off-site cloud backup job (deployed 2026-09-30)",
           "Applied least-privilege access: a file-sharing-only service account for automation",
-          "Consolidated about 67,000 client-file items under a weekly automated compliance scan (see FileGate); the NAS also hosts the staff training web platform"
+          "Consolidated about 67,000 client-file items under a weekly automated compliance scan (see FileGate); the NAS also hosts the staff training web platform",
+          "Hosts the embedded web editions of the staff training platform"
         ],
         "stack": [
           "QNAP TVS-h674",
@@ -1240,18 +1286,17 @@
           "Least Privilege"
         ]
       },
-      "repo": null,
-      "source": "private",
-      "visibility": "public",
-      "page": null,
       "demo": null,
       "preview": null,
-      "preview_img": null
+      "preview_img": null,
+      "source": "private"
     },
     {
       "name": "remote-print-server",
       "title": "Remote Printing Service",
-      "status": "In progress",
+      "category": "Infrastructure & Ops",
+      "status": "In Progress",
+      "status_as_of": "2026-10-19",
       "shipped": "2026-08-28",
       "lang": "Infrastructure",
       "tagline": "Deploying a centralized print service that lets hybrid staff print securely to office printers from anywhere over the VPN.",
@@ -1262,6 +1307,9 @@
         "end-user-support",
         "documentation"
       ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
       "detail": {
         "problem": "Staff could print only while physically in the office, which slowed remote and hybrid workflows.",
         "solution": "Stood up an office print server that shares the agency printers over the VPN, and wrote a one-page self-service setup guide to cut support tickets.",
@@ -1330,18 +1378,17 @@
           "VPN"
         ]
       },
-      "repo": null,
-      "source": "private",
-      "visibility": "public",
-      "page": null,
       "demo": null,
       "preview": null,
-      "preview_img": null
+      "preview_img": null,
+      "source": "private"
     },
     {
       "name": "it-department",
       "title": "Establishing the Agency IT Department",
-      "status": "Ongoing",
+      "category": "Infrastructure & Ops",
+      "status": "Maintained",
+      "status_as_of": "2026-09-15",
       "shipped": "2025-11-03",
       "lang": "Operations",
       "tagline": "Built the agency's IT function from the ground up: technology budget, procurement, vendor management, IT service desk, device lifecycle and systems governance.",
@@ -1355,6 +1402,9 @@
         "eos",
         "leadership"
       ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
       "detail": {
         "problem": "The agency had no IT function. Purchasing, vendors, support and equipment were handled ad hoc, with no budget, no service levels and no systems inventory.",
         "solution": "Established a dedicated IT operations function: an annual technology budget, a centralized systems and vendor ledger, a tiered support model with a defined response SLA, and a managed device lifecycle.",
@@ -1447,18 +1497,17 @@
           "EOS"
         ]
       },
-      "repo": null,
-      "source": "private",
-      "visibility": "public",
-      "page": null,
       "demo": null,
       "preview": null,
-      "preview_img": null
+      "preview_img": null,
+      "source": "private"
     },
     {
       "name": "asset-inventory",
       "title": "Asset Inventory & Storage System",
-      "status": "Ongoing",
+      "category": "Infrastructure & Ops",
+      "status": "Maintained",
+      "status_as_of": "2026-08-31",
       "shipped": "2025-10-06",
       "lang": "Operations",
       "tagline": "Implemented IT asset management (ITAM): a tagged inventory of 150+ items with labeled storage and a remote-equipment register.",
@@ -1469,6 +1518,9 @@
         "facilities-management",
         "process-improvement"
       ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
       "detail": {
         "problem": "Equipment was untracked and scattered across desks and homes, creating loss risk, duplicate purchases and slow replacements.",
         "solution": "Created an asset-management system: numbered asset tags, label-maker labeling, a central register on the agency file server, labeled storage, and a register of agency-owned equipment held by remote staff.",
@@ -1546,18 +1598,17 @@
           "Process Improvement"
         ]
       },
-      "repo": null,
-      "source": "private",
-      "visibility": "public",
-      "page": null,
       "demo": null,
       "preview": null,
-      "preview_img": null
+      "preview_img": null,
+      "source": "private"
     },
     {
       "name": "shipping-station",
       "title": "Shipping & Postage Station",
-      "status": "Operational",
+      "category": "Infrastructure & Ops",
+      "status": "Shipped",
+      "status_as_of": "2026-04-17",
       "shipped": "2026-04-17",
       "lang": "Operations",
       "tagline": "Stood up and modernized an in-office shipping and postage operation, then migrated it to a Zebra thermal printer and Shippo multi-carrier platform when the legacy hardware failed.",
@@ -1568,6 +1619,9 @@
         "cost-control",
         "process-improvement"
       ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
       "detail": {
         "problem": "Packages and postage required trips out and manual label handling. Later, the legacy Pitney Bowes printer failed out of warranty.",
         "solution": "Built an in-office shipping station, then led a vendor migration from Pitney Bowes to a Zebra ZD421 thermal printer with Shippo for multi-carrier labels. USPS stamps are purchased on demand through Stamps.com and printed in batches to control recurring cost.",
@@ -1642,19 +1696,18 @@
           "Process Improvement"
         ]
       },
-      "repo": null,
-      "source": "private",
-      "visibility": "public",
-      "page": null,
       "demo": null,
       "preview": null,
-      "preview_img": null
+      "preview_img": null,
+      "source": "private"
     },
     {
       "name": "ups-backup-rollout",
       "title": "UPS Battery-Backup Rollout",
-      "status": "In progress",
-      "shipped": "2026-09-25",
+      "category": "Infrastructure & Ops",
+      "status": "Shipped",
+      "status_as_of": "2026-10-19",
+      "shipped": "2026-10-19",
       "lang": "Operations",
       "tagline": "Led a business-continuity rollout of battery backup across every office desk and every remote employee's internet connection.",
       "topics": [
@@ -1664,6 +1717,9 @@
         "compliance",
         "remote-workforce"
       ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
       "detail": {
         "problem": "Power interruptions took down office workstations and network equipment, and remote staff lost connectivity during outages.",
         "solution": "Standardized battery backup: a CyberPower CP1500PFCLCD UPS at each office desk, a UPS on the office modem/router, and a Daran 89.6 Wh LiFePO4 portable power station for each remote employee's modem and router.",
@@ -1672,7 +1728,8 @@
           "Protected the office network edge with a dedicated modem/router UPS",
           "Equipped every remote employee with a Daran 89.6 Wh LiFePO4 power station (100 W), sourced with spares at a volume discount (September 2026)",
           "Extended the life of legacy units by sourcing exact replacement batteries",
-          "Ran a fire-code compliance review (NFPA 1, Florida Fire Prevention Code, UL guidance) and defined five compliant installation options"
+          "Ran a fire-code compliance review (NFPA 1, Florida Fire Prevention Code, UL guidance) and defined five compliant installation options",
+          "Rollout completed October 2026: office desks, the network edge and every remote employee's connection are covered"
         ],
         "stack": [
           "CyberPower CP1500PFCLCD",
@@ -1723,18 +1780,17 @@
           "Risk Management"
         ]
       },
-      "repo": null,
-      "source": "private",
-      "visibility": "public",
-      "page": null,
       "demo": null,
       "preview": null,
-      "preview_img": null
+      "preview_img": null,
+      "source": "private"
     },
     {
       "name": "supply-subscriptions",
       "title": "Office Supply Management — Subscription Ordering",
-      "status": "Operational",
+      "category": "Infrastructure & Ops",
+      "status": "Shipped",
+      "status_as_of": "2026-05-31",
       "shipped": null,
       "lang": "Operations",
       "tagline": "Centralized procurement by moving recurring office supplies from ad-hoc orders to managed subscription purchasing with a shared request queue.",
@@ -1744,6 +1800,9 @@
         "process-improvement",
         "amazon-business"
       ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
       "detail": {
         "problem": "Supplies were ordered ad hoc, one request at a time, with no central control or visibility.",
         "solution": "Implemented subscription-based purchasing on Amazon Business Subscribe & Save, with a shared request cart so staff queue needs instead of placing one-off orders.",
@@ -1783,18 +1842,344 @@
           "Operations Management"
         ]
       },
-      "repo": null,
-      "source": "private",
-      "visibility": "public",
-      "page": null,
       "demo": null,
       "preview": null,
-      "preview_img": null
+      "preview_img": null,
+      "source": "private"
+    },
+    {
+      "name": "past-due-tracker",
+      "title": "Past-Due Task Tracker",
+      "category": "Automation",
+      "status": "Maintained",
+      "status_as_of": "2026-10-14",
+      "shipped": "2026-09-30",
+      "lang": "Google Apps Script",
+      "tagline": "Built a web app that turns weekly past-due task counts from several agency systems into per-agent trends, a Friday manager digest and automatic EOS scorecard updates.",
+      "topics": [
+        "google-apps-script",
+        "workflow-automation",
+        "kpi-reporting",
+        "ocr",
+        "slack-api",
+        "eos",
+        "insurance-operations",
+        "data-entry"
+      ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
+      "detail": {
+        "problem": "Past-due task counts lived in a shared spreadsheet tab with no validation, no trend view and no accountability for who entered what. Moving the numbers onto the EOS scorecard was a manual chore, and the counts came from several systems, some of which have no export at all.",
+        "solution": "A Google Apps Script web app embedded in the team portal. Staff pick their name from the roster, enter counts for the items assigned to them, or fill the grid from an export or a screenshot; managers and admins see team trends, a Friday Slack digest and draft Issues for the leadership meeting; the weekly metrics are pushed to the Ninety.io scorecard through a Zapier catch hook.",
+        "highlights": [
+          "Shipped v1.0 on 2026-09-30 and iterated through nine releases to v1.6.1 by 2026-10-14: spreadsheet import (v1.3), screenshot import (v1.4), single-total and separate-box items (v1.4.x), an 'in metrics' switch per item (v1.5), range completeness and an onboarding average (v1.6)",
+          "Privacy by design: Excel/CSV exports and screenshots are parsed in the browser; only per-person counts reach the server, with the file's SHA-256 logged for duplicate detection and raw task rows never stored",
+          "Screenshot import with Tesseract OCR: every queue column must add up to the TOTAL row, or the affected cells are flagged for human review before anything is saved",
+          "Role precedence and effective-dated assignments: Import < Agent < Manager < Admin decides who may overwrite an entry, and switching an item on or off never rewrites earlier weeks",
+          "Weekly scorecard push with dry run, push log and corrected-week re-push; Slack reminders and digests start switched off and are previewed before they are enabled",
+          "Quality gate: 36 engine and integration tests at v1.6 (24 engine tests in pure Node, 12 integration tests through an Apps Script shim), plus idempotent, editor-run migrations"
+        ],
+        "stack": [
+          "Google Apps Script",
+          "Google Sheets",
+          "HTML/JS (vanilla)",
+          "SheetJS (browser-side)",
+          "tesseract.js (browser-side OCR)",
+          "Slack API",
+          "Zapier → Ninety.io",
+          "Node test harness"
+        ],
+        "metrics": [
+          {
+            "value": "9",
+            "label": "releases in 15 days (v1.0 to v1.6.1)"
+          },
+          {
+            "value": "36",
+            "label": "engine + integration tests"
+          },
+          {
+            "value": "0",
+            "label": "raw task rows stored server-side"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Roster + assignments",
+            "note": "who owes which counts, by date"
+          },
+          {
+            "label": "Entry grid",
+            "note": "manual, export or screenshot"
+          },
+          {
+            "label": "Validation + precedence",
+            "note": "locks, jump warnings"
+          },
+          {
+            "label": "Trend dashboard",
+            "note": "team and per-agent"
+          },
+          {
+            "label": "Slack digest + Issue drafts",
+            "note": "Fridays"
+          },
+          {
+            "label": "EOS scorecard push",
+            "note": "Zapier catch hook"
+          }
+        ],
+        "notes": [
+          "The roster and item names in the repository are fictional; agency data fixtures are not included."
+        ],
+        "impact": "Replaced an unvalidated spreadsheet tab with an accountable weekly process: every count has an owner, a snapshot date and an audit row, managers get a digest without chasing people, and the EOS scorecard updates itself from the same numbers.",
+        "competencies": [
+          {
+            "skill": "Workflow automation",
+            "evidence": "Entry-to-scorecard pipeline in Google Apps Script with a Zapier catch hook into Ninety.io."
+          },
+          {
+            "skill": "Privacy-by-design engineering",
+            "evidence": "Browser-side parsing of exports and screenshots; only per-person counts and a file hash reach the server."
+          },
+          {
+            "skill": "OCR and data validation",
+            "evidence": "Tesseract.js screenshot reader with column-sum verification against the TOTAL row and cell-level flags."
+          },
+          {
+            "skill": "Access control design",
+            "evidence": "Role precedence for overwrites and effective-dated assignments that preserve history."
+          },
+          {
+            "skill": "Test automation",
+            "evidence": "36 engine and integration tests at v1.6 (plus import and OCR suites), including integration tests through an Apps Script shim in Node."
+          }
+        ],
+        "keywords": [
+          "Google Apps Script",
+          "Workflow Automation",
+          "KPI Reporting",
+          "EOS / Ninety.io",
+          "OCR",
+          "Slack API",
+          "Zapier",
+          "Data Validation",
+          "Privacy by Design",
+          "Test Automation",
+          "Insurance Operations"
+        ]
+      },
+      "demo": null,
+      "preview_img": null,
+      "source": "private"
+    },
+    {
+      "name": "team-resources",
+      "title": "Team Resources Portal + Quick-Launch Hub",
+      "category": "Automation",
+      "status": "Maintained",
+      "status_as_of": "2026-10-19",
+      "shipped": "2026-09-22",
+      "lang": "Google Sites + Apps Script",
+      "tagline": "Built the staff portal that fronts every internal tool: a Google Sites intranet with an Apps Script Quick-Launch Hub, full-page app embeds and a shared light/dark theme standard.",
+      "topics": [
+        "intranet",
+        "google-sites",
+        "google-apps-script",
+        "internal-tools",
+        "ux",
+        "change-management",
+        "insurance-operations"
+      ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
+      "detail": {
+        "problem": "Internal tools, guides, calendars and references were scattered across bookmarks, chat pins and shared drives, so new staff could not find what existed and rollouts had no single landing place.",
+        "solution": "One portal built on the platform the agency is permitted to use: a Google Sites intranet with Tools, Training and Resources navigation, an Apps Script Quick-Launch Hub of tiles, and full-page embeds of the agency's web apps (document intake and scan dashboard, underwriting triage board, past-due tracker, training platform, exam prep). A shared theme snippet gives every embedded app the same light/dark toggle.",
+        "highlights": [
+          "Quick-Launch Hub iterated from v1.2 (2026-09-22) to v1.12 (2026-10-19) across nine documented change logs: new tool tiles, calendars, roster v5, HR and call-recording tiles, agency-process pages",
+          "Five internal web apps embedded full-page behind one navigation, so every rollout lands in the same place",
+          "Theme standard (2026-10-19): a reusable snippet gives each page a light/dark toggle that follows the device by default and remembers a per-page override; applied to 13 pages and embeds",
+          "Reference content alongside the tools: personality-intelligence report viewer, quick-reference-guide gallery, team calendar and per-person Google Calendar embeds"
+        ],
+        "stack": [
+          "Google Sites",
+          "Google Apps Script (web app)",
+          "HTML/CSS/JS embeds",
+          "Google Calendar"
+        ],
+        "metrics": [
+          {
+            "value": "5",
+            "label": "internal apps embedded"
+          },
+          {
+            "value": "13",
+            "label": "pages with the shared theme toggle"
+          },
+          {
+            "value": "9",
+            "label": "documented Hub releases (Sep–Oct 2026)"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Google Sites portal",
+            "note": "Tools · Training · Resources"
+          },
+          {
+            "label": "Quick-Launch Hub",
+            "note": "Apps Script tiles"
+          },
+          {
+            "label": "Embedded apps",
+            "note": "full-page, one navigation"
+          },
+          {
+            "label": "Shared theme snippet",
+            "note": "device default + per-page override"
+          }
+        ],
+        "notes": [],
+        "impact": "Gave the team one front door for every internal system. Rollouts now ship as a tile and an embed instead of a link in chat, and the consistent theme and navigation lower the training cost of each new tool.",
+        "competencies": [
+          {
+            "skill": "Internal tools & intranet design",
+            "evidence": "Google Sites portal with an Apps Script hub and five embedded web apps."
+          },
+          {
+            "skill": "Front-end consistency",
+            "evidence": "Shared light/dark theme snippet applied to 13 pages and embeds."
+          },
+          {
+            "skill": "Change management",
+            "evidence": "Nine documented releases with change logs and in-portal guides."
+          },
+          {
+            "skill": "Working within constraints",
+            "evidence": "Built entirely on the consumer Google platform the agency can use."
+          }
+        ],
+        "keywords": [
+          "Intranet",
+          "Google Sites",
+          "Google Apps Script",
+          "Internal Tools",
+          "UX Consistency",
+          "Change Management",
+          "Documentation",
+          "Insurance Operations"
+        ]
+      },
+      "demo": null,
+      "preview_img": null,
+      "source": "none"
+    },
+    {
+      "name": "documentation-program",
+      "title": "Documentation & Quick-Reference Guide Program",
+      "category": "Documentation & Training",
+      "status": "Maintained",
+      "status_as_of": "2026-10-08",
+      "shipped": "2026-07-09",
+      "lang": "Operations",
+      "tagline": "Standardized agency documentation: a versioned SOP naming convention, builder scripts, 28 SOPs and quick-reference guides, and the training assets that accompany each system rollout.",
+      "topics": [
+        "sop-development",
+        "documentation",
+        "knowledge-management",
+        "training",
+        "eos",
+        "process-improvement",
+        "insurance-operations"
+      ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
+      "detail": {
+        "problem": "Procedures were spread across unversioned files with inconsistent names, duplicates and no archive policy, and new systems went live without a matching guide or training.",
+        "solution": "A documentation program with one naming convention, a template-driven build pipeline and a rule that every rollout ships with its SOP, quick-reference guide and training module.",
+        "highlights": [
+          "SOP naming convention and archive policy applied to the library (2026-07-09): versioned, title-cased names and an Archived SOPs folder instead of deletions",
+          "20 existing SOPs converted into Quick-Reference Guide documents with a reusable Python builder (2026-09-24); eight new SOP modules built straight into the training platform (2026-09-25)",
+          "Retired the term 'Core Process' in favour of 'Quick-Reference Guide' across documents, Drive folders and the training app, with a data migration (2026-10-07)",
+          "Recurring work documented end to end: call-recording scoring (SOP, guide and narrated video) and the agency handbook training (both 2026-10-08)",
+          "Supporting assets: e-ink tablet library reorganization script (2026-09-29), multi-page client intake worksheet v2.0 (2026-09-29), portfolio publishing SOP (2026-09-25)"
+        ],
+        "stack": [
+          "Python document builders",
+          "Google Drive",
+          "PDF/DOCX",
+          "Training platform modules"
+        ],
+        "metrics": [
+          {
+            "value": "28",
+            "label": "SOPs and quick-reference guides"
+          },
+          {
+            "value": "1",
+            "label": "naming convention, applied library-wide"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Naming convention",
+            "note": "versioned, archived never deleted"
+          },
+          {
+            "label": "Builder scripts",
+            "note": "template → PDF/guide"
+          },
+          {
+            "label": "Training module",
+            "note": "video + quiz + guide"
+          },
+          {
+            "label": "Portal + Drive",
+            "note": "one place to find it"
+          }
+        ],
+        "notes": [],
+        "impact": "Every system the team uses now has a findable, versioned procedure and a training module built from the same source, so onboarding and audits no longer depend on tribal knowledge.",
+        "competencies": [
+          {
+            "skill": "SOP development",
+            "evidence": "Naming convention, archive policy and 28 guides."
+          },
+          {
+            "skill": "Documentation automation",
+            "evidence": "Python builders turn structured content into guides and training modules."
+          },
+          {
+            "skill": "Knowledge management",
+            "evidence": "Terminology standardized across documents, folders and software with a migration."
+          },
+          {
+            "skill": "Training & development",
+            "evidence": "Narrated videos and assessments shipped with each procedure."
+          }
+        ],
+        "keywords": [
+          "SOP Development",
+          "Documentation",
+          "Knowledge Management",
+          "Training & Development",
+          "Process Standardization",
+          "EOS",
+          "Insurance Operations"
+        ]
+      },
+      "demo": null,
+      "preview_img": null,
+      "source": "none"
     },
     {
       "name": "website-outreach-pipeline",
       "title": "Local Website Outreach Pipeline",
-      "status": "In progress",
+      "status": "In Progress",
       "shipped": "2026-10-18",
       "lang": "Python",
       "tagline": "A pipeline that finds Florida small businesses with missing or broken websites, builds two sample sites for each from public facts, publishes them for preview and runs compliant email outreach.",

@@ -145,6 +145,7 @@ kbd { font-family: inherit; font-size: .75rem; border: 1px solid var(--line); bo
 .card-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 .pill { display: inline-flex; align-items: center; gap: .35rem; font-size: .75rem; font-weight: 600; padding: .2rem .6rem; border-radius: 99px; background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--line); }
 .pill--live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-ui); }
+.pill--wip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; border: 2px solid var(--accent-ui); box-sizing: border-box; }
 .meta { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .8rem; }
 .tags { display: flex; flex-wrap: wrap; gap: .35rem; margin: .25rem 0 .5rem; padding: 0; list-style: none; }
 .tags li { font-size: .75rem; color: var(--ink-2); border: 1px solid var(--line); border-radius: 6px; padding: .05rem .45rem; margin: 0; }

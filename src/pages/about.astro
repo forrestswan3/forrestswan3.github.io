@@ -3,7 +3,15 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import profile from '../data/profile.json';
+import portfolio from '../data/portfolio.json';
 const [koi, avidyne, paramount] = profile.experience;
+// Counts come from the same data file as the Work page, so this paragraph never drifts from the case studies.
+const pub = portfolio.projects.filter((p: any) => p.visibility === 'public');
+const infra = pub.filter((p: any) => p.category === 'Infrastructure & Ops');
+const software = pub.filter((p: any) => ['Automation', 'Desktop App & Training'].includes(p.category));
+const maintained = software.filter((p: any) => p.status === 'Maintained');
+const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+const w = (n: number) => words[n] ?? String(n);
 ---
 <Base title="About" description={`About ${profile.name}: ${profile.title} at ${profile.employer}, with systems administration roles at Avidyne Corporation and the Paramount Foundation.`}>
   <section class="section">
@@ -25,7 +33,7 @@ const [koi, avidyne, paramount] = profile.experience;
 
         <h2>Now: {koi.employer}</h2>
         <p>Since {koi.start} I've worked at {koi.employer}, an Allstate agency in {koi.location}. I was promoted from Licensed Sales Producer to Technical Solutions Manager to {koi.title}, and I own systems architecture, automation, data governance and cybersecurity.</p>
-        <p>The environment has real constraints. The agency's Microsoft 365 environment is carrier-managed and blocks add-ins and macros, so automation runs through Google Apps Script, Zapier, n8n and standalone Windows apps instead. Within that, I've built and documented nine internal software systems and led eight infrastructure and IT operations projects, from the firewall and VPN to the NAS and IT asset management. Two systems run in daily production: a file-naming compliance auditor for the agency file share and an AI-assisted underwriting-notice triage board with two-way Slack updates.</p>
+        <p>The environment has real constraints. The agency's Microsoft 365 environment is carrier-managed and blocks add-ins and macros, so automation runs through Google Apps Script, Zapier, n8n and standalone Windows apps instead. Within that, I've built and documented {w(software.length)} internal software systems and led {w(infra.length)} infrastructure and IT operations projects, from the firewall and VPN to the NAS and IT asset management. {w(maintained.length).charAt(0).toUpperCase() + w(maintained.length).slice(1)} of those systems run in daily production and are still being improved, among them a file-naming compliance auditor with AI document intake, an AI-assisted underwriting-notice triage board with two-way Slack updates, a past-due task tracker that feeds the EOS scorecard, and the staff portal that fronts all of them.</p>
 
         <p>I also publish <a href="/work/#open-source">open-source tools</a> distilled from that work and write up what I learn in <a href="/writing/">technical posts</a>.</p>
 
