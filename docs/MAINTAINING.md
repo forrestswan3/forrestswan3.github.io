@@ -6,7 +6,10 @@ Most content comes from JSON files in `src/data/`; longer page copy (home, About
 
 `src/data/portfolio.json` is **generated**. Do not edit it by hand. Project status, dates, highlights and the
 status-driven numbers on the home and About pages all come from the private `forrestswan3/portfolio-tracker`
-repo (`projects.yaml` → `scripts/build_portfolio.py`). Its `HOW-TO-UPDATE.md` has the three-step routine.
+repo (`projects.yaml` → `scripts/build_portfolio.py`). The tracker's *Publish portfolio* workflow pushes a fresh
+`portfolio.json` to `main` here whenever `projects.yaml` changes and every Monday morning; this repo's CI then
+builds, scans and deploys it. Record deliveries in the tracker (its **Add delivery** form or the YAML); see its
+`HOW-TO-UPDATE.md`.
 The one exception: non-agency entries that the tracker does not know (for example the SystemSerenity business
 projects) are kept as they are in the file, so they can still be edited here.
 
@@ -28,7 +31,7 @@ from the same function, so the numbers always match.
 
 **New job title, bullet or skill:** edit `src/data/profile.json`. The About page, the HTML resume, the PDF resume, the vCard and the search-engine data all update from this file.
 
-**New or updated project:** edit `projects.yaml` in the tracker repo and run its generators (see above).
+**New or updated project:** record it in the tracker repo (Add delivery form or `projects.yaml`); the site updates on its own.
 - Optional screenshot: add `public/previews/<name>.webp` (960×600) and set `"preview": "docs/preview.png"` and `"preview_img": "<name>"` on the project in the tracker.
 
 **Prices or service details:** edit `src/data/services.json`.
