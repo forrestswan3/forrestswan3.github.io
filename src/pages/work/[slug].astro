@@ -22,10 +22,16 @@ const related = posts.posts.filter((x) => x.related?.project === p.name);
 const all = portfolio.projects.filter((x) => x.visibility === 'public');
 const idx = all.findIndex((x) => x.name === p.name);
 const next = all[(idx + 1) % all.length];
+// Release history for this project, newest first, from the tracker's delivery timeline.
+const history: any[] = ((portfolio as any).deliveries?.quarters ?? []).flatMap((q: any) => q.items).filter((it: any) => it.name === p.name);
+const fmtS = (s: string) => new Date(s + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const clause = (n: string) => n.split(';').map((x) => x.replace(/\s*\([^)]*\)\s*$/, '').trim()).filter(Boolean);
+const updated = p.last_activity && p.last_activity !== p.shipped ? p.last_activity : null;
+const ops = ['Operations', 'Infrastructure'].includes(p.lang);
 const ld = {
   '@context': 'https://schema.org', '@type': (['Operations', 'Infrastructure'].includes(p.lang) ? 'CreativeWork' : 'SoftwareSourceCode'), name: p.title, description: p.tagline,
   programmingLanguage: p.lang, keywords: (d.keywords ?? p.topics).join(', '),
-  author: { '@id': 'https://forrestswan3.github.io/#person' }, ...(p.shipped ? { dateModified: p.shipped } : {}),
+  author: { '@id': 'https://forrestswan3.github.io/#person' }, ...(p.shipped ? { datePublished: p.shipped, dateModified: p.last_activity ?? p.shipped } : {}),
 };
 ---
 <Base title={p.title} description={p.tagline} jsonld={[ld]}>
@@ -34,8 +40,9 @@ const ld = {
       <p class="eyebrow"><a href="/work/">Work</a> / Case study</p>
       <h1 style="font-size:var(--step-3)">{p.title}</h1>
       <div class="meta">
-        <span class={p.status === 'In production' ? 'pill pill--live' : 'pill'}>{p.status}</span>
-        {p.shipped && <span class="pill">{p.status === 'Shipped' ? 'Shipped' : (['Operations', 'Infrastructure'].includes(p.lang) ? 'Since' : 'Updated')} {fmt(p.shipped)}</span>}
+        <span class={p.status === 'Maintained' ? 'pill pill--live' : p.status === 'In Progress' || p.status === 'Blocked' ? 'pill pill--wip' : 'pill'} title={p.status === 'Maintained' ? 'In production and actively maintained' : p.status === 'Shipped' ? 'Delivered and stable' : undefined}>{p.status}</span>
+        {p.shipped && <span class="pill">{p.status === 'In Progress' ? 'First release' : (ops ? 'Since' : 'Shipped')} {fmt(p.shipped)}</span>}
+        {updated && <span class="pill">Updated {fmt(updated)}</span>}
         <span class="pill">{p.lang}</span>
       </div>
       <p class="lede">{p.tagline}</p>
@@ -70,6 +77,15 @@ const ld = {
           {d.flow && (<><h2>Architecture</h2><Flow steps={d.flow} title={p.title} /></>)}
           {d.notes && d.notes.length > 0 && (<><h2>Notes</h2><ul>{d.notes.map((h: string) => <li set:html={md(h)} />)}</ul></>)}
           {repos.length > 0 && (<><h2>Open-source companion</h2>{repos.map((r: any) => <p><a href={r.url}>{r.title}</a> on GitHub: {r.summary}</p>)}</>)}
+          {history.length > 1 && (<>
+            <h2>Release history</h2>
+            <ol class="tl tl--compact">
+              {history.map((it: any) => (
+                <li><time datetime={it.date}>{fmtS(it.date)}</time><span>{it.kind === 'new' ? (p.status === 'In Progress' ? 'First release live' : 'Shipped') : clause(it.note).join('; ')}</span></li>
+              ))}
+            </ol>
+            <p class="small muted">From the project tracker's dated release records. <a href="/work/timeline/">All deliveries, by quarter →</a></p>
+          </>)}
           {related.length > 0 && (<><h2>Related writing</h2><ul>{related.map((x) => <li><a href={`/writing/${x.slug}/`}>{x.title}</a></li>)}</ul></>)}
         </div>
       </div>

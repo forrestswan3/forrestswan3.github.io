@@ -22,6 +22,9 @@ const groups = [
   { id: 'web', title: 'Web, design & business tooling', items: pub.filter((p) => !['Automation', 'Desktop App & Training', 'Infrastructure & Ops', 'Documentation & Training'].includes(cat(p))).sort(byStatus) },
 ];
 const maintained = pub.filter((p) => p.status === 'Maintained').length;
+const counts = { Maintained: maintained, Shipped: pub.filter((p) => p.status === 'Shipped').length, 'In Progress': pub.filter((p) => ['In Progress', 'Blocked'].includes(p.status)).length };
+const quarters: any[] = (portfolio as any).deliveries?.quarters ?? [];
+const q = quarters.find((x) => x.current);
 const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 const itemList = {
   '@context': 'https://schema.org', '@type': 'ItemList', name: 'Projects by Forrest Swan III',
@@ -34,10 +37,18 @@ const itemList = {
       <p class="eyebrow">Work</p>
       <h1 style="font-size:var(--step-3)">Projects & case studies</h1>
       <p class="lede">{pub.length} projects across software, infrastructure and operations, each with a written case study. Production source code is private and available for walkthrough on request; <a href="#open-source">{oss.repos.length} companion tools are open source</a>.</p>
-      <p class="notice">Case studies describe systems at a design level: staff names, IDs and network details are omitted, and no client data is shown. Status pills: <strong>Maintained</strong> = in production and still being improved ({maintained} today), <strong>Shipped</strong> = delivered and stable, <strong>In Progress</strong> = not yet live.</p>
+      <p class="notice">Case studies describe systems at a design level: staff names, IDs and network details are omitted, and no client data is shown. Status pills: <strong>Maintained</strong> = in production and still being improved ({maintained} today), <strong>Shipped</strong> = delivered and stable, <strong>In Progress</strong> = not yet live.{q && <> This quarter so far: <a href="/work/timeline/"><strong>{q.total} deliveries</strong> ({q.new} new, {q.improvements} improvements)</a>.</>}</p>
+
+      <div class="filters" role="group" aria-label="Filter projects by status" data-filters hidden>
+        <button type="button" class="chip" aria-pressed="true" data-status="all">All <span>{pub.length}</span></button>
+        <button type="button" class="chip" aria-pressed="false" data-status="Maintained">Maintained <span>{counts.Maintained}</span></button>
+        <button type="button" class="chip" aria-pressed="false" data-status="Shipped">Shipped <span>{counts.Shipped}</span></button>
+        <button type="button" class="chip" aria-pressed="false" data-status="In Progress">In Progress <span>{counts['In Progress']}</span></button>
+        <p class="small muted" role="status" aria-live="polite" data-filter-status></p>
+      </div>
 
       {groups.map((g) => g.items.length > 0 && (
-        <section aria-labelledby={`g-${g.id}`} style="margin-top:3rem">
+        <section aria-labelledby={`g-${g.id}`} style="margin-top:3rem" data-group>
           <h2 id={`g-${g.id}`} style="font-size:var(--step-2)">{g.title}</h2>
           <div class="grid grid--3">{g.items.map((p) => <ProjectCard p={p} />)}</div>
         </section>
@@ -116,4 +127,26 @@ const itemList = {
       </section>
     </div>
   </section>
+  <script>
+    // Status filter: progressive enhancement. Without JS every card is shown and the chips stay hidden.
+    const box = document.querySelector<HTMLElement>('[data-filters]');
+    if (box) {
+      box.hidden = false;
+      const chips = Array.from(box.querySelectorAll<HTMLButtonElement>('.chip'));
+      const status = box.querySelector<HTMLElement>('[data-filter-status]')!;
+      const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-group] [data-status]'));
+      const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-group]'));
+      const apply = (want: string) => {
+        let shown = 0;
+        cards.forEach((c) => { const on = want === 'all' || c.dataset.status === want || (want === 'In Progress' && c.dataset.status === 'Blocked'); c.hidden = !on; if (on) shown++; });
+        groups.forEach((g) => { g.hidden = !g.querySelector('[data-status]:not([hidden])'); });
+        chips.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.status === want)));
+        status.textContent = want === 'all' ? '' : `Showing ${shown} ${want.toLowerCase()} ${shown === 1 ? 'project' : 'projects'}.`;
+        try { history.replaceState(null, '', want === 'all' ? location.pathname : `${location.pathname}?status=${encodeURIComponent(want)}`); } catch (e) {}
+      };
+      chips.forEach((b) => b.addEventListener('click', () => apply(b.dataset.status!)));
+      const initial = new URLSearchParams(location.search).get('status');
+      if (initial && chips.some((b) => b.dataset.status === initial)) apply(initial);
+    }
+  </script>
 </Base>
