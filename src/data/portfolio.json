@@ -57,7 +57,7 @@
           },
           {
             "value": "62",
-            "label": "engine + integration tests passing"
+            "label": "automated tests passing"
           }
         ],
         "flow": [
@@ -309,7 +309,7 @@
           },
           {
             "value": "17",
-            "label": "engine + integration tests passing"
+            "label": "automated tests passing"
           }
         ],
         "flow": [
@@ -441,7 +441,7 @@
         "metrics": [
           {
             "value": "39",
-            "label": "engine + integration tests passing"
+            "label": "automated tests passing"
           },
           {
             "value": "1",
@@ -1893,7 +1893,7 @@
         "metrics": [
           {
             "value": "9",
-            "label": "releases in 15 days (v1.0 to v1.6.1) (v1.0 to v1.6.1)"
+            "label": "releases in 15 days (v1.0 to v1.6.1)"
           },
           {
             "value": "36",
