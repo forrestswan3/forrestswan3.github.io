@@ -8,13 +8,20 @@ import redesigns from '../../data/redesigns.json';
 import designs from '../../data/designs.json';
 
 const pub = portfolio.projects.filter((p) => p.visibility === 'public');
+// Status vocabulary (set in the private project tracker): Maintained = in production and actively
+// maintained; Shipped = delivered and stable; In Progress / Blocked = not yet live. Within a group,
+// Maintained sorts first, then Shipped, then In Progress.
+const rank: Record<string, number> = { Maintained: 0, Shipped: 1, 'In Progress': 2, Blocked: 3 };
+const byStatus = (a: any, b: any) => (rank[a.status] ?? 9) - (rank[b.status] ?? 9);
+const cat = (p: any) => p.category ?? (['Infrastructure', 'Operations'].includes(p.lang) ? 'Infrastructure & Ops' : 'Web & Design');
 const groups = [
-  { id: 'production', title: 'In production', items: pub.filter((p) => p.status === 'In production') },
-  { id: 'apps', title: 'Desktop apps & training systems', items: pub.filter((p) => ['license-exam-prep', 'training-program', 'training-video-pipeline'].includes(p.name)) },
-  { id: 'automation', title: 'Automation, web & design tooling', items: pub.filter((p) => ['apps-script-toolkit', 'sdr-talk-path', 'design-system'].includes(p.name)) },
-  { id: 'infra', title: 'Infrastructure & IT operations', items: pub.filter((p) => ['Infrastructure', 'Operations'].includes(p.lang)) },
-  { id: 'progress', title: 'In progress', items: pub.filter((p) => p.status === 'In progress' && !['Infrastructure', 'Operations'].includes(p.lang)) },
+  { id: 'automation', title: 'Automation & internal platforms', items: pub.filter((p) => cat(p) === 'Automation').sort(byStatus) },
+  { id: 'apps', title: 'Training & desktop apps', items: pub.filter((p) => cat(p) === 'Desktop App & Training').sort(byStatus) },
+  { id: 'infra', title: 'Infrastructure & IT operations', items: pub.filter((p) => cat(p) === 'Infrastructure & Ops').sort(byStatus) },
+  { id: 'docs', title: 'Documentation & process', items: pub.filter((p) => cat(p) === 'Documentation & Training').sort(byStatus) },
+  { id: 'web', title: 'Web, design & business tooling', items: pub.filter((p) => !['Automation', 'Desktop App & Training', 'Infrastructure & Ops', 'Documentation & Training'].includes(cat(p))).sort(byStatus) },
 ];
+const maintained = pub.filter((p) => p.status === 'Maintained').length;
 const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 const itemList = {
   '@context': 'https://schema.org', '@type': 'ItemList', name: 'Projects by Forrest Swan III',
@@ -27,7 +34,7 @@ const itemList = {
       <p class="eyebrow">Work</p>
       <h1 style="font-size:var(--step-3)">Projects & case studies</h1>
       <p class="lede">{pub.length} projects across software, infrastructure and operations, each with a written case study. Production source code is private and available for walkthrough on request; <a href="#open-source">{oss.repos.length} companion tools are open source</a>.</p>
-      <p class="notice">Case studies describe systems at a design level: staff names, IDs and network details are omitted, and no client data is shown.</p>
+      <p class="notice">Case studies describe systems at a design level: staff names, IDs and network details are omitted, and no client data is shown. Status pills: <strong>Maintained</strong> = in production and still being improved ({maintained} today), <strong>Shipped</strong> = delivered and stable, <strong>In Progress</strong> = not yet live.</p>
 
       {groups.map((g) => g.items.length > 0 && (
         <section aria-labelledby={`g-${g.id}`} style="margin-top:3rem">

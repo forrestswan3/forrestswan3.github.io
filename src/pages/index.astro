@@ -12,7 +12,7 @@ import posts from '../data/posts.json';
 import RepoCard from '../components/RepoCard.astro';
 
 const pub = portfolio.projects.filter((p) => p.visibility === 'public');
-const inProd = pub.filter((p) => p.status === 'In production').length;
+const inProd = pub.filter((p) => p.status === 'Maintained').length;
 const featured = ['filegate', 'uw-triage', 'license-exam-prep']
   .map((n) => pub.find((p) => p.name === n)).filter(Boolean);
 const pillarIcons = ['shield', 'flow', 'chart'];
@@ -39,8 +39,8 @@ const valueIcons = ['target', 'person', 'lotus'];
     <div class="wrap">
       <div class="proof" role="list" aria-label="At a glance">
         <div role="listitem"><strong>{pub.length}</strong><span>projects delivered: software, infrastructure and operations</span></div>
-        <div role="listitem"><strong>{inProd}</strong><span>in daily production</span></div>
-        <div role="listitem"><strong>118</strong><span>passing automated tests across 3 apps (FileGate, training, exam prep)</span></div>
+        <div role="listitem"><strong>{inProd}</strong><span>in daily production and actively maintained</span></div>
+        <div role="listitem"><strong>154</strong><span>passing automated tests across 4 apps (FileGate, training, exam prep, past-due tracker)</span></div>
         <div role="listitem"><strong>2016</strong><span>started in Salesforce systems administration</span></div>
       </div>
     </div>
