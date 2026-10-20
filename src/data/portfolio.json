@@ -135,7 +135,9 @@
       },
       "demo": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "readme_impact": "Policy-as-code audit of ~67,000 client files plus AI document intake with a human review queue",
+      "last_activity": "2026-10-09"
     },
     {
       "name": "uw-triage",
@@ -249,7 +251,9 @@
       },
       "demo": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "readme_impact": "Carrier underwriting notices become tracked, SLA-dated work items with two-way Slack",
+      "last_activity": "2026-10-15"
     },
     {
       "name": "license-exam-prep",
@@ -386,7 +390,9 @@
       },
       "demo": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "readme_impact": "Six-track Florida license exam prep, 1,467 questions, desktop and web editions",
+      "last_activity": "2026-10-19"
     },
     {
       "name": "training-program",
@@ -514,7 +520,9 @@
       },
       "demo": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "readme_impact": "Internal LMS: video modules, randomized assessments, remediation gates, manager reports",
+      "last_activity": "2026-10-08"
     },
     {
       "name": "apps-script-toolkit",
@@ -620,7 +628,8 @@
       },
       "demo": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "last_activity": "2026-10-19"
     },
     {
       "name": "training-video-pipeline",
@@ -739,7 +748,8 @@
       "demo": null,
       "preview": "docs/preview.png",
       "preview_img": "koi-training-video-pipeline",
-      "source": "private"
+      "source": "private",
+      "last_activity": "2026-09-28"
     },
     {
       "name": "design-system",
@@ -848,7 +858,8 @@
       },
       "preview": "docs/preview.png",
       "preview_img": "koi-design-system",
-      "source": "private"
+      "source": "private",
+      "last_activity": "2026-06-26"
     },
     {
       "name": "sdr-talk-path",
@@ -943,7 +954,8 @@
       },
       "preview": "docs/preview.png",
       "preview_img": "koi-sdr-talk-path",
-      "source": "private"
+      "source": "private",
+      "last_activity": "2026-08-21"
     },
     {
       "name": "audit-system",
@@ -1167,7 +1179,9 @@
       "demo": null,
       "preview": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "readme_impact": "Perimeter firewall and staff VPN for 20+ hybrid users, rolled out without admin rights",
+      "last_activity": "2025-12-29"
     },
     {
       "name": "qnap-nas",
@@ -1289,7 +1303,9 @@
       "demo": null,
       "preview": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "readme_impact": "NAS as system of record: RAID 1, least-privilege access, snapshots and off-site backup",
+      "last_activity": "2026-09-30"
     },
     {
       "name": "remote-print-server",
@@ -1381,7 +1397,8 @@
       "demo": null,
       "preview": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "last_activity": "2026-08-28"
     },
     {
       "name": "it-department",
@@ -1500,7 +1517,9 @@
       "demo": null,
       "preview": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "readme_impact": "Built the IT function: budget, 81-system ledger, service desk with 1-day SLA, device lifecycle",
+      "last_activity": "2026-09-15"
     },
     {
       "name": "asset-inventory",
@@ -1601,7 +1620,8 @@
       "demo": null,
       "preview": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "last_activity": "2025-10-06"
     },
     {
       "name": "shipping-station",
@@ -1699,7 +1719,8 @@
       "demo": null,
       "preview": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "last_activity": "2026-04-17"
     },
     {
       "name": "ups-backup-rollout",
@@ -1783,7 +1804,8 @@
       "demo": null,
       "preview": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "last_activity": "2026-10-19"
     },
     {
       "name": "supply-subscriptions",
@@ -1972,7 +1994,9 @@
       },
       "demo": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "readme_impact": "Weekly past-due counts with OCR/spreadsheet import, Slack digest and EOS scorecard push",
+      "last_activity": "2026-10-14"
     },
     {
       "name": "team-resources",
@@ -2075,7 +2099,8 @@
       },
       "demo": null,
       "preview_img": null,
-      "source": "none"
+      "source": "none",
+      "last_activity": "2026-10-19"
     },
     {
       "name": "documentation-program",
@@ -2174,7 +2199,8 @@
       },
       "demo": null,
       "preview_img": null,
-      "source": "none"
+      "source": "none",
+      "last_activity": "2026-10-08"
     },
     {
       "name": "website-outreach-pipeline",
@@ -2325,5 +2351,364 @@
     "github": "https://github.com/forrestswan3",
     "resume": "https://forrestswan3.github.io/resume.pdf"
   },
-  "headline": "Agency Operations & Systems Manager at Kasey Osman Insurance | Systems Architecture, Automation & Data Governance | Insurance Operations"
+  "headline": "Agency Operations & Systems Manager at Kasey Osman Insurance | Systems Architecture, Automation & Data Governance | Insurance Operations",
+  "deliveries": {
+    "fiscal_year_start_month": 1,
+    "quarters": [
+      {
+        "label": "Q4 2026",
+        "start": "2026-10-01",
+        "end": "2026-12-31",
+        "total": 17,
+        "new": 1,
+        "improvements": 16,
+        "current": true,
+        "pct_elapsed": 21,
+        "as_of": "2026-10-20",
+        "items": [
+          {
+            "date": "2026-10-19",
+            "name": "apps-script-toolkit",
+            "title": "Apps Script Toolkit",
+            "kind": "improvement",
+            "note": "Hub v1.12 (9 change logs 2026-09-24..10-15); Zap Watchdog built and running (owner-confirmed 2026-10-19)"
+          },
+          {
+            "date": "2026-10-19",
+            "name": "license-exam-prep",
+            "title": "License Exam Prep",
+            "kind": "improvement",
+            "note": "Web edition (Apps Script) live under Team Resources › Training; desktop .exe now legacy"
+          },
+          {
+            "date": "2026-10-19",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Hub v1.12 Exam Training Program tile; theme toggle standard across 13 pages"
+          },
+          {
+            "date": "2026-10-19",
+            "name": "ups-backup-rollout",
+            "title": "UPS Battery-Backup Rollout",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-10-15",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Hub v1.10.2 agency-processes pages"
+          },
+          {
+            "date": "2026-10-15",
+            "name": "uw-triage",
+            "title": "UW Triage Engine + Board",
+            "kind": "improvement",
+            "note": "v2.17 mass auto-assign; v2.18 ease of use (owner-confirmed deployed 2026-10-19); Training v1.4"
+          },
+          {
+            "date": "2026-10-14",
+            "name": "past-due-tracker",
+            "title": "Past-Due Task Tracker",
+            "kind": "improvement",
+            "note": "v1.6.1 onboarding trend chart"
+          },
+          {
+            "date": "2026-10-14",
+            "name": "uw-triage",
+            "title": "UW Triage Engine + Board",
+            "kind": "improvement",
+            "note": "v2.16 round-robin assign, to-do scheduled, merge any item; Training v1.3"
+          },
+          {
+            "date": "2026-10-13",
+            "name": "past-due-tracker",
+            "title": "Past-Due Task Tracker",
+            "kind": "improvement",
+            "note": "v1.5 In Metrics; v1.6 range completeness + onboarding average"
+          },
+          {
+            "date": "2026-10-09",
+            "name": "filegate",
+            "title": "FileGate — Naming Compliance Auditor + AI Intake",
+            "kind": "improvement",
+            "note": "Scheduled tasks moved to hidden wrappers (no console windows)"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "Agency Handbook Training v1.0; Call Recording Scoring Training v1.0"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "documentation-program",
+            "title": "Documentation & Quick-Reference Guide Program",
+            "kind": "improvement",
+            "note": "Call Recording Scoring + Agency Handbook trainings"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "uw-triage",
+            "title": "UW Triage Engine + Board",
+            "kind": "improvement",
+            "note": "v2.14 associated-with agent; v2.14.1/v2.15; Training v1.2"
+          },
+          {
+            "date": "2026-10-07",
+            "name": "documentation-program",
+            "title": "Documentation & Quick-Reference Guide Program",
+            "kind": "improvement",
+            "note": "Core Process → Quick-Reference Guide rename"
+          },
+          {
+            "date": "2026-10-02",
+            "name": "filegate",
+            "title": "FileGate — Naming Compliance Auditor + AI Intake",
+            "kind": "improvement",
+            "note": "Scan Dashboard v1.4 two-year activity window; v1.5 specific document types"
+          },
+          {
+            "date": "2026-10-02",
+            "name": "past-due-tracker",
+            "title": "Past-Due Task Tracker",
+            "kind": "improvement",
+            "note": "v1.4.1–v1.4.3 onboarding handling"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "past-due-tracker",
+            "title": "Past-Due Task Tracker",
+            "kind": "improvement",
+            "note": "v1.3 spreadsheet import; v1.4 screenshot import"
+          }
+        ]
+      },
+      {
+        "label": "Q3 2026",
+        "start": "2026-07-01",
+        "end": "2026-09-30",
+        "total": 21,
+        "new": 11,
+        "improvements": 10,
+        "current": false,
+        "items": [
+          {
+            "date": "2026-09-30",
+            "name": "qnap-nas",
+            "title": "Agency File Server — QNAP NAS as System of Record",
+            "kind": "improvement",
+            "note": "Off-site HBS 3 backup to myQNAPcloud (1 TB plan, monthly) + daily snapshots with Smart Versioning"
+          },
+          {
+            "date": "2026-09-30",
+            "name": "filegate",
+            "title": "FileGate — Naming Compliance Auditor + AI Intake",
+            "kind": "improvement",
+            "note": "Scan Dashboard v1.3 time-budgeted rename chunks; Intake v1.3 property-folder picker + dashboard admins"
+          },
+          {
+            "date": "2026-09-30",
+            "name": "uw-triage",
+            "title": "UW Triage Engine + Board",
+            "kind": "improvement",
+            "note": "v2.11 archive from any card; v2.12 split multi-policy emails; v2.13 unresolved contact outcome"
+          },
+          {
+            "date": "2026-09-30",
+            "name": "past-due-tracker",
+            "title": "Past-Due Task Tracker",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-09-29",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "v2.10 Sales team merger; v2.11 assignment progress"
+          },
+          {
+            "date": "2026-09-28",
+            "name": "filegate",
+            "title": "FileGate — Naming Compliance Auditor + AI Intake",
+            "kind": "improvement",
+            "note": "Scan Dashboard v1.0 live; v1.1 batch rename; v1.2 per-row fix + AI client-name read; video tutorial"
+          },
+          {
+            "date": "2026-09-28",
+            "name": "training-video-pipeline",
+            "title": "Narrated Training Video Pipeline",
+            "kind": "improvement",
+            "note": "Reused for the FileGate video tutorial; toolchain made self-sufficient on the office host (2026-09-23)"
+          },
+          {
+            "date": "2026-09-25",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "v2.9 slides + SOP builder, 8 new SOP modules"
+          },
+          {
+            "date": "2026-09-24",
+            "name": "documentation-program",
+            "title": "Documentation & Quick-Reference Guide Program",
+            "kind": "improvement",
+            "note": "20 SOPs → Core Process docs"
+          },
+          {
+            "date": "2026-09-23",
+            "name": "filegate",
+            "title": "FileGate — Naming Compliance Auditor + AI Intake",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-09-22",
+            "name": "apps-script-toolkit",
+            "title": "Apps Script Toolkit",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-09-22",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-09-22",
+            "name": "uw-triage",
+            "title": "UW Triage Engine + Board",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-09-15",
+            "name": "it-department",
+            "title": "Establishing the Agency IT Department",
+            "kind": "improvement",
+            "note": "BIS ledger reconciliation"
+          },
+          {
+            "date": "2026-09-11",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "Web edition on the NAS; roster & admin fix (v2.7)"
+          },
+          {
+            "date": "2026-08-28",
+            "name": "remote-print-server",
+            "title": "Remote Printing Service",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-08-21",
+            "name": "sdr-talk-path",
+            "title": "SDR Talk Path Companion",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-07-15",
+            "name": "training-video-pipeline",
+            "title": "Narrated Training Video Pipeline",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-07-14",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-07-09",
+            "name": "documentation-program",
+            "title": "Documentation & Quick-Reference Guide Program",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-07-02",
+            "name": "license-exam-prep",
+            "title": "License Exam Prep",
+            "kind": "new",
+            "note": "Shipped"
+          }
+        ]
+      },
+      {
+        "label": "Q2 2026",
+        "start": "2026-04-01",
+        "end": "2026-06-30",
+        "total": 2,
+        "new": 2,
+        "improvements": 0,
+        "current": false,
+        "items": [
+          {
+            "date": "2026-06-26",
+            "name": "design-system",
+            "title": "Design System",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-04-17",
+            "name": "shipping-station",
+            "title": "Shipping & Postage Station",
+            "kind": "new",
+            "note": "Shipped"
+          }
+        ]
+      },
+      {
+        "label": "Q4 2025",
+        "start": "2025-10-01",
+        "end": "2025-12-31",
+        "total": 4,
+        "new": 4,
+        "improvements": 0,
+        "current": false,
+        "items": [
+          {
+            "date": "2025-12-29",
+            "name": "pfsense-wireguard-vpn",
+            "title": "Secure Remote Access — pfSense Firewall + WireGuard VPN",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2025-12-12",
+            "name": "qnap-nas",
+            "title": "Agency File Server — QNAP NAS as System of Record",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2025-11-03",
+            "name": "it-department",
+            "title": "Establishing the Agency IT Department",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2025-10-06",
+            "name": "asset-inventory",
+            "title": "Asset Inventory & Storage System",
+            "kind": "new",
+            "note": "Shipped"
+          }
+        ]
+      }
+    ]
+  }
 }

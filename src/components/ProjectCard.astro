@@ -6,7 +6,7 @@ const H = headingLevel;
 const fmt = (d: string | null) => d ? new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : null;
 const hasPreview = showImage && p.preview;
 ---
-<article class="card">
+<article class="card" data-status={p.status}>
   {hasPreview && (
     <div class="card-img"><img src={`/previews/${p.preview_img}.webp`} alt={`Screenshot of ${p.title}`} width="960" height="600" loading="lazy" decoding="async" /></div>
   )}

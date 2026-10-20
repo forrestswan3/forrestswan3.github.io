@@ -9,7 +9,7 @@ const posts = [...data.posts].sort((a, b) => b.date.localeCompare(a.date));
     <div class="wrap" style="max-width:860px">
       <p class="eyebrow">Writing</p>
       <h1 style="font-size:var(--step-3)">Notes from the field</h1>
-      <p class="lede">Short technical write-ups from building and running agency systems. Each one is generic by design: no hostnames, addresses or client details.</p>
+      <p class="lede">Short technical write-ups from building and running agency systems. Each one is generic by design: no hostnames, addresses or client details. <a href="/rss.xml">RSS feed</a>.</p>
       <div class="post-list">
         {posts.map((p) => (
           <article class="card">

@@ -50,11 +50,13 @@ const paletteItems = [
   ...nav.map((n) => ({ label: n.label, href: n.href, group: 'Page' })),
   { label: 'Case studies', href: '/work/#case-studies', group: 'Page' },
   { label: 'Open source', href: '/work/#open-source', group: 'Page' },
+  { label: 'Delivery timeline', href: '/work/timeline/', group: 'Page' },
   ...posts.posts.map((p) => ({ label: p.title, href: `/writing/${p.slug}/`, group: 'Post' })),
   ...oss.repos.map((r) => ({ label: `${r.title} (GitHub)`, href: r.url, group: 'Open source' })),
   { label: 'Links', href: '/links/', group: 'Page' },
   { label: 'Download resume (PDF)', href: '/resume.pdf', group: 'File' },
   { label: 'Save contact card (vCard)', href: '/forrest-swan.vcf', group: 'File' },
+  { label: 'RSS feed (writing)', href: '/rss.xml', group: 'File' },
   ...portfolio.projects.filter((p) => p.visibility === 'public').map((p) => ({ label: p.title, href: `/work/${p.name}/`, group: 'Project' })),
   { label: 'Email Forrest', href: `mailto:${profile.email}`, group: 'Contact' },
   { label: 'LinkedIn', href: profile.social.linkedin, group: 'Contact' },
@@ -86,6 +88,7 @@ const built = new Date(portfolio.updated + 'T12:00:00').toLocaleDateString('en-U
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="sitemap" href="/sitemap.xml" />
+  <link rel="alternate" type="application/rss+xml" title={`${profile.brand.name} writing`} href="/rss.xml" />
   <meta property="og:type" content="profile" />
   <meta property="og:site_name" content={profile.brand.name} />
   <meta property="og:title" content={fullTitle} />
@@ -145,6 +148,7 @@ const built = new Date(portfolio.updated + 'T12:00:00').toLocaleDateString('en-U
         <a href="/links/">Links</a>
         <a href="/resume.pdf">Resume PDF</a>
         <a href="/forrest-swan.vcf">vCard</a>
+        <a href="/rss.xml">RSS</a>
       </nav>
       <SocialLinks variant="icons" label="Social profiles" />
     </div>

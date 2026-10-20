@@ -2,7 +2,7 @@ import portfolio from '../data/portfolio.json';
 import posts from '../data/posts.json';
 const SITE = 'https://forrestswan3.github.io';
 export function GET() {
-  const paths = ['/', '/about/', '/work/', '/services/', '/resume/', '/links/', '/contact/', '/writing/',
+  const paths = ['/', '/about/', '/work/', '/services/', '/resume/', '/links/', '/contact/', '/writing/', '/work/timeline/',
     ...posts.posts.map((p) => `/writing/${p.slug}/`),
     ...portfolio.projects.filter((p) => p.visibility === 'public').map((p) => `/work/${p.name}/`)];
   const today = new Date().toISOString().slice(0, 10);
