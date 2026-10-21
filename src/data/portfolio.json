@@ -136,7 +136,6 @@
       "demo": null,
       "preview_img": null,
       "source": "private",
-      "readme_impact": "Policy-as-code audit of ~67,000 client files plus AI document intake with a human review queue",
       "last_activity": "2026-10-09"
     },
     {
@@ -252,7 +251,6 @@
       "demo": null,
       "preview_img": null,
       "source": "private",
-      "readme_impact": "Carrier underwriting notices become tracked, SLA-dated work items with two-way Slack",
       "last_activity": "2026-10-15"
     },
     {
@@ -391,7 +389,6 @@
       "demo": null,
       "preview_img": null,
       "source": "private",
-      "readme_impact": "Six-track Florida license exam prep, 1,467 questions, desktop and web editions",
       "last_activity": "2026-10-19"
     },
     {
@@ -521,7 +518,6 @@
       "demo": null,
       "preview_img": null,
       "source": "private",
-      "readme_impact": "Internal LMS: video modules, randomized assessments, remediation gates, manager reports",
       "last_activity": "2026-10-08"
     },
     {
@@ -1180,7 +1176,6 @@
       "preview": null,
       "preview_img": null,
       "source": "private",
-      "readme_impact": "Perimeter firewall and staff VPN for 20+ hybrid users, rolled out without admin rights",
       "last_activity": "2025-12-29"
     },
     {
@@ -1304,7 +1299,6 @@
       "preview": null,
       "preview_img": null,
       "source": "private",
-      "readme_impact": "NAS as system of record: RAID 1, least-privilege access, snapshots and off-site backup",
       "last_activity": "2026-09-30"
     },
     {
@@ -1518,7 +1512,6 @@
       "preview": null,
       "preview_img": null,
       "source": "private",
-      "readme_impact": "Built the IT function: budget, 81-system ledger, service desk with 1-day SLA, device lifecycle",
       "last_activity": "2026-09-15"
     },
     {
@@ -1995,7 +1988,6 @@
       "demo": null,
       "preview_img": null,
       "source": "private",
-      "readme_impact": "Weekly past-due counts with OCR/spreadsheet import, Slack digest and EOS scorecard push",
       "last_activity": "2026-10-14"
     },
     {
@@ -2363,8 +2355,8 @@
         "new": 1,
         "improvements": 16,
         "current": true,
-        "pct_elapsed": 21,
-        "as_of": "2026-10-20",
+        "pct_elapsed": 22,
+        "as_of": "2026-10-21",
         "items": [
           {
             "date": "2026-10-19",
