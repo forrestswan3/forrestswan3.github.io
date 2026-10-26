@@ -1,7 +1,7 @@
 {
   "owner": "forrestswan3",
   "author": "Forrest Swan III",
-  "updated": "2026-10-20",
+  "updated": "2026-10-26",
   "projects": [
     {
       "name": "filegate",
@@ -143,7 +143,7 @@
       "title": "UW Triage Engine + Board",
       "category": "Automation",
       "status": "Maintained",
-      "status_as_of": "2026-10-15",
+      "status_as_of": "2026-10-22",
       "shipped": "2026-09-22",
       "lang": "Google Apps Script",
       "tagline": "Automated the underwriting-notice workflow end to end: LLM-powered triage, a web-based work board and two-way Slack integration for accountability and SLA tracking.",
@@ -164,7 +164,9 @@
         "problem": "Carrier underwriting notices arrived by email and fell through the cracks. There was no single source of truth for what was due, who owned it, or what was past due, which put policies and client retention at risk.",
         "solution": "Built an intake-to-resolution pipeline. An Apps Script engine monitors the notices mailbox, uses the Claude API to extract structured fields, and writes work items to a central tracker. A web-app board lets agents claim and close items, with Slack DMs, a daily digest and commands issued straight from Slack threads.",
         "highlights": [
-          "Shipped iteratively: engine v1.4 (legacy-notice backfill) and board v2.10.5 went into production on 2026-09-22, followed by eight board releases (v2.11 to v2.18) between 2026-09-30 and mid-October 2026: archive from any card, split multi-policy emails, unresolved-contact outcomes, associated-agent attribution, round-robin and mass auto-assign",
+          "Shipped iteratively: engine v1.4 (legacy-notice backfill) and board v2.10.5 went into production on 2026-09-22, followed by board releases through v2.24 (2026-10-22): archive from any card, split multi-policy emails, unresolved-contact outcomes, associated-agent attribution, round-robin and mass auto-assign, an open-cards-only count",
+          "Closed a cross-account permission gap (2026-10-22): the engine reads notice PDFs from the mailbox but cannot write to Drive, and the board has no mailbox access, so unreadable attachments stalled cards. The engine now stages each PDF in a sheet tab in base64 chunks and an hourly board job rebuilds it, files it in Drive and links every card from that email; verified byte-identical with a 5/5 test",
+          "EOS scorecard automation (v2.24, 2026-10-22): the board pushes weekly team measurables to Ninety.io every Friday (items associated to Sales, Service open/assigned and completed) through a Zapier catch hook with dry-run, push log and kill switch; a close-rate formula measurable derives from them, and eight weeks of history were rebuilt from the audit log",
           "Built two-way Slack integration within platform constraints (polling, since Apps Script can't read Slack signing headers), with every write going through one controlled path",
           "Standardized SLA visibility: one Past Due flag measured in days, plus an end-of-day digest",
           "Regression suites recorded 0 failures at v2.10",
@@ -180,12 +182,12 @@
             "label": "Slack integration"
           },
           {
-            "value": "1",
-            "label": "Past Due flag, measured in days"
+            "value": "4",
+            "label": "Ninety.io scorecard measurables driven by the board"
           },
           {
-            "value": "8",
-            "label": "board releases, 2026-09-30 to mid-Oct"
+            "value": "v2.24",
+            "label": "board release in production (2026-10-22)"
           }
         ],
         "flow": [
@@ -245,13 +247,15 @@
           "Insurance Operations",
           "Underwriting",
           "Client Retention",
-          "Regression Testing"
+          "Regression Testing",
+          "EOS / Ninety.io",
+          "Zapier"
         ]
       },
       "demo": null,
       "preview_img": null,
       "source": "private",
-      "last_activity": "2026-10-15"
+      "last_activity": "2026-10-22"
     },
     {
       "name": "license-exam-prep",
@@ -396,7 +400,7 @@
       "title": "Agency Training Program",
       "category": "Desktop App & Training",
       "status": "Maintained",
-      "status_as_of": "2026-10-08",
+      "status_as_of": "2026-10-23",
       "shipped": "2026-07-14",
       "lang": "Python",
       "tagline": "Built an internal learning management system (LMS) that standardizes staff onboarding with video modules, randomized assessments, remediation gates and automated manager reporting.",
@@ -424,7 +428,9 @@
           "Added in-app PDF.js document viewing and cross-content search across narration, slides, documents and links",
           "Quality gate: 39 automated tests passing (verified 2026-09-22), plus a Playwright end-to-end suite for the web variant",
           "Web edition (September 2026) moved the platform onto the office file server for use over LAN and VPN; v2.10 merged the sales sub-teams and v2.11 added assignment progress tracking (2026-09-29)",
-          "Module library grew through an SOP builder: eight SOP modules (2026-09-25), then Agency Handbook and Call Recording Scoring trainings (2026-10-08); the 'Core Process' concept was renamed 'Quick-Reference Guide' across schema, UI and search index with a data migration (2026-10-07)"
+          "Module library grew through an SOP builder: eight SOP modules (2026-09-25), then Agency Handbook and Call Recording Scoring trainings (2026-10-08); the 'Core Process' concept was renamed 'Quick-Reference Guide' across schema, UI and search index with a data migration (2026-10-07)",
+          "Three more modules on 2026-10-23, each with an SOP, a Quick-Reference Guide, a narrated video, a QRG video and a chaptered quiz bank: Ninety.io (my90) for all staff and leaders (32 minutes, 57 questions), the Exam Training Program (19 minutes, 51 questions) and IT Support with Alex (13 minutes, 50 questions); the library now holds 15 modules",
+          "Caught a silent failure in the text-to-speech pipeline: two narration clips came back truncated with no error. Found by frame-checking chapter timestamps, confirmed with a words-per-minute audit of every segment, and guarded permanently by rejecting any clip under 1,400 bytes per spoken word with automatic retries"
         ],
         "stack": [
           "Python",
@@ -442,6 +448,10 @@
           "`web-portal/` holds a later browser-based variant (single HTML page + PHP roster API) and its Playwright end-to-end test."
         ],
         "metrics": [
+          {
+            "value": "15",
+            "label": "training modules in the library"
+          },
           {
             "value": "39",
             "label": "automated tests passing"
@@ -518,7 +528,7 @@
       "demo": null,
       "preview_img": null,
       "source": "private",
-      "last_activity": "2026-10-08"
+      "last_activity": "2026-10-23"
     },
     {
       "name": "apps-script-toolkit",
@@ -547,7 +557,7 @@
           "KPI tracker: computes business-hours SLA metrics (Mon–Fri, 8 AM–6 PM), generates weekly roster rows and refreshes every 10 minutes",
           "Assessment generator: builds five auto-graded Google Forms with shuffled choices and per-item feedback",
           "Spend tracker: CSV import, formula repair and a custom menu for a multi-source spend workbook",
-          "Quick-Launch Hub: a web-app portal embedded in the team intranet, iterated from v1.2 (2026-09-22) to v1.12 (2026-10-19) as the launch point for every internal tool",
+          "Quick-Launch Hub: a web-app portal embedded in the team intranet, iterated from v1.2 (2026-09-22) to v1.17.2 (2026-10-23) as the launch point for every internal tool",
           "Zapier failure monitoring: a watchdog Zap that posts silent Zap failures to Slack, backed by a health log and an operating SOP (July 2026)"
         ],
         "metrics": [
@@ -1399,7 +1409,7 @@
       "title": "Establishing the Agency IT Department",
       "category": "Infrastructure & Ops",
       "status": "Maintained",
-      "status_as_of": "2026-09-15",
+      "status_as_of": "2026-10-26",
       "shipped": "2025-11-03",
       "lang": "Operations",
       "tagline": "Built the agency's IT function from the ground up: technology budget, procurement, vendor management, IT service desk, device lifecycle and systems governance.",
@@ -1423,15 +1433,18 @@
           "Career progression: Licensed Sales Producer, then a home-insurance sales seat, then promoted to Technical Solutions Manager (August 2025; full-time November 2025) and Agency Operations & Systems Manager (April 2026)",
           "Authored and own the FY2026 Technology Department Budget",
           "Launched a standardized equipment-request intake with a weekly procurement cycle (November 2025)",
-          "Designed a tiered IT service desk: an AI support chatbot as first line, escalating to an IT request form with a 1-business-day response SLA",
+          "Designed a tiered IT service desk: an AI support agent as first line (in Slack and a web chat since 2026-10-23), escalating to an IT request form with a 1-business-day response SLA",
           "Built a centralized systems ledger tracking 81 tools; System Administrator for 41",
-          "Own onboarding and offboarding, device imaging and a secure wipe, recycle and donation pipeline"
+          "Own onboarding and offboarding, device imaging and a secure wipe, recycle and donation pipeline",
+          "Public website administration (2026-10-26): removed a former vendor's administrator access and stray accounts, upgraded PHP 8.2 to 8.3, cleared Site Health from 3 recommendations to 0, and restored an expired social-feed token"
         ],
         "stack": [
-          "Jotform",
+          "Google Forms",
           "Slack",
           "EOS / Ninety.io",
-          "Systems ledger"
+          "Systems ledger",
+          "Zapier Agents",
+          "WordPress"
         ],
         "notes": [],
         "metrics": [
@@ -1512,7 +1525,7 @@
       "preview": null,
       "preview_img": null,
       "source": "private",
-      "last_activity": "2026-09-15"
+      "last_activity": "2026-10-26"
     },
     {
       "name": "asset-inventory",
@@ -1995,7 +2008,7 @@
       "title": "Team Resources Portal + Quick-Launch Hub",
       "category": "Automation",
       "status": "Maintained",
-      "status_as_of": "2026-10-19",
+      "status_as_of": "2026-10-23",
       "shipped": "2026-09-22",
       "lang": "Google Sites + Apps Script",
       "tagline": "Built the staff portal that fronts every internal tool: a Google Sites intranet with an Apps Script Quick-Launch Hub, full-page app embeds and a shared light/dark theme standard.",
@@ -2015,10 +2028,12 @@
         "problem": "Internal tools, guides, calendars and references were scattered across bookmarks, chat pins and shared drives, so new staff could not find what existed and rollouts had no single landing place.",
         "solution": "One portal built on the platform the agency is permitted to use: a Google Sites intranet with Tools, Training and Resources navigation, an Apps Script Quick-Launch Hub of tiles, and full-page embeds of the agency's web apps (document intake and scan dashboard, underwriting triage board, past-due tracker, training platform, exam prep). A shared theme snippet gives every embedded app the same light/dark toggle.",
         "highlights": [
-          "Quick-Launch Hub iterated from v1.2 (2026-09-22) to v1.12 (2026-10-19) across nine documented change logs: new tool tiles, calendars, roster v5, HR and call-recording tiles, agency-process pages",
+          "Quick-Launch Hub iterated from v1.2 (2026-09-22) to v1.17.2 (2026-10-23) across ten documented change logs: new tool tiles, calendars, roster v5, HR and call-recording tiles, agency-process pages, Google Forms embeds and an AI help-desk tile",
           "Five internal web apps embedded full-page behind one navigation, so every rollout lands in the same place",
           "Theme standard (2026-10-19): a reusable snippet gives each page a light/dark toggle that follows the device by default and remembers a per-page override; applied to 13 pages and embeds",
-          "Reference content alongside the tools: personality-intelligence report viewer, quick-reference-guide gallery, team calendar and per-person Google Calendar embeds"
+          "Reference content alongside the tools: personality-intelligence report viewer, quick-reference-guide gallery, team calendar and per-person Google Calendar embeds",
+          "Mobile fix (Hub v1.16): Google frames nested three deep (Sites → Apps Script sandbox → Docs) fail on phones because mobile browsers partition third-party cookies; on phones and tablets the frames are swapped for tap-to-open cards, desktop unchanged, tested in emulation before deploy",
+          "Knowledge base grew to cover each new tool: 15 help pages published on 2026-10-23 for the Exam Training Program and the IT support agent, each linked from the matching training chapter"
         ],
         "stack": [
           "Google Sites",
@@ -2036,8 +2051,8 @@
             "label": "pages with the shared theme toggle"
           },
           {
-            "value": "9",
-            "label": "documented Hub releases (Sep–Oct 2026)"
+            "value": "10",
+            "label": "documented Hub change logs (Sep–Oct 2026)"
           }
         ],
         "flow": [
@@ -2092,7 +2107,7 @@
       "demo": null,
       "preview_img": null,
       "source": "none",
-      "last_activity": "2026-10-19"
+      "last_activity": "2026-10-23"
     },
     {
       "name": "documentation-program",
@@ -2193,6 +2208,240 @@
       "preview_img": null,
       "source": "none",
       "last_activity": "2026-10-08"
+    },
+    {
+      "name": "forms-migration",
+      "title": "Form Platform Migration — 24 Forms to Google Forms",
+      "category": "Automation",
+      "status": "Shipped",
+      "status_as_of": "2026-10-26",
+      "shipped": "2026-10-23",
+      "lang": "Google Apps Script",
+      "tagline": "Migrated 24 business forms from a paid form builder to Google Forms in one day, with a rules engine that rebuilds routing, notifications, lookups and webhooks the native product lacks.",
+      "topics": [
+        "google-apps-script",
+        "google-forms",
+        "migration",
+        "workflow-automation",
+        "webhooks",
+        "data-parity",
+        "insurance-operations"
+      ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
+      "detail": {
+        "problem": "Every agency form (lead capture, referrals, IT and purchase requests, time clock) lived in a paid form builder with conditional logic, per-form email rules, hidden lookup fields and webhooks into the agency's lead platform. Leadership wanted Google Forms instead, but Google Forms has no conditional show/hide, no hidden fields, no per-answer email routing, no webhooks, and its APIs cannot create file-upload questions or set a theme.",
+        "solution": "Exported every form, question, condition, email rule and webhook from the source API into a versioned JSON build spec, then generated each Google Form from that spec with an Apps Script engine. A hand-built branded template supplies the theme, header and file-upload question (copies keep them; the APIs cannot create them). One submit trigger per response workbook runs the engine, which adds the derived columns, routes approvals, sends branded notifications and posts a payload shaped exactly like the old webhook, so the lead platform needed no change.",
+        "highlights": [
+          "Inventory from the live API before building: 39 forms, 545 questions, 89 conditions, 73 email rules, 5 webhook integrations and 659 historical submissions, every count reconciled against the source product",
+          "Conditional show/hide rebuilt as section routing from the controlling question; 55 hidden per-employee lookup fields replaced by engine-written requester, team and supervisor columns from one table; a separate parity audit decoded all 89 conditions",
+          "Found and fixed a misspelled notification address that had silently kept every referral-form alert from reaching sales leadership",
+          "Worked around three platform limits with tested probes: template copies for branding and uploads, a one-time folder restore Google requires on copied upload forms, and one trigger per workbook to stay under Apps Script's 20-trigger cap",
+          "Parity test before cutover: 24 of 24 synthetic submissions and 34 of 34 trigger runs completed with 0 failures, webhooks held back under a test mode",
+          "Cut over without downtime: the team portal's embeds were switched the same morning, the old forms stay live through a 14-day parallel run, and five public lead forms that need anonymous uploads stay on the old builder by decision (2026-10-26)",
+          "Shipped with an operations SOP covering the template-copy procedure, the folder-restore step and the cutover checklist"
+        ],
+        "stack": [
+          "Google Apps Script",
+          "Google Forms",
+          "Google Sheets",
+          "Forms + Drive APIs",
+          "Python (spec generator)",
+          "Source form-builder API",
+          "Webhooks"
+        ],
+        "metrics": [
+          {
+            "value": "24",
+            "label": "forms rebuilt and live in one day"
+          },
+          {
+            "value": "89",
+            "label": "conditional rules mapped to Google Forms routing"
+          },
+          {
+            "value": "0",
+            "label": "failures in 34 parity-test trigger runs"
+          },
+          {
+            "value": "659",
+            "label": "historical submissions reconciled"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Source API export",
+            "note": "forms, rules, webhooks"
+          },
+          {
+            "label": "JSON build spec",
+            "note": "versioned, regenerable"
+          },
+          {
+            "label": "Template copy",
+            "note": "theme, header, upload"
+          },
+          {
+            "label": "Form generator",
+            "note": "sections, routing"
+          },
+          {
+            "label": "Submit engine",
+            "note": "lookups, emails, approvals"
+          },
+          {
+            "label": "Same-shape webhook",
+            "note": "lead platform unchanged"
+          }
+        ],
+        "notes": [
+          "Form contents, respondent data and account identifiers are not shown; figures are from the deploy record of 2026-10-23."
+        ],
+        "impact": "Moved the agency's day-to-day forms onto the Google Workspace it already pays for, with routing, notifications and lead-platform integration preserved, a fix for a long-silent alert failure, and a documented path to retire most of a paid subscription.",
+        "competencies": [
+          {
+            "skill": "Platform migration",
+            "evidence": "API-first inventory, spec-driven rebuild of 24 forms, parallel run and staged cutover."
+          },
+          {
+            "skill": "Integration design",
+            "evidence": "Replayed the old webhook payload shape so the downstream lead platform needed no change."
+          },
+          {
+            "skill": "Working within platform limits",
+            "evidence": "Template-copy technique for branding and uploads the Forms APIs cannot create; trigger consolidation under the 20-trigger cap."
+          },
+          {
+            "skill": "Data parity and QA",
+            "evidence": "Reconciled counts against the source, decoded every condition, and ran a 24-form synthetic submission test before go-live."
+          }
+        ],
+        "keywords": [
+          "Google Apps Script",
+          "Google Forms",
+          "Platform Migration",
+          "Workflow Automation",
+          "Webhooks",
+          "Data Parity",
+          "API Integration",
+          "Change Management",
+          "Google Workspace",
+          "Insurance Operations"
+        ]
+      },
+      "demo": null,
+      "preview_img": null,
+      "source": "private",
+      "last_activity": "2026-10-23"
+    },
+    {
+      "name": "it-support-agent",
+      "title": "AI IT Support Agent — Slack and Web Chat",
+      "category": "Automation",
+      "status": "Shipped",
+      "status_as_of": "2026-10-23",
+      "shipped": "2026-10-23",
+      "lang": "Zapier Agents",
+      "tagline": "Rebuilt the agency's Windows 11 help-desk agent as a Slack thread bot and a web chat that troubleshoot first and hand off a pre-filled IT ticket when they can't fix it.",
+      "topics": [
+        "ai-agents",
+        "zapier",
+        "slack-api",
+        "help-desk",
+        "it-support",
+        "llm",
+        "windows-11"
+      ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
+      "detail": {
+        "problem": "First-line IT help ran on an AI agent inside the form builder the agency was leaving. Its escalation path pointed at a form being retired, staff had to find a separate link to use it, and its knowledge and rules lived only inside that product.",
+        "solution": "Recreated the agent on Zapier: a Zapier Agent listens to a public #it-help Slack channel and answers in the message's thread, reading the thread for follow-ups, and a standalone web chat carries the same instructions and knowledge base. The original persona, rules and 41,000+ characters of troubleshooting knowledge were copied verbatim from the source product's API. When a fix doesn't work, the agent hands over a pre-filled link to the new IT request form, so the person only reviews, picks a priority and submits.",
+        "highlights": [
+          "Two front ends from one playbook: threaded replies in Slack #it-help for staff who live in Slack, and a web chat linked from the team portal for everyone else",
+          "Escalation as a pre-filled ticket: name, category, category detail, system, description and steps already tried are filled in from the conversation; the agent never submits on someone's behalf and never asks for passwords",
+          "Rules carried over and hardened: lightest fix first, two to three fixes then a ticket, no Task Manager, security terms escalate immediately, and Slack system notices are ignored so they don't spend the plan's monthly activity allowance",
+          "Tested in the live channel before rollout: a top-level-reply defect in v1 was caught and fixed in v2 (thread-only replies), then follow-up, re-greeting and ticket-link behaviour verified",
+          "Rolled out the same afternoon: channel opened to the whole team, announcement posted, portal tile added, and a 20-minute training module with seven help pages, an SOP and a quiz"
+        ],
+        "stack": [
+          "Zapier Agents",
+          "Zapier Chatbots",
+          "Slack API",
+          "Google Forms (pre-filled links)",
+          "Google Sites"
+        ],
+        "metrics": [
+          {
+            "value": "2",
+            "label": "front ends: Slack thread bot + web chat"
+          },
+          {
+            "value": "6",
+            "label": "ticket fields pre-filled on hand-off"
+          },
+          {
+            "value": "41k",
+            "label": "characters of troubleshooting knowledge carried over verbatim"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Slack #it-help or web chat",
+            "note": "staff describe the problem"
+          },
+          {
+            "label": "Zapier Agent",
+            "note": "persona + knowledge base"
+          },
+          {
+            "label": "Guided fixes",
+            "note": "lightest first, 2–3 tries"
+          },
+          {
+            "label": "Pre-filled ticket link",
+            "note": "review, priority, submit"
+          },
+          {
+            "label": "IT request engine",
+            "note": "routing + notifications"
+          }
+        ],
+        "notes": [
+          "Conversation content and channel membership are not shown."
+        ],
+        "impact": "Kept AI first-line IT support running through the form-platform migration, moved it to where staff already work, and turned every failed self-fix into a complete ticket instead of a vague request.",
+        "competencies": [
+          {
+            "skill": "AI agent design",
+            "evidence": "Persona, rules and knowledge base migrated verbatim; thread-aware Slack behaviour with explicit operating rules."
+          },
+          {
+            "skill": "Help-desk process design",
+            "evidence": "Troubleshoot-then-escalate flow with a pre-filled ticket and a 1-business-day SLA behind it."
+          },
+          {
+            "skill": "Change management",
+            "evidence": "Same-day channel rollout, announcement, portal tile and a full training module."
+          }
+        ],
+        "keywords": [
+          "AI Agents",
+          "Zapier",
+          "Slack API",
+          "IT Help Desk",
+          "LLM",
+          "Prompt Engineering",
+          "Windows 11 Support",
+          "Change Management"
+        ]
+      },
+      "demo": null,
+      "preview_img": null,
+      "source": "none",
+      "last_activity": "2026-10-23"
     },
     {
       "name": "website-outreach-pipeline",
@@ -2351,13 +2600,76 @@
         "label": "Q4 2026",
         "start": "2026-10-01",
         "end": "2026-12-31",
-        "total": 17,
-        "new": 1,
-        "improvements": 16,
+        "total": 26,
+        "new": 3,
+        "improvements": 23,
         "current": true,
         "pct_elapsed": 27,
         "as_of": "2026-10-26",
         "items": [
+          {
+            "date": "2026-10-26",
+            "name": "it-department",
+            "title": "Establishing the Agency IT Department",
+            "kind": "improvement",
+            "note": "Public website administration: former-vendor admin access removed, PHP 8.2 to 8.3, Site Health 3 to 0 recommendations, expired social-feed token restored"
+          },
+          {
+            "date": "2026-10-23",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "Ninety.io (my90) training module: SOP, Quick-Reference Guide, 32-minute video, 57-question bank"
+          },
+          {
+            "date": "2026-10-23",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "Exam Training Program training module: 8 knowledge-base pages, SOP, Quick-Reference Guide, 19-minute video, 51-question bank"
+          },
+          {
+            "date": "2026-10-23",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "IT Support with Alex training module: 7 knowledge-base pages, SOP, Quick-Reference Guide, 13-minute video, 50-question bank"
+          },
+          {
+            "date": "2026-10-23",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Hub v1.14 to v1.17.2: form embeds moved to Google Forms, mobile tap-to-open cards, Ask Alex tile; 15 new knowledge-base pages"
+          },
+          {
+            "date": "2026-10-23",
+            "name": "it-support-agent",
+            "title": "AI IT Support Agent — Slack and Web Chat",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-10-23",
+            "name": "forms-migration",
+            "title": "Form Platform Migration — 24 Forms to Google Forms",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-10-22",
+            "name": "uw-triage",
+            "title": "UW Triage Engine + Board",
+            "kind": "improvement",
+            "note": "v2.23.8 open-card count; v2.23.9 + engine v1.4 PDF hand-off: notice PDFs the board cannot read are filed to Drive automatically"
+          },
+          {
+            "date": "2026-10-22",
+            "name": "uw-triage",
+            "title": "UW Triage Engine + Board",
+            "kind": "improvement",
+            "note": "v2.24 weekly Ninety.io measurables pushed every Friday (Sales associated, Service open and completed) plus a Service close-rate formula; history backfilled from the audit log"
+          },
           {
             "date": "2026-10-19",
             "name": "apps-script-toolkit",
