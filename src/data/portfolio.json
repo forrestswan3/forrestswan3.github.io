@@ -635,7 +635,7 @@
       "demo": null,
       "preview_img": null,
       "source": "private",
-      "last_activity": "2026-10-19"
+      "last_activity": "2026-09-22"
     },
     {
       "name": "training-video-pipeline",
@@ -2207,7 +2207,7 @@
       "demo": null,
       "preview_img": null,
       "source": "none",
-      "last_activity": "2026-10-08"
+      "last_activity": "2026-10-07"
     },
     {
       "name": "forms-migration",
@@ -2553,6 +2553,111 @@
       "last_activity": "2026-10-26"
     },
     {
+      "name": "time-clock-app",
+      "title": "Mobile Time-Clock App",
+      "category": "Automation",
+      "status": "Maintained",
+      "status_as_of": "2026-10-23",
+      "shipped": "2026-04-30",
+      "lang": "Zapier",
+      "tagline": "Built a one-tap clock-in and clock-out app for every employee's phone that logs each punch to a shared sheet and a private Slack channel, running alongside the payroll system of record.",
+      "topics": [
+        "workflow-automation",
+        "zapier",
+        "google-sheets",
+        "slack-api",
+        "mobile",
+        "timekeeping"
+      ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
+      "detail": {
+        "problem": "Leadership had no real-time view of who was in and when; punches lived only in the payroll platform, which is built for payroll, not for a same-day operational picture.",
+        "solution": "Each employee gets a home-screen app with two tiles, Clock In and Clock Out, each opening a personal pre-filled form so the punch takes one tap and carries the person's identity. Two Zaps write every punch to a Clock Log sheet (with daily first-in, last-out and total hours computed) and post it to a private Slack channel. The payroll system stays the system of record; the sheet is a parallel log reconciled weekly.",
+        "highlights": [
+          "One tap per punch: identity travels in each employee's personal pre-filled link, so there is nothing to type",
+          "Sized for the automation plan before rollout: about 1,600 tasks a month for 18 seats, inside the plan's ceiling",
+          "Rolled out with a two-day single-user pilot, a 15-minute all-hands install and a same-day verification against the payroll log",
+          "Migrated to Google Forms on 2026-10-23 with regenerated personal links and QR codes for every employee"
+        ],
+        "stack": [
+          "Jotform (to 2026-10)",
+          "Google Forms",
+          "Zapier",
+          "Google Sheets",
+          "Slack API"
+        ],
+        "metrics": [
+          {
+            "value": "1",
+            "label": "tap per punch"
+          },
+          {
+            "value": "18",
+            "label": "seats rolled out"
+          },
+          {
+            "value": "2",
+            "label": "logs per punch: sheet + Slack"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Home-screen tile",
+            "note": "personal pre-filled link"
+          },
+          {
+            "label": "Punch form",
+            "note": "in or out"
+          },
+          {
+            "label": "Zapier",
+            "note": "two Zaps"
+          },
+          {
+            "label": "Clock Log sheet",
+            "note": "daily hours computed"
+          },
+          {
+            "label": "Slack channel",
+            "note": "real-time feed"
+          },
+          {
+            "label": "Weekly reconcile",
+            "note": "against payroll"
+          }
+        ],
+        "notes": [
+          "Employee names, links and punch data are not shown."
+        ],
+        "impact": "Gave leadership a same-day view of attendance without changing payroll, with an audit trail in two places and a weekly reconciliation step.",
+        "competencies": [
+          {
+            "skill": "Workflow automation",
+            "evidence": "Form-to-Zapier-to-Sheets-and-Slack pipeline with per-employee pre-filled identity."
+          },
+          {
+            "skill": "Rollout management",
+            "evidence": "Pilot, all-hands install and day-one verification against the system of record."
+          }
+        ],
+        "keywords": [
+          "Workflow Automation",
+          "Zapier",
+          "Google Sheets",
+          "Slack API",
+          "Mobile",
+          "Timekeeping",
+          "Change Management"
+        ]
+      },
+      "demo": null,
+      "preview_img": null,
+      "source": "none",
+      "last_activity": "2026-10-23"
+    },
+    {
       "name": "website-outreach-pipeline",
       "title": "Local Website Outreach Pipeline",
       "status": "In Progress",
@@ -2709,9 +2814,9 @@
         "label": "Q4 2026",
         "start": "2026-10-01",
         "end": "2026-12-31",
-        "total": 28,
+        "total": 31,
         "new": 4,
-        "improvements": 24,
+        "improvements": 27,
         "current": true,
         "pct_elapsed": 27,
         "as_of": "2026-10-26",
@@ -2760,6 +2865,13 @@
           },
           {
             "date": "2026-10-23",
+            "name": "time-clock-app",
+            "title": "Mobile Time-Clock App",
+            "kind": "improvement",
+            "note": "Clock and lunch forms moved to Google Forms; personal links and QR codes regenerated"
+          },
+          {
+            "date": "2026-10-23",
             "name": "team-resources",
             "title": "Team Resources Portal + Quick-Launch Hub",
             "kind": "improvement",
@@ -2792,13 +2904,6 @@
             "title": "UW Triage Engine + Board",
             "kind": "improvement",
             "note": "v2.24 weekly Ninety.io measurables pushed every Friday (Sales associated, Service open and completed) plus a Service close-rate formula; history backfilled from the audit log"
-          },
-          {
-            "date": "2026-10-19",
-            "name": "apps-script-toolkit",
-            "title": "Apps Script Toolkit",
-            "kind": "improvement",
-            "note": "Hub v1.12 (9 change logs 2026-09-24..10-15); Zap Watchdog built and running (owner-confirmed 2026-10-19)"
           },
           {
             "date": "2026-10-19",
@@ -2864,6 +2969,13 @@
             "note": "Scheduled tasks moved to hidden wrappers (no console windows)"
           },
           {
+            "date": "2026-10-09",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Hub v1.10: call-recording tile"
+          },
+          {
             "date": "2026-10-08",
             "name": "training-program",
             "title": "Agency Training Program",
@@ -2872,10 +2984,10 @@
           },
           {
             "date": "2026-10-08",
-            "name": "documentation-program",
-            "title": "Documentation & Quick-Reference Guide Program",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
             "kind": "improvement",
-            "note": "Call Recording Scoring + Agency Handbook trainings"
+            "note": "Hub v1.9: HR platform tile"
           },
           {
             "date": "2026-10-08",
@@ -2890,6 +3002,13 @@
             "title": "Documentation & Quick-Reference Guide Program",
             "kind": "improvement",
             "note": "Core Process → Quick-Reference Guide rename"
+          },
+          {
+            "date": "2026-10-02",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "UW Triage Board training v1.1: SOP, Core Process and videos updated"
           },
           {
             "date": "2026-10-02",
@@ -2911,6 +3030,13 @@
             "title": "Past-Due Task Tracker",
             "kind": "improvement",
             "note": "v1.3 spreadsheet import; v1.4 screenshot import"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Hub v1.8.1: Sales and Service pages restored"
           }
         ]
       },
@@ -2918,9 +3044,9 @@
         "label": "Q3 2026",
         "start": "2026-07-01",
         "end": "2026-09-30",
-        "total": 21,
+        "total": 35,
         "new": 11,
-        "improvements": 10,
+        "improvements": 24,
         "current": false,
         "items": [
           {
@@ -2936,6 +3062,13 @@
             "title": "FileGate — Naming Compliance Auditor + AI Intake",
             "kind": "improvement",
             "note": "Scan Dashboard v1.3 time-budgeted rename chunks; Intake v1.3 property-folder picker + dashboard admins"
+          },
+          {
+            "date": "2026-09-30",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Hub v1.8: Past-Due Tracker page and tile"
           },
           {
             "date": "2026-09-30",
@@ -2959,6 +3092,20 @@
             "note": "v2.10 Sales team merger; v2.11 assignment progress"
           },
           {
+            "date": "2026-09-29",
+            "name": "documentation-program",
+            "title": "Documentation & Quick-Reference Guide Program",
+            "kind": "improvement",
+            "note": "Tablet document library reorganized by seat: 60 items moved, 114 placements verified, daily drift-guard script"
+          },
+          {
+            "date": "2026-09-29",
+            "name": "documentation-program",
+            "title": "Documentation & Quick-Reference Guide Program",
+            "kind": "improvement",
+            "note": "Client intake worksheet v2.0: 5-page print form and 152-field fillable PDF with field map"
+          },
+          {
             "date": "2026-09-28",
             "name": "filegate",
             "title": "FileGate — Naming Compliance Auditor + AI Intake",
@@ -2973,11 +3120,32 @@
             "note": "Reused for the FileGate video tutorial; toolchain made self-sufficient on the office host (2026-09-23)"
           },
           {
+            "date": "2026-09-28",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Hub v1.7 to v1.7.2: Scan Dashboard tile and placement"
+          },
+          {
             "date": "2026-09-25",
             "name": "training-program",
             "title": "Agency Training Program",
             "kind": "improvement",
             "note": "v2.9 slides + SOP builder, 8 new SOP modules"
+          },
+          {
+            "date": "2026-09-25",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Hub v1.5.3 to v1.6: reMarkable SOP and employee tiles, compact six-per-row layout"
+          },
+          {
+            "date": "2026-09-24",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "FileGate training: deck, Core Process, narrated videos, quiz, help pages"
           },
           {
             "date": "2026-09-24",
@@ -2987,11 +3155,25 @@
             "note": "20 SOPs → Core Process docs"
           },
           {
+            "date": "2026-09-24",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Hub v1.5: team and personal calendar embeds, roster v5"
+          },
+          {
             "date": "2026-09-23",
             "name": "filegate",
             "title": "FileGate — Naming Compliance Auditor + AI Intake",
             "kind": "new",
             "note": "Shipped"
+          },
+          {
+            "date": "2026-09-22",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "UW Triage Board training v1.0: 35-slide deck, Core Process, help pages, narrated videos, quiz"
           },
           {
             "date": "2026-09-22",
@@ -3022,11 +3204,39 @@
             "note": "BIS ledger reconciliation"
           },
           {
+            "date": "2026-09-15",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Personality intelligence report viewer page"
+          },
+          {
+            "date": "2026-09-12",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "Dropbox Sign training module: 37-slide deck, 14-minute video, Core Process video, quiz"
+          },
+          {
             "date": "2026-09-11",
             "name": "training-program",
             "title": "Agency Training Program",
             "kind": "improvement",
             "note": "Web edition on the NAS; roster & admin fix (v2.7)"
+          },
+          {
+            "date": "2026-09-11",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "PDFelement training v1.1: eSignature section removed, video 15:56 to 11:12, quiz and search index rebuilt"
+          },
+          {
+            "date": "2026-09-11",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "Client Folder and Naming Standards Policy training module"
           },
           {
             "date": "2026-08-28",
@@ -3057,11 +3267,25 @@
             "note": "Shipped"
           },
           {
+            "date": "2026-07-10",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "reMarkable 2 training: 32-slide deck and Core Process"
+          },
+          {
             "date": "2026-07-09",
             "name": "documentation-program",
             "title": "Documentation & Quick-Reference Guide Program",
             "kind": "new",
             "note": "Shipped"
+          },
+          {
+            "date": "2026-07-07",
+            "name": "apps-script-toolkit",
+            "title": "Apps Script Toolkit",
+            "kind": "improvement",
+            "note": "Zap Watchdog: failure-detection Zap to Slack, Zap Health Log and operating SOP"
           },
           {
             "date": "2026-07-02",
@@ -3076,15 +3300,36 @@
         "label": "Q2 2026",
         "start": "2026-04-01",
         "end": "2026-06-30",
-        "total": 2,
-        "new": 2,
-        "improvements": 0,
+        "total": 6,
+        "new": 3,
+        "improvements": 3,
         "current": false,
         "items": [
+          {
+            "date": "2026-06-28",
+            "name": "apps-script-toolkit",
+            "title": "Apps Script Toolkit",
+            "kind": "improvement",
+            "note": "KPI tracker build: multi-tab tracker, Apps Script business-hours engine on a 10-minute refresh, Slack to AI to Sheets logging Zap"
+          },
           {
             "date": "2026-06-26",
             "name": "design-system",
             "title": "Design System",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-05-05",
+            "name": "it-department",
+            "title": "Establishing the Agency IT Department",
+            "kind": "improvement",
+            "note": "Systems accounting ledger v1.0 and operating SOP: 81 systems documented with cost, renewal calendar and ownership"
+          },
+          {
+            "date": "2026-04-30",
+            "name": "time-clock-app",
+            "title": "Mobile Time-Clock App",
             "kind": "new",
             "note": "Shipped"
           },
@@ -3094,6 +3339,45 @@
             "title": "Shipping & Postage Station",
             "kind": "new",
             "note": "Shipped"
+          },
+          {
+            "date": "2026-04-10",
+            "name": "apps-script-toolkit",
+            "title": "Apps Script Toolkit",
+            "kind": "improvement",
+            "note": "KPI tracking system design: five weighted categories, each mapped to a source, owner, validation step and scorecard measurable"
+          }
+        ]
+      },
+      {
+        "label": "Q1 2026",
+        "start": "2026-01-01",
+        "end": "2026-03-31",
+        "total": 3,
+        "new": 0,
+        "improvements": 3,
+        "current": false,
+        "items": [
+          {
+            "date": "2026-03-04",
+            "name": "documentation-program",
+            "title": "Documentation & Quick-Reference Guide Program",
+            "kind": "improvement",
+            "note": "Carrier Specifics SOP v1.1"
+          },
+          {
+            "date": "2026-03-04",
+            "name": "documentation-program",
+            "title": "Documentation & Quick-Reference Guide Program",
+            "kind": "improvement",
+            "note": "New-hire 5-week training schedule SOP v1.1"
+          },
+          {
+            "date": "2026-01-31",
+            "name": "it-department",
+            "title": "Establishing the Agency IT Department",
+            "kind": "improvement",
+            "note": "Agency data-flow diagram mapping how client and operational data moves between systems (January 2026)"
           }
         ]
       },
