@@ -2447,9 +2447,9 @@
       "name": "uw-triage-platform-handoff",
       "title": "UW Triage Board — Developer Handoff for a Web-Platform Rebuild",
       "category": "Automation",
-      "status": "In Progress",
+      "status": "Shipped",
       "status_as_of": "2026-10-26",
-      "shipped": null,
+      "shipped": "2026-10-26",
       "lang": "Google Apps Script",
       "tagline": "Packaging a production Apps Script system so an outside developer can rebuild it with feature parity on Vercel and Supabase, without access to the agency's Google account.",
       "topics": [
@@ -2504,7 +2504,7 @@
           }
         ],
         "notes": [
-          "In progress (started 2026-10-26). The package itself stays private; this page describes the approach."
+          "Delivered 2026-10-26 to the internal developer. The package itself stays private; this page describes the approach."
         ],
         "impact": "Turns a system that only its builder fully understands into something another engineer can rebuild with confidence, protecting two months of iteration and the agency's stated business rules through a platform change.",
         "competencies": [
@@ -2531,11 +2531,26 @@
           "Vercel",
           "OpenAPI",
           "Systems Architecture"
+        ],
+        "metrics": [
+          {
+            "value": "113",
+            "label": "files in the handoff bundle"
+          },
+          {
+            "value": "37/37",
+            "label": "live source files hash-verified"
+          },
+          {
+            "value": "0",
+            "label": "secrets found in the pre-handoff sweep"
+          }
         ]
       },
       "demo": null,
       "preview_img": null,
-      "source": "private"
+      "source": "private",
+      "last_activity": "2026-10-26"
     },
     {
       "name": "website-outreach-pipeline",
@@ -2694,8 +2709,8 @@
         "label": "Q4 2026",
         "start": "2026-10-01",
         "end": "2026-12-31",
-        "total": 27,
-        "new": 3,
+        "total": 28,
+        "new": 4,
         "improvements": 24,
         "current": true,
         "pct_elapsed": 27,
@@ -2714,6 +2729,13 @@
             "title": "Team Resources Portal + Quick-Launch Hub",
             "kind": "improvement",
             "note": "Hub v1.18: public agency website tile first in Resources"
+          },
+          {
+            "date": "2026-10-26",
+            "name": "uw-triage-platform-handoff",
+            "title": "UW Triage Board — Developer Handoff for a Web-Platform Rebuild",
+            "kind": "new",
+            "note": "Shipped"
           },
           {
             "date": "2026-10-23",
