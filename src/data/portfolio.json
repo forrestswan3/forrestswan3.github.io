@@ -557,7 +557,7 @@
           "KPI tracker: computes business-hours SLA metrics (Mon–Fri, 8 AM–6 PM), generates weekly roster rows and refreshes every 10 minutes",
           "Assessment generator: builds five auto-graded Google Forms with shuffled choices and per-item feedback",
           "Spend tracker: CSV import, formula repair and a custom menu for a multi-source spend workbook",
-          "Quick-Launch Hub: a web-app portal embedded in the team intranet, iterated from v1.2 (2026-09-22) to v1.17.2 (2026-10-23) as the launch point for every internal tool",
+          "Quick-Launch Hub: a web-app portal embedded in the team intranet, iterated from v1.2 (2026-09-22) to v1.18 (2026-10-26) as the launch point for every internal tool",
           "Zapier failure monitoring: a watchdog Zap that posts silent Zap failures to Slack, backed by a health log and an operating SOP (July 2026)"
         ],
         "metrics": [
@@ -2008,7 +2008,7 @@
       "title": "Team Resources Portal + Quick-Launch Hub",
       "category": "Automation",
       "status": "Maintained",
-      "status_as_of": "2026-10-23",
+      "status_as_of": "2026-10-26",
       "shipped": "2026-09-22",
       "lang": "Google Sites + Apps Script",
       "tagline": "Built the staff portal that fronts every internal tool: a Google Sites intranet with an Apps Script Quick-Launch Hub, full-page app embeds and a shared light/dark theme standard.",
@@ -2028,7 +2028,7 @@
         "problem": "Internal tools, guides, calendars and references were scattered across bookmarks, chat pins and shared drives, so new staff could not find what existed and rollouts had no single landing place.",
         "solution": "One portal built on the platform the agency is permitted to use: a Google Sites intranet with Tools, Training and Resources navigation, an Apps Script Quick-Launch Hub of tiles, and full-page embeds of the agency's web apps (document intake and scan dashboard, underwriting triage board, past-due tracker, training platform, exam prep). A shared theme snippet gives every embedded app the same light/dark toggle.",
         "highlights": [
-          "Quick-Launch Hub iterated from v1.2 (2026-09-22) to v1.17.2 (2026-10-23) across ten documented change logs: new tool tiles, calendars, roster v5, HR and call-recording tiles, agency-process pages, Google Forms embeds and an AI help-desk tile",
+          "Quick-Launch Hub iterated from v1.2 (2026-09-22) to v1.18 (2026-10-26) across eleven documented change logs: new tool tiles, calendars, roster v5, HR and call-recording tiles, agency-process pages, Google Forms embeds, an AI help-desk tile and a public-website tile",
           "Five internal web apps embedded full-page behind one navigation, so every rollout lands in the same place",
           "Theme standard (2026-10-19): a reusable snippet gives each page a light/dark toggle that follows the device by default and remembers a per-page override; applied to 13 pages and embeds",
           "Reference content alongside the tools: personality-intelligence report viewer, quick-reference-guide gallery, team calendar and per-person Google Calendar embeds",
@@ -2051,7 +2051,7 @@
             "label": "pages with the shared theme toggle"
           },
           {
-            "value": "10",
+            "value": "11",
             "label": "documented Hub change logs (Sep–Oct 2026)"
           }
         ],
@@ -2107,7 +2107,7 @@
       "demo": null,
       "preview_img": null,
       "source": "none",
-      "last_activity": "2026-10-23"
+      "last_activity": "2026-10-26"
     },
     {
       "name": "documentation-program",
@@ -2444,6 +2444,100 @@
       "last_activity": "2026-10-23"
     },
     {
+      "name": "uw-triage-platform-handoff",
+      "title": "UW Triage Board — Developer Handoff for a Web-Platform Rebuild",
+      "category": "Automation",
+      "status": "In Progress",
+      "status_as_of": "2026-10-26",
+      "shipped": null,
+      "lang": "Google Apps Script",
+      "tagline": "Packaging a production Apps Script system so an outside developer can rebuild it with feature parity on Vercel and Supabase, without access to the agency's Google account.",
+      "topics": [
+        "technical-documentation",
+        "migration",
+        "google-apps-script",
+        "postgresql",
+        "supabase",
+        "vercel",
+        "knowledge-transfer"
+      ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
+      "detail": {
+        "problem": "The underwriting triage system grew to two Apps Script projects, a dozen-plus sheet tabs, dozens of Config keys, scheduled triggers and Slack, AI and scorecard integrations over 24 board releases. The agency wants it inside its own web platform (Vercel + Supabase), and the developer doing that work has no access to the Google account and no history of the decisions behind the behaviour.",
+        "solution": "A self-contained handoff bundle built from the live code rather than archived copies: a hash-verified source snapshot of both projects, a machine-readable description of every sheet, column, Config key, trigger, deployment, scope and secret name (never values), architecture and state-machine documentation, a dated decision log, an Apps Script → Vercel/Supabase mapping with a proposed Postgres schema, the pure business logic ported with its test vectors, and a context file so the developer's own AI assistant starts from verified facts.",
+        "highlights": [
+          "Live code wins: every file is pulled from the editor's current version and hash-verified, because archived copies stop several releases behind production",
+          "Secrets and client data swept out by rule, with the sweep commands and zero-hit results recorded in the package manifest",
+          "Business rules carried over verbatim with dates, so parity questions are settled by the record instead of by memory",
+          "Pure logic (next-step rules, due-date math, duplicate detection, scorecard metric definitions) handed over as portable functions with their existing tests, so it is ported rather than re-invented"
+        ],
+        "stack": [
+          "Google Apps Script",
+          "Google Sheets",
+          "PostgreSQL / Supabase",
+          "Vercel",
+          "OpenAPI",
+          "Markdown"
+        ],
+        "flow": [
+          {
+            "label": "Live source snapshot",
+            "note": "hash-verified, both projects"
+          },
+          {
+            "label": "System inventory",
+            "note": "sheets, config, triggers, scopes"
+          },
+          {
+            "label": "Docs + decision log",
+            "note": "architecture, state machine"
+          },
+          {
+            "label": "Platform mapping",
+            "note": "Postgres schema, API shapes"
+          },
+          {
+            "label": "Developer bundle",
+            "note": "context file, logic + tests"
+          }
+        ],
+        "notes": [
+          "In progress (started 2026-10-26). The package itself stays private; this page describes the approach."
+        ],
+        "impact": "Turns a system that only its builder fully understands into something another engineer can rebuild with confidence, protecting two months of iteration and the agency's stated business rules through a platform change.",
+        "competencies": [
+          {
+            "skill": "Technical documentation",
+            "evidence": "Architecture, state machine, config catalog and dated decision log written for a developer starting cold."
+          },
+          {
+            "skill": "Migration planning",
+            "evidence": "Apps Script → Vercel/Supabase mapping with a proposed Postgres schema and API description."
+          },
+          {
+            "skill": "Security hygiene",
+            "evidence": "Secret names documented, values never included; recorded PII and secret sweep before handoff."
+          }
+        ],
+        "keywords": [
+          "Technical Documentation",
+          "Knowledge Transfer",
+          "Platform Migration",
+          "Google Apps Script",
+          "PostgreSQL",
+          "Supabase",
+          "Vercel",
+          "OpenAPI",
+          "Systems Architecture"
+        ]
+      },
+      "demo": null,
+      "preview_img": null,
+      "source": "private"
+    },
+    {
       "name": "website-outreach-pipeline",
       "title": "Local Website Outreach Pipeline",
       "status": "In Progress",
@@ -2600,9 +2694,9 @@
         "label": "Q4 2026",
         "start": "2026-10-01",
         "end": "2026-12-31",
-        "total": 26,
+        "total": 27,
         "new": 3,
-        "improvements": 23,
+        "improvements": 24,
         "current": true,
         "pct_elapsed": 27,
         "as_of": "2026-10-26",
@@ -2613,6 +2707,13 @@
             "title": "Establishing the Agency IT Department",
             "kind": "improvement",
             "note": "Public website administration: former-vendor admin access removed, PHP 8.2 to 8.3, Site Health 3 to 0 recommendations, expired social-feed token restored"
+          },
+          {
+            "date": "2026-10-26",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Hub v1.18: public agency website tile first in Resources"
           },
           {
             "date": "2026-10-23",
