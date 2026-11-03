@@ -232,6 +232,10 @@ dialog.palette::backdrop { background: rgba(11,31,51,.55); }
 }
 
 /* Resume page (screen) */
+.resume-head { display: flex; align-items: center; gap: 1.25rem; }
+.resume-photo { width: 96px; height: 96px; flex: none; object-fit: cover; border-radius: 50%; border: 3px solid var(--surface); box-shadow: 0 0 0 1px var(--line); }
+.resume-id { min-width: 0; }
+@media screen and (max-width: 520px) { .resume-head { flex-direction: column; align-items: flex-start; gap: .75rem; } }
 .resume-head h1 { font-size: var(--step-3); margin-bottom: .25rem; }
 .rh { font-size: var(--step-1); margin-top: 2rem; }
 @media print {
@@ -249,6 +253,8 @@ dialog.palette::backdrop { background: rgba(11,31,51,.55); }
   .role .when { font-size: 9pt !important; }
   .skills { gap: 0 10pt !important; margin: 3pt 0 !important; }
   .resume-head h1 { margin-bottom: 1pt !important; }
+  .resume-head { gap: 10pt !important; }
+  .resume-photo { width: 52pt !important; height: 52pt !important; border: 0 !important; box-shadow: 0 0 0 .6pt #cfd6de !important; }
 }
 
 /* Social profile links */

@@ -12,10 +12,13 @@ import profile from '../data/profile.json';
       </div>
 
       <header class="resume-head">
+        <img class="resume-photo" src="/images/forrest-swan-headshot.webp" alt="Portrait of Forrest Swan III" width="96" height="96" decoding="async" />
+        <div class="resume-id">
         <h1>{profile.name}</h1>
         <p class="muted" style="margin:0">
           Florida, United States · <a href={`tel:${profile.phone}`}>{profile.phoneDisplay}</a> · <a href={`mailto:${profile.email}`}>{profile.email}</a> · <a href={profile.social.linktree}>linktr.ee/forrestswan3</a>
         </p>
+        </div>
       </header>
 
       <h2 class="rh">Key strengths, skills & knowledge</h2>
