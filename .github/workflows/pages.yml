@@ -1,6 +1,7 @@
 name: Build, test and deploy site
-# Every push builds the Astro site, generates the resume PDF from the same data,
-# and runs Lighthouse, axe accessibility and link checks. Only pushes to main deploy.
+# Every push builds the Astro site and runs Lighthouse, axe accessibility and link
+# checks. Only pushes to main deploy. /resume.pdf is served as-is from public/resume.pdf
+# (the same file published on LinkedIn and Linktree), so it is not regenerated here.
 on:
   push:
     branches: [main, astro-rebuild]
@@ -40,8 +41,6 @@ jobs:
         run: |
           npm run preview > preview.log 2>&1 &
           npx --yes wait-on@8 http://localhost:4321/ -t 60000
-      - name: Generate resume PDF
-        run: npm run resume:pdf
       - name: Accessibility (axe, WCAG 2.2 AA, light + dark)
         run: npm run test:a11y
       - name: Lighthouse (min 95 in every category)

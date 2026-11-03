@@ -29,7 +29,7 @@ from the same function, so the numbers always match.
 
 ## Common updates
 
-**New job title, bullet or skill:** edit `src/data/profile.json`. The About page, the HTML resume, the PDF resume, the vCard and the search-engine data all update from this file.
+**New job title, bullet or skill:** edit `src/data/profile.json`. The About page, the HTML resume, the vCard and the search-engine data all update from this file. The downloadable PDF is a separate master file: replace `public/resume.pdf` with the same PDF you post on LinkedIn and Linktree.
 
 **New or updated project:** record it in the tracker repo (Add delivery form or `projects.yaml`); the site updates on its own.
 - Optional screenshot: add `public/previews/<name>.webp` (960×600) and set `"preview": "docs/preview.png"` and `"preview_img": "<name>"` on the project in the tracker.

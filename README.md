@@ -10,12 +10,12 @@ Built with [Astro](https://astro.build) as static HTML with near-zero JavaScript
 
 | Path | Purpose |
 |---|---|
-| `src/data/profile.json` | Resume, contact and brand content: the single source for the About, Resume and Contact pages, the resume PDF, the vCard and the structured data |
+| `src/data/profile.json` | Resume, contact and brand content: the single source for the About, Resume and Contact pages, the vCard and the structured data |
 | `src/data/portfolio.json` | Every project (status, dates, stack, problem/solution/highlights). Drives the Work pages and home-page stats |
 | `src/data/services.json` | SystemSerenity service offers and prices |
 | `src/pages/` | Pages, plus build-time endpoints: `sitemap.xml`, `robots.txt`, `forrest-swan.vcf`, `qr.svg` |
 | `src/styles/global.css` | Design tokens (light and dark) and all styles |
-| `scripts/resume-pdf.mjs` | Prints `/resume/` to `resume.pdf` during CI, so the PDF can't drift from the HTML |
+| `public/resume.pdf` | The downloadable resume: the same master file posted on LinkedIn and Linktree, served as-is. Replace it to update the download |
 | `scripts/a11y.mjs` | axe-core WCAG 2.2 AA checks on every page, in light and dark mode |
 | `scripts/make-mark.py` | Regenerates the SS monogram SVGs |
 | `docs/DESIGN-EVIDENCE.md` | Research behind the design decisions, plus the contrast table |
@@ -25,7 +25,7 @@ Built with [Astro](https://astro.build) as static HTML with near-zero JavaScript
 
 Every push runs the build, then:
 
-1. Generates `resume.pdf` from the HTML resume
+1. Serves `resume.pdf` unchanged from `public/resume.pdf`
 2. axe accessibility checks (fails on any serious or critical issue)
 3. Lighthouse on key pages (fails below 95 in Performance, Accessibility, Best Practices or SEO)
 4. Link check with lychee (fails on broken links)
