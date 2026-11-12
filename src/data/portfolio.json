@@ -1,7 +1,7 @@
 {
   "owner": "forrestswan3",
   "author": "Forrest Swan III",
-  "updated": "2026-10-26",
+  "updated": "2026-11-12",
   "projects": [
     {
       "name": "filegate",
@@ -143,7 +143,7 @@
       "title": "UW Triage Engine + Board",
       "category": "Automation",
       "status": "Maintained",
-      "status_as_of": "2026-10-22",
+      "status_as_of": "2026-11-12",
       "shipped": "2026-09-22",
       "lang": "Google Apps Script",
       "tagline": "Automated the underwriting-notice workflow end to end: LLM-powered triage, a web-based work board and two-way Slack integration for accountability and SLA tracking.",
@@ -255,7 +255,7 @@
       "demo": null,
       "preview_img": null,
       "source": "private",
-      "last_activity": "2026-10-22"
+      "last_activity": "2026-11-12"
     },
     {
       "name": "license-exam-prep",
@@ -400,7 +400,7 @@
       "title": "Agency Training Program",
       "category": "Desktop App & Training",
       "status": "Maintained",
-      "status_as_of": "2026-10-23",
+      "status_as_of": "2026-11-12",
       "shipped": "2026-07-14",
       "lang": "Python",
       "tagline": "Built an internal learning management system (LMS) that standardizes staff onboarding with video modules, randomized assessments, remediation gates and automated manager reporting.",
@@ -528,7 +528,7 @@
       "demo": null,
       "preview_img": null,
       "source": "private",
-      "last_activity": "2026-10-23"
+      "last_activity": "2026-11-12"
     },
     {
       "name": "apps-script-toolkit",
@@ -1313,16 +1313,19 @@
     },
     {
       "name": "remote-print-server",
-      "title": "Remote Printing Service",
+      "title": "PrintHub — Browser Print Portal",
       "category": "Infrastructure & Ops",
-      "status": "In Progress",
-      "status_as_of": "2026-10-19",
+      "status": "Shipped",
+      "status_as_of": "2026-11-11",
       "shipped": "2026-08-28",
-      "lang": "Infrastructure",
-      "tagline": "Deploying a centralized print service that lets hybrid staff print securely to office printers from anywhere over the VPN.",
+      "lang": "Python",
+      "tagline": "Built a browser-based print portal that lets any staff device, in the office or remote, upload a document, preview it and send it to any of the agency's network printers, with no drivers or printer setup.",
       "topics": [
-        "remote-access",
         "print-management",
+        "python",
+        "php",
+        "web-app",
+        "remote-access",
         "hybrid-work",
         "end-user-support",
         "documentation"
@@ -1331,85 +1334,109 @@
       "visibility": "public",
       "page": null,
       "detail": {
-        "problem": "Staff could print only while physically in the office, which slowed remote and hybrid workflows.",
-        "solution": "Stood up an office print server that shares the agency printers over the VPN, and wrote a one-page self-service setup guide to cut support tickets.",
+        "problem": "Printing depended on per-device printer setup and, for remote staff, a VPN profile that reached the print server. Staff in the office on the wrong network segment could not print at all, and every new laptop meant another driver install.",
+        "solution": "Replaced per-device setup with PrintHub, a self-hosted print portal. A small Python print agent on the office print server discovers the network printers, converts uploads, counts pages and renders a preview, then submits and tracks jobs. Because only the agency file server is reachable from every office PC, Wi-Fi device and VPN profile, the public front door is a PHP page on the file server that exchanges requests with the agent through a relay folder outside the web root, so nothing is proxied and the print server stays unexposed.",
         "highlights": [
-          "Live since August 28, 2026 for the office's shared printers; remaining printers being reconnected",
-          "Published a self-service setup guide (v1.1): connect the VPN, open the print server, add a printer",
-          "Resilient by design: jobs sent while offline queue and release when the VPN reconnects"
+          "One address for everyone: the same page works from office Ethernet, staff Wi-Fi and the VPN, with no printer drivers on any device",
+          "Upload, preview, print: page count and a rendered preview before sending, then live job status (sending, printing, completed) and cancel",
+          "Store-and-forward relay design: the file-server page never connects to the print server; a stdlib-only relay worker polls every 2 seconds, and an \"offline\" banner appears if the agent stops reporting",
+          "Security choices documented: relay folder not reachable by URL, directory listing off, optional PIN with lockout that can be switched on without a code change, client files deleted once printed and previews cleared after 30 minutes",
+          "Survives restarts: the agent runs from a start-up task with a watchdog",
+          "Shipped with a portal tile, menu link, an SOP, a Quick-Reference Guide and a narrated training module, rebuilt how-first the next day"
         ],
         "stack": [
-          "Office print server",
-          "WireGuard VPN"
-        ],
-        "notes": [
-          "In progress. Next milestone: remote staff setup and testing, then a training SOP and Core Process module."
+          "Python (stdlib HTTP agent)",
+          "PHP 8.2 on a NAS web server",
+          "LibreOffice (headless conversion)",
+          "Windows print spooler",
+          "WireGuard VPN",
+          "Google Sites"
         ],
         "metrics": [
           {
-            "value": "3",
-            "label": "setup steps for staff (guide v1.1)"
+            "value": "9",
+            "label": "network printers reachable from one page"
           },
           {
-            "value": "Aug 2026",
-            "label": "live for shared office printers"
+            "value": "0",
+            "label": "printer drivers to install per device"
+          },
+          {
+            "value": "2 s",
+            "label": "relay polling interval"
+          },
+          {
+            "value": "2 days",
+            "label": "from build to office-wide access with training"
           }
         ],
         "flow": [
           {
-            "label": "Remote laptop",
-            "note": "connect the VPN"
+            "label": "Any staff device",
+            "note": "office LAN, Wi-Fi or VPN"
           },
           {
-            "label": "Print server",
-            "note": "jobs queue while offline"
+            "label": "File-server page",
+            "note": "upload, preview, pick printer"
           },
           {
-            "label": "Office printers",
-            "note": "release on reconnect"
+            "label": "Relay folder",
+            "note": "outside the web root"
+          },
+          {
+            "label": "Print agent",
+            "note": "convert, count, submit"
+          },
+          {
+            "label": "Network printer",
+            "note": "live job status"
           }
         ],
-        "impact": "Removes the in-office requirement for printing, so hybrid staff can print from anywhere, with a self-service setup designed to cut support tickets.",
+        "notes": [
+          "Printer names, network addresses and staff names are not shown."
+        ],
+        "impact": "Turned printing from a per-device IT task into a self-service web page anyone on staff can use from any device, including a shared conference-room printer, while keeping the print server off the open network.",
         "competencies": [
           {
-            "skill": "Remote access enablement",
-            "evidence": "Office printers shared securely over the WireGuard VPN."
+            "skill": "Network-constrained architecture",
+            "evidence": "Store-and-forward relay through the file server when direct routing between segments was not available."
           },
           {
-            "skill": "Print management",
-            "evidence": "Centralized print server; jobs sent while offline queue and release on reconnect."
+            "skill": "Full-stack web development",
+            "evidence": "Python print agent, PHP front door and a single-page upload/preview/status UI."
           },
           {
-            "skill": "End-user documentation",
-            "evidence": "One-page self-service setup guide (v1.1)."
+            "skill": "Security by design",
+            "evidence": "Non-web-reachable relay folder, optional hashed PIN with lockout, automatic deletion of client files."
           },
           {
-            "skill": "Rollout planning",
-            "evidence": "Next: remote staff setup and testing, then a training SOP and Core Process module."
+            "skill": "Rollout and training",
+            "evidence": "Portal placement, SOP, Quick-Reference Guide and narrated training module shipped with the tool."
           }
         ],
         "keywords": [
           "Print Management",
-          "Remote Access",
+          "Python",
+          "PHP",
+          "Web Application",
+          "Network Architecture",
           "Hybrid Work Enablement",
-          "End-User Support",
           "Self-Service IT",
-          "Technical Documentation",
-          "VPN"
+          "Technical Documentation"
         ]
       },
       "demo": null,
       "preview": null,
       "preview_img": null,
       "source": "private",
-      "last_activity": "2026-08-28"
+      "last_activity": "2026-11-11"
     },
     {
       "name": "it-department",
       "title": "Establishing the Agency IT Department",
       "category": "Infrastructure & Ops",
       "status": "Maintained",
-      "status_as_of": "2026-10-26",
+      "status_as_of": "2026-10-28",
       "shipped": "2025-11-03",
       "lang": "Operations",
       "tagline": "Built the agency's IT function from the ground up: technology budget, procurement, vendor management, IT service desk, device lifecycle and systems governance.",
@@ -1525,7 +1552,7 @@
       "preview": null,
       "preview_img": null,
       "source": "private",
-      "last_activity": "2026-10-26"
+      "last_activity": "2026-10-28"
     },
     {
       "name": "asset-inventory",
@@ -1880,7 +1907,7 @@
       "title": "Past-Due Task Tracker",
       "category": "Automation",
       "status": "Maintained",
-      "status_as_of": "2026-10-14",
+      "status_as_of": "2026-11-04",
       "shipped": "2026-09-30",
       "lang": "Google Apps Script",
       "tagline": "Built a web app that turns weekly past-due task counts from several agency systems into per-agent trends, a Friday manager digest and automatic EOS scorecard updates.",
@@ -2001,14 +2028,14 @@
       "demo": null,
       "preview_img": null,
       "source": "private",
-      "last_activity": "2026-10-14"
+      "last_activity": "2026-11-04"
     },
     {
       "name": "team-resources",
       "title": "Team Resources Portal + Quick-Launch Hub",
       "category": "Automation",
       "status": "Maintained",
-      "status_as_of": "2026-10-26",
+      "status_as_of": "2026-11-11",
       "shipped": "2026-09-22",
       "lang": "Google Sites + Apps Script",
       "tagline": "Built the staff portal that fronts every internal tool: a Google Sites intranet with an Apps Script Quick-Launch Hub, full-page app embeds and a shared light/dark theme standard.",
@@ -2107,14 +2134,14 @@
       "demo": null,
       "preview_img": null,
       "source": "none",
-      "last_activity": "2026-10-26"
+      "last_activity": "2026-11-11"
     },
     {
       "name": "documentation-program",
       "title": "Documentation & Quick-Reference Guide Program",
       "category": "Documentation & Training",
       "status": "Maintained",
-      "status_as_of": "2026-10-08",
+      "status_as_of": "2026-11-12",
       "shipped": "2026-07-09",
       "lang": "Operations",
       "tagline": "Standardized agency documentation: a versioned SOP naming convention, builder scripts, 28 SOPs and quick-reference guides, and the training assets that accompany each system rollout.",
@@ -2207,7 +2234,7 @@
       "demo": null,
       "preview_img": null,
       "source": "none",
-      "last_activity": "2026-10-07"
+      "last_activity": "2026-11-12"
     },
     {
       "name": "forms-migration",
@@ -2658,6 +2685,124 @@
       "last_activity": "2026-10-23"
     },
     {
+      "name": "rollout-center",
+      "title": "Rollout Center — New-System Rollout Process and Planning App",
+      "category": "Automation",
+      "status": "Shipped",
+      "status_as_of": "2026-11-02",
+      "shipped": "2026-11-02",
+      "lang": "Google Apps Script",
+      "tagline": "Designed a standard eight-stage rollout process for every new internal system and built the web app that runs it, with gated stages, pilot usability scoring and Gantt planning with critical path and baselines.",
+      "topics": [
+        "change-management",
+        "project-management",
+        "google-apps-script",
+        "web-app",
+        "gantt",
+        "critical-path",
+        "usability",
+        "eos"
+      ],
+      "repo": null,
+      "visibility": "public",
+      "page": null,
+      "detail": {
+        "problem": "New internal tools reached staff as one-day launches with no structured demo, feedback loop or pilot, so defects and workflow gaps surfaced in front of the whole team and adoption depended on who happened to attend the announcement.",
+        "solution": "Turned the owner's brief (show the teams, survey them, show back what changed, pilot with a manager and a front-line user, then roll out) into an eight-stage process with risk tiers and exit gates, a 16-page SOP, a one-page guide and a 13-template kit. Then built the Rollout Center, an Apps Script web app embedded on the staff portal: a Kanban pipeline whose gates the server re-checks before a rollout can advance, pilot System Usability Scale scoring, Go/No-Go decisions, and a planning layer with a Gantt timeline, critical path, baselines and capacity views.",
+        "highlights": [
+          "Eight gated stages: Intake, Show & Tell, Survey, You Said / We Did, Pilot, Go / No-Go, Full Rollout, Post-Launch Review; three risk tiers set durations, pilot size and gate strictness",
+          "Evidence-based pilot exit: zero severity-1 defects, a manager sign-off and an average SUS of 68 or more with no score below 51",
+          "Same rules on both sides: the page and the server load one rules engine, so the UI and the gate check can never disagree",
+          "Project-planning views to SaaS standard: Gantt with drag-to-replan and auto-shift, critical path (forward/backward pass, float), immutable baselines with versioning, earned-schedule SPI(t), capacity heat map, WIP limits and a cumulative flow diagram",
+          "One-click kit generator: folder, nine documents, three unpublished survey forms and a feedback register per rollout",
+          "Holiday-aware business-day scheduling from the employee handbook; Go/No-Go snaps to the weekly leadership meeting; copy-ready quarterly Rock text for the EOS scorecard"
+        ],
+        "stack": [
+          "Google Apps Script",
+          "JavaScript (SVG Gantt)",
+          "Google Sheets / Forms / Docs / Drive",
+          "Google Sites",
+          "iCalendar (RFC 5545)"
+        ],
+        "metrics": [
+          {
+            "value": "8",
+            "label": "gated rollout stages"
+          },
+          {
+            "value": "132",
+            "label": "automated checks across 4 test harnesses"
+          },
+          {
+            "value": "13",
+            "label": "kit templates generated per rollout"
+          },
+          {
+            "value": "<100 ms",
+            "label": "Gantt render, 32 rollouts × 8 stages"
+          }
+        ],
+        "flow": [
+          {
+            "label": "Intake",
+            "note": "risk tier + baseline"
+          },
+          {
+            "label": "Show, survey, show back",
+            "note": "feedback register"
+          },
+          {
+            "label": "Pilot",
+            "note": "manager + front-line user, SUS"
+          },
+          {
+            "label": "Go / No-Go",
+            "note": "leadership meeting"
+          },
+          {
+            "label": "Waves + review",
+            "note": "hypercare, lessons to SOP"
+          }
+        ],
+        "notes": [
+          "Rollout records, survey responses and staff names are not shown."
+        ],
+        "impact": "Gives every new system the same path from demo to agency-wide use, so staff input is captured and answered before launch and leadership decides go-live on pilot evidence instead of anecdotes.",
+        "competencies": [
+          {
+            "skill": "Change management",
+            "evidence": "Eight-stage process with show-back meetings, anonymous surveys and a manager-led pilot."
+          },
+          {
+            "skill": "Project scheduling",
+            "evidence": "Critical path, float, baselines and earned-schedule metrics implemented from primary sources."
+          },
+          {
+            "skill": "Usability measurement",
+            "evidence": "System Usability Scale scoring with average and floor thresholds as pilot exit criteria."
+          },
+          {
+            "skill": "Full-stack Apps Script development",
+            "evidence": "Shared client/server rules engine, kit generator and portal-embedded web app with light/dark themes."
+          }
+        ],
+        "keywords": [
+          "Change Management",
+          "Project Management",
+          "Gantt Chart",
+          "Critical Path Method",
+          "System Usability Scale",
+          "Google Apps Script",
+          "EOS",
+          "Process Design"
+        ]
+      },
+      "demo": null,
+      "preview_img": null,
+      "source": "none",
+      "last_activity": "2026-11-02"
+    },
+    {
       "name": "website-outreach-pipeline",
       "title": "Local Website Outreach Pipeline",
       "status": "In Progress",
@@ -2814,13 +2959,167 @@
         "label": "Q4 2026",
         "start": "2026-10-01",
         "end": "2026-12-31",
-        "total": 31,
-        "new": 4,
-        "improvements": 27,
+        "total": 54,
+        "new": 5,
+        "improvements": 49,
         "current": true,
-        "pct_elapsed": 43,
-        "as_of": "2026-11-09",
+        "pct_elapsed": 46,
+        "as_of": "2026-11-12",
         "items": [
+          {
+            "date": "2026-11-12",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "How-first rebuild of the training program: six system trainings (underwriting board, past-due tracker, print portal, file intake, IT support agent, EOS scorecard) re-shot to teach the task before the background; nine more modules rebuilt as how-first cards"
+          },
+          {
+            "date": "2026-11-12",
+            "name": "documentation-program",
+            "title": "Documentation & Quick-Reference Guide Program",
+            "kind": "improvement",
+            "note": "SOPs and Quick-Reference Guides v2.0 rewritten how-first for six systems, with refreshed Quick-Reference Guide videos"
+          },
+          {
+            "date": "2026-11-12",
+            "name": "uw-triage",
+            "title": "UW Triage Engine + Board",
+            "kind": "improvement",
+            "note": "v2.34 help wording and guided-tour text fix"
+          },
+          {
+            "date": "2026-11-11",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "PrintHub training module: help pages, SOP, Quick-Reference Guide and narrated videos"
+          },
+          {
+            "date": "2026-11-11",
+            "name": "remote-print-server",
+            "title": "PrintHub — Browser Print Portal",
+            "kind": "improvement",
+            "note": "PrintHub v0.2: front door moved to the file server with a store-and-forward relay so every office PC, Wi-Fi device and VPN user can print without a VPN profile"
+          },
+          {
+            "date": "2026-11-11",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "PrintHub added to the Tools menu; all PrintHub links repointed to the new front door"
+          },
+          {
+            "date": "2026-11-11",
+            "name": "uw-triage",
+            "title": "UW Triage Engine + Board",
+            "kind": "improvement",
+            "note": "v2.32 close message and display fixes; v2.33 simple-view callback and display fixes"
+          },
+          {
+            "date": "2026-11-10",
+            "name": "remote-print-server",
+            "title": "PrintHub — Browser Print Portal",
+            "kind": "improvement",
+            "note": "PrintHub v0.1: browser print portal on the print server; upload, preview and print to any of 9 network printers with live job status; survives restarts"
+          },
+          {
+            "date": "2026-11-10",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Hub v1.20 PrintHub tile"
+          },
+          {
+            "date": "2026-11-09",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "v2.14 light and dark mode across the training app"
+          },
+          {
+            "date": "2026-11-06",
+            "name": "training-program",
+            "title": "Agency Training Program",
+            "kind": "improvement",
+            "note": "What the Heck is EOS (book) training module with study pages, SOP, Quick-Reference Guide and video; Past-Due Task Tracker training module with help pages, SOP, guide and videos"
+          },
+          {
+            "date": "2026-11-06",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Hub v1.19 calculator tile; EOS study pages under Training"
+          },
+          {
+            "date": "2026-11-04",
+            "name": "past-due-tracker",
+            "title": "Past-Due Task Tracker",
+            "kind": "improvement",
+            "note": "v1.8.1 built-in import layouts locked; one screenshot fills both onboarding items; extra OCR passes fix small-digit misreads; 87 tests"
+          },
+          {
+            "date": "2026-11-02",
+            "name": "past-due-tracker",
+            "title": "Past-Due Task Tracker",
+            "kind": "improvement",
+            "note": "v1.8 past-due onboarding tracked as its own item: screenshot reader handles the new column (7- and 8-column layouts), new dashboard tiles and a two-line onboarding chart; 81 tests, outputs proven byte-identical after migration"
+          },
+          {
+            "date": "2026-11-02",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Tools > Rollout Center page with full-page app embed"
+          },
+          {
+            "date": "2026-11-02",
+            "name": "rollout-center",
+            "title": "Rollout Center — New-System Rollout Process and Planning App",
+            "kind": "new",
+            "note": "Shipped"
+          },
+          {
+            "date": "2026-10-29",
+            "name": "uw-triage",
+            "title": "UW Triage Engine + Board",
+            "kind": "improvement",
+            "note": "v2.28 workflow-column board layout; SOP v1.5 and staff announcement"
+          },
+          {
+            "date": "2026-10-28",
+            "name": "it-department",
+            "title": "Establishing the Agency IT Department",
+            "kind": "improvement",
+            "note": "Public website: slow page loads traced to a stale server address in cached pages after the hosting migration; cache purged and fixed"
+          },
+          {
+            "date": "2026-10-28",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Team Vision/Traction Organizer (V/TO) page published on the portal"
+          },
+          {
+            "date": "2026-10-27",
+            "name": "documentation-program",
+            "title": "Documentation & Quick-Reference Guide Program",
+            "kind": "improvement",
+            "note": "Quick-Reference Guide set for the Agency Operations and Systems Management seat, generated from one data file to PDF and spreadsheet"
+          },
+          {
+            "date": "2026-10-27",
+            "name": "team-resources",
+            "title": "Team Resources Portal + Quick-Launch Hub",
+            "kind": "improvement",
+            "note": "Team roster: contact QR codes added for five more employees"
+          },
+          {
+            "date": "2026-10-27",
+            "name": "uw-triage",
+            "title": "UW Triage Engine + Board",
+            "kind": "improvement",
+            "note": "v2.26 full-detail Slack direct messages on assignment; v2.27 One Select: a single multi-select drives every bulk action"
+          },
           {
             "date": "2026-10-26",
             "name": "it-department",
@@ -2834,6 +3133,13 @@
             "title": "Team Resources Portal + Quick-Launch Hub",
             "kind": "improvement",
             "note": "Hub v1.18: public agency website tile first in Resources"
+          },
+          {
+            "date": "2026-10-26",
+            "name": "uw-triage",
+            "title": "UW Triage Engine + Board",
+            "kind": "improvement",
+            "note": "v2.25 'Associated with' auto-filled from the agency system on intake, plus a scorecard push fix"
           },
           {
             "date": "2026-10-26",
@@ -3241,7 +3547,7 @@
           {
             "date": "2026-08-28",
             "name": "remote-print-server",
-            "title": "Remote Printing Service",
+            "title": "PrintHub — Browser Print Portal",
             "kind": "new",
             "note": "Shipped"
           },
