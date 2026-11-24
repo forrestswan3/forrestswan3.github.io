@@ -120,6 +120,14 @@
   ],
   "education": [
     {
+      "school": "University of South Florida",
+      "college": "Muma College of Business",
+      "degree": "Master of Science, Artificial Intelligence in Business and Digital Transformation",
+      "date": "Expected December 2028",
+      "location": "Tampa, Florida (Online)",
+      "honors": "Begins Spring 2027, 100% online"
+    },
+    {
       "school": "University of Florida",
       "college": "College of Health & Human Performance",
       "degree": "Bachelor of Science, Sport and Fitness Administration/Management",
